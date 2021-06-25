@@ -1,14 +1,18 @@
-import React from 'react';
-import './App.css';
+import React, { useState } from 'react';
+import './assets/css/App.css';
 import graphql from 'babel-plugin-relay/macro';
 import {
-  RelayEnvironmentProvider,
   loadQuery,
   usePreloadedQuery,
 } from 'react-relay/hooks';
+import Display from './Display';
 import RelayEnvironment from './RelayEnvironment';
 
-const { Suspense } = React;
+const classesIndexArray = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
+const racesIndexArray = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];
+const getRandomClass = () => classesIndexArray[Math.floor(Math.random() * classesIndexArray.length)];
+const getRandomRace = () => racesIndexArray[Math.floor(Math.random() * racesIndexArray.length)];
+
 
 // Define a query
 const AppQuery = graphql`
@@ -61,16 +65,11 @@ query AppQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
   }
 }`;
 
-// variable of form: {"FilterFindOneClassInput": {"index": "warlock"}}
+
 
 // Immediately load the query as our app starts. For a real app, we'd move this
 // into our routing configuration, preloading data as we transition to new routes.
-const preloadedQuery = loadQuery(
-  RelayEnvironment, 
-  AppQuery, 
-  {"FilterFindOneClassInput": {
-    "index": "warlock"}
-  });
+
 
 // Inner component that reads the preloaded query results via `usePreloadedQuery()`.
 // This works as follows:
@@ -81,30 +80,39 @@ const preloadedQuery = loadQuery(
 // - If the query failed, it throws the failure error. For simplicity we aren't
 //   handling the failure case here.
 function App(props) {
-  const data = usePreloadedQuery(AppQuery, props.preloadedQuery);
+  
+  const getNewCharacterClass = () => {
+    return {
+      "FilterFindOneClassInput": {
+        "index": getRandomClass()
+      }
+    }
+  }
+
+  const [characterClass, setCharacterClass] = useState(getNewCharacterClass());
+  // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
+  const preloadedQuery = loadQuery(
+    RelayEnvironment, 
+    AppQuery,
+    characterClass);
+
+  
+  const data = usePreloadedQuery(AppQuery, preloadedQuery);
+  
+  const handleClick = () => {
+    setCharacterClass(getNewCharacterClass());
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        <button onClick={handleClick}>
+          This one is weak, bring me another
+        </button>
+        <Display data={data} />
       </header>
     </div>
   );
 }
 
-// The above component needs to know how to access the Relay environment, and we
-// need to specify a fallback in case it suspends:
-// - <RelayEnvironmentProvider> tells child components how to talk to the current
-//   Relay Environment instance
-// - <Suspense> specifies a fallback in case a child suspends.
-function AppRoot() {
-  return (
-    <RelayEnvironmentProvider environment={RelayEnvironment}>
-      <Suspense fallback={'Loading...'}>
-        <App preloadedQuery={preloadedQuery} />
-      </Suspense>
-    </RelayEnvironmentProvider>
-  );
-}
-
-export default AppRoot;
+export default App;

@@ -1,0 +1,102 @@
+
+fragment magicAbilities on Class {
+  spells #url
+    spellcasting {
+      spellcasting_ability {
+        name
+      }
+      info {
+        name
+        desc
+      }
+      level
+    }
+}
+
+fragment subclassOptions on Class {
+  subclasses {
+      name
+    }
+}
+
+fragment equipment on Class {
+     	starting_equipment {
+      quantity
+      equipment {
+        name
+      }
+    }
+    starting_equipment_options {
+      choose
+      from {
+        equipment {
+          name
+        }
+        quantity
+      }
+    }
+}
+
+fragment proficiencies on Class {
+  proficiencies {
+      name
+    }
+    proficiency_choices {
+      choose
+      from {
+        name
+      }
+    }
+}
+
+
+fragment basicClassInfo on Class {
+  name
+    hit_die
+    class_levels #url
+    saving_throws {
+      name
+    }
+}
+
+query levelsQuery ($FilterFindManyLevelInput: FilterFindManyLevelInput) {
+  levels (filter: $FilterFindManyLevelInput) {
+    index
+    ability_score_bonuses
+    ...spellslots
+    prof_bonus
+    class_specific {
+      arcane_recovery_levels
+    }
+    feature_choices {
+      name
+      url
+    }
+    features {
+      name
+      url
+    }
+  }
+}
+
+fragment spellslots on Level {
+  spellcasting {
+      cantrips_known
+      spells_known
+      spell_slots_level_1
+      spell_slots_level_2
+      spell_slots_level_3
+      spell_slots_level_4
+      spell_slots_level_5
+      spell_slots_level_6
+      spell_slots_level_7
+      spell_slots_level_8
+      spell_slots_level_9
+    }
+}
+
+# variable for levels: {"FilterFindManyLevelInput": {
+#  "class": {
+#      "index": "wizard"}
+#  }
+#}

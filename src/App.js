@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import './assets/css/App.css';
 import graphql from 'babel-plugin-relay/macro';
 import {
@@ -109,7 +109,9 @@ function App(props) {
         <button onClick={handleClick}>
           This one is weak, bring me another
         </button>
-        <Display data={data} />
+        <Suspense fallback={'Loading...'}>
+          <Display data={data} />
+        </Suspense>
       </header>
     </div>
   );

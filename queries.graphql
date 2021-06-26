@@ -63,19 +63,9 @@ query levelsQuery ($FilterFindManyLevelInput: FilterFindManyLevelInput) {
   levels (filter: $FilterFindManyLevelInput) {
     index
     ability_score_bonuses
-    ...spellslots
     prof_bonus
-    class_specific {
-      arcane_recovery_levels
-    }
-    feature_choices {
-      name
-      url
-    }
-    features {
-      name
-      url
-    }
+    ...levelFeatureOptions
+    ...spellslots
   }
 }
 
@@ -95,8 +85,31 @@ fragment spellslots on Level {
     }
 }
 
+fragment levelFeatureOptions on Level {
+  feature_choices {
+      name
+      url
+    }
+    features {
+      name
+      url
+    }
+}
+
 # variable for levels: {"FilterFindManyLevelInput": {
 #  "class": {
 #      "index": "wizard"}
 #  }
 #}
+
+# query the names of the class-specific abilities
+query levelClassSpecific {
+   __type (name: "LevelClass_specific") {
+      fields {
+         name
+         type {
+          name
+        }
+      }  
+   }
+}

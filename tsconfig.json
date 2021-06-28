@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "target": "es5",
+    "target": "es6",
     "allowJs": true,
     "checkJs": false,
     "jsx": "react-jsx",
     "outDir": "./build",
-    "rootDir": "./src",
+    // "rootDir": "./src",
     "removeComments": true,
     "noEmit": true,
     "pretty": true,

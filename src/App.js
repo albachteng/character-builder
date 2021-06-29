@@ -138,25 +138,25 @@ function App() {
   
   const data = usePreloadedQuery(AppQuery, preloadedAppQuery);
 
-  const features = usePreloadedQuery(FeaturesQuery, preloadedFeaturesQuery);
-  console.log(features);
-  
   const handleClick = () => {
-    setCharacterClass(getNewCharacterClass());
+    setCharacterClass(getRandomClass());
   }
 
   return (
     <div className="App">
-      <header className="App-header">
+      
         <button onClick={handleClick}>
           This one is weak, bring me another
         </button>
         <AbilityScores stats={stats}></AbilityScores>
         <Suspense fallback={'Loading...'}>
           <Display data={data} />
-          {/* {features && <FeatureDisplay features={features}></FeatureDisplay>} */}
+          <FeatureDisplay 
+            featuresQuery={FeaturesQuery}
+            preloadedFeaturesQuery={preloadedFeaturesQuery}>
+          </FeatureDisplay>
         </Suspense>
-      </header>
+      
     </div>
   );
 }

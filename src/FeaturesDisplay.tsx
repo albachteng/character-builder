@@ -1,17 +1,22 @@
+import { usePreloadedQuery } from 'react-relay';
 import Feature from './Feature';
 import {FeatureType} from './Feature';
+import featuresQuery from './__generated__/AppFeaturesQuery.graphql';
 
 type Props = {
-    features: FeatureType[]
-}
+    featuresQuery: typeof featuresQuery
+    preloadedFeaturesQuery: any
+};
 
-const FeaturesDisplay = ({features}: Props): JSX.Element => {
+const FeaturesDisplay = ({featuresQuery, preloadedFeaturesQuery}: Props): JSX.Element => {
+    const featuresData: any = usePreloadedQuery(featuresQuery, preloadedFeaturesQuery);
+    featuresData && console.log('featuresData', featuresData);
+
     return (
         <div>
-            
-            {/* {features && features.map((feature) => {
-                <Feature featureDetails={feature}></Feature>
-            })} */}
+            {featuresData && featuresData.features.map((feature: FeatureType) => {
+                return <Feature featureDetails={feature}></Feature>
+            })}
         </div>
     )
 }

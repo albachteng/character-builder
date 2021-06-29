@@ -8,8 +8,15 @@ export interface FeatureType {
 }
 
 const Feature = ({featureDetails}: Props) => {
+    console.log('featureDetails', featureDetails);
     return (
-        <div>helloworld</div>
+
+        <div>
+            {featureDetails && 
+            <p>
+                {featureDetails.name}<br></br><br></br>{featureDetails.desc}
+            </p>}
+        </div>
     )
 } 
 

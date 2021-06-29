@@ -97,11 +97,38 @@ function App() {
     AppQuery,
     characterClass);
 
-  const stats = [{
-    name: 'Hit Points',
-    acronym: 'HP',
-    total: 20
-  }];
+  const stats = [
+    {
+    name: 'Strength',
+    acronym: 'STR',
+    total: 18
+    },
+    {
+      name: 'Constitution',
+      acronym: 'CON', 
+      total: 14
+    },
+    {
+      name: 'Dexterity',
+      acronym: 'DEX', 
+      total: 12
+    },
+    {
+      name: 'Intelligence',
+      acronym: 'INT', 
+      total: 10
+    },
+    {
+      name: 'Wisdom',
+      acronym: 'WIS', 
+      total: 8
+    },
+    {
+      name: 'Charisma',
+      acronym: 'CHA', 
+      total: 15
+    },
+];
   
   const data = usePreloadedQuery(AppQuery, preloadedQuery);
   

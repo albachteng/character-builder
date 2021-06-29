@@ -12,7 +12,7 @@ const Stat = ({stat}: Props): JSX.Element => {
     return (
         <div>
             <h4>
-                <strong>{stat.acronym}:</strong>
+                <strong>{stat.acronym}: {stat.total >= 10 && '+'}</strong>
                 {Math.floor((stat.total - 10)/2)}
             </h4>
             <p>

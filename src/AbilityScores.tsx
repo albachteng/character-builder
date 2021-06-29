@@ -5,11 +5,13 @@ type Props = {
     stats: AbilityScore[]
 };
 
-const AbilityScores = ({stats}: Props): JSX.Element[] => {
+const AbilityScores = ({stats}: Props): JSX.Element => {
     return (
-        stats.map((stat) => {
-            return <Stat stat={stat}></Stat>
-        })
+        <div style={{display: 'flex', justifyContent: 'space-around'}}>
+            {stats.map((stat) => {
+                return <Stat stat={stat}></Stat>
+            })}
+        </div>
     )
 };
 

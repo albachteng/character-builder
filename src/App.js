@@ -7,6 +7,7 @@ import {
 } from 'react-relay/hooks';
 import Display from './Display';
 import RelayEnvironment from './RelayEnvironment';
+import AbilityScores from './AbilityScores';
 
 const classesIndexArray = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
 const racesIndexArray = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];
@@ -79,7 +80,7 @@ query AppQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
 //   fallback.
 // - If the query failed, it throws the failure error. For simplicity we aren't
 //   handling the failure case here.
-function App(props) {
+function App() {
   
   const getNewCharacterClass = () => {
     return {
@@ -96,6 +97,11 @@ function App(props) {
     AppQuery,
     characterClass);
 
+  const stats = [{
+    name: 'Hit Points',
+    acronym: 'HP',
+    total: 20
+  }];
   
   const data = usePreloadedQuery(AppQuery, preloadedQuery);
   
@@ -109,6 +115,7 @@ function App(props) {
         <button onClick={handleClick}>
           This one is weak, bring me another
         </button>
+        <AbilityScores stats={stats}></AbilityScores>
         <Suspense fallback={'Loading...'}>
           <Display data={data} />
         </Suspense>

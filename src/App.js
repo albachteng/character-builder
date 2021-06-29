@@ -8,6 +8,7 @@ import {
 import Display from './Display';
 import RelayEnvironment from './RelayEnvironment';
 import AbilityScores from './AbilityScores';
+import FeatureDisplay from './FeaturesDisplay';
 
 const classesIndexArray = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
 const racesIndexArray = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];
@@ -66,38 +67,43 @@ query AppQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
   }
 }`;
 
+const FeaturesQuery = graphql`query AppFeaturesQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
+  features(filter: $FilterFindManyFeatureInput) {
+    name 
+    desc
+  }
+}`;
 
-
-// Immediately load the query as our app starts. For a real app, we'd move this
-// into our routing configuration, preloading data as we transition to new routes.
-
-
-// Inner component that reads the preloaded query results via `usePreloadedQuery()`.
-// This works as follows:
-// - If the query has completed, it returns the results of the query.
-// - If the query is still pending, it "suspends" (indicates to React that the
-//   component isn't ready to render yet). This will show the nearest <Suspense>
-//   fallback.
-// - If the query failed, it throws the failure error. For simplicity we aren't
-//   handling the failure case here.
 function App() {
   
   const getNewCharacterClass = () => {
-    return {
-      "FilterFindOneClassInput": {
-        "index": getRandomClass()
-      }
-    }
+    return 
   }
 
-  const [characterClass, setCharacterClass] = useState(getNewCharacterClass());
+  const [characterClass, setCharacterClass] = useState(getRandomClass());
+  
   // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
-  const preloadedQuery = loadQuery(
+  const preloadedAppQuery = loadQuery(
     RelayEnvironment, 
     AppQuery,
-    characterClass);
+    {
+      "FilterFindOneClassInput": {
+        "index": characterClass
+      }
+    });
 
-  const stats = [
+  const preloadedFeaturesQuery = loadQuery(
+    RelayEnvironment,
+    FeaturesQuery,
+    {
+      "FilterFindManyFeatureInput": {
+      "class": {
+        "index": characterClass
+      }}
+    }
+  );
+
+  const stats = [ // TODO: hard-coded for now
     {
     name: 'Strength',
     acronym: 'STR',
@@ -130,7 +136,10 @@ function App() {
     },
 ];
   
-  const data = usePreloadedQuery(AppQuery, preloadedQuery);
+  const data = usePreloadedQuery(AppQuery, preloadedAppQuery);
+
+  const features = usePreloadedQuery(FeaturesQuery, preloadedFeaturesQuery);
+  console.log(features);
   
   const handleClick = () => {
     setCharacterClass(getNewCharacterClass());
@@ -145,6 +154,7 @@ function App() {
         <AbilityScores stats={stats}></AbilityScores>
         <Suspense fallback={'Loading...'}>
           <Display data={data} />
+          {/* {features && <FeatureDisplay features={features}></FeatureDisplay>} */}
         </Suspense>
       </header>
     </div>

@@ -113,3 +113,16 @@ query levelClassSpecific {
       }  
    }
 }
+
+query FeaturesByClass ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
+  features(filter: $FilterFindManyFeatureInput) {
+    name 
+    desc
+  }
+}
+
+## variables: 
+## {"FilterFindManyFeatureInput": {
+##   "class": {
+##     "index": "fighter"
+## }}}

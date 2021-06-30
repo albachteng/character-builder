@@ -138,6 +138,11 @@ const App = () => {
 
   const handleClick = () => {
     setCharacterClass(getRandomClass());
+    setCharacterRace(getRandomRace());
+  }
+
+  const levelUp = () => {
+    setCharacterLevel(prev => prev + 1);
   }
 
   return (
@@ -146,10 +151,15 @@ const App = () => {
         <button onClick={handleClick}>
           This one is weak, bring me another
         </button>
+        <button onClick={levelUp}>
+          Increase this one's power...
+        </button>
+        <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
         <AbilityScores stats={stats}></AbilityScores>
         <Suspense fallback={'Loading...'}>
           <Display data={data} />
           <FeatureDisplay 
+            characterLevel={characterLevel}
             featuresQuery={FeaturesQuery}
             preloadedFeaturesQuery={preloadedFeaturesQuery}>
           </FeatureDisplay>

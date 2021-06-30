@@ -4,19 +4,20 @@ import {FeatureType} from './Feature';
 
 
 type Props = {
+    characterLevel: number,
     featuresQuery: GraphQLTaggedNode,
     preloadedFeaturesQuery: PreloadedQuery<any, Record<string, unknown>>,
     children: any,
 };
 
-const FeaturesDisplay = ({featuresQuery, preloadedFeaturesQuery}: Props): JSX.Element => {
+const FeaturesDisplay = ({characterLevel, featuresQuery, preloadedFeaturesQuery}: Props): JSX.Element => {
     // TODO really unhappy with this any here
     const featuresData: any = usePreloadedQuery(featuresQuery, preloadedFeaturesQuery);
 
     return (
-        <div>
+        <div style={{height: '50%', overflow: 'scroll'}}>
             {featuresData && featuresData.features.map((feature: FeatureType) => {
-                return <Feature featureDetails={feature}></Feature>
+                return (feature.level <= characterLevel) && <Feature featureDetails={feature}></Feature>
             })}
         </div>
     )

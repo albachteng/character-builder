@@ -15,7 +15,7 @@ const Feature = ({featureDetails}: Props) => {
         <div>
                 <p>
                     {featureDetails.name}, Level {featureDetails.level}
-                    <br/><br/>
+                    <br/>
                     {featureDetails.desc.map(paragraph => <p>{paragraph}</p>)}
                 </p>
         </div>

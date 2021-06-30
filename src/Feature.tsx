@@ -9,15 +9,16 @@ export interface FeatureType {
 }
 
 const Feature = ({featureDetails}: Props) => {
-    console.log('featureDetails', featureDetails);
-    return (
 
+    return (
         <div>
-                <p>
-                    {featureDetails.name}, Level {featureDetails.level}
-                    <br/>
-                    {featureDetails.desc.map(paragraph => <p>{paragraph}</p>)}
-                </p>
+            <p>{featureDetails.name}, Level {featureDetails.level}</p>
+            <br/>
+            {featureDetails.desc.map((paragraph, i) => {
+                return (
+                    <p key={`${featureDetails.name + i}`}>{paragraph}</p>
+                )
+            })}
         </div>
     )
 } 

@@ -16,8 +16,8 @@ const FeaturesDisplay = ({characterLevel, featuresQuery, preloadedFeaturesQuery}
 
     return (
         <div style={{height: '50%', overflow: 'scroll'}}>
-            {featuresData && featuresData.features.map((feature: FeatureType) => {
-                return (feature.level <= characterLevel) && <Feature featureDetails={feature}></Feature>
+            {featuresData && featuresData.features.map((feature: FeatureType, i: number) => {
+                return (feature.level <= characterLevel) && <Feature key={`${feature.name+i}`} featureDetails={feature}></Feature>
             })}
         </div>
     )

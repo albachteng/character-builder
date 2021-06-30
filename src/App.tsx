@@ -65,7 +65,8 @@ query AppQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
   }
 }`;
 
-const FeaturesQuery = graphql`query AppFeaturesQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
+const FeaturesQuery = graphql`
+query AppFeaturesQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
   features(filter: $FilterFindManyFeatureInput) {
     name 
     desc

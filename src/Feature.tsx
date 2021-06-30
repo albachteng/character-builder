@@ -4,7 +4,8 @@ type Props = {
 
 export interface FeatureType {
     name: string,
-    desc: string
+    desc: string[],
+    level: number
 }
 
 const Feature = ({featureDetails}: Props) => {
@@ -12,10 +13,11 @@ const Feature = ({featureDetails}: Props) => {
     return (
 
         <div>
-            {featureDetails && 
-            <p>
-                {featureDetails.name}<br></br><br></br>{featureDetails.desc}
-            </p>}
+                <p>
+                    {featureDetails.name}, Level {featureDetails.level}
+                    <br/><br/>
+                    {featureDetails.desc.map(paragraph => <p>{paragraph}</p>)}
+                </p>
         </div>
     )
 } 

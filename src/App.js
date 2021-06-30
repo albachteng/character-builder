@@ -71,6 +71,7 @@ const FeaturesQuery = graphql`query AppFeaturesQuery ($FilterFindManyFeatureInpu
   features(filter: $FilterFindManyFeatureInput) {
     name 
     desc
+    level
   }
 }`;
 

@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import './assets/css/App.css';
 import graphql from 'babel-plugin-relay/macro';
 import {
@@ -15,8 +15,6 @@ const racesIndexArray = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'hal
 const getRandomClass = () => classesIndexArray[Math.floor(Math.random() * classesIndexArray.length)];
 const getRandomRace = () => racesIndexArray[Math.floor(Math.random() * racesIndexArray.length)];
 
-
-// Define a query
 const AppQuery = graphql`
 query AppQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
   class (filter: $FilterFindOneClassInput) {
@@ -75,19 +73,17 @@ const FeaturesQuery = graphql`query AppFeaturesQuery ($FilterFindManyFeatureInpu
   }
 }`;
 
-function App() {
-  
-  const getNewCharacterClass = () => {
-    return 
-  }
+const App = () => {
 
   const [characterClass, setCharacterClass] = useState(getRandomClass());
-  
+  const [characterRace, setCharacterRace] = useState(getRandomRace());
+  const [characterLevel, setCharacterLevel] = useState(1);
+   
   // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
   const preloadedAppQuery = loadQuery(
     RelayEnvironment, 
     AppQuery,
-    {
+    { // main Query variables
       "FilterFindOneClassInput": {
         "index": characterClass
       }
@@ -104,7 +100,7 @@ function App() {
     }
   );
 
-  const stats = [ // TODO: hard-coded for now
+  const stats = [ // !: hard-coded for now
     {
     name: 'Strength',
     acronym: 'STR',
@@ -137,7 +133,8 @@ function App() {
     },
 ];
   
-  const data = usePreloadedQuery(AppQuery, preloadedAppQuery);
+  // !
+  const data: any = usePreloadedQuery(AppQuery, preloadedAppQuery);
 
   const handleClick = () => {
     setCharacterClass(getRandomClass());

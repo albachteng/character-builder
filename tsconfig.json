@@ -13,13 +13,13 @@
     "skipLibCheck": true,
     "strict": true,
     "moduleResolution": "node",
-    "esModuleInterop": true,
+    "esModuleInterop": false,
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,

@@ -1,11 +1,12 @@
 import { GraphQLTaggedNode, PreloadedQuery, usePreloadedQuery } from 'react-relay';
 import Feature from './Feature';
 import {FeatureType} from './Feature';
-import featuresQuery from './__generated__/AppFeaturesQuery.graphql';
+
 
 type Props = {
-    featuresQuery: typeof featuresQuery
-    preloadedFeaturesQuery: PreloadedQuery<any, Record<string, unknown>>
+    featuresQuery: GraphQLTaggedNode,
+    preloadedFeaturesQuery: PreloadedQuery<any, Record<string, unknown>>,
+    children: any,
 };
 
 const FeaturesDisplay = ({featuresQuery, preloadedFeaturesQuery}: Props): JSX.Element => {

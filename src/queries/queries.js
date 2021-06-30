@@ -1,6 +1,6 @@
 import graphql from 'babel-plugin-relay/macro';
 
-graphql`fragment magicAbilities on Class {
+graphql`fragment queriesMagicAbilitiesQuery on Class {
     spells #url
     spellcasting {
         spellcasting_ability {
@@ -14,13 +14,13 @@ graphql`fragment magicAbilities on Class {
     }
 }`
   
-graphql`fragment subclassOptions on Class {
+graphql`fragment queriesSubclassOptionsQuery on Class {
     subclasses {
         name
     }
 }`
   
-graphql`fragment equipment on Class {
+graphql`fragment queriesEquipmentQuery on Class {
     starting_equipment {
         quantity
         equipment {
@@ -37,7 +37,7 @@ graphql`fragment equipment on Class {
     }}
 }`
   
-graphql`fragment proficiencies on Class {
+graphql`fragment queriesProficienciesQuery on Class {
     proficiencies {
         name
     }
@@ -50,7 +50,7 @@ graphql`fragment proficiencies on Class {
 }`
   
   
-graphql`fragment basicClassInfo on Class {
+graphql`fragment queriesBasicClassInfoQuery on Class {
     name
     hit_die
     class_levels #url
@@ -59,17 +59,17 @@ graphql`fragment basicClassInfo on Class {
     }
 }`
   
-graphql`query levelsQuery ($FilterFindManyLevelInput: FilterFindManyLevelInput) {
+graphql`query queriesLevelsQuery ($FilterFindManyLevelInput: FilterFindManyLevelInput) {
     levels (filter: $FilterFindManyLevelInput) {
         index
         ability_score_bonuses
         prof_bonus
-        ...levelFeatureOptions
-        ...spellslots
+        ...queriesLevelFeatureOptionsQuery
+        ...queriesSpellslotsQuery
     }
 }`
   
-graphql`fragment spellslots on Level {
+graphql`fragment queriesSpellslotsQuery on Level {
     spellcasting {
         cantrips_known
         spells_known
@@ -85,7 +85,7 @@ graphql`fragment spellslots on Level {
     }
 }`
   
-graphql`fragment levelFeatureOptions on Level {
+graphql`fragment queriesLevelFeatureOptionsQuery on Level {
 feature_choices {
     name
     url
@@ -103,18 +103,18 @@ feature_choices {
 // }
   
 //   # query the names of the class-specific abilities
-graphql`query levelClassSpecific {
-    __type (name: "LevelClass_specific") {
-        fields {
-            name
-            type {
-                name
-            }
-        }  
-    }
-}`
+// graphql`query queriesLevelClassSpecificQuery {
+//     __type (name: "LevelClass_specific") {
+//         fields {
+//             name
+//             type {
+//                 name
+//             }
+//         }  
+//     }
+// }`
   
-graphql`query FeaturesByClass ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
+graphql`query queriesFeaturesByClassQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
     features(filter: $FilterFindManyFeatureInput) {
         name 
         desc

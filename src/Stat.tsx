@@ -1,3 +1,5 @@
+import dice from './utilities/dice';
+
 type Props = {
     stat: AbilityScore
 };
@@ -13,7 +15,7 @@ const Stat = ({stat}: Props): JSX.Element => {
         <div>
             <h4>
                 <strong>{stat.acronym}: {stat.total >= 10 && '+'}</strong>
-                {Math.floor((stat.total - 10)/2)}
+                {dice.mod(stat.total)}
             </h4>
             <p>
                 {stat.total}

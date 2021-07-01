@@ -1,15 +1,15 @@
-import {AbilityScore} from './Stat';
+import { AbilityScore } from './Stat';
 import Stat from './Stat';
 
 type Props = {
     stats: AbilityScore[]
 };
 
-const AbilityScores = ({stats}: Props): JSX.Element => {
+const AbilityScores = ({stats}: Props) => {
     return (
         <div style={{display: 'flex', justifyContent: 'space-around'}}>
             {stats.map((stat) => {
-                return <Stat key={stat.name} stat={stat}></Stat>
+                return <Stat key={stat.name} stat={stat}/>
             })}
         </div>
     )

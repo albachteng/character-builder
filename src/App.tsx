@@ -175,21 +175,23 @@ const App = () => {
 
   return (
     <div className="App">
-        <button onClick={handleClick}>This one is weak, bring me another</button>
-        <button onClick={levelUp}>Increase this one's power...</button>
-        <button onClick={rerollStats}>These stats are bullshit, roll again!</button>
-        <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
+      <a target="_" href='https://www.dnd5eapi.co/graphql'>GraphQL Explorer</a>
+      <br></br>
+      <button onClick={handleClick}>This one is weak, bring me another</button>
+      <button onClick={levelUp}>Increase this one's power...</button>
+      <button onClick={rerollStats}>These stats are bullshit, roll again!</button>
+      <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
 
-        <AbilityScores stats={characterStats}></AbilityScores>
+      <AbilityScores stats={characterStats}></AbilityScores>
 
-        <Suspense fallback={'Loading...'}>
-          <Display data={data} />
-          <FeatureDisplay 
-            characterLevel={characterLevel}
-            featuresQuery={FeaturesQuery}
-            preloadedFeaturesQuery={preloadedFeaturesQuery}>
-          </FeatureDisplay>
-        </Suspense>
+      <Suspense fallback={'Loading...'}>
+        <Display data={data} />
+        <FeatureDisplay 
+          characterLevel={characterLevel}
+          featuresQuery={FeaturesQuery}
+          preloadedFeaturesQuery={preloadedFeaturesQuery}>
+        </FeatureDisplay>
+      </Suspense>
       
     </div>
   );

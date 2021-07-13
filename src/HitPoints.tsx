@@ -8,7 +8,8 @@ import dice from './utilities/dice';
 type Props = {
     level: number,
     CON: number,
-    hit_die: number
+    hit_die: number,
+    characterClass: string,
 }
 
 /* does not work with level up because 
@@ -17,10 +18,10 @@ leading to HP losses - what we really want
 to do is set an initial HP and call a useEffect
 function that adds a new roll with each level */
 
-const HitPoints = ({CON, level, hit_die}: Props) => {
+const HitPoints = ({CON, level, hit_die, characterClass}: Props) => {
 
-    const [HP, setHP] = useState<number>(hit_die);
-    const [conMod, setConMod] = useState<number>(dice.mod(CON));
+    const [HP, setHP] = useState(hit_die);
+    const [conMod, setConMod] = useState(dice.mod(CON));
 
     console.log('state HP', HP);
     
@@ -35,9 +36,15 @@ const HitPoints = ({CON, level, hit_die}: Props) => {
             let toAdd = dice.rollDice(hit_die);
             // minimum increase of 1 per PHB
             if ((toAdd + conMod) < 1) toAdd = 1;
+            console.log('useEffect fired with: ', toAdd);
             setHP((prev) => prev + toAdd);
         }
     }, [level]);
+
+    // if the character class changes, we must reset base HP
+    useEffect(() => {
+        setHP(hit_die);
+    }, [characterClass]);
 
     /* const hitDiceData = useFragment(graphql`
         fragment HitPointsFragment_class on class {

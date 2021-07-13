@@ -172,11 +172,11 @@ const App = () => {
       <button onClick={rerollStats}>These stats are bullshit, roll again!</button>
       <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
       
-
       <Suspense fallback={'Loading...'}>
         {data && <HitPoints 
           hit_die={data.class.hit_die}
           CON={characterStats[1].total} 
+          characterClass={characterClass}
           level={characterLevel}/>}
         <AbilityScores stats={characterStats}></AbilityScores>
         <Display data={data} />

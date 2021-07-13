@@ -12,13 +12,13 @@ graphql`fragment queriesMagicAbilitiesQuery on Class {
         }
         level
     }
-}`
+}`;
   
 graphql`fragment queriesSubclassOptionsQuery on Class {
     subclasses {
         name
     }
-}`
+}`;
   
 graphql`fragment queriesEquipmentQuery on Class {
     starting_equipment {
@@ -35,7 +35,7 @@ graphql`fragment queriesEquipmentQuery on Class {
         }
         quantity
     }}
-}`
+}`;
   
 graphql`fragment queriesProficienciesQuery on Class {
     proficiencies {
@@ -47,7 +47,7 @@ graphql`fragment queriesProficienciesQuery on Class {
             name
         }
     }
-}`
+}`;
   
   
 graphql`fragment queriesBasicClassInfoQuery on Class {
@@ -57,7 +57,7 @@ graphql`fragment queriesBasicClassInfoQuery on Class {
     saving_throws {
         name
     }
-}`
+}`;
   
 graphql`query queriesLevelsQuery ($FilterFindManyLevelInput: FilterFindManyLevelInput) {
     levels (filter: $FilterFindManyLevelInput) {
@@ -67,7 +67,7 @@ graphql`query queriesLevelsQuery ($FilterFindManyLevelInput: FilterFindManyLevel
         ...queriesLevelFeatureOptionsQuery
         ...queriesSpellslotsQuery
     }
-}`
+}`;
   
 graphql`fragment queriesSpellslotsQuery on Level {
     spellcasting {
@@ -83,7 +83,7 @@ graphql`fragment queriesSpellslotsQuery on Level {
         spell_slots_level_8
         spell_slots_level_9
     }
-}`
+}`;
   
 graphql`fragment queriesLevelFeatureOptionsQuery on Level {
 feature_choices {
@@ -94,7 +94,7 @@ feature_choices {
     name
     url
     }
-}`
+}`;
   
 //  variable for levels: {"FilterFindManyLevelInput": {
 //   "class": {
@@ -118,11 +118,16 @@ graphql`query queriesFeaturesByClassQuery ($FilterFindManyFeatureInput: FilterFi
     features(filter: $FilterFindManyFeatureInput) {
         name 
         desc
+        level
     }
-}`
+}`;
   
 // variables: 
 // {"FilterFindManyFeatureInput": {
 //   "class": {
 //     "index": "fighter"
 // }}}
+
+graphql`fragment queriesHitPointsFragment_class on Class {
+    hit_die
+}`;

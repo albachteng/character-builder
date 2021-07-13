@@ -23,7 +23,6 @@ const AppQuery = graphql`
 query AppQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
   class (filter: $FilterFindOneClassInput) {
     name
-    hit_die
     class_levels #url
     saving_throws {
       name
@@ -66,6 +65,7 @@ query AppQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
     subclasses {
       name
     }
+    hit_dice
   }
 }`;
 
@@ -78,7 +78,7 @@ query AppFeaturesQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput)
   }
 }`;
 
-const emptyStats = [ // !: hard-coded for now
+const emptyStats = [
   {
     name: 'Strength',
     acronym: 'STR',
@@ -171,10 +171,14 @@ const App = () => {
       <button onClick={levelUp}>Increase this one's power...</button>
       <button onClick={rerollStats}>These stats are bullshit, roll again!</button>
       <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
-      <HitPoints CON={characterStats[1].total} level={characterLevel}></HitPoints>
-      <AbilityScores stats={characterStats}></AbilityScores>
+      
 
       <Suspense fallback={'Loading...'}>
+        {data && <HitPoints 
+          hit_die={data.class.hit_die}
+          CON={characterStats[1].total} 
+          level={characterLevel}/>}
+        <AbilityScores stats={characterStats}></AbilityScores>
         <Display data={data} />
         <FeatureDisplay 
           characterLevel={characterLevel}

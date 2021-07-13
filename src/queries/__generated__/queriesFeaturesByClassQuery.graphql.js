@@ -60,6 +60,7 @@ export type queriesFeaturesByClassQueryResponse = {|
   +features: $ReadOnlyArray<{|
     +name: ?string,
     +desc: ?$ReadOnlyArray<?string>,
+    +level: ?number,
   |}>
 |};
 export type queriesFeaturesByClassQuery = {|
@@ -76,6 +77,7 @@ query queriesFeaturesByClassQuery(
   features(filter: $FilterFindManyFeatureInput) {
     name
     desc
+    level
   }
 }
 */
@@ -116,6 +118,13 @@ v1 = [
         "kind": "ScalarField",
         "name": "desc",
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "level",
+        "storageKey": null
       }
     ],
     "storageKey": null
@@ -139,16 +148,16 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "9b78f8e97ed13e40653f644ac7d7687c",
+    "cacheID": "c2b8e1a95fe5bb4a049ce3914acdfa74",
     "id": null,
     "metadata": {},
     "name": "queriesFeaturesByClassQuery",
     "operationKind": "query",
-    "text": "query queriesFeaturesByClassQuery(\n  $FilterFindManyFeatureInput: FilterFindManyFeatureInput\n) {\n  features(filter: $FilterFindManyFeatureInput) {\n    name\n    desc\n  }\n}\n"
+    "text": "query queriesFeaturesByClassQuery(\n  $FilterFindManyFeatureInput: FilterFindManyFeatureInput\n) {\n  features(filter: $FilterFindManyFeatureInput) {\n    name\n    desc\n    level\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '63134f737f92efcff9aa643d59cc561d';
+(node/*: any*/).hash = '27b1b07fb63f3287a82b58a85990c15b';
 
 module.exports = node;

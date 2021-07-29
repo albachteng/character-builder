@@ -21,11 +21,7 @@ const Feature = ({featureDetails}: Props) => {
             <button onClick={expand}>Expand</button>
             {featureDetails.desc.map((paragraph, i) => {
                 return (
-                    <p 
-                        id={`desc${featureDetails.name}`} 
-                        style={{display: 'none'}} 
-                        key={`${featureDetails.name + i}`}
-                    >
+                    <p id={`desc${featureDetails.name}`} style={{display: 'none'}} key={`${featureDetails.name + i}`}>
                         {paragraph}
                     </p>
                 )

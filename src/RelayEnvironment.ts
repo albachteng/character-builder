@@ -1,5 +1,5 @@
 import {Environment, FetchFunction, Network, RecordSource, RequestParameters, Store, Variables} from 'relay-runtime';
-import fetchGraphQL from './fetchGraphQL';
+import fetchGraphQL from './utilities/fetchGraphQL';
 
 
 // Relay passes a "params" object with the query name and text. So we define a helper function

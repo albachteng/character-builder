@@ -1,17 +1,25 @@
 import React, {Suspense} from 'react';
 import ReactDOM from 'react-dom';
-import {RelayEnvironmentProvider} from 'react-relay';
-import RelayEnvironment from './RelayEnvironment';
+import {
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache
+} from '@apollo/client';
 import './assets/css/index.css';
 import App from './App';
 
+const client = new ApolloClient({
+  uri: 'https://www.dnd5eapi.co/graphql',
+  cache: new InMemoryCache(),
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <RelayEnvironmentProvider environment={RelayEnvironment}>
+    <ApolloProvider client={client}>
       <Suspense fallback={'Loading...'}>
         <App />
       </Suspense>
-    </RelayEnvironmentProvider>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

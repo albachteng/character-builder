@@ -1,12 +1,7 @@
 import { useState, Suspense } from 'react';
 import './assets/css/App.css';
-import graphql from 'babel-plugin-relay/macro';
-import {
-  loadQuery,
-  usePreloadedQuery,
-} from 'react-relay/hooks';
+import { gql } from '@apollo/client';
 import Display from './Display';
-import RelayEnvironment from './RelayEnvironment';
 import AbilityScores from './AbilityScores';
 import FeatureDisplay from './FeaturesDisplay';
 import dice from './utilities/dice';
@@ -19,64 +14,64 @@ const getRandomRace = () => racesIndexArray[Math.floor(Math.random() * racesInde
 
 
 
-const AppQuery = graphql`
-query AppQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
-  class (filter: $FilterFindOneClassInput) {
-    name
-    class_levels #url
-    saving_throws {
-      name
-    }
-    spells #url
-    spellcasting {
-      spellcasting_ability {
-        name
-      }
-      info {
-        name
-        desc
-      }
-      level
-    }
-  	starting_equipment {
-      quantity
-      equipment {
-        name
-      }
-    }
-    proficiencies {
-      name
-    }
-    proficiency_choices {
-      choose
-      from {
-        name
-      }
-    }
-    starting_equipment_options {
-      choose
-      from {
-        equipment {
-          name
-        }
-        quantity
-      }
-    }
-    subclasses {
-      name
-    }
-    hit_dice
-  }
-}`;
+// const AppQuery = graphql`
+// query AppQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
+//   class (filter: $FilterFindOneClassInput) {
+//     name
+//     class_levels #url
+//     saving_throws {
+//       name
+//     }
+//     spells #url
+//     spellcasting {
+//       spellcasting_ability {
+//         name
+//       }
+//       info {
+//         name
+//         desc
+//       }
+//       level
+//     }
+//   	starting_equipment {
+//       quantity
+//       equipment {
+//         name
+//       }
+//     }
+//     proficiencies {
+//       name
+//     }
+//     proficiency_choices {
+//       choose
+//       from {
+//         name
+//       }
+//     }
+//     starting_equipment_options {
+//       choose
+//       from {
+//         equipment {
+//           name
+//         }
+//         quantity
+//       }
+//     }
+//     subclasses {
+//       name
+//     }
+//     hit_dice
+//   }
+// }`;
 
-const FeaturesQuery = graphql`
-query AppFeaturesQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
-  features(filter: $FilterFindManyFeatureInput) {
-    name 
-    desc
-    level
-  }
-}`;
+// const FeaturesQuery = graphql`
+// query AppFeaturesQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
+//   features(filter: $FilterFindManyFeatureInput) {
+//     name 
+//     desc
+//     level
+//   }
+// }`;
 
 const emptyStats = [
   {
@@ -123,31 +118,31 @@ const App = () => {
   const [characterLevel, setCharacterLevel] = useState(1);
   const [characterStats, setCharacterStats] = useState(getRandomStats());
    
-  // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
-  const preloadedAppQuery = loadQuery(
-    RelayEnvironment, 
-    AppQuery,
-    { // main Query variables
-      "FilterFindOneClassInput": {
-        "index": characterClass
-      }
-    });
+  // // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
+  // const preloadedAppQuery = loadQuery(
+  //   // RelayEnvironment, 
+  //   AppQuery,
+  //   { // main Query variables
+  //     "FilterFindOneClassInput": {
+  //       "index": characterClass
+  //     }
+  //   });
 
-  const preloadedFeaturesQuery = loadQuery(
-    RelayEnvironment,
-    FeaturesQuery,
-    {
-      "FilterFindManyFeatureInput": {
-      "class": {
-        "index": characterClass
-      }}
-    }
-  );
+  // const preloadedFeaturesQuery = loadQuery(
+  //   RelayEnvironment,
+  //   FeaturesQuery,
+  //   {
+  //     "FilterFindManyFeatureInput": {
+  //     "class": {
+  //       "index": characterClass
+  //     }}
+  //   }
+  // );
 
   
   
   // !
-  const data: any = usePreloadedQuery(AppQuery, preloadedAppQuery);
+  // const data: any = usePreloadedQuery(AppQuery, preloadedAppQuery);
 
   const rerollStats = () => {
     setCharacterStats(getRandomStats());
@@ -173,17 +168,18 @@ const App = () => {
       <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
       
       <Suspense fallback={'Loading...'}>
-        {data && <HitPoints 
-          hit_die={data.class.hit_die}
+        {/* {data &&  */}
+        <HitPoints 
+          hit_die={1}
           CON={characterStats[1].total} 
           characterClass={characterClass}
-          level={characterLevel}/>}
+          level={characterLevel}/>
         <AbilityScores stats={characterStats}></AbilityScores>
-        <Display data={data} />
+        <Display data={{}} />
         <FeatureDisplay 
           characterLevel={characterLevel}
-          featuresQuery={FeaturesQuery}
-          preloadedFeaturesQuery={preloadedFeaturesQuery}>
+          /* featuresQuery={FeaturesQuery}
+          preloadedFeaturesQuery={preloadedFeaturesQuery}*/>
         </FeatureDisplay>
       </Suspense>
       

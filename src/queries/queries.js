@@ -1,4 +1,4 @@
-import graphql from 'babel-plugin-relay/macro';
+import graphql from 'graphql';
 
 graphql`fragment queriesMagicAbilitiesQuery on Class {
     spells #url

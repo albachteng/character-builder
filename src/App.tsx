@@ -19,15 +19,10 @@ query characterClassQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
   class (filter: $FilterFindOneClassInput) {
     name
     class_levels {
-      features {
-        choice {
-          choose
-          from {
-            index
-            name
-          }
-        }
-      }
+      ability_score_bonuses
+      index
+      level
+      prof_bonus
     }
     saving_throws {
       name

@@ -1,6 +1,6 @@
-import graphql from 'graphql';
+import { gql } from '@apollo/client';
 
-graphql`fragment queriesMagicAbilitiesQuery on Class {
+gql`fragment MagicAbilitiesQuery on Class {
     spells #url
     spellcasting {
         spellcasting_ability {
@@ -14,13 +14,13 @@ graphql`fragment queriesMagicAbilitiesQuery on Class {
     }
 }`;
   
-graphql`fragment queriesSubclassOptionsQuery on Class {
+gql`fragment SubclassOptionsQuery on Class {
     subclasses {
         name
     }
 }`;
   
-graphql`fragment queriesEquipmentQuery on Class {
+gql`fragment EquipmentQuery on Class {
     starting_equipment {
         quantity
         equipment {
@@ -37,7 +37,7 @@ graphql`fragment queriesEquipmentQuery on Class {
     }}
 }`;
   
-graphql`fragment queriesProficienciesQuery on Class {
+gql`fragment ProficienciesQuery on Class {
     proficiencies {
         name
     }
@@ -50,7 +50,7 @@ graphql`fragment queriesProficienciesQuery on Class {
 }`;
   
   
-graphql`fragment queriesBasicClassInfoQuery on Class {
+gql`fragment BasicClassInfoQuery on Class {
     name
     hit_die
     class_levels #url
@@ -59,17 +59,17 @@ graphql`fragment queriesBasicClassInfoQuery on Class {
     }
 }`;
   
-graphql`query queriesLevelsQuery ($FilterFindManyLevelInput: FilterFindManyLevelInput) {
+gql`query LevelsQuery ($FilterFindManyLevelInput: FilterFindManyLevelInput) {
     levels (filter: $FilterFindManyLevelInput) {
         index
         ability_score_bonuses
         prof_bonus
-        ...queriesLevelFeatureOptionsQuery
-        ...queriesSpellslotsQuery
+        ...LevelFeatureOptionsQuery
+        ...SpellslotsQuery
     }
 }`;
   
-graphql`fragment queriesSpellslotsQuery on Level {
+gql`fragment SpellslotsQuery on Level {
     spellcasting {
         cantrips_known
         spells_known
@@ -85,7 +85,7 @@ graphql`fragment queriesSpellslotsQuery on Level {
     }
 }`;
   
-graphql`fragment queriesLevelFeatureOptionsQuery on Level {
+gql`fragment LevelFeatureOptionsQuery on Level {
 feature_choices {
     name
     url
@@ -103,7 +103,7 @@ feature_choices {
 // }
   
 //   # query the names of the class-specific abilities
-// graphql`query queriesLevelClassSpecificQuery {
+// gql`query LevelClassSpecificQuery {
 //     __type (name: "LevelClass_specific") {
 //         fields {
 //             name
@@ -114,7 +114,7 @@ feature_choices {
 //     }
 // }`
   
-graphql`query queriesFeaturesByClassQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
+gql`query FeaturesByClassQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
     features(filter: $FilterFindManyFeatureInput) {
         name 
         desc
@@ -128,6 +128,6 @@ graphql`query queriesFeaturesByClassQuery ($FilterFindManyFeatureInput: FilterFi
 //     "index": "fighter"
 // }}}
 
-graphql`fragment queriesHitPointsFragment_class on Class {
+gql`fragment HitPointsFragment_class on Class {
     hit_die
 }`;

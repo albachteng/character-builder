@@ -1,6 +1,6 @@
 import { useState, Suspense } from 'react';
 import './assets/css/App.css';
-import { gql } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import Display from './Display';
 import AbilityScores from './AbilityScores';
 import FeatureDisplay from './FeaturesDisplay';
@@ -14,64 +14,77 @@ const getRandomRace = () => racesIndexArray[Math.floor(Math.random() * racesInde
 
 
 
-// const AppQuery = graphql`
-// query AppQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
-//   class (filter: $FilterFindOneClassInput) {
-//     name
-//     class_levels #url
-//     saving_throws {
-//       name
-//     }
-//     spells #url
-//     spellcasting {
-//       spellcasting_ability {
-//         name
-//       }
-//       info {
-//         name
-//         desc
-//       }
-//       level
-//     }
-//   	starting_equipment {
-//       quantity
-//       equipment {
-//         name
-//       }
-//     }
-//     proficiencies {
-//       name
-//     }
-//     proficiency_choices {
-//       choose
-//       from {
-//         name
-//       }
-//     }
-//     starting_equipment_options {
-//       choose
-//       from {
-//         equipment {
-//           name
-//         }
-//         quantity
-//       }
-//     }
-//     subclasses {
-//       name
-//     }
-//     hit_dice
-//   }
-// }`;
+const CHARACTERCLASSQUERY = gql`
+query characterClassQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
+  class (filter: $FilterFindOneClassInput) {
+    name
+    class_levels {
+      features {
+        choice {
+          choose
+          from {
+            index
+            name
+          }
+        }
+      }
+    }
+    saving_throws {
+      name
+    }
+    spells {
+      name
+      url
+    }
+    spellcasting {
+      spellcasting_ability {
+        name
+      }
+      info {
+        name
+        desc
+      }
+      level
+    }
+  	starting_equipment {
+      quantity
+      equipment {
+        name
+      }
+    }
+    proficiencies {
+      name
+    }
+    proficiency_choices {
+      choose
+      from {
+        name
+      }
+    }
+    starting_equipment_options {
+      choose
+      from {
+        equipment {
+          name
+        }
+        quantity
+      }
+    }
+    subclasses {
+      name
+    }
+    hit_die
+  }
+}`;
 
-// const FeaturesQuery = graphql`
-// query AppFeaturesQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
-//   features(filter: $FilterFindManyFeatureInput) {
-//     name 
-//     desc
-//     level
-//   }
-// }`;
+const FEATURES = gql`
+query featuresQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
+  features(filter: $FilterFindManyFeatureInput) {
+    name 
+    desc
+    level
+  }
+}`;
 
 const emptyStats = [
   {
@@ -118,31 +131,10 @@ const App = () => {
   const [characterLevel, setCharacterLevel] = useState(1);
   const [characterStats, setCharacterStats] = useState(getRandomStats());
    
-  // // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
-  // const preloadedAppQuery = loadQuery(
-  //   // RelayEnvironment, 
-  //   AppQuery,
-  //   { // main Query variables
-  //     "FilterFindOneClassInput": {
-  //       "index": characterClass
-  //     }
-  //   });
-
-  // const preloadedFeaturesQuery = loadQuery(
-  //   RelayEnvironment,
-  //   FeaturesQuery,
-  //   {
-  //     "FilterFindManyFeatureInput": {
-  //     "class": {
-  //       "index": characterClass
-  //     }}
-  //   }
-  // );
-
-  
-  
-  // !
-  // const data: any = usePreloadedQuery(AppQuery, preloadedAppQuery);
+  // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
+  const {loading, error, data} = useQuery(CHARACTERCLASSQUERY, {
+    variables: {"FilterFindOneClassInput": {"index": "warlock"}}
+  });
 
   const rerollStats = () => {
     setCharacterStats(getRandomStats());
@@ -157,8 +149,8 @@ const App = () => {
   const levelUp = () => {
     setCharacterLevel(prev => prev + 1);
   };
-
-  return (
+  console.log(data);
+  return loading ? 'Loading...' : (
     <div className="App">
       <a target="_" href='https://www.dnd5eapi.co/graphql'>GraphQL Explorer</a>
       <br></br>
@@ -166,23 +158,20 @@ const App = () => {
       <button onClick={levelUp}>Increase this one's power...</button>
       <button onClick={rerollStats}>These stats are bullshit, roll again!</button>
       <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
-      
-      <Suspense fallback={'Loading...'}>
-        {/* {data &&  */}
-        <HitPoints 
+      <Suspense fallback={'Suspense Loading...'}>
+          <HitPoints 
           hit_die={1}
           CON={characterStats[1].total} 
           characterClass={characterClass}
           level={characterLevel}/>
         <AbilityScores stats={characterStats}></AbilityScores>
-        <Display data={{}} />
+        <Display data={data} />
         <FeatureDisplay 
           characterLevel={characterLevel}
           /* featuresQuery={FeaturesQuery}
           preloadedFeaturesQuery={preloadedFeaturesQuery}*/>
         </FeatureDisplay>
       </Suspense>
-      
     </div>
   );
 }

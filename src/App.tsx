@@ -147,7 +147,9 @@ const App = () => {
   console.log(data);
   return loading ? 'Loading...' : (
     <div className="App">
-      <a target="_" href='https://www.dnd5eapi.co/graphql'>GraphQL Explorer</a>
+      <a target="_" href='https://www.dnd5eapi.co/graphql'>GraphQL Playground</a>
+      <br></br>
+      <a target="_" href='https://studio.apollographql.com/sandbox/explorer/?_gl=1*1m2cvlk*_ga*MjA5MTc2OTg3OC4xNjM0MTM3MDc2*_ga_0BGG5V2W2K*MTYzNDIyMzUyNS4yLjEuMTYzNDIyNTEwOC4w'>Apollo Explorer</a>
       <br></br>
       <button onClick={newCharacter}>This one is weak, bring me another</button>
       <button onClick={levelUp}>Increase this one's power...</button>

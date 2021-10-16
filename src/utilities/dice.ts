@@ -35,4 +35,13 @@ const dice: Dice = {
     mod
 }
 
+export type LimitedRange<N extends number, M extends number> = number & { ___brand: [N, M] };
+
+export function limitedRange<N extends number = 1, M extends number = 100>(i: number, n?: N, m?: M): LimitedRange<N, M> | null {
+    if (i >= (n || 1) && i < (m || 100)) {
+        return i as LimitedRange<N, M>;
+    }
+    return null;
+}
+
 export default dice;

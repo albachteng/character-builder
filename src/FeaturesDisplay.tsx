@@ -1,23 +1,29 @@
 import Feature from './Feature';
-import {FeatureType} from './Feature';
+import { FeatureType } from './Feature';
+import { useQuery, DocumentNode } from '@apollo/client';
+import { CharacterClass } from './App';
 
 
 type Props = {
     characterLevel: number,
-    /* featuresQuery: GraphQLTaggedNode,
-    preloadedFeaturesQuery: PreloadedQuery<any, Record<string, unknown>>, */
+    featuresQuery: DocumentNode,
+    characterClass: CharacterClass,
     children: any,
 };
 
-const FeaturesDisplay = ({characterLevel, /* featuresQuery, preloadedFeaturesQuery*/}: Props): JSX.Element => {
+const FeaturesDisplay = ({characterLevel, featuresQuery, characterClass }: Props): JSX.Element => {
     // TODO really unhappy with this any here
-    // const featuresData: any = usePreloadedQuery(featuresQuery, preloadedFeaturesQuery);
+    const { loading, error, data } = useQuery(featuresQuery, {
+        variables: {"FilterFindManyFeatureInput": {"class": {"index": characterClass}}}
+      });
 
     return (
         <div style={{height: '50%', overflow: 'scroll'}}>
-            {/* {featuresData && featuresData.features.map((feature: FeatureType, i: number) => {
+            {loading && 'Loading...'}
+            {error && 'Whoops! Something went wrong!'}
+            {data && data.features.map((feature: FeatureType, i: number) => {
                 return (feature.level <= characterLevel) && <Feature key={`${feature.name+i}`} featureDetails={feature}></Feature>
-            })} */}
+            })}
         </div>
     )
 }

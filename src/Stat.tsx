@@ -15,7 +15,7 @@ const Stat = ({stat}: Props): JSX.Element => {
         <div>
             <h4>
                 <strong>{stat.acronym}: {stat.total >= 10 && '+'}</strong>
-                {dice.mod(stat.total)}
+                {dice.mod(stat.total)};
             </h4>
             <p>
                 {stat.total}

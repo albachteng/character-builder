@@ -4,12 +4,18 @@ import { gql, useQuery } from '@apollo/client';
 import Display from './Display';
 import AbilityScores from './AbilityScores';
 import FeatureDisplay from './FeaturesDisplay';
-import dice from './utilities/dice';
+import dice, { limitedRange, LimitedRange } from './utilities/dice';
 import HitPoints from './HitPoints';
 
-type CharacterClass = 'barbarian' | 'bard'| 'cleric'| 'druid'| 'fighter'| 'monk'| 'paladin'| 'ranger'| 'ranger'| 'sorcerer'| 'warlock'| 'wizard'; 
+export type CharacterClass = 'barbarian' | 'bard'| 'cleric'| 'druid'| 'fighter'| 'monk'| 'paladin'| 'ranger'| 'ranger'| 'sorcerer'| 'warlock'| 'wizard'; 
+export type Race = 'dragonborn'| 'dwarf'| 'elf'| 'gnome'| 'half-elf'| 'half-orc'| 'halfling'| 'human'| 'tiefling';
+export interface AbilityScore {
+  name: 'Constitution' | 'Dexterity' | 'Strength' | 'Intelligence' | 'Wisdom' | 'Charisma',
+  acronym: 'CON' | 'DEX' | 'STR' | 'INT' | 'WIS' | 'CHA',
+  total: number
+};
+
 const classesIndexArray: CharacterClass[] = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
-type Race = 'dragonborn'| 'dwarf'| 'elf'| 'gnome'| 'half-elf'| 'half-orc'| 'halfling'| 'human'| 'tiefling';
 const racesIndexArray: Race[] = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];
 const getRandomClass = () => classesIndexArray[Math.floor(Math.random() * classesIndexArray.length)];
 const getRandomRace = () => racesIndexArray[Math.floor(Math.random() * racesIndexArray.length)];
@@ -83,7 +89,7 @@ query featuresQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
   }
 }`;
 
-const emptyStats = [
+const emptyStats: AbilityScore[] = [
   {
     name: 'Strength',
     acronym: 'STR',
@@ -130,7 +136,7 @@ const App = () => {
    
   // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
   const {loading, error, data} = useQuery(CHARACTERCLASSQUERY, {
-    variables: {"FilterFindOneClassInput": {"index": "warlock"}}
+    variables: {"FilterFindOneClassInput": {"index": characterClass}}
   });
 
   const rerollStats = () => {
@@ -165,10 +171,7 @@ const App = () => {
           level={characterLevel}/>
         <AbilityScores stats={characterStats}></AbilityScores>
         <Display data={data} />
-        <FeatureDisplay 
-          characterLevel={characterLevel}
-          /* featuresQuery={FeaturesQuery}
-          preloadedFeaturesQuery={preloadedFeaturesQuery}*/>
+        <FeatureDisplay characterLevel={characterLevel} featuresQuery={FEATURES} characterClass={characterClass}>
         </FeatureDisplay>
       </Suspense>
     </div>

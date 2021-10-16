@@ -7,8 +7,10 @@ import FeatureDisplay from './FeaturesDisplay';
 import dice from './utilities/dice';
 import HitPoints from './HitPoints';
 
-const classesIndexArray = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
-const racesIndexArray = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];
+type CharacterClass = 'barbarian' | 'bard'| 'cleric'| 'druid'| 'fighter'| 'monk'| 'paladin'| 'ranger'| 'ranger'| 'sorcerer'| 'warlock'| 'wizard'; 
+const classesIndexArray: CharacterClass[] = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
+type Race = 'dragonborn'| 'dwarf'| 'elf'| 'gnome'| 'half-elf'| 'half-orc'| 'halfling'| 'human'| 'tiefling';
+const racesIndexArray: Race[] = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];
 const getRandomClass = () => classesIndexArray[Math.floor(Math.random() * classesIndexArray.length)];
 const getRandomRace = () => racesIndexArray[Math.floor(Math.random() * racesIndexArray.length)];
 

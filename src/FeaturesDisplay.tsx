@@ -1,19 +1,18 @@
 import Feature from './Feature';
-import { FeatureType } from './Feature';
-import { useQuery, DocumentNode } from '@apollo/client';
-import { CharacterClass } from './App';
-
+import { FeatureType } from './types';
+import { useQuery } from '@apollo/client';
+import { CharacterClass, Level } from './types';
+import { FEATURES } from './queries/queries';
 
 type Props = {
-    characterLevel: number,
-    featuresQuery: DocumentNode,
+    characterLevel: Level,
     characterClass: CharacterClass,
-    children: any,
 };
 
-const FeaturesDisplay = ({characterLevel, featuresQuery, characterClass }: Props): JSX.Element => {
-    // TODO really unhappy with this any here
-    const { loading, error, data } = useQuery(featuresQuery, {
+
+
+const FeaturesDisplay = ({characterLevel, characterClass }: Props): JSX.Element => {
+    const { loading, error, data } = useQuery(FEATURES, {
         variables: {"FilterFindManyFeatureInput": {"class": {"index": characterClass}}}
       });
 

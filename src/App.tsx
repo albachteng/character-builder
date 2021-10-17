@@ -1,131 +1,37 @@
 import { useState, Suspense } from 'react';
 import './assets/css/App.css';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Display from './Display';
 import AbilityScores from './AbilityScores';
 import FeatureDisplay from './FeaturesDisplay';
-import dice, { limitedRange, LimitedRange } from './utilities/dice';
+import Header from './Header';
+import SkillProficienciesDisplay from './SkillProficienciesDisplay';
+import dice /*, { limitedRange, LimitedRange } */ from './utilities/dice';
 import HitPoints from './HitPoints';
-
-export type CharacterClass = 'barbarian' | 'bard'| 'cleric'| 'druid'| 'fighter'| 'monk'| 'paladin'| 'ranger'| 'ranger'| 'sorcerer'| 'warlock'| 'wizard'; 
-export type Race = 'dragonborn'| 'dwarf'| 'elf'| 'gnome'| 'half-elf'| 'half-orc'| 'halfling'| 'human'| 'tiefling';
-export interface AbilityScore {
-  name: 'Constitution' | 'Dexterity' | 'Strength' | 'Intelligence' | 'Wisdom' | 'Charisma',
-  acronym: 'CON' | 'DEX' | 'STR' | 'INT' | 'WIS' | 'CHA',
-  total: number
-};
+import { CHARACTERCLASSQUERY } from './queries/queries';
+import {CharacterClass, Race, AbilityScore} from './types';
 
 const classesIndexArray: CharacterClass[] = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
 const racesIndexArray: Race[] = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];
 const getRandomClass = () => classesIndexArray[Math.floor(Math.random() * classesIndexArray.length)];
 const getRandomRace = () => racesIndexArray[Math.floor(Math.random() * racesIndexArray.length)];
 
+const emptyStats: AbilityScore = {
+  STR: 0,
+  CON: 0,
+  DEX: 0,
+  INT: 0, 
+  WIS: 0, 
+  CHA: 0,
+};
 
-
-const CHARACTERCLASSQUERY = gql`
-query characterClassQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
-  class (filter: $FilterFindOneClassInput) {
-    name
-    class_levels {
-      ability_score_bonuses
-      index
-      level
-      prof_bonus
-    }
-    saving_throws {
-      name
-    }
-    spells {
-      name
-      url
-    }
-    spellcasting {
-      spellcasting_ability {
-        name
-      }
-      info {
-        name
-        desc
-      }
-      level
-    }
-  	starting_equipment {
-      quantity
-      equipment {
-        name
-      }
-    }
-    proficiencies {
-      name
-    }
-    proficiency_choices {
-      choose
-      from {
-        name
-      }
-    }
-    starting_equipment_options {
-      choose
-      from {
-        equipment {
-          name
-        }
-        quantity
-      }
-    }
-    subclasses {
-      name
-    }
-    hit_die
-  }
-}`;
-
-const FEATURES = gql`
-query featuresQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
-  features(filter: $FilterFindManyFeatureInput) {
-    name 
-    desc
-    level
-  }
-}`;
-
-const emptyStats: AbilityScore[] = [
-  {
-    name: 'Strength',
-    acronym: 'STR',
-    total: 0
-  },
-  {
-    name: 'Constitution',
-    acronym: 'CON', 
-    total: 0
-  },
-  {
-    name: 'Dexterity',
-    acronym: 'DEX', 
-    total: 0
-  },
-  {
-    name: 'Intelligence',
-    acronym: 'INT', 
-    total: 0
-  },
-  {
-    name: 'Wisdom',
-    acronym: 'WIS', 
-    total: 0
-  },
-  {
-    name: 'Charisma',
-    acronym: 'CHA', 
-    total: 0
-  },
-];
-
-const getRandomStats = () => {
-  return emptyStats.map((stat) => {
-    return {...stat, total: dice.rollDice(6, 4, 0, 1)}
-})};
+const getRandomStats = (): AbilityScore => {
+  let newStats: any = {};
+  for (let key in emptyStats) {
+    newStats = {...newStats, [key]: dice.rollDice(6, 4, 0, 1)}
+  };
+  return newStats;
+};
 
 const App = () => {
 
@@ -164,15 +70,12 @@ const App = () => {
       <button onClick={rerollStats}>These stats are bullshit, roll again!</button>
       <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
       <Suspense fallback={'Suspense Loading...'}>
-          <HitPoints 
-          hit_die={1}
-          CON={characterStats[1].total} 
-          characterClass={characterClass}
-          level={characterLevel}/>
-        <AbilityScores stats={characterStats}></AbilityScores>
+        <Header />
+        <HitPoints hit_die={1} CON={characterStats.CON} characterClass={characterClass} level={characterLevel}/>
+        <AbilityScores stats={characterStats} />
         <Display data={data} />
-        <FeatureDisplay characterLevel={characterLevel} featuresQuery={FEATURES} characterClass={characterClass}>
-        </FeatureDisplay>
+        <FeatureDisplay characterLevel={characterLevel} characterClass={characterClass} />
+        <SkillProficienciesDisplay stats={characterStats} />
       </Suspense>
     </div>
   );

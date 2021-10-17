@@ -1,11 +1,7 @@
+import { FeatureType } from './types';
+
 type Props = {
     featureDetails: FeatureType
-}
-
-export interface FeatureType {
-    name: string,
-    desc: string[],
-    level: number
 }
 
 const Feature = ({featureDetails}: Props) => {

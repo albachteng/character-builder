@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import dice from './utilities/dice';
+import { Level, CharacterClass } from './types';
 // import { graphql, GraphQLTaggedNode, useFragment } from 'react-relay';
 // import type { HitPointsFragment_class$key } from './queries/__generated__/queriesBasicClassInfoQuery.graphql';
 // import type { queriesHitPointsFragment_class$ref } from './queries/__generated__/queriesHitPointsFragment_class.graphql';
 
 type Props = {
-    level: number,
+    level: Level,
     CON: number,
     hit_die: number,
-    characterClass: string,
+    characterClass: CharacterClass,
 }
 
 /* does not work with level up because 
@@ -45,12 +46,6 @@ const HitPoints = ({CON, level, hit_die, characterClass}: Props) => {
     useEffect(() => {
         setHP(hit_die);
     }, [characterClass]);
-
-    /* const hitDiceData = useFragment(graphql`
-        fragment HitPointsFragment_class on class {
-            hit_die
-        }`, AppQuery); */ 
-    // ! come back to fragments later...
 
     return (
         <>

@@ -21,12 +21,11 @@ function that adds a new roll with each level */
 
 const HitPoints = ({CON, level, hit_die, characterClass}: Props) => {
 
-    const [HP, setHP] = useState(hit_die);
     const [conMod, setConMod] = useState(dice.mod(CON));
+    const [HP, setHP] = useState(hit_die);
+    const [rolls, setRolls] = useState({});
 
-    console.log({HP});
-    
-    // update the CON mod when stats change
+    // update the CON mod when stats change, applies per level
     useEffect(() => {
         setConMod(dice.mod(CON));
     }, [CON]);
@@ -36,21 +35,27 @@ const HitPoints = ({CON, level, hit_die, characterClass}: Props) => {
         if (level >= 2) {
             let toAdd = dice.rollDice(hit_die);
             // minimum increase of 1 per PHB
-            if ((toAdd + conMod) < 1) toAdd = 1;
-            console.log({toAdd});
+            if (toAdd + conMod < 1) toAdd = 1;
+            setRolls((prev) => { 
+                return {
+                    ...prev, 
+                    [`${level}`]: toAdd
+                }});
             setHP((prev) => prev + toAdd);
         }
     }, [level]);
 
-    // if the character class changes, we must reset base HP
+    // if the character class changes, we must reset everything
     useEffect(() => {
         setHP(hit_die);
+        setRolls({});
+        setConMod(dice.mod(CON))
     }, [characterClass]);
 
     return (
         <>
-            <h1>HP: {HP + (conMod * level)}</h1>
-            <h2>baseHP: {HP} + CON mod: {conMod} * level: {level}</h2>
+            <h1>HP: {(level === 1 && conMod < 0) ? HP : HP + (conMod * level)}</h1>
+            <h2>hit_die: {hit_die} + CON mod: {conMod} * level: {level} + rolls: {JSON.stringify(rolls, null, 2)}</h2>
         </>
     )
 }

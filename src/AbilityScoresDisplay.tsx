@@ -1,14 +1,13 @@
-import { AbilityScore } from './types';
 import Stat from './Stat';
+import {AbilityScore} from './types'
 
 type Props = {
     stats: any
 };
 
-const AbilityScores = ({stats}: Props) => {
+const AbilityScoresDisplay = ({stats}: Props) => {
     const scores: any = [];
     const keys = Object.keys(stats);
-    console.log({keys});
     keys.forEach((key) => {
         scores.push(<Stat name={key} stats={stats[key]}></Stat>)
     });
@@ -20,4 +19,4 @@ const AbilityScores = ({stats}: Props) => {
     )
 };
 
-export default AbilityScores;
+export default AbilityScoresDisplay;

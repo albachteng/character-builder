@@ -14,7 +14,7 @@ type Props = {
     background?: string,
 };
 
-const Header = ({
+const HeaderDisplay = ({
     characterName,
     characterClass,
     race, 
@@ -26,17 +26,19 @@ const Header = ({
 
     return (
         <h1>
-            {JSON.stringify({
-                characterName,
-                characterClass,
-                race, 
-                level,
-                alignment,
-                experience,
-                background
-            }, null, 2)}
+            <pre>
+                {JSON.stringify({
+                    characterName,
+                    characterClass,
+                    race, 
+                    level,
+                    alignment,
+                    experience,
+                    background
+                }, null, 2)}
+            </pre>
         </h1>
     )
 };
 
-export default Header;
+export default HeaderDisplay;

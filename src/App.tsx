@@ -2,9 +2,9 @@ import { useState, Suspense } from 'react';
 import './assets/css/App.css';
 import { useQuery } from '@apollo/client';
 import Display from './Display';
-import AbilityScores from './AbilityScores';
+import AbilityScoresDisplay from './AbilityScoresDisplay';
 import FeatureDisplay from './FeaturesDisplay';
-import Header from './Header';
+import HeaderDisplay from './HeaderDisplay';
 import SkillProficienciesDisplay from './SkillProficienciesDisplay';
 import dice /*, { limitedRange, LimitedRange } */ from './utilities/dice';
 import HitPoints from './HitPoints';
@@ -58,7 +58,6 @@ const App = () => {
   const levelUp = () => {
     setCharacterLevel(prev => prev + 1);
   };
-  console.log(data);
   return loading ? 'Loading...' : (
     <div className="App">
       <a target="_" href='https://www.dnd5eapi.co/graphql'>GraphQL Playground</a>
@@ -70,9 +69,9 @@ const App = () => {
       <button onClick={rerollStats}>These stats are bullshit, roll again!</button>
       <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
       <Suspense fallback={'Suspense Loading...'}>
-        <Header characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
-        <HitPoints hit_die={1} CON={characterStats.CON} characterClass={characterClass} level={characterLevel}/>
-        <AbilityScores stats={characterStats} />
+        <HeaderDisplay characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
+        <HitPoints hit_die={data?.class.hit_die} CON={characterStats.CON} characterClass={characterClass} level={characterLevel}/>
+        <AbilityScoresDisplay stats={characterStats} />
         <Display data={data} />
         <FeatureDisplay characterLevel={characterLevel} characterClass={characterClass} />
         <SkillProficienciesDisplay stats={characterStats} />

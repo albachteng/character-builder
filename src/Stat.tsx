@@ -1,10 +1,9 @@
 import dice from './utilities/dice';
 import { AbilityScore } from './types';
-import { Stats } from 'fs';
 
 type Props = {
     name: string,
-    stats: any
+    stats: any // TODO
 };
 
 // export interface AbilityScore {
@@ -14,12 +13,11 @@ type Props = {
 // };
 
 const Stat = ({name, stats}: Props): JSX.Element => {
-    console.log({stats});
     return (
         <div>
             <h4>
-                <strong>{name}: {Number(stats) >= 10 ? '+' : ''}</strong>
-                {dice.mod(Number(stats))};
+                <strong>{name}: {stats >= 10 ? '+' : ''}</strong>
+                {dice.mod(stats)};
             </h4>
             <p>
                 Total: {stats}

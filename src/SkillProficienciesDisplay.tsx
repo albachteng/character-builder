@@ -20,7 +20,6 @@ const SkillProficienciesDisplay = ({ stats }: Props) => {
 
     const proficienciesArray: JSX.Element[] = []
     // TODO props.map((stat) => <Proficiency/>)
-    console.log(data);
     data?.skills?.map((skill: Skill) => {
         proficienciesArray.push(<SkillProficiency skill={skill} stat={stats[skill.ability_score.name]}/>)
     })

@@ -10,7 +10,7 @@ import dice /*, { limitedRange, LimitedRange } */ from '../utilities/dice';
 import HitPoints from './HitPoints';
 import { CHARACTERCLASSQUERY } from '../queries/queries';
 import {CharacterClass, Race, AbilityScore } from '../types';
-import ProficiencyChoicesDisplay from './ProficiencyChoicesDisplay';
+import ChoicesDisplay from './ChoicesDisplay';
 
 const classesIndexArray: CharacterClass[] = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
 const racesIndexArray: Race[] = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];
@@ -80,7 +80,8 @@ const App = () => {
         <AbilityScoresDisplay stats={characterStats} />
         <Display data={data} />
         <FeatureDisplay characterLevel={characterLevel} characterClass={characterClass} />
-        <ProficiencyChoicesDisplay proficiencyChoices={data?.class.proficiency_choices}/>
+        <ChoicesDisplay title="Proficiency Choices" choicesArray={data?.class.proficiency_choices}/>
+        <ChoicesDisplay title="Equipment Choices" choicesArray={data?.class.starting_equipment_options}/>
         <SkillProficienciesDisplay proficiencyBonus={proficiencyBonus} stats={characterStats} />
       </Suspense>
     </div>

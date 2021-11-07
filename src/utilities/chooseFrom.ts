@@ -1,8 +1,8 @@
 export const chooseFrom = (choose: number, from: any[]) => {
-    const choices = [];
+    const choices: any[] = [];
     while (choices.length < choose) {
         const choice = Math.floor(Math.random()*from.length);
-        choices.push(from[choice]);
+        (!choices.includes(from[choice])) && choices.push(from[choice]);
     }
     return choices;
 };

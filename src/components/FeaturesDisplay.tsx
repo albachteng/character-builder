@@ -2,7 +2,7 @@ import Feature from './Feature';
 import { FeatureType } from '../types';
 import { useQuery } from '@apollo/client';
 import { CharacterClass } from '../types';
-import { FEATURES } from '../queries/queries';
+import { FEATURES } from '../queries';
 
 type Props = {
     characterLevel: number,

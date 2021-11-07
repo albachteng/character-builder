@@ -20,11 +20,13 @@ const ChoicesDisplay = ({title, choicesArray}: Props) => {
         choices.push(...chooseFrom(choose, from.filter((option) => option?.equipment?.name !== null)));
     });
 
+    // TODO if title is proficiency then we should be lifting state up so that the proficiency bonuses can be applied
+
     return (
         <div>
             <p>{title}</p>
             <pre>selections: {JSON.stringify(choices, null, 2)}</pre>
-            <pre>options: {JSON.stringify(choicesArray, null, 2)}</pre>
+            {/* <pre>options: {JSON.stringify(choicesArray, null, 2)}</pre> */}
         </div>
     )
 };

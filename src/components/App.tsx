@@ -8,7 +8,7 @@ import HeaderDisplay from './HeaderDisplay';
 import SkillProficienciesDisplay from './SkillProficienciesDisplay';
 import dice /*, { limitedRange, LimitedRange } */ from '../utilities/dice';
 import HitPoints from './HitPoints';
-import { CHARACTERCLASSQUERY } from '../queries/queries';
+import { CHARACTERCLASSQUERY } from '../queries';
 import {CharacterClass, Race, AbilityScore } from '../types';
 import ChoicesDisplay from './ChoicesDisplay';
 

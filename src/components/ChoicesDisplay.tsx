@@ -3,19 +3,19 @@
 import {chooseFrom} from '../utilities/chooseFrom';
 
 interface choice {
-    [key: string]: any,
+    [key: string]: any, // can we rule out that the choices will have other fields? 
     choose: number,
-    from: any[];
+    from: any[]; // 
 }
 
 type Props = {
     title: string,
-    choicesArray: any[]
+    choicesArray: choice[] // should be an array of choices
 }
 
 const ChoicesDisplay = ({title, choicesArray}: Props) => {
 
-    const choices: any[] = [];
+    const choices: any[] = []; // ! 
     choicesArray.map(({choose, from}: choice) => {
         choices.push(...chooseFrom(choose, from.filter((option) => option?.equipment?.name !== null)));
     });

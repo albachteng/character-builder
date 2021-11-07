@@ -1,11 +1,11 @@
 import Feature from './Feature';
 import { FeatureType } from './types';
 import { useQuery } from '@apollo/client';
-import { CharacterClass, Level } from './types';
+import { CharacterClass } from './types';
 import { FEATURES } from './queries/queries';
 
 type Props = {
-    characterLevel: Level,
+    characterLevel: number,
     characterClass: CharacterClass,
 };
 

@@ -2,13 +2,13 @@ import { AbilityScore } from './types';
 import Stat from './Stat';
 
 type Props = {
-    stats: AbilityScore
+    stats: any
 };
 
 const AbilityScores = ({stats}: Props) => {
     const scores = [];
     for (let key in stats) {
-        scores.push(<Stat name={key} total={1}></Stat>)
+        scores.push(<Stat name={key} stats={stats[key]}></Stat>)
     }
 
     return (

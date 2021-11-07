@@ -9,7 +9,7 @@ import SkillProficienciesDisplay from './SkillProficienciesDisplay';
 import dice /*, { limitedRange, LimitedRange } */ from './utilities/dice';
 import HitPoints from './HitPoints';
 import { CHARACTERCLASSQUERY } from './queries/queries';
-import {CharacterClass, Race, AbilityScore} from './types';
+import {CharacterClass, Race, AbilityScore } from './types';
 
 const classesIndexArray: CharacterClass[] = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
 const racesIndexArray: Race[] = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];
@@ -70,7 +70,7 @@ const App = () => {
       <button onClick={rerollStats}>These stats are bullshit, roll again!</button>
       <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
       <Suspense fallback={'Suspense Loading...'}>
-        <Header />
+        <Header characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
         <HitPoints hit_die={1} CON={characterStats.CON} characterClass={characterClass} level={characterLevel}/>
         <AbilityScores stats={characterStats} />
         <Display data={data} />

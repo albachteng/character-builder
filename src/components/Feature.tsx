@@ -1,4 +1,4 @@
-import { FeatureType } from './types';
+import { FeatureType } from '../types';
 
 type Props = {
     featureDetails: FeatureType

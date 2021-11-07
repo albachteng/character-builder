@@ -3,8 +3,8 @@ responsible for displaying a single proficiency name and score
 will need character stats and the name of the skill to render
 will also need proficiency bonus which is based on level (universally?)
 */
-import dice from './utilities/dice';
-import { AbilityScoreTotal, Skill } from './types';
+import dice from '../utilities/dice';
+import { AbilityScoreTotal, Skill } from '../types';
 
 type Props = {
     stat: AbilityScoreTotal,

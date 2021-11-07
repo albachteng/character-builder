@@ -6,7 +6,7 @@ import {
   InMemoryCache
 } from '@apollo/client';
 import './assets/css/index.css';
-import App from './App';
+import App from './components/App';
 
 const client = new ApolloClient({
   uri: 'https://www.dnd5eapi.co/graphql',

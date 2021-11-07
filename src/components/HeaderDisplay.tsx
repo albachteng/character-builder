@@ -2,7 +2,7 @@
 ultimately responsible for displaying character name, character class, race, level, ?alignment, ?experience, ?background 
 */ 
 
-import {CharacterClass, Race} from './types';
+import {CharacterClass, Race} from '../types';
 
 type Props = {
     characterName: string,

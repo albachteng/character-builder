@@ -1,15 +1,15 @@
 import { useState, useEffect, Suspense } from 'react';
-import './assets/css/App.css';
+import '../assets/css/App.css';
 import { useQuery } from '@apollo/client';
 import Display from './Display';
 import AbilityScoresDisplay from './AbilityScoresDisplay';
 import FeatureDisplay from './FeaturesDisplay';
 import HeaderDisplay from './HeaderDisplay';
 import SkillProficienciesDisplay from './SkillProficienciesDisplay';
-import dice /*, { limitedRange, LimitedRange } */ from './utilities/dice';
+import dice /*, { limitedRange, LimitedRange } */ from '../utilities/dice';
 import HitPoints from './HitPoints';
-import { CHARACTERCLASSQUERY } from './queries/queries';
-import {CharacterClass, Race, AbilityScore } from './types';
+import { CHARACTERCLASSQUERY } from '../queries/queries';
+import {CharacterClass, Race, AbilityScore } from '../types';
 
 const classesIndexArray: CharacterClass[] = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
 const racesIndexArray: Race[] = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];

@@ -6,8 +6,8 @@ these should probably be separated from other kinds of proficiencies, so maybe "
 */
 
 import SkillProficiency from './SkillProficiency';
-import { Skill, AbilityScore } from './types';
-import { ALLSKILLS } from './queries/queries';
+import { Skill, AbilityScore } from '../types';
+import { ALLSKILLS } from '../queries/queries';
 import { useQuery } from '@apollo/client';
 
 type Props = {

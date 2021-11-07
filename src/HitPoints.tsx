@@ -24,7 +24,7 @@ const HitPoints = ({CON, level, hit_die, characterClass}: Props) => {
     const [HP, setHP] = useState(hit_die);
     const [conMod, setConMod] = useState(dice.mod(CON));
 
-    console.log('state HP', HP);
+    console.log({HP});
     
     // update the CON mod when stats change
     useEffect(() => {
@@ -37,7 +37,7 @@ const HitPoints = ({CON, level, hit_die, characterClass}: Props) => {
             let toAdd = dice.rollDice(hit_die);
             // minimum increase of 1 per PHB
             if ((toAdd + conMod) < 1) toAdd = 1;
-            console.log('useEffect fired with: ', toAdd);
+            console.log({toAdd});
             setHP((prev) => prev + toAdd);
         }
     }, [level]);

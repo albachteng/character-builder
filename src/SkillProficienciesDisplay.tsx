@@ -12,16 +12,17 @@ import { useQuery } from '@apollo/client';
 
 type Props = {
     stats: AbilityScore 
+    proficiencyBonus: number,
 }
 
-const SkillProficienciesDisplay = ({ stats }: Props) => {
+const SkillProficienciesDisplay = ({ stats, proficiencyBonus }: Props) => {
     
     const { loading, error, data } = useQuery(ALLSKILLS);
 
     const proficienciesArray: JSX.Element[] = []
     // TODO props.map((stat) => <Proficiency/>)
     data?.skills?.map((skill: Skill) => {
-        proficienciesArray.push(<SkillProficiency skill={skill} stat={stats[skill.ability_score.name]}/>)
+        proficienciesArray.push(<SkillProficiency skill={skill} stat={stats[skill.ability_score.name]} proficiencyBonus={proficiencyBonus}/>)
     })
 
     return(

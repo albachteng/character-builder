@@ -1,4 +1,4 @@
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import './assets/css/App.css';
 import { useQuery } from '@apollo/client';
 import Display from './Display';
@@ -39,6 +39,12 @@ const App = () => {
   const [characterRace, setCharacterRace] = useState(getRandomRace());
   const [characterLevel, setCharacterLevel] = useState(1);
   const [characterStats, setCharacterStats] = useState(getRandomStats());
+  const [proficiencyBonus, setProficiencyBonus] = useState(2);
+
+  useEffect(() => {
+    setProficiencyBonus(Math.floor((7 + characterLevel) / 4));
+    console.log({proficiencyBonus});
+  }, [characterLevel]);
    
   // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
   const {loading, error, data} = useQuery(CHARACTERCLASSQUERY, {
@@ -74,7 +80,7 @@ const App = () => {
         <AbilityScoresDisplay stats={characterStats} />
         <Display data={data} />
         <FeatureDisplay characterLevel={characterLevel} characterClass={characterClass} />
-        <SkillProficienciesDisplay stats={characterStats} />
+        <SkillProficienciesDisplay proficiencyBonus={proficiencyBonus} stats={characterStats} />
       </Suspense>
     </div>
   );

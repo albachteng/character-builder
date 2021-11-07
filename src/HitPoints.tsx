@@ -30,7 +30,8 @@ const HitPoints = ({CON, level, hit_die, characterClass}: Props) => {
         setConMod(dice.mod(CON));
     }, [CON]);
 
-    // add another dice roll to HP total on level up
+    // add another dice roll to HP total on level up 
+    // TODO - there is a bug where the minimum 1 HP increase is not being accounted for when modifier is negative...
     useEffect(() => {
         if (level >= 2) {
             let toAdd = dice.rollDice(hit_die);

@@ -10,9 +10,10 @@ type Props = {
     stat: AbilityScoreTotal,
     skill: Skill
     proficiencyBonus?: number,
+    isProficient?: boolean,
 }
 
-const SkillProficiency = ({stat, skill, proficiencyBonus = 2}: Props) => {
+const SkillProficiency = ({stat, skill, proficiencyBonus = 2, isProficient}: Props) => {
 
     const expand = () => { // TODO abstract this functionality into its own hook
         for (let i = 0; i < skill.desc.length; i += 1) {
@@ -27,7 +28,7 @@ const SkillProficiency = ({stat, skill, proficiencyBonus = 2}: Props) => {
 
     return (
         <div>
-            <li onClick={expand}>{dice.mod(stat) + proficiencyBonus}: {skill.name}</li>
+            <li onClick={expand}>{dice.mod(stat) + proficiencyBonus}: {skill.name} Proficient: {`${isProficient}`}</li>
             {description}
         </div>
     )

@@ -16,9 +16,6 @@ type Props = {
 
 const ChoicesDisplay = ({title, choicesArray}: Props) => {
 
-    // const choices = choicesArray.map(({choose, from}: choice) => {
-    //     return chooseFrom(choose, from.filter((option) => option?.equipment?.name !== null));
-    // });
     const {choose, selections} = useOption();
 
     useEffect(() => {

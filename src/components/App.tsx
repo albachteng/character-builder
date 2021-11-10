@@ -11,6 +11,7 @@ import HitPoints from './HitPoints';
 import { CHARACTERCLASSQUERY } from '../queries';
 import {CharacterClass, Race, AbilityScore } from '../types';
 import ChoicesDisplay from './ChoicesDisplay';
+import Inventory from './Inventory';
 
 const classesIndexArray: CharacterClass[] = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
 const racesIndexArray: Race[] = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];
@@ -82,6 +83,7 @@ const App = () => {
         <FeatureDisplay characterLevel={characterLevel} characterClass={characterClass} />
         {/* <ChoicesDisplay title="Proficiency Choices" choicesArray={data?.class.proficiency_choices}/> */}
         <ChoicesDisplay title="Equipment Choices" choicesArray={data?.class.starting_equipment_options}/>
+        <Inventory equipmentChoices={data?.class.starting_equipment_options}></Inventory>
         <SkillProficienciesDisplay choicesArray={data?.class.proficiency_choices} proficiencyBonus={proficiencyBonus} stats={characterStats} />
       </Suspense>
     </div>

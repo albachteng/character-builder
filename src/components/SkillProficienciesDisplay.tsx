@@ -14,7 +14,7 @@ import useOption from '../hooks/useOption';
 interface choice {
     [key: string]: any, // can we rule out that the choices will have other fields? 
     choose: number,
-    from: any[] // ! 
+    from: any[] 
 }
 
 type Props = {
@@ -35,14 +35,12 @@ const SkillProficienciesDisplay = ({ choicesArray, stats, proficiencyBonus }: Pr
     
 
     const proficienciesArray = data?.skills?.map((skill: Skill) => {
-        console.log(selections.flat());
-        console.log({skill});
         return (
             <SkillProficiency 
                 skill={skill} 
                 stat={stats[skill.ability_score.name]} 
                 proficiencyBonus={proficiencyBonus} 
-                isProficient={selections.some((e: any) => {
+                isProficient={selections.some((e: choice) => {
                     return e.name === `Skill: ${skill.name}`
                 })}
             />
@@ -51,6 +49,8 @@ const SkillProficienciesDisplay = ({ choicesArray, stats, proficiencyBonus }: Pr
 
     return(
         <div>
+            {loading && <h3>Loading...</h3>}
+            {error && <h3>Whoops, something went wrong!</h3>}
             <ul>
                 {proficienciesArray}
             </ul>

@@ -1,13 +1,5 @@
-// TODO this logic could be extracted into a simple "ChooseFrom" component or hook since it is a common pattern
-import { useEffect } from 'react';
 import useOption from '../hooks/useOption';
-// import {chooseFrom} from '../utilities/chooseFrom';
-
-interface choice {
-    [key: string]: any, // can we rule out that the choices will have other fields? 
-    choose: number,
-    from: any[]; // 
-}
+import type { choice } from '../types';
 
 type Props = {
     title: string,
@@ -16,13 +8,7 @@ type Props = {
 
 const ChoicesDisplay = ({title, choicesArray}: Props) => {
 
-    const {choose, selections} = useOption();
-
-    useEffect(() => {
-        choose(choicesArray);
-    }, []);
-
-    // TODO if title is proficiency then we should be lifting state up so that the proficiency bonuses can be applied
+    const {selections} = useOption(choicesArray);
 
     return (
         <div>

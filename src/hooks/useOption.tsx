@@ -9,11 +9,11 @@ interface choice {
 
 
 const useOption = () => {
-    const [selections, setSelections]: [any, React.Dispatch<any>] = useState(); // ! 
+    const [selections, setSelections]: [any[], React.Dispatch<any>] = useState([]); // ! 
     // choose takes a choice array and returns the appropriate number of selections
     const choose = (choicesArray: choice[]) => setSelections(choicesArray.map(({choose, from}: choice) => {
         return chooseFrom(choose, from.filter((option) => option?.equipment?.name !== null));
-    }));
+    }).flat());
     return {
         choose,
         selections,

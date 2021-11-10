@@ -35,16 +35,15 @@ const SkillProficienciesDisplay = ({ choicesArray, stats, proficiencyBonus }: Pr
     
 
     const proficienciesArray = data?.skills?.map((skill: Skill) => {
-        console.log({selections});
+        console.log(selections.flat());
         console.log({skill});
         return (
-            data && selections && <SkillProficiency 
+            <SkillProficiency 
                 skill={skill} 
                 stat={stats[skill.ability_score.name]} 
                 proficiencyBonus={proficiencyBonus} 
-                isProficient={selections.includes({
-                    __typename: "ClassProficiency_choicesFrom",
-                    name: `Skill: ${skill.name}`
+                isProficient={selections.some((e: any) => {
+                    return e.name === `Skill: ${skill.name}`
                 })}
             />
         );

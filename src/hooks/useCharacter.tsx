@@ -1,11 +1,33 @@
 import { useState, useEffect, useReducer } from 'react';
-import { useQuery } from '@apollo/client';
 import dice /*, { limitedRange, LimitedRange } */ from '../utilities/dice';
-import { CHARACTERCLASSQUERY } from '../queries';
 import {CharacterClass, Race, AbilityScore } from '../types';
 
-const classesIndexArray: CharacterClass[] = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'ranger', 'sorcerer', 'warlock', 'wizard',];
-const racesIndexArray: Race[] = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'half-orc', 'halfling', 'human', 'tiefling',];
+const classesIndexArray: CharacterClass[] = [
+    'barbarian', 
+    'bard', 
+    'cleric', 
+    'druid', 
+    'fighter', 
+    'monk', 
+    'paladin', 
+    'ranger', 
+    'sorcerer', 
+    'warlock', 
+    'wizard',
+];
+
+const racesIndexArray: Race[] = [
+    'dragonborn', 
+    'dwarf', 
+    'elf', 
+    'gnome', 
+    'half-elf', 
+    'half-orc', 
+    'halfling', 
+    'human', 
+    'tiefling',
+];
+
 const getRandomClass = () => classesIndexArray[Math.floor(Math.random() * classesIndexArray.length)];
 const getRandomRace = () => racesIndexArray[Math.floor(Math.random() * racesIndexArray.length)];
 
@@ -39,12 +61,7 @@ const useCharacter = () => {
     setProficiencyBonus(Math.floor((7 + characterLevel) / 4));
   }, [characterLevel]);
    
-  // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
-  const {loading, error, data} = useQuery(CHARACTERCLASSQUERY, {
-    variables: {"FilterFindOneClassInput": {"index": characterClass}}
-  });
-
-  const rerollStats = () => {
+const rerollStats = () => {
     setCharacterStats(getRandomStats());
   };
 
@@ -70,9 +87,6 @@ const useCharacter = () => {
         setCharacterStats,
         proficiencyBonus,
         setProficiencyBonus,
-        loading,
-        error,
-        data,
         newCharacter,
         levelUp,
         rerollStats,

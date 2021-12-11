@@ -1,4 +1,6 @@
 import { Suspense } from 'react';
+import { useQuery } from '@apollo/client';
+import { CHARACTERCLASSQUERY } from '../queries';
 import '../assets/css/App.css';
 import Display from './Display';
 import AbilityScoresDisplay from './AbilityScoresDisplay';
@@ -8,29 +10,26 @@ import SkillProficienciesDisplay from './SkillProficienciesDisplay';
 import HitPoints from './HitPoints';
 import ChoicesDisplay from './ChoicesDisplay';
 import Inventory from './Inventory';
-import useCharacter from '../hooks/store';
+import useCharacter from '../hooks/useCharacter';
 
 const App = () => {
 
     const {
         characterClass,
-        setCharacterClass,
         characterRace,
-        setCharacterRace,
         characterLevel,
-        setCharacterLevel,
         characterStats,
-        setCharacterStats,
         proficiencyBonus,
-        setProficiencyBonus,
-        loading, 
-        error, 
-        data,
         newCharacter,
         levelUp,
         rerollStats,
     } = useCharacter();
-    
+
+    // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
+    const {loading, error, data} = useQuery(CHARACTERCLASSQUERY, {
+        variables: {"FilterFindOneClassInput": {"index": characterClass}}
+    });
+
   return loading ? 'Loading...' : (
     <div className="App">
       <a target="_" href='https://www.dnd5eapi.co/graphql'>GraphQL Playground</a>

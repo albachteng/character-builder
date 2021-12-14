@@ -2,6 +2,11 @@ import { useState, useEffect, useReducer } from 'react';
 import dice /*, { limitedRange, LimitedRange } */ from '../utilities/dice';
 import {CharacterClass, Race, AbilityScore } from '../types';
 
+/* hook handles the stateful and effectful logic of maintaining the character
+ * stats and broad strokes of player choice - race, class, core stats.
+ *
+ *
+ * */ 
 const classesIndexArray: CharacterClass[] = [
     'barbarian', 
     'bard', 
@@ -66,13 +71,14 @@ const rerollStats = () => {
   };
 
   const newCharacter = () => {
+    // NTS - this does not reroll stats
     setCharacterClass(getRandomClass());
     setCharacterRace(getRandomRace());
     setCharacterLevel(1);
   };
 
   const levelUp = () => {
-    setCharacterLevel(prev => prev + 1);
+    characterLevel <= 20 && setCharacterLevel(prev => prev + 1);
   };
 
 

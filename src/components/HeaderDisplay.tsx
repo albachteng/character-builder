@@ -4,7 +4,7 @@ ultimately responsible for displaying character name, character class, race, lev
 
 import {AbilityScore, CharacterClass, Race} from '../types';
 import HitPoints from './HitPoints';
-import { HITDICE } from '../queries/HitDice';
+import { HitDice } from '../queries/HitDice';
 import { useQuery } from '@apollo/client';
 
 type Props = {
@@ -29,7 +29,7 @@ const HeaderDisplay = ({
     background = ''
 }: Props) => {
 
-    const { loading, error, data } = useQuery(HITDICE);
+    const { loading, error, data } = useQuery(HitDice);
 
     return (
         <>

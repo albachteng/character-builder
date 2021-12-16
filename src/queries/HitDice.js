@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const HITDICE = gql`
-    query HitDice ($FilterFindOneClassInput: FilterFindOneClassInput){
-        class (filter: $FilterFindOneClassInput) {
+export const HitDice = gql`
+    query HitDice ($filter: FilterFindOneClassInput){
+        class (filter: $filter) {
             name
             hit_die
         }

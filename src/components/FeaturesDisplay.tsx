@@ -1,8 +1,8 @@
 import Feature from './Feature';
 import { FeatureType } from '../types';
 import { CharacterClass, Race } from '../types';
-import { FEATURES } from '../queries';
-import { RACIALFEATURES } from '../queries';
+import { ClassFeatures } from '../queries';
+import { RacialFeatures } from '../queries';
 import QueryMap from './QueryMap';
 
 type Props = {
@@ -36,12 +36,12 @@ const FeaturesDisplay = ({characterLevel, characterClass, characterRace }: Props
                 return (feature.level <= characterLevel) && <Feature key={`${feature.name+i}`} featureDetails={feature}></Feature>
             })} */}
             <QueryMap 
-                query={FEATURES} 
+                query={ClassFeatures} 
                 variables={{"FilterFindManyFeatureInput": {"class": {"index": characterClass}}}}
                 mappingFunc={featuresMap}
                 dataType={"features"}/>    
             <QueryMap 
-                query={RACIALFEATURES}
+                query={RacialFeatures}
                 variables={{"filter": { "races": { "index": characterRace}}}}
                 mappingFunc={featuresMap}
                 dataType={"features"}

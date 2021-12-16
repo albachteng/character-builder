@@ -1,5 +1,5 @@
 import ChoicesDisplay from "./ChoicesDisplay";
-import { EQUIPMENTOPTIONS } from "../queries";
+import { EquipmentOptions } from "../queries";
 import { useQuery } from '@apollo/client';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 
 const InventoryDisplay = ({characterClass}: Props) => {
     
-    const { loading, error, data } = useQuery(EQUIPMENTOPTIONS, {
+    const { loading, error, data } = useQuery(EquipmentOptions, {
         variables: {"filter": {"index": characterClass}}
       });
 

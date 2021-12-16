@@ -6,7 +6,7 @@ proficiency bonus is mostly based on class and race
 
 import SkillProficiency from './SkillProficiency';
 import type { Skill, AbilityScore, choice } from '../types';
-import { ALLSKILLS } from '../queries';
+import { AllSkills } from '../queries';
 import { useQuery } from '@apollo/client';
 import useOption from '../hooks/useOption';
 
@@ -16,9 +16,9 @@ type Props = {
     proficiencyBonus: number
 }
 
-const SkillProficienciesDisplay = ({ choicesArray, stats, proficiencyBonus }: Props) => {
+const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus }: Props) => {
     
-    const { loading, error, data } = useQuery(ALLSKILLS);
+    const { loading, error, data } = useQuery(AllSkills);
     const { selections } = useOption(choicesArray);
 
     const proficienciesArray = data?.skills?.map((skill: Skill) => {
@@ -46,4 +46,4 @@ const SkillProficienciesDisplay = ({ choicesArray, stats, proficiencyBonus }: Pr
     )
 };
 
-export default SkillProficienciesDisplay;
+export default SkillProficiencies;

@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const EQUIPMENTOPTIONS = gql`
+export const EquipmentOptions = gql`
     query EquipmentOptions ($filter: FilterFindOneClassInput) {
         class (filter: $filter) {
             starting_equipment_options {

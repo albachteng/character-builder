@@ -51,7 +51,7 @@ const HitPoints = ({CON, level, hit_die, characterClass}: Props) => {
         setHP(hit_die);
         setRolls({});
         setConMod(dice.mod(CON))
-    }, [characterClass]);
+    }, [characterClass]); // TODO refactor into a hook? 
 
     return (
         <>

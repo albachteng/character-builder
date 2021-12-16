@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const FEATURES = gql`
-query featuresQuery ($FilterFindManyFeatureInput: FilterFindManyFeatureInput){
-  features(filter: $FilterFindManyFeatureInput) {
+export const ClassFeatures = gql`
+query ClassFeaturesQuery ($filter: FilterFindManyFeatureInput){
+  features(filter: $filter) {
     name 
     desc
     level

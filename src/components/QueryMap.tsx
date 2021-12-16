@@ -14,8 +14,6 @@ const QueryMap = ({query, mappingFunc, variables, dataType}: Props) => {
 
     const { loading, error, data } = useQuery(query, {variables});
 
-    console.group({data});
-
     return (
         <>
             {loading && 'Loading...'}

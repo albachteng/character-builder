@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const RACEQUERY = gql`
-query RACE ($FilterFindOneRaceInput: FilterFindOneRaceInput) {
-  race (filter:$FilterFindOneRaceInput) {
+export const RaceQuery = gql`
+query RaceQuery ($filter: FilterFindOneRaceInput) {
+  race (filter: $filter) {
     name
     index
     size

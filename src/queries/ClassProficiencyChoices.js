@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const PROFICIENCYCHOICES = gql`
-    query ProficiencyChoices ($filter: FilterFindOneClassInput) {
+export const ClassProficiencyChoices = gql`
+    query ClassProficiencyChoices ($filter: FilterFindOneClassInput) {
         class (filter: $filter) {
             proficiency_choices {
                 choose
@@ -9,6 +9,7 @@ export const PROFICIENCYCHOICES = gql`
                     name
                     index
                     url
+                    __typename
                 }
             }
         }

@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const CHARACTERCLASSQUERY = gql`
-query characterClassQuery ($FilterFindOneClassInput: FilterFindOneClassInput){
-  class (filter: $FilterFindOneClassInput) {
+export const CharaceterClass = gql`
+query characterClassQuery ($filter: FilterFindOneClassInput){
+  class (filter: $filter) {
     name
     class_levels {
       ability_score_bonuses

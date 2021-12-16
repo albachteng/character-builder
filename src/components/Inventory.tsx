@@ -1,8 +1,6 @@
-import useOption from "../hooks/useOption";
 import ChoicesDisplay from "./ChoicesDisplay";
 import { EQUIPMENTOPTIONS } from "../queries";
 import { useQuery } from '@apollo/client';
-import type {choice} from '../types';
 
 type Props = {
     characterClass: string,
@@ -10,12 +8,9 @@ type Props = {
 
 const Inventory = ({characterClass}: Props) => {
     
-    // console.group({selections});
     const { loading, error, data } = useQuery(EQUIPMENTOPTIONS, {
-        variables: {"FilterFindManyFeatureInput": {"class": {"index": characterClass}}}
+        variables: {"filter": {"index": characterClass}}
       });
-
-    // const { selections } = useOption(data);
 
     return (
         <>
@@ -28,6 +23,9 @@ const Inventory = ({characterClass}: Props) => {
                     {/* {selections && <ul>
                         {selections.map((choice) => <li>{choice?.equipment?.name}: {choice?.quantity}</li>)}
                     </ul>} */}
+                    <ul>
+                        {/* <StartingClassEquipment></StartingClassEquipment> */}
+                    </ul>
                 </div>
             )}
         </>

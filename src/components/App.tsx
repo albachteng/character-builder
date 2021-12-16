@@ -2,14 +2,12 @@ import { Suspense } from 'react';
 import { useQuery } from '@apollo/client';
 import { CHARACTERCLASSQUERY } from '../queries';
 import '../assets/css/App.css';
-import Display from './Display';
 import AbilityScoresDisplay from './AbilityScoresDisplay';
 import FeatureDisplay from './FeaturesDisplay';
 import HeaderDisplay from './HeaderDisplay';
 import SkillProficienciesDisplay from './SkillProficienciesDisplay';
-import HitPoints from './HitPoints';
-import ChoicesDisplay from './ChoicesDisplay';
 import Inventory from './Inventory';
+import Skills from './Skills';
 import useCharacter from '../hooks/useCharacter';
 
 const App = () => {
@@ -25,12 +23,7 @@ const App = () => {
         rerollStats,
     } = useCharacter();
 
-    // variable form: {"FilterFindOneClassInput": {"index": "warlock"}}
-    const {loading, error, data} = useQuery(CHARACTERCLASSQUERY, {
-        variables: {"FilterFindOneClassInput": {"index": characterClass}}
-    });
-
-  return loading ? 'Loading...' : (
+  return (
     <div className="App">
       <a target="_" href='https://www.dnd5eapi.co/graphql'>GraphQL Playground</a>
       <br></br>
@@ -45,14 +38,12 @@ const App = () => {
         <HeaderDisplay characterStats={characterStats} characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
         
         <AbilityScoresDisplay stats={characterStats} />
-        {/* <Display data={data} /> */}
 
         <FeatureDisplay characterLevel={characterLevel} characterClass={characterClass} />
-        {/* <ChoicesDisplay title="Proficiency Choices" choicesArray={data?.class.proficiency_choices}/> */}
 
         <Inventory characterClass={characterClass}></Inventory>
 
-        <SkillProficienciesDisplay choicesArray={data?.class.proficiency_choices} proficiencyBonus={proficiencyBonus} stats={characterStats} />
+        <Skills characterClass={characterClass} proficiencyBonus={proficiencyBonus} characterStats={characterStats}></Skills>
       </Suspense>
     </div>
   );

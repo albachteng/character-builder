@@ -12,6 +12,7 @@ type Props = {
 
 
 const FeaturesDisplay = ({characterLevel, characterClass }: Props): JSX.Element => {
+
     const { loading, error, data } = useQuery(FEATURES, {
         variables: {"FilterFindManyFeatureInput": {"class": {"index": characterClass}}}
       });

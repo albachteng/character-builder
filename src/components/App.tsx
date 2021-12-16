@@ -41,14 +41,17 @@ const App = () => {
       <button onClick={rerollStats}>These stats are bullshit, roll again!</button>
       <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
       <Suspense fallback={'Suspense Loading...'}>
-        <HeaderDisplay characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
-        <HitPoints hit_die={data?.class.hit_die} CON={characterStats.CON} characterClass={characterClass} level={characterLevel}/>
+
+        <HeaderDisplay characterStats={characterStats} characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
+        
         <AbilityScoresDisplay stats={characterStats} />
-        <Display data={data} />
+        {/* <Display data={data} /> */}
+
         <FeatureDisplay characterLevel={characterLevel} characterClass={characterClass} />
         {/* <ChoicesDisplay title="Proficiency Choices" choicesArray={data?.class.proficiency_choices}/> */}
-        <ChoicesDisplay title="Equipment Choices" choicesArray={data?.class.starting_equipment_options}/>
-        <Inventory equipmentChoices={data?.class.starting_equipment_options}></Inventory>
+
+        <Inventory characterClass={characterClass}></Inventory>
+
         <SkillProficienciesDisplay choicesArray={data?.class.proficiency_choices} proficiencyBonus={proficiencyBonus} stats={characterStats} />
       </Suspense>
     </div>

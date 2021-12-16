@@ -2,12 +2,16 @@
 ultimately responsible for displaying character name, character class, race, level, ?alignment, ?experience, ?background 
 */ 
 
-import {CharacterClass, Race} from '../types';
+import {AbilityScore, CharacterClass, Race} from '../types';
+import HitPoints from './HitPoints';
+import { HITDICE } from '../queries/HitDice';
+import { useQuery } from '@apollo/client';
 
 type Props = {
     characterName: string,
     characterClass: CharacterClass,
-    race: Race
+    characterStats: AbilityScore, 
+    race: Race,
     level: number,
     alignment?: string,
     experience?: number,
@@ -17,6 +21,7 @@ type Props = {
 const HeaderDisplay = ({
     characterName,
     characterClass,
+    characterStats,
     race, 
     level,
     alignment = 'Neutral',
@@ -24,20 +29,34 @@ const HeaderDisplay = ({
     background = ''
 }: Props) => {
 
+    const { loading, error, data } = useQuery(HITDICE);
+
     return (
-        <h1>
-            <pre>
-                {JSON.stringify({
-                    characterName,
-                    characterClass,
-                    race, 
-                    level,
-                    alignment,
-                    experience,
-                    background
-                }, null, 2)}
-            </pre>
-        </h1>
+        <>
+            {loading && 'Loading...'}
+            {error && 'Whoops! Something went wrong!'}
+            {data && (              
+                <p>
+                    <pre>
+                        {JSON.stringify({
+                            characterName,
+                            characterClass,
+                            race, 
+                            level,
+                            alignment,
+                            experience,
+                            background
+                        }, null, 2)}
+                    </pre>
+                    {data && <HitPoints 
+                        hit_die={data?.class.hit_die} 
+                        CON={characterStats.CON} 
+                        characterClass={characterClass} 
+                        level={level}
+                    />}
+                </p>
+            )}
+        </>
     )
 };
 

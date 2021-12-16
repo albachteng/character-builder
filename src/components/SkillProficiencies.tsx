@@ -19,13 +19,15 @@ type Props = {
 
 const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, children }: Props) => {
     
-    console.log({children});
-
     const { loading, error, data } = useQuery(AllSkills); // purely to save me writing them all out
+
+    console.log({choicesArray});
 
     const { selections } = useOption(choicesArray);
 
+    console.log({selections});
     const proficienciesArray = data?.skills?.map((skill: Skill) => {
+
         return (
             <SkillProficiency 
                 skill={skill} 

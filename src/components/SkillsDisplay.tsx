@@ -1,11 +1,12 @@
 /* renders skill proficiencies display and handles query for class skill choices */ 
 
-import { ClassProficiencyChoices, RaceProficiencyChoices, RaceStartingProficiencies } from "../queries";
+import { ClassProficiencyChoices, RaceProficiencyChoices } from "../queries";
 import SkillProficiencies from './SkillProficiencies';
-import QueryMap from './QueryMap';
+// import QueryMap from './QueryMap';
+import { useState, useEffect } from "react";
 import { useQuery } from '@apollo/client';
 import type { AbilityScore } from '../types/AbilityScore';
-import { CharacterClass, Race } from "../types";
+import { CharacterClass, Race, choice } from "../types";
 
 type Props = {
     characterClass: CharacterClass, 
@@ -17,47 +18,38 @@ type Props = {
 
 const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, characterRace, }: Props) => {
 
-    const { loading, error, data } = useQuery(ClassProficiencyChoices, {
+    const classChoices = useQuery(ClassProficiencyChoices, {
         variables: {"filter": {"index": characterClass}}
     });
 
-    // maps proficiencies to an array of proficiency objects to be rendered in SkillProficiencies
-    const proficienciesMap = () => {};
+    const raceChoices = useQuery(RaceProficiencyChoices, {
+        variables: {"filter": {"index": characterRace}}
+    });
 
-    // maps proficiencyChoices
-    const proficiencyChoicesMap = (value: any) => {
-        return <p>{value}</p>;
-    };
+    const [choicesArray, setChoicesArray] = useState<choice[]>([])
 
+    useEffect(() => {
+        if (classChoices.data && raceChoices.data) {
+            setChoicesArray([
+                ...classChoices?.data?.class?.proficiency_choices, 
+                raceChoices?.data?.race?.proficiency_choices,
+            ]);
+        }
+    }, [raceChoices, classChoices]);
+
+    // console.log(raceChoices?.data?.race?.proficiency_choices, classChoices?.data?.class?.proficiency_choices);
+    // console.log(classChoices?.data?.class?.proficiency_choices.push(raceChoices?.data?.race?.proficiency_choices));
     return (
         <>
-            {loading && 'Loading...'}
-            {error && 'Whoops! Something went wrong!'}
-            {data && (
+            {(raceChoices.loading || classChoices.loading) && 'Loading...'}
+            {(raceChoices.error || classChoices.error) && 'Whoops! Something went wrong!'}
+            {(raceChoices.data && classChoices.data) && (
                 <>
                     <SkillProficiencies
-                        choicesArray={[]}
+                        choicesArray={choicesArray}
                         stats={characterStats}
                         proficiencyBonus={proficiencyBonus}
                     >
-                        <QueryMap
-                            query={ClassProficiencyChoices}
-                            mappingFunc={proficiencyChoicesMap}
-                            variables={{"filter": {"index": characterClass}}}
-                            dataType={"proficiency_choices"}
-                            />
-                        <QueryMap 
-                            query={RaceProficiencyChoices}
-                            mappingFunc={proficiencyChoicesMap}
-                            variables={{"filter": {"index": characterRace}}}
-                            dataType={"proficiency_choices"}
-                        />
-                        {/* <QueryMap 
-                            query={RaceStartingProficiencies}
-                            mappingFunc={proficienciesMap}
-                            variables={{"filter": {"index": characterRace}}}
-                            dataType={"proficiencies"}
-                        /> */}
                     </SkillProficiencies>
                 </>
             )}

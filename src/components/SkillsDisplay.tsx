@@ -11,7 +11,7 @@ type Props = {
     proficiencyBonus: number, 
 }
 
-const Skills = ({characterClass, characterStats, proficiencyBonus}: Props) => {
+const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus}: Props) => {
 
     const { loading, error, data } = useQuery(PROFICIENCYCHOICES, {
         variables: {"filter": {"index": characterClass}}
@@ -32,4 +32,4 @@ const Skills = ({characterClass, characterStats, proficiencyBonus}: Props) => {
     );
 };
 
-export default Skills;
+export default SkillsDisplay;

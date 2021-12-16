@@ -6,7 +6,7 @@ type Props = {
     characterClass: string,
 }
 
-const Inventory = ({characterClass}: Props) => {
+const InventoryDisplay = ({characterClass}: Props) => {
     
     const { loading, error, data } = useQuery(EQUIPMENTOPTIONS, {
         variables: {"filter": {"index": characterClass}}
@@ -32,4 +32,4 @@ const Inventory = ({characterClass}: Props) => {
     )
 };
 
-export default Inventory;
+export default InventoryDisplay;

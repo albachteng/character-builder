@@ -12,15 +12,22 @@ type Props = {
     characterRace: Race,
     characterStats: AbilityScore,
     proficiencyBonus: number, 
+    // children: any
 }
 
-const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, characterRacestring}: Props) => {
+const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, characterRace, }: Props) => {
 
     const { loading, error, data } = useQuery(ClassProficiencyChoices, {
         variables: {"filter": {"index": characterClass}}
     });
 
+    // maps proficiencies to an array of proficiency objects to be rendered in SkillProficiencies
     const proficienciesMap = () => {};
+
+    // maps proficiencyChoices
+    const proficiencyChoicesMap = (value: any) => {
+        return <p>{value}</p>;
+    };
 
     return (
         <>
@@ -29,21 +36,29 @@ const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, charac
             {data && (
                 <>
                     <SkillProficiencies
-                        choicesArray={data.class.proficiency_choices}
+                        choicesArray={[]}
                         stats={characterStats}
                         proficiencyBonus={proficiencyBonus}
-                    ></SkillProficiencies>
-                    <QueryMap
-                        query={ClassProficiencyChoices}
-                        mappingFunc={proficiencyChoicesMap}
-                        variables={{"filter": {"index": characterClass}}}
-                        dataType={"proficiency_choices"}
+                    >
+                        <QueryMap
+                            query={ClassProficiencyChoices}
+                            mappingFunc={proficiencyChoicesMap}
+                            variables={{"filter": {"index": characterClass}}}
+                            dataType={"proficiency_choices"}
+                            />
+                        <QueryMap 
+                            query={RaceProficiencyChoices}
+                            mappingFunc={proficiencyChoicesMap}
+                            variables={{"filter": {"index": characterRace}}}
+                            dataType={"proficiency_choices"}
                         />
-                    <QueryMap 
-                        query={RaceProficiencyChoices}
-                        mappingFunc={proficiencyChoicesMap}
-                        variables={{"filter": {"index": characterRace}}}
-                    />
+                        {/* <QueryMap 
+                            query={RaceStartingProficiencies}
+                            mappingFunc={proficienciesMap}
+                            variables={{"filter": {"index": characterRace}}}
+                            dataType={"proficiencies"}
+                        /> */}
+                    </SkillProficiencies>
                 </>
             )}
         </>

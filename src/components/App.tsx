@@ -29,10 +29,10 @@ const App = () => {
       <button onClick={rerollStats}>These stats are bullshit, roll again!</button>
       <h1>Play a fucking {characterRace} {characterClass}, coward!</h1>
       <Suspense fallback={'Suspense Loading...'}>
-        <HeaderDisplay characterStats={characterStats} characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
+        {/* <HeaderDisplay characterStats={characterStats} characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
         <AbilityScoresDisplay stats={characterStats} />
         <FeatureDisplay characterRace={characterRace} characterLevel={characterLevel} characterClass={characterClass} />
-        <InventoryDisplay characterClass={characterClass}></InventoryDisplay>
+        <InventoryDisplay characterClass={characterClass}></InventoryDisplay> */}
         <SkillsDisplay characterRace={characterRace} characterClass={characterClass} proficiencyBonus={proficiencyBonus} characterStats={characterStats}></SkillsDisplay>
       </Suspense>
     </div>

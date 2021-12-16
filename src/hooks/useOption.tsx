@@ -20,5 +20,4 @@ const useOption = (choicesArray: choice[]) => {
     };
 };
 
-
 export default useOption;

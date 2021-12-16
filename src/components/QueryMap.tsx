@@ -1,7 +1,7 @@
 /* takes a query and maps the results of that query using a provided mapping function */
 import { useQuery } from "@apollo/client";
 import { DocumentNode } from "graphql";
-import { JsxElement } from "typescript";
+// import { JsxElement } from "typescript";
 
 type Props = {
     query: DocumentNode,

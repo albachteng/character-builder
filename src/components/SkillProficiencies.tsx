@@ -26,8 +26,7 @@ const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, children }:
     const { selections } = useOption(choicesArray);
 
     console.log({selections});
-    const proficienciesArray = data?.skills?.map((skill: Skill) => {
-
+    const proficienciesArray = data?.skills?.map((skill: Skill, index: number) => {
         return (
             <SkillProficiency 
                 skill={skill} 
@@ -36,6 +35,7 @@ const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, children }:
                 isProficient={selections.some((e: Choice) => {
                     return e?.name === `Skill: ${skill.name}`
                 })}
+                key={`${skill.name}${index}`}
             />
         );
     });

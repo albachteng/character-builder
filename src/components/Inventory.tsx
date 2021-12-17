@@ -1,5 +1,5 @@
-import ChoicesDisplay from "./ChoicesDisplay";
-import { EquipmentOptions } from "../queries";
+import StartingInventoryChoices from './StartingInventoryChoices';
+import { ClassEquipmentOptions } from "../queries";
 import { useQuery } from '@apollo/client';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 
 const InventoryDisplay = ({characterClass}: Props) => {
     
-    const { loading, error, data } = useQuery(EquipmentOptions, {
+    const { loading, error, data } = useQuery(ClassEquipmentOptions, {
         variables: {"filter": {"index": characterClass}}
       });
 
@@ -18,14 +18,9 @@ const InventoryDisplay = ({characterClass}: Props) => {
             {error && 'Whoops! Something went wrong!'}
             {data && (
                 <div>
-                    <ChoicesDisplay title="Equipment Choices" choicesArray={data?.class.starting_equipment_options}/>
+                    {/* <ChoicesDisplay title="Equipment Choices" choicesArray={data?.class.starting_equipment_options}/> */}
                     <h3>Inventory:</h3>
-                    {/* {selections && <ul>
-                        {selections.map((choice) => <li>{choice?.equipment?.name}: {choice?.quantity}</li>)}
-                    </ul>} */}
-                    <ul>
-                        {/* <StartingClassEquipment></StartingClassEquipment> */}
-                    </ul>
+                    <StartingInventoryChoices choicesArray={data?.class?.starting_equipment_options}/>
                 </div>
             )}
         </>

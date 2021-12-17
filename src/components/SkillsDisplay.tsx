@@ -6,7 +6,7 @@ import SkillProficiencies from './SkillProficiencies';
 import { useState, useEffect } from "react";
 import { useQuery } from '@apollo/client';
 import type { AbilityScore } from '../types/AbilityScore';
-import { CharacterClass, Race, choice } from "../types";
+import { CharacterClass, Race, Choice } from "../types";
 
 type Props = {
     characterClass: CharacterClass, 
@@ -26,7 +26,7 @@ const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, charac
         variables: {"filter": {"index": characterRace}}
     });
 
-    const [choicesArray, setChoicesArray] = useState<choice[]>([])
+    const [choicesArray, setChoicesArray] = useState<Choice[]>([])
 
     useEffect(() => {
         if (classChoices.data && raceChoices.data) {

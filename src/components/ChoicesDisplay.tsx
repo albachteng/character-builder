@@ -1,9 +1,9 @@
 import useOption from '../hooks/useOption';
-import type { choice } from '../types';
+import type { Choice } from '../types';
 
 type Props = {
     title: string,
-    choicesArray: choice[] // should be an array of choices
+    choicesArray: Choice[] // should be an array of choices
 }
 
 const ChoicesDisplay = ({title, choicesArray}: Props) => {

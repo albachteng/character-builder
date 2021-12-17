@@ -18,7 +18,8 @@ const QueryMap = ({query, mappingFunc, variables, dataType}: Props) => {
         <>
             {loading && 'Loading...'}
             {error && 'Whoops! Something went wrong!'}
-            {data && data[dataType].map(mappingFunc)}
+            {data && data[dataType].map(mappingFunc)
+            }
         </>
     )
 };

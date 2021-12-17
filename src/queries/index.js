@@ -1,8 +1,9 @@
 // export { CharacterClassQuery } from './CharacterClass';
 export { AllSkills } from './AllSkills';
+export { ClassEquipmentOptions } from './ClassEquipmentOptions';
 export { ClassFeatures } from './ClassFeatures';
 export { ClassProficiencyChoices } from './ClassProficiencyChoices';
-export { EquipmentOptions } from './EquipmentOptions';
+export { ClassStartingEquipment } from './ClassStartingEquipment';
 export { HitDice } from './HitDice';
 export { RacialFeatures } from './RacialFeatures';
 export { RaceProficiencyChoices } from './RaceProficiencyChoices';

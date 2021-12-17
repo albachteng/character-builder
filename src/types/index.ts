@@ -7,4 +7,4 @@ export type {Race} from './Race';
 export type {Skill} from './Skill';
 export type {SkillName} from './SkillName';
 export type {StatName} from './StatName';
-export type {choice} from './choice';
+export type {Choice} from './choice';

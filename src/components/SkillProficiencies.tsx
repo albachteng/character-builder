@@ -5,13 +5,13 @@ proficiency bonus is mostly based on class and race
 */
 
 import SkillProficiency from './SkillProficiency';
-import type { Skill, AbilityScore, choice } from '../types';
+import type { Skill, AbilityScore, Choice } from '../types';
 import { AllSkills } from '../queries';
 import { useQuery } from '@apollo/client';
 import useOption from '../hooks/useOption';
 
 type Props = {
-    choicesArray: choice[],
+    choicesArray: Choice[],
     stats: AbilityScore ,
     proficiencyBonus: number
     children: any // !
@@ -33,7 +33,7 @@ const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, children }:
                 skill={skill} 
                 stat={stats[skill.ability_score.name]} 
                 proficiencyBonus={proficiencyBonus} 
-                isProficient={selections.some((e: choice) => {
+                isProficient={selections.some((e: Choice) => {
                     return e?.name === `Skill: ${skill.name}`
                 })}
             />

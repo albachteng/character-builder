@@ -37,12 +37,12 @@ const FeaturesDisplay = ({characterLevel, characterClass, characterRace }: Props
             })} */}
             <QueryMap 
                 query={ClassFeatures} 
-                variables={{"FilterFindManyFeatureInput": {"class": {"index": characterClass}}}}
+                variables={{"filter": {"class": {"index": characterClass}}}}
                 mappingFunc={featuresMap}
                 dataType={"features"}/>    
             <QueryMap 
                 query={RacialFeatures}
-                variables={{"filter": { "races": { "index": characterRace}}}}
+                variables={{"filter": {"races": { "index": characterRace}}}}
                 mappingFunc={featuresMap}
                 dataType={"features"}
             />

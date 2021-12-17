@@ -1,6 +1,6 @@
-import type { choice } from '../types';
+import type { Choice } from '../types';
 
-export const chooseFrom = (choose: number, from: choice[]) => {
+export const chooseFrom = (choose: number, from: Choice[]) => {
     const choices: any[] = [];
     while (choices.length < choose) {
         const choice = Math.floor(Math.random()*from.length);

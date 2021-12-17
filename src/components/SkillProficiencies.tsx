@@ -21,11 +21,9 @@ const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, children }:
     
     const { loading, error, data } = useQuery(AllSkills); // purely to save me writing them all out
 
-    console.log({choicesArray});
 
     const { selections } = useOption(choicesArray);
 
-    console.log({selections});
     const proficienciesArray = data?.skills?.map((skill: Skill, index: number) => {
         return (
             <SkillProficiency 

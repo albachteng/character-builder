@@ -8,9 +8,3 @@ query ClassFeaturesQuery ($filter: FilterFindManyFeatureInput){
     level
   }
 }`;
-
-// variables: 
-// {"FilterFindManyFeatureInput": {
-//   "class": {
-//     "index": "fighter"
-// }}}

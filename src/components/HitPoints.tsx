@@ -2,9 +2,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import dice from '../utilities/dice';
 import { CharacterClass } from '../types';
-// import { graphql, GraphQLTaggedNode, useFragment } from 'react-relay';
-// import type { HitPointsFragment_class$key } from './queries/__generated__/queriesBasicClassInfoQuery.graphql';
-// import type { queriesHitPointsFragment_class$ref } from './queries/__generated__/queriesHitPointsFragment_class.graphql';
 
 type Props = {
     level: number,
@@ -12,12 +9,6 @@ type Props = {
     hit_die: number,
     characterClass: CharacterClass,
 }
-
-/* does not work with level up because 
-rerolls previous HP increases, sometimes 
-leading to HP losses - what we really want
-to do is set an initial HP and call a useEffect
-function that adds a new roll with each level */
 
 const HitPoints = ({CON, level, hit_die, characterClass}: Props) => {
 

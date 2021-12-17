@@ -95,25 +95,6 @@ feature_choices {
     }
 }`;
   
-//  variable for levels: {"FilterFindManyLevelInput": {
-//   "class": {
-//       "index": "wizard"}
-//   }
-// }
-  
-//   # query the names of the class-specific abilities
-// gql`query LevelClassSpecificQuery {
-//     __type (name: "LevelClass_specific") {
-//         fields {
-//             name
-//             type {
-//                 name
-//             }
-//         }  
-//     }
-// }`
-
-  
 gql`fragment HitPointsFragment_class on Class {
     hit_die
 }`;

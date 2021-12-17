@@ -6,12 +6,11 @@ type Props = {
     otherEquipment: {}[]
 }
 
-const StartingInventoryChocies = ({choicesArray, otherEquipment}: Props) => {
+const StartingInventoryChoices = ({choicesArray, otherEquipment}: Props) => {
 
     const { selections } = useOption(choicesArray);
 
     const allOptions = [...selections, ...otherEquipment];
-    console.log(allOptions);
 
     return (
 
@@ -23,4 +22,4 @@ const StartingInventoryChocies = ({choicesArray, otherEquipment}: Props) => {
     )
 };
 
-export default StartingInventoryChocies;
+export default StartingInventoryChoices;

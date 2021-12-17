@@ -2,7 +2,6 @@
 
 import { ClassProficiencyChoices, RaceProficiencyChoices } from "../queries";
 import SkillProficiencies from './SkillProficiencies';
-// import QueryMap from './QueryMap';
 import { useState, useEffect } from "react";
 import { useQuery } from '@apollo/client';
 import type { AbilityScore } from '../types/AbilityScore';
@@ -13,7 +12,6 @@ type Props = {
     characterRace: Race,
     characterStats: AbilityScore,
     proficiencyBonus: number, 
-    // children: any
 }
 
 const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, characterRace, }: Props) => {
@@ -37,8 +35,6 @@ const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, charac
         }
     }, [raceChoices, classChoices]);
 
-    // console.log(raceChoices?.data?.race?.proficiency_choices, classChoices?.data?.class?.proficiency_choices);
-    // console.log(classChoices?.data?.class?.proficiency_choices.push(raceChoices?.data?.race?.proficiency_choices));
     return (
         <>
             {(raceChoices.loading || classChoices.loading) && 'Loading...'}

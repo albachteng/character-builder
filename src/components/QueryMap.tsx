@@ -5,7 +5,7 @@ import { DocumentNode } from "graphql";
 
 type Props = {
     query: DocumentNode,
-    mappingFunc: (value: any, index: number, array: any[]) => any,
+    mappingFunc: (value: any, index: number, array: any[]) => any, // ! 
     variables: {[key: string]: any},
     dataType: string
 }

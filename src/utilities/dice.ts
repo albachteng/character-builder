@@ -11,14 +11,16 @@ const rollDice = function(
     dice: number, 
     repeat: number = 1, 
     modifier: number = 0, 
-    drop: number = 0): number {
+    drop: number = 0
+    ): number {
         let result = [];
         // repeats and adds a single roll a number of times equal to repeat
         for (let i = 0; i < repeat; i += 1) {
             // represents a single roll of a dice-sided die
             result.push(Math.ceil(Math.random() * dice));
         }
-    //! this doens't work for drops higher than 1
+    // ! NTS this doesn't work for drops higher than 1
+    // TODO
     if (drop) { // sets the lowest number instead to zero, effectively removing it
       result[result.indexOf(Math.min(...result))] = 0;
     }

@@ -2,14 +2,14 @@ import Stat from './Stat';
 import {AbilityScore} from '../types'
 
 type Props = {
-    stats: any
+    stats: {[key: string]: any}
 };
 
 const AbilityScoresDisplay = ({stats}: Props) => {
     const scores: any = [];
     const keys = Object.keys(stats);
-    keys.forEach((key) => {
-        scores.push(<Stat name={key} stats={stats[key]}></Stat>)
+    keys.forEach((key, index) => {
+        scores.push(<Stat name={key} key={`${key}${index}`} stats={stats[key]}></Stat>)
     });
 
     return (

@@ -3,7 +3,7 @@ import type { Choice } from '../types';
 
 type Props = {
     title: string,
-    choicesArray: Choice[] // should be an array of choices
+    choicesArray: Choice[] 
 }
 
 const ChoicesDisplay = ({title, choicesArray}: Props) => {

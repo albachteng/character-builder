@@ -5,6 +5,7 @@ export const ClassProficiencyChoices = gql`
         class (filter: $filter) {
             proficiency_choices {
                 choose
+                __typename
                 from {
                     name
                     index

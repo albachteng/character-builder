@@ -1,6 +1,6 @@
 /* renders skill proficiencies display and handles query for class skill choices */ 
 
-import { ClassProficiencyChoices, RaceProficiencyChoices } from "../queries";
+import { ClassProficiencyChoices, RaceProficiencyChoices, RaceStartingProficiencies } from "../queries";
 import SkillProficiencies from './SkillProficiencies';
 import { useState, useEffect } from "react";
 import { useQuery } from '@apollo/client';
@@ -45,8 +45,8 @@ const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, charac
                         choicesArray={choicesArray}
                         stats={characterStats}
                         proficiencyBonus={proficiencyBonus}
-                    >
-                    </SkillProficiencies>
+                        characterRace={characterRace}
+                    />
                 </>
             )}
         </>

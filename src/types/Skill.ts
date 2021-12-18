@@ -5,4 +5,5 @@ export type Skill = {
     name: SkillName,
     ability_score: ability_score
     desc: string[],
+    __typename: 'string',
   }

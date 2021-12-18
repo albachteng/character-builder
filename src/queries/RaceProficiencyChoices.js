@@ -5,6 +5,7 @@ export const RaceProficiencyChoices = gql`
       race (filter: $filter) {
         proficiency_choices: starting_proficiency_options {
           choose
+          __typename
           from {
             name
             index

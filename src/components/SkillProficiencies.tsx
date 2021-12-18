@@ -5,8 +5,9 @@ proficiency bonus is mostly based on class and race
 */
 
 import SkillProficiency from './SkillProficiency';
-import type { Skill, AbilityScore, Choice } from '../types';
-import { AllSkills } from '../queries';
+import { useState, useEffect } from 'react';
+import type { Skill, AbilityScore, Choice, Race } from '../types';
+import { AllSkills, RaceStartingProficiencies } from '../queries';
 import { useQuery } from '@apollo/client';
 import useOption from '../hooks/useOption';
 
@@ -14,15 +15,28 @@ type Props = {
     choicesArray: Choice[],
     stats: AbilityScore ,
     proficiencyBonus: number
-    children: any // !
+    characterRace: Race 
 }
 
-const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, children }: Props) => {
+const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, characterRace}: Props) => {
+    const [ allProficiencies, setAllProficiencies] = useState<Skill[]>([])
     
     const { loading, error, data } = useQuery(AllSkills); // purely to save me writing them all out
 
+    const raceStartingProficiencies = useQuery(RaceStartingProficiencies, {
+        variables: {"filter": {"index": characterRace}}
+    });
 
     const { selections } = useOption(choicesArray);
+
+    useEffect(() => {
+        if (raceStartingProficiencies.data && selections) {
+            setAllProficiencies([...selections, ...raceStartingProficiencies?.data?.race?.proficiencies?.filter((proficiency: any) => { 
+                // if (proficiency?.name?.slice(0, 7) === `Skill: `) console.log({proficiency});
+                return proficiency?.name?.slice(0, 7) === `Skill: `;
+            })]);
+        }
+    }, [raceStartingProficiencies, selections]);
 
     const proficienciesArray = data?.skills?.map((skill: Skill, index: number) => {
         return (
@@ -30,10 +44,13 @@ const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, children }:
                 skill={skill} 
                 stat={stats[skill.ability_score.name]} 
                 proficiencyBonus={proficiencyBonus} 
-                isProficient={selections.some((e: Choice) => {
+                isProficient={allProficiencies.some((e: Skill) => {
                     return e?.name === `Skill: ${skill.name}`
                 })}
                 key={`${skill.name}${index}`}
+                proficiencyFrom={allProficiencies.find((e: Skill) => {
+                    return e?.name === `Skill: ${skill.name}`
+                })?.__typename}
             />
         );
     });

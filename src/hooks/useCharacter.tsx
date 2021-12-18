@@ -82,18 +82,17 @@ const rerollStats = () => {
     characterLevel <= 20 && setCharacterLevel(prev => prev + 1);
   };
 
-
-    return {
-        characterClass, 
-        characterRace,
-        characterLevel,
-        characterStats,
-        characterBackground,
-        proficiencyBonus,
-        newCharacter,
-        levelUp,
-        rerollStats,
-    };
+  return {
+    characterClass, 
+    characterRace,
+    characterLevel,
+    characterStats,
+    characterBackground,
+    proficiencyBonus,
+    newCharacter,
+    levelUp,
+    rerollStats,
+  };
     
 }
 

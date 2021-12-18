@@ -1,6 +1,7 @@
 // export { CharacterClassQuery } from './CharacterClass';
 export { AllSkills } from './AllSkills';
 export { BackgroundEquipment } from './BackgroundEquipment';
+export { BackgroundFeatures } from './BackgroundFeatures';
 export { ClassEquipmentOptions } from './ClassEquipmentOptions';
 export { ClassFeatures } from './ClassFeatures';
 export { ClassProficiencyChoices } from './ClassProficiencyChoices';

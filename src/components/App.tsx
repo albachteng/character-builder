@@ -32,7 +32,7 @@ const App = () => {
       <Suspense fallback={'Suspense Loading...'}>
         <HeaderDisplay characterStats={characterStats} characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
         <AbilityScoresDisplay stats={characterStats} />
-        <FeatureDisplay characterRace={characterRace} characterLevel={characterLevel} characterClass={characterClass} />
+        <FeatureDisplay characterBackground={characterBackground} characterRace={characterRace} characterLevel={characterLevel} characterClass={characterClass} />
         <InventoryDisplay characterClass={characterClass} characterBackground={characterBackground}></InventoryDisplay>
         <SkillsDisplay characterRace={characterRace} characterClass={characterClass} proficiencyBonus={proficiencyBonus} characterStats={characterStats}></SkillsDisplay>
       </Suspense>

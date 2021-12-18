@@ -1,17 +1,17 @@
 import Feature from './Feature';
 import { FeatureType } from '../types';
 import { CharacterClass, Race } from '../types';
-import { ClassFeatures } from '../queries';
-import { RacialFeatures } from '../queries';
+import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../queries';
 import QueryMap from './QueryMap';
 
 type Props = {
     characterLevel: number,
     characterClass: CharacterClass,
     characterRace: Race
+    characterBackground: string,
 };
 
-const FeaturesDisplay = ({characterLevel, characterClass, characterRace }: Props): JSX.Element => {
+const FeaturesDisplay = ({characterLevel, characterClass, characterRace, characterBackground }: Props): JSX.Element => {
 
     const featuresMap = (feature: FeatureType, index: number) => {
         if (feature.level) {
@@ -33,6 +33,11 @@ const FeaturesDisplay = ({characterLevel, characterClass, characterRace }: Props
                 variables={{"filter": {"races": { "index": characterRace}}}}
                 mappingFunc={featuresMap}
                 dataType={['features']}/> 
+            <QueryMap 
+                query={BackgroundFeatures}
+                variables={{"filter": { "index": characterBackground}}}
+                mappingFunc={featuresMap}
+                dataType={['background', 'feature']}/> 
         </div>
     )
 }

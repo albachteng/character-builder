@@ -15,22 +15,27 @@ type Props = {
 const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false}: Props) => {
 
     const { loading, error, data } = useQuery(query, {variables});
-
+    console.log({data});
     const findArray = (data: any, dataType: string[]) => {
-        let output = data; 
-        dataType.forEach((type) => {
-            if (output[type]) output = output[type];
-            else throw new Error('did not find array');
-        });
-        return output;
+        if (data) {
+            let output = data; 
+            dataType.forEach((type) => {
+                if (output[type]) output = output[type];
+                else throw new Error('did not find array');
+            });
+            return output;
+        }
     }
-
+    
+    const response = findArray(data, dataType);
+    console.log({response}) 
     return (
         <>
             {loading && 'Loading...'}
             {error && 'Whoops! Something went wrong!'}
-            {(data && !useOption) && findArray(data, dataType).map(mappingFunc)}
-            {(data && useOption) && 
+            {(data && !useOption && Array.isArray(response)) && response.map(mappingFunc)}
+            {(data && !useOption && !Array.isArray(response)) && mappingFunc(response, 0, [])}
+            {(data && useOption && Array.isArray(response)) && 
                 <OptionWrapper 
                     choicesArray={findArray(data, dataType)} 
                     mappingFunc={mappingFunc}

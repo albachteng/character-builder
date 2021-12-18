@@ -13,7 +13,7 @@ const Feature = ({featureDetails}: Props) => {
 
     return (
         <div>
-            <p>{featureDetails.name}, {featureDetails.level && `Level ${featureDetails.level}`}</p>
+            <p>{featureDetails.name}{featureDetails.level && `, Level ${featureDetails.level}`}</p>
             <button onClick={expand}>Expand</button>
             {featureDetails.desc.map((paragraph, i) => {
                 return (

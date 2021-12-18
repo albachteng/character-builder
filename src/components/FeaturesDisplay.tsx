@@ -22,17 +22,17 @@ const FeaturesDisplay = ({characterLevel, characterClass, characterRace }: Props
 
     return (
         <div style={{height: '50%', overflow: 'scroll'}}>
+            <h2>Features</h2>
             <QueryMap 
                 query={ClassFeatures} 
                 variables={{"filter": {"class": {"index": characterClass}}}}
                 mappingFunc={featuresMap}
-                dataType={"features"}/>    
+                dataType={['features']}/>    
             <QueryMap 
                 query={RacialFeatures}
                 variables={{"filter": {"races": { "index": characterRace}}}}
                 mappingFunc={featuresMap}
-                dataType={"features"}
-            />
+                dataType={['features']}/> 
         </div>
     )
 }

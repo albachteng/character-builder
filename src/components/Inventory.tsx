@@ -1,4 +1,4 @@
-import StartingInventoryChoices from './StartingInventoryChoices';
+import QueryMap from './QueryMap';
 import { ClassEquipmentOptions, ClassStartingEquipment } from "../queries";
 import { useQuery } from '@apollo/client';
 
@@ -16,16 +16,28 @@ const InventoryDisplay = ({characterClass}: Props) => {
         variables: {"filter": { "index": characterClass}}
     });
 
+    const equipmentMap = (item: any, index: number) => item && <li key={`${item?.equipment?.name}${index}`}>{item?.equipment?.name}: {item?.quantity}</li>;
+
     return (
         <>
             {(loading || startingEquipment.loading) && 'Loading...'}
             {(error || startingEquipment.error) && 'Whoops! Something went wrong!'}
             {(data && startingEquipment.data) && (
                 <div>
-                    <h3>Inventory:</h3>
-                    <StartingInventoryChoices 
-                        choicesArray={data?.class?.starting_equipment_options} 
-                        otherEquipment={startingEquipment.data.class.starting_equipment}/>
+                    <h2>Inventory:</h2>
+                    <ul>
+                        <QueryMap 
+                            query={ClassStartingEquipment} 
+                            variables={{"filter": {"index": characterClass}}}
+                            mappingFunc={equipmentMap}
+                            dataType={["class", 'starting_equipment']}/>    
+                        <QueryMap 
+                            query={ClassEquipmentOptions} 
+                            variables={{"filter": {"index": characterClass}}}
+                            mappingFunc={equipmentMap}
+                            dataType={["class", 'starting_equipment_options']}
+                            useOption={true}/>    
+                    </ul>
                 </div>
             )}
         </>

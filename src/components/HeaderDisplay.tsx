@@ -33,6 +33,7 @@ const HeaderDisplay = ({
 
     return (
         <>
+            <h2>Header</h2>
             {loading && 'Loading...'}
             {error && 'Whoops! Something went wrong!'}
             {data && (              

@@ -1,10 +1,6 @@
-import {AbilityScoreTotal} from './AbilityScoreTotal'
+import { AbilityScoreTotal } from './AbilityScoreTotal'
+import {ability_score_abbr} from './ability_score'
 
-export interface AbilityScore {
-    ['CON']: AbilityScoreTotal,
-    ['STR']: AbilityScoreTotal,
-    ['DEX']: AbilityScoreTotal,
-    ['INT']: AbilityScoreTotal,
-    ['WIS']: AbilityScoreTotal,
-    ['CHA']: AbilityScoreTotal,
-  };
+export type AbilityScore = {
+  [key in ability_score_abbr]: AbilityScoreTotal
+};

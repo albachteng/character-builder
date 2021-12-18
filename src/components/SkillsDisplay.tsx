@@ -41,6 +41,7 @@ const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, charac
             {(raceChoices.error || classChoices.error) && 'Whoops! Something went wrong!'}
             {(raceChoices.data && classChoices.data) && (
                 <>
+                    <h2>Skills</h2>
                     <SkillProficiencies
                         choicesArray={choicesArray}
                         stats={characterStats}

@@ -19,20 +19,17 @@ type Props = {
 }
 
 const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, characterRace}: Props) => {
-    const [ allProficiencies, setAllProficiencies] = useState<Skill[]>([])
-    
-    const { loading, error, data } = useQuery(AllSkills); // purely to save me writing them all out
 
+    const [ allProficiencies, setAllProficiencies] = useState<Skill[]>([])
+    const { loading, error, data } = useQuery(AllSkills); // purely to save me writing them all out
     const raceStartingProficiencies = useQuery(RaceStartingProficiencies, {
         variables: {"filter": {"index": characterRace}}
     });
-
     const { selections } = useOption(choicesArray);
 
     useEffect(() => {
         if (raceStartingProficiencies.data && selections) {
             setAllProficiencies([...selections, ...raceStartingProficiencies?.data?.race?.proficiencies?.filter((proficiency: any) => { 
-                // if (proficiency?.name?.slice(0, 7) === `Skill: `) console.log({proficiency});
                 return proficiency?.name?.slice(0, 7) === `Skill: `;
             })]);
         }
@@ -44,12 +41,12 @@ const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, characterRa
                 skill={skill} 
                 stat={stats[skill.ability_score.name]} 
                 proficiencyBonus={proficiencyBonus} 
-                isProficient={allProficiencies.some((e: Skill) => {
-                    return e?.name === `Skill: ${skill.name}`
+                isProficient={allProficiencies.some((proficiency: Skill) => {
+                    return proficiency?.name === `Skill: ${skill.name}`
                 })}
                 key={`${skill.name}${index}`}
-                proficiencyFrom={allProficiencies.find((e: Skill) => {
-                    return e?.name === `Skill: ${skill.name}`
+                proficiencyFrom={allProficiencies.find((proficiency: Skill) => {
+                    return proficiency?.name === `Skill: ${skill.name}`
                 })?.__typename}
             />
         );
@@ -58,8 +55,8 @@ const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, characterRa
     return(
         
         <div>
-            {loading && <h3>Loading...</h3>}
-            {error && <h3>Whoops, something went wrong!</h3>}
+            {loading && "Loading..."}
+            {error && "Whoops, something went wrong!"}
             <ul>
                 {proficienciesArray}
             </ul>

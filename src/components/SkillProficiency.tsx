@@ -30,7 +30,8 @@ const SkillProficiency = ({stat, skill, proficiencyBonus = 2, isProficient, prof
     return (
         <div>
             <li onClick={expand}>
-                {dice.mod(stat) + proficiencyBonus}: {skill.name} 
+                {dice.mod(stat) + (isProficient ? proficiencyBonus : 0)}: {skill.name}  
+                {` Stat (${skill.ability_score.name}-${stat}) mod: ${dice.mod(stat)} ${isProficient ? `+ ${proficiencyBonus} ` : ' '}`}
                 Proficient: {`${isProficient ? `Yes, from ${proficiencyFrom}` : "No"}`}
             </li>
             {description}

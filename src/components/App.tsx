@@ -34,7 +34,7 @@ const App = () => {
         <AbilityScoresDisplay stats={characterStats} />
         <FeatureDisplay characterBackground={characterBackground} characterRace={characterRace} characterLevel={characterLevel} characterClass={characterClass} />
         <InventoryDisplay characterClass={characterClass} characterBackground={characterBackground}></InventoryDisplay>
-        <SkillsDisplay characterRace={characterRace} characterClass={characterClass} proficiencyBonus={proficiencyBonus} characterStats={characterStats}></SkillsDisplay>
+        <SkillsDisplay characterBackground={characterBackground} characterRace={characterRace} characterClass={characterClass} proficiencyBonus={proficiencyBonus} characterStats={characterStats}></SkillsDisplay>
       </Suspense>
     </div>
   );

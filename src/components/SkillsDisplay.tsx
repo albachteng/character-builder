@@ -12,9 +12,10 @@ type Props = {
     characterRace: Race,
     characterStats: AbilityScore,
     proficiencyBonus: number, 
+    characterBackground: string,
 }
 
-const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, characterRace, }: Props) => {
+const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, characterRace, characterBackground}: Props) => {
 
     const classChoices = useQuery(ClassProficiencyChoices, {
         variables: {"filter": {"index": characterClass}}
@@ -47,6 +48,7 @@ const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, charac
                         stats={characterStats}
                         proficiencyBonus={proficiencyBonus}
                         characterRace={characterRace}
+                        characterBackground={characterBackground}
                     />
                 </>
             )}

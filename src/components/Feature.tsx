@@ -1,23 +1,23 @@
 import { FeatureType } from '../types';
 
 type Props = {
-    featureDetails: FeatureType
+    feature: FeatureType
 }
 
-const Feature = ({featureDetails}: Props) => {
+const Feature = ({feature}: Props) => {
 
     const expand = () => {
-        const desc = document.getElementById(`desc${featureDetails.name}`);
+        const desc = document.getElementById(`desc${feature.name}`);
         desc && (desc.style.display = 'block');
     };
 
     return (
         <div>
-            <p>{featureDetails.name}{featureDetails.level && `, Level ${featureDetails.level}`}</p>
+            <p>{feature.name}{feature.level && `, Level ${feature.level}`}</p>
             <button onClick={expand}>Expand</button>
-            {featureDetails.desc.map((paragraph, i) => {
+            {feature.desc.map((paragraph, i) => {
                 return (
-                    <p id={`desc${featureDetails.name}`} style={{display: 'none'}} key={`${featureDetails.name + i}`}>
+                    <p id={`desc${feature.name}`} style={{display: 'none'}} key={`${feature.name + i}`}>
                         {paragraph}
                     </p>
                 )

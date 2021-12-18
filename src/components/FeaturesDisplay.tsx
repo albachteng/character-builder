@@ -15,9 +15,9 @@ const FeaturesDisplay = ({characterLevel, characterClass, characterRace, charact
 
     const featuresMap = (feature: FeatureType, index: number) => {
         if (feature.level) {
-            return (feature.level <= characterLevel) && <Feature key={`${feature.name+index}`} featureDetails={feature}></Feature>
+            return (feature.level <= characterLevel) && <Feature key={`${feature.name+index}`} feature={feature}></Feature>
         }
-        return <Feature key={`${feature.name+index}`} featureDetails={feature}></Feature>
+        return <Feature key={`${feature.name+index}`} feature={feature}></Feature>
     }
 
     return (

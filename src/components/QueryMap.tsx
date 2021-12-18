@@ -15,7 +15,7 @@ type Props = {
 const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false}: Props) => {
 
     const { loading, error, data } = useQuery(query, {variables});
-    console.log({data});
+
     const findArray = (data: any, dataType: string[]) => {
         if (data) {
             let output = data; 
@@ -28,7 +28,7 @@ const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false}: 
     }
     
     const response = findArray(data, dataType);
-    console.log({response}) 
+
     return (
         <>
             {loading && 'Loading...'}

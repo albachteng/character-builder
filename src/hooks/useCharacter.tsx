@@ -33,8 +33,9 @@ const racesIndexArray: Race[] = [
     'tiefling',
 ];
 
-const getRandomClass = () => classesIndexArray[Math.floor(Math.random() * classesIndexArray.length)];
-const getRandomRace = () => racesIndexArray[Math.floor(Math.random() * racesIndexArray.length)];
+const backgroundIndexArray = ['acolyte']; // sadly, the only free option
+
+const getRandom = <T extends unknown>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
 const emptyStats: AbilityScore = {
   STR: 0,
@@ -55,12 +56,12 @@ const getRandomStats = (): AbilityScore => {
 
 const useCharacter = () => {
 
-  const [characterClass, setCharacterClass] = useState(getRandomClass());
-  const [characterRace, setCharacterRace] = useState(getRandomRace());
+  const [characterClass, setCharacterClass] = useState(getRandom(classesIndexArray));
+  const [characterRace, setCharacterRace] = useState(getRandom(racesIndexArray));
   const [characterLevel, setCharacterLevel] = useState(1);
   const [characterStats, setCharacterStats] = useState(getRandomStats());
+  const [characterBackground, setCharacterBackground] = useState(getRandom(backgroundIndexArray));
   const [proficiencyBonus, setProficiencyBonus] = useState(2);
-
 
   useEffect(() => {
     setProficiencyBonus(Math.floor((7 + characterLevel) / 4));
@@ -72,8 +73,8 @@ const rerollStats = () => {
 
   const newCharacter = () => {
     // NTS - this does not reroll stats
-    setCharacterClass(getRandomClass());
-    setCharacterRace(getRandomRace());
+    setCharacterClass(getRandom(classesIndexArray));
+    setCharacterRace(getRandom(racesIndexArray));
     setCharacterLevel(1);
   };
 
@@ -84,15 +85,11 @@ const rerollStats = () => {
 
     return {
         characterClass, 
-        setCharacterClass,
         characterRace,
-        setCharacterRace,
         characterLevel,
-        setCharacterLevel,
         characterStats,
-        setCharacterStats,
+        characterBackground,
         proficiencyBonus,
-        setProficiencyBonus,
         newCharacter,
         levelUp,
         rerollStats,

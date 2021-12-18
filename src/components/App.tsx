@@ -3,7 +3,7 @@ import '../assets/css/App.css';
 import AbilityScoresDisplay from './AbilityScoresDisplay';
 import FeatureDisplay from './FeaturesDisplay';
 import HeaderDisplay from './HeaderDisplay';
-import InventoryDisplay from './Inventory';
+import InventoryDisplay from './InventoryDisplay';
 import SkillsDisplay from './SkillsDisplay';
 import useCharacter from '../hooks/useCharacter';
 
@@ -14,6 +14,7 @@ const App = () => {
         characterRace,
         characterLevel,
         characterStats,
+        characterBackground,
         proficiencyBonus,
         newCharacter,
         levelUp,
@@ -32,7 +33,7 @@ const App = () => {
         <HeaderDisplay characterStats={characterStats} characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
         <AbilityScoresDisplay stats={characterStats} />
         <FeatureDisplay characterRace={characterRace} characterLevel={characterLevel} characterClass={characterClass} />
-        <InventoryDisplay characterClass={characterClass}></InventoryDisplay>
+        <InventoryDisplay characterClass={characterClass} characterBackground={characterBackground}></InventoryDisplay>
         <SkillsDisplay characterRace={characterRace} characterClass={characterClass} proficiencyBonus={proficiencyBonus} characterStats={characterStats}></SkillsDisplay>
       </Suspense>
     </div>

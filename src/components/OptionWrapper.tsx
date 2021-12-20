@@ -7,6 +7,7 @@ type Props = {
 }
 
 const OptionWrapper = ({mappingFunc, choicesArray}: Props) => {
+
     const { selections } = useOption(choicesArray);
 
     return (

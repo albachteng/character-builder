@@ -1,5 +1,5 @@
 import Stat from './Stat';
-import {AbilityScore} from '../types'
+// import {AbilityScore} from '../types'
 
 type Props = {
     stats: {[key: string]: any}

@@ -37,7 +37,7 @@ const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false}: 
             {(data && !useOption && !Array.isArray(response)) && mappingFunc(response, 0, [])}
             {(data && useOption && Array.isArray(response)) && 
                 <OptionWrapper 
-                    choicesArray={findArray(data, dataType)} 
+                    choicesArray={response} 
                     mappingFunc={mappingFunc}
                 />
             }

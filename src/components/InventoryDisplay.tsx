@@ -17,10 +17,6 @@ const InventoryDisplay = ({characterClass, characterBackground}: Props) => {
         variables: {"filter": { "index": characterClass}}
     });
 
-    const backgroundEquipment = useQuery(BackgroundEquipment, {
-        variables: {"filter": {"index": characterBackground}}
-    });
-
     const equipmentMap = (item: any, index: number) => item && <li key={`${item?.equipment?.name}${index}`}>{item?.equipment?.name}: {item?.quantity}</li>;
 
     return (

@@ -1,5 +1,5 @@
 import dice from '../utilities/dice';
-import { AbilityScore } from '../types';
+// import { AbilityScore } from '../types';
 
 type Props = {
     name: string,

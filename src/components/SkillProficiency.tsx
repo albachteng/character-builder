@@ -11,19 +11,21 @@ type Props = {
     skill: Skill
     proficiencyBonus?: number,
     isProficient?: boolean,
-    proficiencyFrom?: 'string', 
+    proficiencyFrom?: string, 
 }
 
 const SkillProficiency = ({stat, skill, proficiencyBonus = 2, isProficient, proficiencyFrom}: Props) => {
 
     const expand = () => { // TODO abstract this functionality into its own hook
-        for (let i = 0; i < skill.desc.length; i += 1) {
-            const target = document.getElementById(`${skill.name}-desc ${i}`);
-            target && (target.style.display = 'block');
+        if (skill.desc) {
+            for (let i = 0; i < skill.desc.length; i += 1) {
+                const target = document.getElementById(`${skill.name}-desc ${i}`);
+                target && (target.style.display = 'block');
+            }
         }
     }
 
-    const description = skill.desc.map((paragraph, i) => {
+    const description = skill?.desc && skill.desc.map((paragraph, i) => {
         return <p style={{display: 'none'}} id={`${skill.name}-desc ${i}`} key={`${skill.name}desc-${i}`}>{paragraph}</p>
     });
 

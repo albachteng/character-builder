@@ -5,9 +5,9 @@ export const RaceStartingProficiencies = gql`
         race (filter: $filter) {
             proficiencies: starting_proficiencies {
                 name
+                __typename
                 index
                 url
-                __typename
             }
         }
     }

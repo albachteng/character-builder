@@ -33,7 +33,6 @@ const racesIndexArray: Race[] = [
     'human', 
     'tiefling',
 ];
-
 const backgroundIndexArray = ['acolyte']; // sadly, the only free option
 
 const getRandom = <T extends unknown>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
@@ -61,11 +60,10 @@ const initState: Store = {
   characterBackground: getRandom(backgroundIndexArray),
   characterStats: getRandomStats(),
   characterLevel: 1,
-  characterSkillProficiencies: [],
   proficiencyBonus: 2,
 }
 
-const reducer = (state: Store, action: Action) => {
+const reducer = (state: Store, action: Action<undefined>) => {
   switch(action.type) {
     case 'levelUp': 
       const characterLevel = state.characterLevel + 1;
@@ -78,7 +76,6 @@ const reducer = (state: Store, action: Action) => {
         characterBackground: getRandom(backgroundIndexArray),
         characterStats: getRandomStats(),
         characterLevel: 1,
-        characterSkillProficiencies: [],
         proficiencyBonus: 2,
       };
     case 'reroll': 
@@ -86,19 +83,8 @@ const reducer = (state: Store, action: Action) => {
         ...state,
         characterStats: getRandomStats()
       }
-    case 'addProficiency': 
-      let { characterSkillProficiencies } = state;
-      if (!characterSkillProficiencies.includes(action.payload)) {
-        characterSkillProficiencies = [...characterSkillProficiencies, action.payload];
-      }  
-      return {
-        ...state, 
-        characterSkillProficiencies
-      };
     case 'resetProficiencies': 
       return {...state, characterSkillProficiencies: []}
-    case 'updateAllSkills': 
-      return {...state, characterSkillProficiencies: action.payload};
     default: 
       return state;
   }
@@ -107,8 +93,6 @@ const reducer = (state: Store, action: Action) => {
 const useCharacter = () => {
 
   const [ state, dispatch ] = useReducer(reducer, initState);
-
-  console.log('in useCharacter', {skills: state.characterSkillProficiencies});
 
   return {
     state,

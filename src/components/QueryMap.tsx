@@ -12,12 +12,9 @@ type Props = {
     variables: {[key: string]: any},
     dataType: string[],
     useOption?: boolean,
-    passState?: Function,
-    updating?: boolean,
-    setReadyToDispatch?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false, passState, updating, setReadyToDispatch}: Props) => {
+const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false}: Props) => {
 
     const [ render, setRender] = useState<any[]>([]);
     const { loading, error, data } = useQuery(query, {variables});
@@ -36,16 +33,10 @@ const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false, p
     const response = findArray(data, dataType);
 
     useEffect(() => {
-        if (!updating) {    
-            if (data && !useOption && Array.isArray(response)) setRender(response.map(mappingFunc));
-            if (data && !useOption && !Array.isArray(response)) setRender(mappingFunc(response, 0, []));
-            if (useOption) return;
-        }
-    }, [mappingFunc, response, data, useOption, updating])
-
-    useEffect(() => {
-        if (setReadyToDispatch && !updating && data && response) setReadyToDispatch(true);
-    }, [setReadyToDispatch, updating, data, response]);
+        if (data && !useOption && Array.isArray(response)) setRender(response.map(mappingFunc));
+        if (data && !useOption && !Array.isArray(response)) setRender(mappingFunc(response, 0, []));
+        if (useOption) return;
+    }, [mappingFunc, response, data, useOption])
 
     return (
         <>

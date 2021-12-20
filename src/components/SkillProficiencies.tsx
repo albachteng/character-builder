@@ -54,7 +54,7 @@ const SkillProficiencies = ({ choicesArray, stats, proficiencyBonus, characterRa
                 key={`${skill.name}${index}`}
                 proficiencyFrom={allProficiencies.find((proficiency: Skill) => {
                     return proficiency?.name === `Skill: ${skill.name}`
-                })?.__typename}
+                })?.__typename || undefined}
             />
         );
     });

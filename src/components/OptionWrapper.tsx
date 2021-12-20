@@ -1,5 +1,6 @@
 import { Choice } from "../types";
 import useOption from '../hooks/useOption';
+import { useState, useEffect } from "react";
 
 type Props = {
     mappingFunc: (value: any, index: number, array: any[]) => any, // ! 
@@ -9,10 +10,15 @@ type Props = {
 const OptionWrapper = ({mappingFunc, choicesArray}: Props) => {
 
     const { selections } = useOption(choicesArray);
+    const [render, setRender] = useState<any>([])
+
+    useEffect(() => {
+        selections && setRender(selections.map(mappingFunc));
+    }, [selections, mappingFunc])
 
     return (
         <>
-            {selections && selections.map(mappingFunc)}
+            {render}
         </>
     )
 

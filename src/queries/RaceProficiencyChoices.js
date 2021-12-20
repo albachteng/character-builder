@@ -8,9 +8,9 @@ export const RaceProficiencyChoices = gql`
           __typename
           from {
             name
+            __typename
             index
             url
-            __typename
           }
         }
       }

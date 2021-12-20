@@ -1,13 +1,13 @@
 type Props = {
-    QueryMap: React.Component
+    QueryMap: React.Component[]
 }
 
-const SkillsWrapper = ({QueryMaps}: Props) => {
+const SkillsWrapper = ({QueryMap}: Props) => {
 
     return () => {
         return (
             <>
-                {...QueryMaps}
+                {...QueryMap}
             </>
         )
     } 

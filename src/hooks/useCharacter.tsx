@@ -1,6 +1,7 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, Reducer } from 'react';
 import dice /*, { limitedRange, LimitedRange } */ from '../utilities/dice';
-import {CharacterClass, Race, AbilityScore } from '../types';
+import {CharacterClass, Race, AbilityScore, Action, Store } from '../types';
+import { ReducerWithoutAction } from 'react';
 
 /* hook handles the stateful and effectful logic of maintaining the character
  * stats and broad strokes of player choice - race, class, core stats.
@@ -54,46 +55,65 @@ const getRandomStats = (): AbilityScore => {
   return newStats;
 };
 
+const initState: Store = {
+  characterClass: getRandom(classesIndexArray), 
+  characterRace: getRandom(racesIndexArray),
+  characterBackground: getRandom(backgroundIndexArray),
+  characterStats: getRandomStats(),
+  characterLevel: 1,
+  characterSkillProficiencies: [],
+  proficiencyBonus: 2,
+}
+
+const reducer = (state: Store, action: Action) => {
+  switch(action.type) {
+    case 'levelUp': 
+      const characterLevel = state.characterLevel + 1;
+      const proficiencyBonus = Math.floor((7 + characterLevel) / 4);
+      return {...state, characterLevel, proficiencyBonus};
+    case 'newCharacter': 
+      return {
+        characterClass: getRandom(classesIndexArray), 
+        characterRace: getRandom(racesIndexArray),
+        characterBackground: getRandom(backgroundIndexArray),
+        characterStats: getRandomStats(),
+        characterLevel: 1,
+        characterSkillProficiencies: [],
+        proficiencyBonus: 2,
+      };
+    case 'reroll': 
+      return {
+        ...state,
+        characterStats: getRandomStats()
+      }
+    case 'addProficiency': 
+      let { characterSkillProficiencies } = state;
+      if (!characterSkillProficiencies.includes(action.payload)) {
+        characterSkillProficiencies = [...characterSkillProficiencies, action.payload];
+      }  
+      return {
+        ...state, 
+        characterSkillProficiencies
+      };
+    case 'resetProficiencies': 
+      return {...state, characterSkillProficiencies: []}
+    case 'updateAllSkills': 
+      return {...state, characterSkillProficiencies: action.payload};
+    default: 
+      return state;
+  }
+}
+
 const useCharacter = () => {
 
-  const [characterClass, setCharacterClass] = useState(getRandom(classesIndexArray));
-  const [characterRace, setCharacterRace] = useState(getRandom(racesIndexArray));
-  const [characterLevel, setCharacterLevel] = useState(1);
-  const [characterStats, setCharacterStats] = useState(getRandomStats());
-  const [characterBackground, setCharacterBackground] = useState(getRandom(backgroundIndexArray));
-  const [proficiencyBonus, setProficiencyBonus] = useState(2);
+  const [ state, dispatch ] = useReducer(reducer, initState);
 
-  useEffect(() => {
-    setProficiencyBonus(Math.floor((7 + characterLevel) / 4));
-  }, [characterLevel]);
-   
-const rerollStats = () => {
-    setCharacterStats(getRandomStats());
-  };
-
-  const newCharacter = () => {
-    // NTS - this does not reroll stats
-    setCharacterClass(getRandom(classesIndexArray));
-    setCharacterRace(getRandom(racesIndexArray));
-    setCharacterLevel(1);
-  };
-
-  const levelUp = () => {
-    characterLevel <= 20 && setCharacterLevel(prev => prev + 1);
-  };
+  console.log('in useCharacter', {skills: state.characterSkillProficiencies});
 
   return {
-    characterClass, 
-    characterRace,
-    characterLevel,
-    characterStats,
-    characterBackground,
-    proficiencyBonus,
-    newCharacter,
-    levelUp,
-    rerollStats,
+    state,
+    dispatch,
   };
-    
 }
 
 export default useCharacter;

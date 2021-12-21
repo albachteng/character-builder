@@ -1,5 +1,9 @@
-import { useReducer } from "react";
-import { SkillIndex } from "../types";
+import { useQuery } from "@apollo/client";
+import { useState, useEffect, useReducer } from "react";
+import { ClassProficiencyChoices, RaceProficiencyChoices, RaceStartingProficiencies } from "../queries";
+import { CharacterClass, Race, SkillIndex } from "../types";
+import { findArray } from "../utilities/findArray";
+import useOption from "./useOption";
 
     type SkillAction = 
         {
@@ -50,9 +54,40 @@ import { SkillIndex } from "../types";
         }
     }
 
-const useSkillProficiencies = () => {
+const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Race, characterBackground: string) => {
+
+    const characterClassChoices = useQuery(ClassProficiencyChoices, {
+        variables: {"filter": {"index": characterClass}}
+    });
+    const characterRaceChoices = useQuery(RaceProficiencyChoices, {
+        variables: {"filter": {"index": characterRace}}
+    });
+    const characterRaceProficiencies = useQuery(RaceStartingProficiencies, {
+        variables: {"filter": {"index": characterRace}}
+    });
+    const [ choicesArray, setChoicesArray ] = useState<any>([]);
+    const { selections } = useOption(choicesArray);
+    const [ proficiencies, setProficiencies] = useState<any>([]);
+
+    useEffect(() => {
+        if (!characterClassChoices.loading && !characterRaceChoices.loading) {
+            const classArray = findArray(characterClassChoices.data, ['class', 'proficiency_choices']) || [];
+            const raceArray = findArray(characterRaceChoices.data, ['race', 'proficiency_choices']) || null;
+            setChoicesArray([...classArray, raceArray]);
+    }}, [characterRaceChoices, characterClassChoices]);
+
+    useEffect(() => {
+        selections && characterRaceProficiencies.data && setProficiencies([...selections, ...findArray(characterRaceProficiencies.data, ['race', 'proficiencies'])]);
+    }, [selections, characterRaceProficiencies])
+
+    useEffect(() => {
+        proficiencies.forEach((proficiency: any) => {
+            if (proficiency) dispatch({type: 'isProficient', payload: proficiency.index});
+        })
+    }, [proficiencies]);
 
     const [ state, dispatch ] = useReducer(reducer, initSkills);
+    console.log(state);
 
     return {
         state,

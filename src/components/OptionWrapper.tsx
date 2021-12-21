@@ -10,15 +10,10 @@ type Props = {
 const OptionWrapper = ({mappingFunc, choicesArray}: Props) => {
 
     const { selections } = useOption(choicesArray);
-    const [render, setRender] = useState<any>([])
-
-    useEffect(() => {
-        selections && setRender(selections.map(mappingFunc));
-    }, [selections, mappingFunc])
 
     return (
         <>
-            {render}
+            {selections && selections.map(mappingFunc)}
         </>
     )
 

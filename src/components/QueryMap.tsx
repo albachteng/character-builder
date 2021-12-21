@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import OptionWrapper from "./OptionWrapper";
 import { DocumentNode } from "graphql";
+import { findArray } from '../utilities/findArray';
 import * as React from "react";
 // import { JsxElement } from "typescript";
 
@@ -19,17 +20,6 @@ const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false}: 
     const [ render, setRender] = useState<any[]>([]);
     const { loading, error, data } = useQuery(query, {variables});
 
-    const findArray = (data: any, dataType: string[]) => {
-        if (data) {
-            let output = data; 
-            dataType.forEach((type) => {
-                if (output[type]) output = output[type];
-                else throw new Error(`did not find array for ${dataType}`);
-            });
-            return output;
-        }
-    }
-    
     const response = findArray(data, dataType);
 
     useEffect(() => {

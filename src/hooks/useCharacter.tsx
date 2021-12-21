@@ -1,7 +1,7 @@
-import { useState, useEffect, useReducer, Reducer } from 'react';
+import { useReducer } from 'react';
 import dice /*, { limitedRange, LimitedRange } */ from '../utilities/dice';
 import {CharacterClass, Race, AbilityScore, Action, Store } from '../types';
-import { ReducerWithoutAction } from 'react';
+import useSkillProficiencies from './useSkillProficiencies';
 
 /* hook handles the stateful and effectful logic of maintaining the character
  * stats and broad strokes of player choice - race, class, core stats.
@@ -70,6 +70,7 @@ const reducer = (state: Store, action: Action<undefined>) => {
       const proficiencyBonus = Math.floor((7 + characterLevel) / 4);
       return {...state, characterLevel, proficiencyBonus};
     case 'newCharacter': 
+
       return {
         characterClass: getRandom(classesIndexArray), 
         characterRace: getRandom(racesIndexArray),

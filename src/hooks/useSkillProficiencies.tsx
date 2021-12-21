@@ -16,7 +16,7 @@ import useOption from "./useOption";
             type: 'reset'
         };
 
-    type SkillProficiencyState= {
+    export type SkillProficiencyState= {
         [key in SkillIndex]: boolean;
     }
     
@@ -65,6 +65,7 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
     const characterRaceProficiencies = useQuery(RaceStartingProficiencies, {
         variables: {"filter": {"index": characterRace}}
     });
+
     const [ choicesArray, setChoicesArray ] = useState<any>([]);
     const { selections } = useOption(choicesArray);
     const [ proficiencies, setProficiencies] = useState<any>([]);
@@ -82,7 +83,9 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
 
     useEffect(() => {
         proficiencies.forEach((proficiency: any) => {
-            if (proficiency) dispatch({type: 'isProficient', payload: proficiency.index});
+            if (proficiency && initSkills.hasOwnProperty(proficiency.index.slice(6))) {
+                dispatch({type: 'isProficient', payload: proficiency.index.slice(6)});
+            }
         })
     }, [proficiencies]);
 
@@ -91,7 +94,9 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
 
     return {
         state,
-        dispatch
+        dispatch, 
+        setChoicesArray,
+        setProficiencies,
     }
 }
 

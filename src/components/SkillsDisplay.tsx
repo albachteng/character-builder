@@ -1,8 +1,9 @@
 /* renders skill proficiencies display and handles query for class skill choices */ 
-import { ClassProficiencyChoices, RaceProficiencyChoices, RaceStartingProficiencies } from "../queries";
+import { AllSkills, ClassProficiencyChoices, RaceProficiencyChoices, RaceStartingProficiencies } from "../queries";
 import SkillProficiencies from './SkillProficiencies';
 import QueryMap from "./QueryMap";
 import useCharacter from '../hooks/useCharacter';
+import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 // import { useQuery } from '@apollo/client';
 import type { AbilityScore } from '../types/AbilityScore';
@@ -20,12 +21,15 @@ type Props = {
 const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, characterRace, characterBackground}: Props) => {
 
     const { state, dispatch } = useSkillProficiencies(characterClass, characterRace, characterBackground);
+    const { loading, error, data } = useQuery(AllSkills);
 
     return (
         <>
-        {/* <SkillProficiencies
-
-        /> */}
+        <SkillProficiencies
+            characterStats={characterStats}
+            proficiencyBonus={proficiencyBonus}
+            skillState={state}
+        />
                     {/* <QueryMap 
                         query={ClassProficiencyChoices} 
                         variables={{}}

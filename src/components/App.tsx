@@ -6,6 +6,8 @@ import HeaderDisplay from './HeaderDisplay';
 import InventoryDisplay from './InventoryDisplay';
 import SkillsDisplay from './SkillsDisplay';
 import useCharacter from '../hooks/useCharacter';
+import SpellsDisplay from './SpellsDisplay';
+import { CharacterClass } from '../types';
 
 const App = () => {
 
@@ -17,6 +19,10 @@ const App = () => {
 
     const getNewCharacter = () => {
       dispatch({type: 'newCharacter'});
+    }
+
+    const isSpellcaster = (characterClass: CharacterClass) => {
+      return true;
     }
 
   return (
@@ -33,6 +39,7 @@ const App = () => {
         <FeatureDisplay characterBackground={characterBackground} characterRace={characterRace} characterLevel={characterLevel} characterClass={characterClass} />
         <InventoryDisplay characterClass={characterClass} characterBackground={characterBackground}></InventoryDisplay>
         <SkillsDisplay characterBackground={characterBackground} characterRace={characterRace} characterClass={characterClass} proficiencyBonus={proficiencyBonus} characterStats={characterStats}/>
+        { isSpellcaster(characterClass) && <SpellsDisplay characterClass={characterClass} characterLevel={characterLevel} />}
       </Suspense>
     </div>
   );

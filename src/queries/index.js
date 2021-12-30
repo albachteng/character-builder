@@ -6,6 +6,7 @@ export { BackgroundProficiencies } from './BackgroundProficiencies';
 export { ClassEquipmentOptions } from './ClassEquipmentOptions';
 export { ClassFeatures } from './ClassFeatures';
 export { ClassProficiencyChoices } from './ClassProficiencyChoices';
+export { ClassSpellSlots } from './ClassSpellSlots';
 export { ClassStartingEquipment } from './ClassStartingEquipment';
 export { HitDice } from './HitDice';
 export { RacialFeatures } from './RacialFeatures';

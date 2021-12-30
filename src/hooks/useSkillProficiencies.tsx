@@ -1,61 +1,15 @@
 import { useQuery } from "@apollo/client";
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect } from "react";
 import { ClassProficiencyChoices, RaceProficiencyChoices, RaceStartingProficiencies } from "../queries";
-import { CharacterClass, Race, SkillIndex } from "../types";
+import { CharacterClass, Race } from "../types";
 import { findArray } from "../utilities/findArray";
 import useOption from "./useOption";
 
-    type SkillAction = 
-        {
-            type: 'isProficient', 
-            payload: SkillIndex
-        } | {
-            type: 'isNotProficient', 
-            payload: SkillIndex
-        } | {
-            type: 'reset'
-        };
-
-    export type SkillProficiencyState= {
-        [key in SkillIndex]: boolean;
-    }
-    
-    const initSkills: {[key in SkillIndex]: false} = {
-        acrobatics: false,
-        'animal-handling': false, 
-        arcana: false,
-        athletics: false,
-        deception: false,
-        history: false,
-        insight: false,
-        intimidation: false,
-        investigation: false,
-        medicine: false,
-        nature: false,
-        perception: false,
-        performance: false,
-        persuasion: false,
-        religion: false,
-        'slight-of-hand': false,
-        stealth: false,
-        survival: false,
-    }
-
-    const reducer = (state: SkillProficiencyState, action: SkillAction) => {
-        switch(action.type) {
-            case 'isProficient': 
-                return {...state, [action.payload]: true};
-            case 'isNotProficient': 
-                return {...state, [action.payload]: false};
-            case 'reset': 
-                return {...initSkills};
-            default: 
-                return state
-        }
-    }
-
 const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Race, characterBackground: string) => {
 
+    /* we need to do work on several queries 
+    in the future, we can combine these queries into 
+    one to make this cleaner and to avoid multiple round trips */ 
     const characterClassChoices = useQuery(ClassProficiencyChoices, {
         variables: {"filter": {"index": characterClass}}
     });
@@ -66,6 +20,7 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
         variables: {"filter": {"index": characterRace}}
     });
 
+    // must update the choices and get selections before we can set the proficiencies
     const [ choicesArray, setChoicesArray ] = useState<any>([]);
     const { selections } = useOption(choicesArray);
     const [ proficiencies, setProficiencies] = useState<any>([]);
@@ -83,24 +38,8 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
         selections && characterRaceProficiencies.data && setProficiencies([...selections, ...findArray(characterRaceProficiencies.data, ['race', 'proficiencies'])]);
     }, [selections, characterRaceProficiencies])
 
-    // TODO - remove? 
-    useEffect(() => {
-        proficiencies.forEach((proficiency: any) => {
-            if (proficiency && initSkills.hasOwnProperty(proficiency.index.slice(6))) {
-                dispatch({type: 'isProficient', payload: proficiency.index.slice(6)});
-            }
-        })
-    }, [proficiencies, characterRace, characterClass, characterBackground]);
-
-    const [ state, dispatch ] = useReducer(reducer, initSkills);
-    console.log(proficiencies);
-
     return {
         proficiencies,
-        state,
-        // dispatch, 
-        // setChoicesArray,
-        // setProficiencies,
     }
 }
 

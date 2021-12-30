@@ -1,13 +1,9 @@
 /* renders skill proficiencies display and handles query for class skill choices */ 
-import { AllSkills, ClassProficiencyChoices, RaceProficiencyChoices, RaceStartingProficiencies } from "../queries";
+import { AllSkills } from "../queries";
 import SkillProficiencies from './SkillProficiencies';
-import QueryMap from "./QueryMap";
-import useCharacter from '../hooks/useCharacter';
 import { useQuery } from "@apollo/client";
-import { useState, useEffect } from "react";
-// import { useQuery } from '@apollo/client';
 import type { AbilityScore } from '../types/AbilityScore';
-import { CharacterClass, Race, Choice, SkillName, CoreSkills, Skill } from "../types";
+import { CharacterClass, Race } from "../types";
 import useSkillProficiencies from "../hooks/useSkillProficiencies";
 
 type Props = {
@@ -20,14 +16,14 @@ type Props = {
 
 const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, characterRace, characterBackground}: Props) => {
 
-    const { state, proficiencies } = useSkillProficiencies(characterClass, characterRace, characterBackground);
+    const { proficiencies } = useSkillProficiencies(characterClass, characterRace, characterBackground);
     const { loading, error, data } = useQuery(AllSkills);
 
     return (
         <>
-            {loading && 'Loading...'}
+            { loading && 'Loading...'}
             { error && 'Whoops, something went wrong!'}
-            {data && 
+            { data && 
                 <SkillProficiencies
                     characterStats={characterStats}
                     proficiencyBonus={proficiencyBonus}
@@ -35,28 +31,6 @@ const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, charac
                     allSkills={data.skills}
                 />
             }
-                    {/* <QueryMap 
-                        query={ClassProficiencyChoices} 
-                        variables={{}}
-                        mappingFunc={skillsMapState}
-                        dataType={["class", "proficiency_choices"]}
-                        useOption={true}
-                        />
-
-                    <QueryMap 
-                        query={RaceProficiencyChoices} 
-                        variables={{"filter": {"index": characterRace}}}
-                        mappingFunc={skillsMapState}
-                        dataType={["race", "proficiency_choices"]}
-                        useOption={true}
-                        />
-
-                    <QueryMap 
-                        query={RaceStartingProficiencies} 
-                        variables={{"filter": {"index": characterRace}}}
-                        mappingFunc={skillsMapState}
-                        dataType={["race", "proficiencies"]}
-                        /> */}
         </>
     );
 };

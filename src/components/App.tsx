@@ -6,7 +6,6 @@ import HeaderDisplay from './HeaderDisplay';
 import InventoryDisplay from './InventoryDisplay';
 import SkillsDisplay from './SkillsDisplay';
 import useCharacter from '../hooks/useCharacter';
-import useSkillProficiencies from '../hooks/useSkillProficiencies';
 
 const App = () => {
 
@@ -14,13 +13,10 @@ const App = () => {
       state, dispatch
     } = useCharacter();
 
-    // const { dispatch: skillDispatch, setProficiencies, setChoicesArray} = useSkillProficiencies(state.characterClass, state.characterRace, state.characterBackground);
+    const { characterRace, characterBackground, characterClass, characterStats, characterLevel } = state;
 
     const getNewCharacter = () => {
       dispatch({type: 'newCharacter'});
-      // skillDispatch({type: 'reset'});
-      // setProficiencies([]);
-      // setChoicesArray([]);
     }
 
   return (
@@ -32,10 +28,10 @@ const App = () => {
       <button onClick={() => dispatch({type: 'rerollStats'})}>These stats are bullshit, roll again!</button>
       <h1>Play a fucking {state.characterRace} {state.characterClass}, coward!</h1>
       <Suspense fallback={'Suspense Loading...'}>
-        {/* <HeaderDisplay background={characterBackground} characterStats={characterStats} characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
+        <HeaderDisplay background={characterBackground} characterStats={characterStats} characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
         <AbilityScoresDisplay stats={characterStats} />
         <FeatureDisplay characterBackground={characterBackground} characterRace={characterRace} characterLevel={characterLevel} characterClass={characterClass} />
-        <InventoryDisplay characterClass={characterClass} characterBackground={characterBackground}></InventoryDisplay> */}
+        <InventoryDisplay characterClass={characterClass} characterBackground={characterBackground}></InventoryDisplay>
         <SkillsDisplay characterBackground={state.characterBackground} characterRace={state.characterRace} characterClass={state.characterClass} proficiencyBonus={state.proficiencyBonus} characterStats={state.characterStats}></SkillsDisplay>
       </Suspense>
     </div>

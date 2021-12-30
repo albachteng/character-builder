@@ -14,13 +14,13 @@ const App = () => {
       state, dispatch
     } = useCharacter();
 
-    const { dispatch: skillDispatch, setProficiencies, setChoicesArray} = useSkillProficiencies(state.characterClass, state.characterRace, state.characterBackground);
+    // const { dispatch: skillDispatch, setProficiencies, setChoicesArray} = useSkillProficiencies(state.characterClass, state.characterRace, state.characterBackground);
 
     const getNewCharacter = () => {
       dispatch({type: 'newCharacter'});
-      skillDispatch({type: 'reset'});
-      setProficiencies([]);
-      setChoicesArray([]);
+      // skillDispatch({type: 'reset'});
+      // setProficiencies([]);
+      // setChoicesArray([]);
     }
 
   return (

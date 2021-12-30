@@ -20,16 +20,21 @@ type Props = {
 
 const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, characterRace, characterBackground}: Props) => {
 
-    const { state, dispatch } = useSkillProficiencies(characterClass, characterRace, characterBackground);
+    const { state, proficiencies } = useSkillProficiencies(characterClass, characterRace, characterBackground);
     const { loading, error, data } = useQuery(AllSkills);
 
     return (
         <>
-        <SkillProficiencies
-            characterStats={characterStats}
-            proficiencyBonus={proficiencyBonus}
-            skillState={state}
-        />
+            {loading && 'Loading...'}
+            { error && 'Whoops, something went wrong!'}
+            {data && 
+                <SkillProficiencies
+                    characterStats={characterStats}
+                    proficiencyBonus={proficiencyBonus}
+                    skillState={proficiencies}
+                    allSkills={data.skills}
+                />
+            }
                     {/* <QueryMap 
                         query={ClassProficiencyChoices} 
                         variables={{}}

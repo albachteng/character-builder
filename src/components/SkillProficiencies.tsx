@@ -12,34 +12,44 @@ import { useQuery } from '@apollo/client';
 import { SkillProficiencyState } from '../hooks/useSkillProficiencies';
 
 type Props = {
-    characterStats: AbilityScore,
+    characterStats: any,
     proficiencyBonus: number,
-    skillState: SkillProficiencyState 
+    skillState: Skill[] ,
+    allSkills: Skill[]
 }
 
-const SkillProficiencies = ({ characterStats, proficiencyBonus, skillState }: Props) => {
+const SkillProficiencies = ({ characterStats, proficiencyBonus, skillState, allSkills}: Props) => {
 
-    const [ allProficiencies, setAllProficiencies] = useState<Skill[]>([])
-    const { loading, error, data } = useQuery(AllSkills); // purely to save me writing them all out
+    // const [ allProficiencies, setAllProficiencies] = useState<Skill[]>([])
+    // const { loading, error, data } = useQuery(AllSkills); // purely to save me writing them all out
 
-    useEffect(() => { 
-        if (data) {
-            setAllProficiencies(
-                data.skills.filter((skill: Skill) => skillState.hasOwnProperty(skill.index)));
+    // useEffect(() => { 
+    //     if (data) {
+    //         setAllProficiencies(
+    //             data.skills.filter((skill: Skill) => skillState.hasOwnProperty(skill.index)));
+    //     }
+    // }, [data, skillState]);
+
+    const isProficient = (proficiencies: Skill[], skill: Skill): [boolean, string | undefined] => {
+        for (let i = 0; i < proficiencies.length; i += 1) {
+            if (proficiencies[i]) console.log('compare: ', proficiencies[i].index, skill.index);
+            if (proficiencies[i] && proficiencies[i].index.slice(6)  === skill.index) {
+                return [true, proficiencies[i].__typename];
+            }
         }
-    }, [data, skillState]);
+        return [false, 'undefined'];
+    }
 
-    const proficienciesArray = allProficiencies.map((skill: Skill, index: number) => {
+    const proficienciesArray = allSkills.map((skill: Skill, index: number) => {
+        const proficiency = isProficient(skillState, skill);
         return (
             <SkillProficiency 
                 skill={skill} 
                 stat={characterStats[skill?.ability_score?.name]} 
                 proficiencyBonus={proficiencyBonus} 
-                isProficient={skillState[skill.index]}
+                isProficient={proficiency[0]}
                 key={`${skill.name}${index}`}
-                proficiencyFrom={allProficiencies.find((proficiency: Skill) => {
-                    return proficiency?.name === `Skill: ${skill.name}`
-                })?.__typename || undefined}
+                proficiencyFrom={proficiency[1]}
             />
         );
     });
@@ -47,8 +57,6 @@ const SkillProficiencies = ({ characterStats, proficiencyBonus, skillState }: Pr
     return(
         
         <div>
-            {loading && "Loading..."}
-            {error && "Whoops, something went wrong!"}
             <ul>
                 {proficienciesArray}
             </ul>

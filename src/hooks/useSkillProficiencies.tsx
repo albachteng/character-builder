@@ -70,33 +70,37 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
     const { selections } = useOption(choicesArray);
     const [ proficiencies, setProficiencies] = useState<any>([]);
 
+    // when we have the choice arrays, combine them so that useOption can update selections
     useEffect(() => {
         if (!characterClassChoices.loading && !characterRaceChoices.loading) {
             const classArray = findArray(characterClassChoices.data, ['class', 'proficiency_choices']) || [];
             const raceArray = findArray(characterRaceChoices.data, ['race', 'proficiency_choices']) || null;
             setChoicesArray([...classArray, raceArray]);
-    }}, [characterRaceChoices, characterClassChoices]);
+    }}, [characterRaceChoices, characterClassChoices, characterClass, characterRace]);
 
+    // when we have selections, combine them with racial starting proficiencies
     useEffect(() => {
         selections && characterRaceProficiencies.data && setProficiencies([...selections, ...findArray(characterRaceProficiencies.data, ['race', 'proficiencies'])]);
     }, [selections, characterRaceProficiencies])
 
+    // TODO - remove? 
     useEffect(() => {
         proficiencies.forEach((proficiency: any) => {
             if (proficiency && initSkills.hasOwnProperty(proficiency.index.slice(6))) {
                 dispatch({type: 'isProficient', payload: proficiency.index.slice(6)});
             }
         })
-    }, [proficiencies]);
+    }, [proficiencies, characterRace, characterClass, characterBackground]);
 
     const [ state, dispatch ] = useReducer(reducer, initSkills);
-    console.log(state);
+    console.log(proficiencies);
 
     return {
+        proficiencies,
         state,
-        dispatch, 
-        setChoicesArray,
-        setProficiencies,
+        // dispatch, 
+        // setChoicesArray,
+        // setProficiencies,
     }
 }
 

@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 import dice /*, { limitedRange, LimitedRange } */ from '../utilities/dice';
 import {CharacterClass, Race, AbilityScore, Action, Store } from '../types';
-import useSkillProficiencies from './useSkillProficiencies';
+// import useSkillProficiencies from './useSkillProficiencies';
 
 /* hook handles the stateful and effectful logic of maintaining the character
  * stats and broad strokes of player choice - race, class, core stats.

@@ -13,7 +13,7 @@ const App = () => {
       state, dispatch
     } = useCharacter();
 
-    const { characterRace, characterBackground, characterClass, characterStats, characterLevel } = state;
+    const { proficiencyBonus, characterRace, characterBackground, characterClass, characterStats, characterLevel } = state;
 
     const getNewCharacter = () => {
       dispatch({type: 'newCharacter'});
@@ -32,7 +32,7 @@ const App = () => {
         <AbilityScoresDisplay stats={characterStats} />
         <FeatureDisplay characterBackground={characterBackground} characterRace={characterRace} characterLevel={characterLevel} characterClass={characterClass} />
         <InventoryDisplay characterClass={characterClass} characterBackground={characterBackground}></InventoryDisplay>
-        <SkillsDisplay characterBackground={state.characterBackground} characterRace={state.characterRace} characterClass={state.characterClass} proficiencyBonus={state.proficiencyBonus} characterStats={state.characterStats}></SkillsDisplay>
+        <SkillsDisplay characterBackground={characterBackground} characterRace={characterRace} characterClass={characterClass} proficiencyBonus={proficiencyBonus} characterStats={characterStats}/>
       </Suspense>
     </div>
   );

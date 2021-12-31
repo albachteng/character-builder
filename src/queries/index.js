@@ -13,3 +13,4 @@ export { RacialFeatures } from './RacialFeatures';
 export { RaceProficiencyChoices } from './RaceProficiencyChoices';
 export { RaceStartingProficiencies } from './RaceStartingProficiencies';
 export { SpellModByClass } from './SpellModByClass';
+export { SpellsOptionsByClassAndLevel } from './SpellsOptionsByClassAndLevel';

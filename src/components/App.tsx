@@ -31,7 +31,7 @@ const App = () => {
       <a target="_" href='https://studio.apollographql.com/sandbox/explorer/?_gl=1*1m2cvlk*_ga*MjA5MTc2OTg3OC4xNjM0MTM3MDc2*_ga_0BGG5V2W2K*MTYzNDIyMzUyNS4yLjEuMTYzNDIyNTEwOC4w'>Apollo Explorer</a>
       <button onClick={getNewCharacter}>This one is weak, bring me another</button>
       <button onClick={() => dispatch({type: 'levelUp'})}>Increase this one's power...</button>
-      <button onClick={() => dispatch({type: 'rerollStats'})}>These stats are bullshit, roll again!</button>
+      <button onClick={() => dispatch({type: 'reroll'})}>These stats are bullshit, roll again!</button>
       <h1>Play a fucking {state.characterRace} {state.characterClass}, coward!</h1>
       <Suspense fallback={'Suspense Loading...'}>
         <HeaderDisplay background={characterBackground} characterStats={characterStats} characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>
@@ -39,7 +39,7 @@ const App = () => {
         <FeatureDisplay characterBackground={characterBackground} characterRace={characterRace} characterLevel={characterLevel} characterClass={characterClass} />
         <InventoryDisplay characterClass={characterClass} characterBackground={characterBackground}></InventoryDisplay>
         <SkillsDisplay characterBackground={characterBackground} characterRace={characterRace} characterClass={characterClass} proficiencyBonus={proficiencyBonus} characterStats={characterStats}/>
-        { isSpellcaster(characterClass) && <SpellsDisplay characterClass={characterClass} characterLevel={characterLevel} />}
+        { isSpellcaster(characterClass) && <SpellsDisplay characterStats={characterStats} characterClass={characterClass} characterLevel={characterLevel} />}
       </Suspense>
     </div>
   );

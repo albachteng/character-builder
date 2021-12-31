@@ -11,7 +11,7 @@ type Props = {
 const SpellSlots = ({ characterClass, characterLevel }: Props) => {
     
     const mappingFunc = (spellSlot: any) => {
-        if (spellSlot.level === characterLevel && spellSlot.spellcasting.cantrips_known) {
+        if (spellSlot.level === characterLevel && spellSlot.spellcasting.spell_slots_level_1) {
             return <pre>{JSON.stringify(spellSlot.spellcasting, null, 3)}</pre>
         }
     }

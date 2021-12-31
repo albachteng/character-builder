@@ -12,3 +12,4 @@ export { HitDice } from './HitDice';
 export { RacialFeatures } from './RacialFeatures';
 export { RaceProficiencyChoices } from './RaceProficiencyChoices';
 export { RaceStartingProficiencies } from './RaceStartingProficiencies';
+export { SpellModByClass } from './SpellModByClass';

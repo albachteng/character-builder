@@ -4,7 +4,7 @@ import SpellSlots from './SpellSlots';
 import QueryMap from './QueryMap';
 import dice from '../utilities/dice';
 import { ability_score_abbr } from '../types/ability_score';
-import { SpellsOptionsByClassAndLevel } from '../queries/SpellsOptionsByClassAndLevel';
+import SpellBook from './SpellBook';
 
 type Props = {
     characterClass: CharacterClass,
@@ -12,37 +12,11 @@ type Props = {
     characterStats: AbilityScore
 }
 
-const buildSpellVariables = (characterClass: string, characterLevel: number) => {
-    const variables: any = {"filter": {
-        "AND": {"classes": {"index": characterClass}},
-        "OR": [],
-    }};
-    for (let i = 0; i <= characterLevel; i += 1) {
-        variables.filter.OR.push({"level": i});
-    };
-    return variables
-};
-
 const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props) => {
 
     const spellModMapFunc = (item: {[key: string]: any, name: ability_score_abbr}, index: number, arr: any[]) => {
         return <p>{item.name}: {dice.mod(characterStats[item.name])} </p>
     };   
-
-    const spellMapFunc = (spell: {[key: string]: any, desc: string[]}, index: number, arr: any[]) => {
-        const description: JSX.Element[] = [];
-        spell.desc.forEach((paragraph: string, index: number, arr: string[]) => {
-            description.push(<p key={`${spell.index}${index}`}>{paragraph}</p>);
-        });
-        return (
-            <div>
-                <h4>
-                    {spell.name}: {spell.level > 0 ? `Level ${spell.level}` : `Cantrip`}
-                </h4>
-                {description}
-            </div>
-        )
-    };
 
     return (
         <>
@@ -60,13 +34,7 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
                 dataType={['class', 'spellcasting', 'spellcasting_ability']}
             />
             <h3>Spellbook</h3>
-            <QueryMap
-                query={SpellsOptionsByClassAndLevel}
-                variables={buildSpellVariables(characterClass, characterLevel)}
-                mappingFunc={spellMapFunc}
-                dataType={['spells']}
-
-            /> 
+            <SpellBook characterClass={characterClass} characterLevel={characterLevel}/>
         </>
     )
 }

@@ -7,7 +7,6 @@ type Props = {
     characterLevel: number
 }
 
-
 const SpellSlots = ({ characterClass, characterLevel }: Props) => {
     
     const mappingFunc = (spellSlot: any) => {

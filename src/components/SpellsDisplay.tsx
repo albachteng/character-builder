@@ -1,5 +1,5 @@
 import { SpellModByClass } from '../queries';
-import { AbilityScore, ability_score, CharacterClass } from '../types';
+import { AbilityScore, CharacterClass } from '../types';
 import SpellSlots from './SpellSlots';
 import QueryMap from './QueryMap';
 import dice from '../utilities/dice';

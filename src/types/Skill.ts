@@ -6,7 +6,7 @@ export type Skill = {
     name: SkillName,
     index: SkillIndex,
     ability_score: ability_score
-    desc?: string[],
+    desc: string[],
     url?: string,
     __typename?: string,
   }

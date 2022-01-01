@@ -1,6 +1,6 @@
 export type { AbilityScore } from './AbilityScore';
 export type { Action } from './Action';
-export type { ability_score } from './ability_score';
+export type { ability_score, ability_score_abbr } from './ability_score';
 export type { AbilityScoreTotal } from './AbilityScoreTotal';
 export type { CharacterClass } from './CharacterClass';
 export type { CoreSkills } from './CoreSkills';

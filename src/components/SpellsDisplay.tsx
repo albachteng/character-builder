@@ -71,4 +71,4 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
     )
 }
 
-export default SpellsDisplay
+export default SpellsDisplay;

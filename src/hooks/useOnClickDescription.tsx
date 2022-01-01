@@ -1,6 +1,6 @@
 /* 
     responsible for taking a 'withDescription' object type (a type that has, 
-    at minimum, a desc property which is an array of strings and an index 
+    at minimum, a desc property which is an array of strings and an name 
     which is a string) and returning the functionality to hide or show that 
     information on a click
 */ 
@@ -9,14 +9,14 @@ type WithDescription = {
     [key: string]: any,
     [key: number]: any,
     desc: string[],
-    index: string,
+    name: string,
 }
 
 const useOnClickDescription = (withDescription: WithDescription) => {
 
     const toggleDescription = () => { 
         for (let i = 0; i < withDescription.desc.length; i += 1) {
-            const target = document.getElementById(`${withDescription.index}-desc${i}`);
+            const target = document.getElementById(`${withDescription.name}-desc${i}`);
             target && (target.style.display === 'block' 
                 ? target.style.display = 'none' 
                 : target.style.display = 'block');
@@ -27,8 +27,8 @@ const useOnClickDescription = (withDescription: WithDescription) => {
         return ( 
             <p 
                 style={{display: 'none'}} 
-                id={`${withDescription.index}-desc${i}`}
-                key={`${withDescription.index}-desc${i}`}
+                id={`${withDescription.name}-desc${i}`}
+                key={`${withDescription.name}-desc${i}`}
             >
                 {paragraph}
             </p>)

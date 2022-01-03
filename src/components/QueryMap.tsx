@@ -1,4 +1,6 @@
-/* takes a query and maps the results of that query using a provided mapping function */
+/* takes a query and maps the results of that query 
+using a provided mapping function */
+
 import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import OptionWrapper from "./OptionWrapper";
@@ -7,9 +9,11 @@ import { findArray } from '../utilities/findArray';
 import * as React from "react";
 // import { JsxElement } from "typescript";
 
+export type MappingFunc<T> = (value: T, index: number, arr: T[]) => React.ReactNode;
+
 type Props = {
     query: DocumentNode,
-    mappingFunc: (value: any, index: number, array: any[]) => any, // ! 
+    mappingFunc: MappingFunc<any>, 
     variables: {[key: string]: any},
     dataType: string[],
     useOption?: boolean,
@@ -17,14 +21,14 @@ type Props = {
 
 const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false}: Props) => {
 
-    const [ render, setRender] = useState<any[]>([]);
+    const [ render, setRender] = useState<React.ReactNode>([]);
     const { loading, error, data } = useQuery(query, {variables});
 
     const response = findArray(data, dataType);
 
     useEffect(() => {
         if (data && !useOption && Array.isArray(response)) setRender(response.map(mappingFunc));
-        if (data && !useOption && !Array.isArray(response)) setRender(mappingFunc(response, 0, []));
+        if (data && !useOption && !Array.isArray(response)) setRender([mappingFunc(response, 0, [])]);
         if (useOption) return;
     }, [mappingFunc, response, data, useOption])
 

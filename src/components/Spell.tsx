@@ -9,10 +9,10 @@ const Spell = ({spell}: Props) => {
     const { description, toggleDescription } = useOnClickDescription(spell);
 
     return (
-        <div>
-            <p onClick={toggleDescription}>{spell.name}{spell.level && `, Level ${spell.level}`}</p>
+        <>
+            <li onClick={toggleDescription}>{spell.name}{spell.level ? `, Level ${spell.level}` : `, Cantrip`}</li>
             {description}
-        </div>
+        </>
     )
 } 
 

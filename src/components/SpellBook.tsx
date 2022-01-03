@@ -1,8 +1,8 @@
-import useOnClickDescription from "../hooks/useOnClickDescription";
 import { SpellsOptionsByClassAndLevel } from "../queries";
-import { CharacterClass } from "../types";
+import { CharacterClass, FeatureType } from "../types";
 import Spell from './Spell';
 import QueryMap from './QueryMap';
+import * as React from "react";
 
 type Props = { 
     characterClass: CharacterClass,
@@ -10,7 +10,7 @@ type Props = {
 }
 
 const buildSpellVariables = (characterClass: string, characterLevel: number) => {
-    const variables: any = {"filter": {
+    const variables: {[key: string]: any} = {"filter": {
         "AND": {"classes": {"index": characterClass}},
         "OR": [],
     }};
@@ -20,19 +20,21 @@ const buildSpellVariables = (characterClass: string, characterLevel: number) => 
     return variables
 };
 
+const spellMapFunc = (spell: FeatureType, index: number, arr: FeatureType[]): React.ReactNode => {
+    return <Spell spell={spell} key={`${spell.name}${index}`}/>
+};
+
 const SpellBook = ({ characterClass, characterLevel }: Props) => {
 
-    const spellMapFunc = (spell: {[key: string]: any, desc: string[]}, index: number, arr: any[]) => {
-        return <Spell spell={spell} key={`${spell.name}${index}`}/>
-    };
-
     return (
-        <QueryMap
-            query={SpellsOptionsByClassAndLevel}
-            variables={buildSpellVariables(characterClass, characterLevel)}
-            mappingFunc={spellMapFunc}
-            dataType={['spells']}
-        /> 
+        <ul>
+            <QueryMap
+                query={SpellsOptionsByClassAndLevel}
+                variables={buildSpellVariables(characterClass, characterLevel)}
+                mappingFunc={spellMapFunc}
+                dataType={['spells']}
+            /> 
+        </ul>
     );
 };
 

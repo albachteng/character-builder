@@ -5,6 +5,7 @@ import QueryMap from './QueryMap';
 import dice from '../utilities/dice';
 import { ability_score_abbr } from '../types/ability_score';
 import SpellBook from './SpellBook';
+import type { MappingFunc } from './QueryMap';
 
 type Props = {
     characterClass: CharacterClass,
@@ -12,9 +13,15 @@ type Props = {
     characterStats: AbilityScore
 }
 
+type SpellMod = {
+    [key: string]: any,
+    name: ability_score_abbr
+}
+
+
 const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props) => {
 
-    const spellModMapFunc = (item: {[key: string]: any, name: ability_score_abbr}, index: number, arr: any[]) => {
+    const spellModMapFunc: MappingFunc<SpellMod> = (item, index, arr) => {
         return <p>{item.name}: {dice.mod(characterStats[item.name])} </p>
     };   
 

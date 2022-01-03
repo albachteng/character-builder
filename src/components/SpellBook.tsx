@@ -1,7 +1,7 @@
 import { SpellsOptionsByClassAndLevel } from "../queries";
 import { CharacterClass, FeatureType } from "../types";
 import Spell from './Spell';
-import QueryMap, { MappingFunc } from './QueryMap';
+import QueryMap, { FilterFunc, MappingFunc, SortFunc } from './QueryMap';
 import * as React from "react";
 
 type Props = { 
@@ -24,6 +24,13 @@ const spellMapFunc: MappingFunc<FeatureType> = (spell, index, arr) => {
     return <Spell spell={spell} key={`${spell.name}${index}`}/>
 };
 
+const spellSortFunc: SortFunc<FeatureType> = (first, second) => {
+    if (first.level && second.level) {
+        return first.level >= second.level ? 1 : -1;
+    };
+    return 0;
+}
+
 const SpellBook = ({ characterClass, characterLevel }: Props) => {
 
     return (
@@ -33,6 +40,8 @@ const SpellBook = ({ characterClass, characterLevel }: Props) => {
                 variables={buildSpellVariables(characterClass, characterLevel)}
                 mappingFunc={spellMapFunc}
                 dataType={['spells']}
+                sortFunc={spellSortFunc}
+                // filterFunc={spellFilterFunc}
             /> 
         </ul>
     );

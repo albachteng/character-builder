@@ -7,9 +7,12 @@ import OptionWrapper from "./OptionWrapper";
 import { DocumentNode } from "graphql";
 import { findArray } from '../utilities/findArray';
 import * as React from "react";
-// import { JsxElement } from "typescript";
 
 export type MappingFunc<T> = (value: T, index: number, arr: T[]) => React.ReactNode;
+
+export type FilterFunc<T> = (value: T) => boolean;
+
+export type SortFunc<T> = (first: T, second: T) => number;
 
 type Props = {
     query: DocumentNode,
@@ -17,30 +20,34 @@ type Props = {
     variables: {[key: string]: any},
     dataType: string[],
     useOption?: boolean,
+    filterFunc?: FilterFunc<any>, 
+    sortFunc?: SortFunc<any>, // ! I suspect we can replace these anys with {[key: string]: any}
 }
 
-const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false}: Props) => {
+const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false, filterFunc, sortFunc = () => {return 0}}: Props) => {
 
     const [ render, setRender] = useState<React.ReactNode>([]);
     const { loading, error, data } = useQuery(query, {variables});
 
-    const response = findArray(data, dataType);
 
     useEffect(() => {
+        let response = findArray(data, dataType);
+        // if (data && filterFunc && Array.isArray(response)) response.filter(filterFunc);
+        if (data && sortFunc && Array.isArray(response)) response = response.slice().sort(sortFunc);
         if (data && !useOption && Array.isArray(response)) setRender(response.map(mappingFunc));
         if (data && !useOption && !Array.isArray(response)) setRender([mappingFunc(response, 0, [])]);
         if (useOption) return;
-    }, [mappingFunc, response, data, useOption])
+    }, [mappingFunc, dataType, data, useOption, filterFunc, sortFunc])
 
     return (
         <>
             {loading && 'Loading...'}
             {error && 'Whoops! Something went wrong!'}
-            {(data && !useOption && Array.isArray(response)) && render}
-            {(data && !useOption && !Array.isArray(response)) && mappingFunc(response, 0, [])}
-            {(data && useOption && Array.isArray(response)) && 
+            {(data && !useOption && Array.isArray(render)) && render}
+            {(data && !useOption && !Array.isArray(render)) && mappingFunc(render, 0, [])}
+            {(data && useOption && Array.isArray(render)) && 
                 <OptionWrapper 
-                    choicesArray={response} 
+                    choicesArray={findArray(data, dataType)} 
                     mappingFunc={mappingFunc}
                 />
             }

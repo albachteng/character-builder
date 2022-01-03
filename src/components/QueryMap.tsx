@@ -27,9 +27,11 @@ const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false}: 
     const response = findArray(data, dataType);
 
     useEffect(() => {
-        if (data && !useOption && Array.isArray(response)) setRender(response.map(mappingFunc));
+        if (data && !useOption && Array.isArray(response)) {
+            setRender(response.slice().sort((a: any, b: any) => a.level > b.level ? 1 : -1).map(mappingFunc));
+        };
         if (data && !useOption && !Array.isArray(response)) setRender([mappingFunc(response, 0, [])]);
-        if (useOption) return;
+        if (useOption) return; // if we're using option, this component is not responsible for rendering
     }, [mappingFunc, response, data, useOption])
 
     return (

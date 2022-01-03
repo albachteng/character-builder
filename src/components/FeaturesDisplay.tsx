@@ -2,7 +2,7 @@ import Feature from './Feature';
 import { FeatureType } from '../types';
 import { CharacterClass, Race } from '../types';
 import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../queries';
-import QueryMap from './QueryMap';
+import QueryMap, { MappingFunc } from './QueryMap';
 
 type Props = {
     characterLevel: number,
@@ -13,7 +13,7 @@ type Props = {
 
 const FeaturesDisplay = ({characterLevel, characterClass, characterRace, characterBackground }: Props): JSX.Element => {
 
-    const featuresMap = (feature: FeatureType, index: number) => {
+    const featuresMap: MappingFunc<FeatureType> = (feature, index: number) => {
         if (feature.level) {
             return (feature.level <= characterLevel) && <Feature key={`${feature.name+index}`} feature={feature}></Feature>
         }

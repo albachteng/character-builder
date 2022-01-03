@@ -1,4 +1,4 @@
-import QueryMap from "./QueryMap";
+import QueryMap, { MappingFunc } from "./QueryMap";
 import { ClassSpellSlots } from '../queries';
 import { CharacterClass } from "../types";
 
@@ -9,7 +9,7 @@ type Props = {
 
 const SpellSlots = ({ characterClass, characterLevel }: Props) => {
     
-    const mappingFunc = (spellSlot: any) => {
+    const mappingFunc: MappingFunc<{[key: string]: any}> = (spellSlot) => {
         if (spellSlot.level === characterLevel && spellSlot.spellcasting.spell_slots_level_1) {
             return <pre>{JSON.stringify(spellSlot.spellcasting, null, 3)}</pre>
         }
@@ -18,9 +18,7 @@ const SpellSlots = ({ characterClass, characterLevel }: Props) => {
     return (
         <QueryMap
             query={ClassSpellSlots}
-            variables={{
-                filter: {index: characterClass }
-            }}
+            variables={{filter: {index: characterClass }}}
             mappingFunc={mappingFunc}
             dataType={['class', 'class_levels']}
         />

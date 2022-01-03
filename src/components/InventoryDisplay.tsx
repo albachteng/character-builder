@@ -1,6 +1,7 @@
-import QueryMap from './QueryMap';
+import QueryMap, { MappingFunc } from './QueryMap';
 import { ClassEquipmentOptions, ClassStartingEquipment, BackgroundEquipment } from "../queries";
 import { useQuery } from '@apollo/client';
+
 
 type Props = {
     characterClass: string,
@@ -17,7 +18,7 @@ const InventoryDisplay = ({characterClass, characterBackground}: Props) => {
         variables: {"filter": { "index": characterClass}}
     });
 
-    const equipmentMap = (item: any, index: number) => item && <li key={`${item?.equipment?.name}${index}`}>{item?.equipment?.name}: {item?.quantity}</li>;
+    const equipmentMap: MappingFunc<{[key: string]: any}> = (item, index) => item && <li key={`${item?.equipment?.name}${index}`}>{item?.equipment?.name}: {item?.quantity}</li>;
 
     return (
         <>

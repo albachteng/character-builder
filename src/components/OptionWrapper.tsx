@@ -1,9 +1,9 @@
 import { Choice } from "../types";
 import useOption from '../hooks/useOption';
-import { useState, useEffect } from "react";
+import { MappingFunc } from './QueryMap';
 
 type Props = {
-    mappingFunc: (value: any, index: number, array: any[]) => any, // ! 
+    mappingFunc: MappingFunc<any>, 
     choicesArray: Choice[]
 }
 

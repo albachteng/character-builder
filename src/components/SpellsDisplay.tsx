@@ -1,11 +1,10 @@
 import { SpellModByClass } from '../queries';
 import { AbilityScore, CharacterClass } from '../types';
 import SpellSlots from './SpellSlots';
-import QueryMap from './QueryMap';
+import QueryMap, { MappingFunc } from './QueryMap';
 import dice from '../utilities/dice';
 import { ability_score_abbr } from '../types/ability_score';
 import SpellBook from './SpellBook';
-import type { MappingFunc } from './QueryMap';
 
 type Props = {
     characterClass: CharacterClass,

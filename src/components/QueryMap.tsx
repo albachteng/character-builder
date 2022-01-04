@@ -7,7 +7,7 @@ import OptionWrapper from "./OptionWrapper";
 import { DocumentNode } from "graphql";
 import { findArray } from '../utilities/findArray';
 import * as React from "react";
-// import { JsxElement } from "typescript";
+import { sortByOptions } from "../utilities/sortByOptions";
 
 export type MappingFunc<T> = (value: T, index: number, arr: T[]) => React.ReactNode;
 
@@ -17,9 +17,12 @@ type Props = {
     variables: {[key: string]: any},
     dataType: string[],
     useOption?: boolean,
+    sortBy?: string,
 }
 
-const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false}: Props) => {
+
+
+const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false, sortBy}: Props) => {
 
     const [ render, setRender] = useState<React.ReactNode>([]);
     const { loading, error, data } = useQuery(query, {variables});
@@ -28,7 +31,7 @@ const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false}: 
 
     useEffect(() => {
         if (data && !useOption && Array.isArray(response)) {
-            setRender(response.slice().sort((a: any, b: any) => a.level > b.level ? 1 : -1).map(mappingFunc));
+                        setRender(response.slice().sort(sortByOptions[sortBy || 'default']).map(mappingFunc));
         };
         if (data && !useOption && !Array.isArray(response)) setRender([mappingFunc(response, 0, [])]);
         if (useOption) return; // if we're using option, this component is not responsible for rendering

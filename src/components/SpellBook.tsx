@@ -32,6 +32,7 @@ const SpellBook = ({ characterClass, characterLevel }: Props) => {
                 variables={buildSpellVariables(characterClass, characterLevel)}
                 mappingFunc={spellMapFunc}
                 dataType={['spells']}
+                sortBy={'levelAsc'}
             /> 
         </ul>
     );

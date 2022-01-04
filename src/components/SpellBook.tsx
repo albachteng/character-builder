@@ -1,8 +1,7 @@
 import { SpellsOptionsByClassAndLevel } from "../queries";
-import { CharacterClass, FeatureType } from "../types";
+import { CharacterClass, Spell as SpellType} from "../types";
 import Spell from './Spell';
 import QueryMap, { MappingFunc } from './QueryMap';
-import * as React from "react";
 
 type Props = { 
     characterClass: CharacterClass,
@@ -20,7 +19,7 @@ const buildSpellVariables = (characterClass: string, characterLevel: number) => 
     return variables
 };
 
-const spellMapFunc: MappingFunc<FeatureType> = (spell, index, arr) => {
+const spellMapFunc: MappingFunc<SpellType> = (spell, index, arr) => {
     return <Spell spell={spell} key={`${spell.name}${index}`}/>
 };
 

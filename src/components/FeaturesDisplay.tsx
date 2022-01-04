@@ -13,7 +13,7 @@ type Props = {
 
 const FeaturesDisplay = ({characterLevel, characterClass, characterRace, characterBackground }: Props): JSX.Element => {
 
-    const featuresMap: MappingFunc<FeatureType> = (feature, index: number) => {
+    const featuresMap: MappingFunc<FeatureType> = (feature, index) => {
         if (feature.level) {
             return (feature.level <= characterLevel) && <Feature key={`${feature.name+index}`} feature={feature}></Feature>
         }

@@ -1,7 +1,11 @@
 import useOnClickDescription from '../hooks/useOnClickDescription';
 
 type Props = {
-    spell: any
+    spell: {
+        [key: string]: any, 
+        desc: string[], 
+        level?: number, name: string
+    } // NTS - basically indistinguishable from feature type? 
 }
 
 const Spell = ({spell}: Props) => {

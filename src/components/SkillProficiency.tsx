@@ -18,9 +18,7 @@ type Props = {
 
 const SkillProficiency = ({stat, skill, proficiencyBonus = 2, isProficient, proficiencyFrom}: Props) => {
 
-    proficiencyFrom = proficiencyFrom ? proficiencyFrom : 'undefined';
-
-    const originMap = (origin: string) => {
+    const originMap = (origin: string | undefined) => {
         switch  (origin) {
             case 'ClassProficiency_choicesFrom': 
                 return 'Class Proficiency Option';
@@ -35,12 +33,13 @@ const SkillProficiency = ({stat, skill, proficiencyBonus = 2, isProficient, prof
 
     const { description, toggleDescription } = useOnClickDescription(skill);
 
+    const bonus = dice.mod(stat) + (isProficient ? proficiencyBonus : 0);
+
     return (
         <div>
             <li onClick={toggleDescription}>
-                {dice.mod(stat) + (isProficient ? proficiencyBonus : 0)}: {skill.name}  
-                {` Stat (${skill.ability_score.name}-${stat}) mod: ${dice.mod(stat)} ${isProficient ? `+ ${proficiencyBonus} ` : ' '}`}
-                Proficient: {`${isProficient ? `Yes, from ${originMap(proficiencyFrom)}` : "No"}`}
+                {bonus >= 0 ? '+' : ''}{bonus}: {skill.name + ' '}
+                {`${isProficient ? `| Proficient from ${originMap(proficiencyFrom)}` : ""}`}
             </li>
             {description}
         </div>

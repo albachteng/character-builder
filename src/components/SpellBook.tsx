@@ -20,7 +20,7 @@ const buildSpellVariables = (characterClass: string, characterLevel: number) => 
 };
 
 const spellMapFunc: MappingFunc<SpellType> = (spell, index, arr) => {
-    return <Spell spell={spell} key={`${spell.name}${index}`}/>
+    return <Spell spell={spell} id={`${spell.name}${index}`} key={`${spell.name}${index}`}/>
 };
 
 const SpellBook = ({ characterClass, characterLevel }: Props) => {

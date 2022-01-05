@@ -1,31 +1,27 @@
-const WithOnClick = (Child: (props: any) => JSX.Element, id: string, props: any) => {
+const withOnClick = (Child: (props: any) => JSX.Element) => ({...props}) => {
 
-    const NewComponent = () => {
-
-        const handleClick = () => {
-            const target = document.getElementById(id);
-            target && (target.style.display === 'block'
-                ? target.style.display = 'none' 
-                : target.style.display = 'block'
-            );
-        }
-
-        return (
-            <>
-                <Child onClick={handleClick} props={props}>
-                    {/* <p onClick={handleClick}>click me!</p> */}
-                    <div 
-                        id={id} 
-                        key={id}
-                        style={{display: 'none'}}
-                    >
-                    </div>
-                </Child>
-            </>
-        )
+    const handleClick = () => {
+        console.log('id: ', props.id)
+        const target = document.getElementById(props.id);
+        target && (target.style.display === 'block'
+            ? target.style.display = 'none' 
+            : target.style.display = 'block'
+        );
     }
 
-    return NewComponent;
+    return (
+        <>
+            
+            <p onClick={handleClick}>click me!</p>
+            <div 
+                id={props.id} 
+                key={props.id}
+                style={{display: 'none'}}
+            >
+                <Child {...props} />
+            </div>
+        </>
+    )
 }
 
-export default WithOnClick;
+export default withOnClick;

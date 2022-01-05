@@ -50,10 +50,9 @@ const HeaderDisplay = ({
                         }, null, 2)}
                     </pre>
                     {data && <HitPoints 
-                        hit_die={data?.class.hit_die} 
-                        CON={characterStats.CON} 
+                        characterStats={characterStats}
+                        characterLevel={level}
                         characterClass={characterClass} 
-                        level={level}
                     />}
                 </p>
             )}

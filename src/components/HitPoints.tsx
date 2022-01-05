@@ -1,53 +1,19 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
-import dice from '../utilities/dice';
-import { CharacterClass } from '../types';
+import { CharacterClass, AbilityScore } from '../types';
+import useHP from '../hooks/useHP';
 
 type Props = {
-    level: number,
-    CON: number,
-    hit_die: number,
+    characterStats: AbilityScore,
+    characterLevel: number,
     characterClass: CharacterClass,
 }
 
-const HitPoints = ({CON, level, hit_die, characterClass}: Props) => {
+const HitPoints = ({characterStats, characterLevel, characterClass}: Props) => {
 
-    const [conMod, setConMod] = useState(dice.mod(CON));
-    const [HP, setHP] = useState(hit_die);
-    const [rolls, setRolls] = useState({});
-
-    // update the CON mod when stats change, applies per level
-    useEffect(() => {
-        setConMod(dice.mod(CON));
-    }, [CON]);
-
-    // add another dice roll to HP total on level up 
-    // TODO - there is a bug where the minimum 1 HP increase is not being accounted for when modifier is negative...
-    useEffect(() => {
-        if (level >= 2) {
-            let toAdd = dice.rollDice(hit_die);
-            // minimum increase of 1 per PHB
-            if (toAdd + conMod < 1) toAdd = 1;
-            setRolls((prev) => { 
-                return {
-                    ...prev, 
-                    [`${level}`]: toAdd
-                }});
-            setHP((prev) => prev + toAdd);
-        }
-    }, [level]);
-
-    // if the character class changes, we must reset everything
-    useEffect(() => {
-        setHP(hit_die);
-        setRolls({});
-        setConMod(dice.mod(CON))
-    }, [characterClass]); // TODO refactor into a hook? 
-
+    const { HP, conMod, hit_die, rolls } = useHP(characterStats, characterLevel, characterClass)
     return (
         <>
-            <h1>HP: {(level === 1 && conMod < 0) ? HP : HP + (conMod * level)}</h1>
-            <h2>hit_die: {hit_die} + CON mod: {conMod} * level: {level} + rolls: {JSON.stringify(rolls, null, 2)}</h2>
+            <h1>HP: {(characterLevel === 1 && conMod < 0) ? HP : HP + (conMod * characterLevel)}</h1>
+            <h2>hit_die: {hit_die(characterClass)} + CON mod: {conMod} * level: {characterLevel} + rolls: {JSON.stringify(rolls, null, 2)}</h2>
         </>
     )
 }

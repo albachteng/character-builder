@@ -20,8 +20,6 @@ type Props = {
     sortBy?: string,
 }
 
-
-
 const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false, sortBy}: Props) => {
 
     const [ render, setRender] = useState<React.ReactNode>([]);
@@ -31,18 +29,21 @@ const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false, s
 
     useEffect(() => {
         if (data && !useOption && Array.isArray(response)) {
-                        setRender(response.slice().sort(sortByOptions[sortBy || 'default']).map(mappingFunc));
+            setRender(response
+                .slice()
+                .sort(sortByOptions[sortBy || 'default'])
+                .map(mappingFunc));
         };
         if (data && !useOption && !Array.isArray(response)) setRender([mappingFunc(response, 0, [])]);
         if (useOption) return; // if we're using option, this component is not responsible for rendering
-    }, [mappingFunc, response, data, useOption])
+    }, [mappingFunc, response, data, useOption, sortBy])
 
     return (
         <>
             {loading && 'Loading...'}
             {error && 'Whoops! Something went wrong!'}
-            {(data && !useOption && Array.isArray(response)) && render}
-            {(data && !useOption && !Array.isArray(response)) && mappingFunc(response, 0, [])}
+            {(data && !useOption) && render}
+            {/* {(data && !useOption && !Array.isArray(response)) && mappingFunc(response, 0, [])} */}
             {(data && useOption && Array.isArray(response)) && 
                 <OptionWrapper 
                     choicesArray={response} 

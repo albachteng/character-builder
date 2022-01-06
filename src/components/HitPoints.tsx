@@ -1,5 +1,6 @@
 import { CharacterClass, AbilityScore } from '../types';
-import useHP from '../hooks/useHP';
+import useHP, { Rolls } from '../hooks/useHP';
+import dice from '../utilities/dice';
 
 type Props = {
     characterStats: AbilityScore,
@@ -7,13 +8,29 @@ type Props = {
     characterClass: CharacterClass,
 }
 
+const calculateHP = (characterClass: CharacterClass, characterStats: AbilityScore, characterLevel: number, rolls: Rolls) => {
+    let total = 0;
+    for (let i = 1; i <= characterLevel; i += 1) {
+        const toAdd = rolls[i] + dice.mod(characterStats['CON']);
+        if (toAdd >= 1) total += toAdd;
+        else total += 1;
+    }
+    return total;
+};
+
 const HitPoints = ({characterStats, characterLevel, characterClass}: Props) => {
 
-    const { HP, conMod, hit_die, rolls } = useHP(characterStats, characterLevel, characterClass)
+    const { rolls, calculateHitDice } = useHP(characterStats, characterLevel, characterClass)
+
     return (
         <>
-            <h1>HP: {(characterLevel === 1 && conMod < 0) ? HP : HP + (conMod * characterLevel)}</h1>
-            <h2>hit_die: {hit_die(characterClass)} + CON mod: {conMod} * level: {characterLevel} + rolls: {JSON.stringify(rolls, null, 2)}</h2>
+            <h1>HP: {calculateHP(characterClass, characterStats, characterLevel, rolls)}</h1>
+            <h2>
+                hit die: {calculateHitDice(characterClass)} 
+                + CON mod: {dice.mod(characterStats['CON'])} 
+                * level: {characterLevel} 
+                + rolls: {JSON.stringify(rolls, null, 2)}
+            </h2>
         </>
     )
 }

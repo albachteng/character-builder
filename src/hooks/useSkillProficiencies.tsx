@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
-import { ClassProficiencyChoices, RaceProficiencyChoices, RaceStartingProficiencies } from "../queries";
+import { BackgroundProficiencies, ClassProficiencyChoices, RaceProficiencyChoices, RaceStartingProficiencies } from "../queries";
 import { CharacterClass, Race } from "../types";
 import { findArray } from "../utilities/findArray";
 import useOption from "./useOption";
@@ -19,6 +19,9 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
     const characterRaceProficiencies = useQuery(RaceStartingProficiencies, {
         variables: {"filter": {"index": characterRace}}
     });
+    const characterBackgroundProficiencies = useQuery(BackgroundProficiencies, {
+        variables: {"filter": {"index": characterBackground}}
+    })
 
     // must update the choices and get selections before we can set the proficiencies
     const [ choicesArray, setChoicesArray ] = useState<any>([]);
@@ -33,10 +36,15 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
             setChoicesArray([...classArray, raceArray]);
     }}, [characterRaceChoices, characterClassChoices, characterClass, characterRace]);
 
-    // when we have selections, combine them with racial starting proficiencies
+    // when we have selections, combine them with racial starting proficiencies and background proficiencies
     useEffect(() => {
-        selections && characterRaceProficiencies.data && setProficiencies([...selections, ...findArray(characterRaceProficiencies.data, ['race', 'proficiencies'])]);
-    }, [selections, characterRaceProficiencies])
+        selections && characterRaceProficiencies.data && characterBackgroundProficiencies.data && 
+            setProficiencies([
+                ...selections, 
+                ...findArray(characterRaceProficiencies.data, ['race', 'proficiencies']),
+                ...findArray(characterBackgroundProficiencies.data, ['background', 'proficiencies']),
+            ]);
+    }, [selections, characterRaceProficiencies, characterBackgroundProficiencies])
 
     return {
         proficiencies,

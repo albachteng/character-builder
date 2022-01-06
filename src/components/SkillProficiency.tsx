@@ -23,11 +23,13 @@ const SkillProficiency = ({stat, skill, proficiencyBonus = 2, isProficient, prof
             case 'ClassProficiency_choicesFrom': 
                 return 'Class Proficiency Option';
             case 'RaceStarting_proficiency_optionsFrom':
-                return 'Race Proficiency Option'
+                return 'Race Proficiency Option';
             case 'RaceStarting_proficiencies':
-                return 'Race Starting Proficiency'
+                return 'Race Starting Proficiency';
+            case 'Proficiency':
+                return 'Background Starting Proficiency';
             default:
-                return ''
+                return '';
         }
     }
 
@@ -38,8 +40,8 @@ const SkillProficiency = ({stat, skill, proficiencyBonus = 2, isProficient, prof
     return (
         <div>
             <li onClick={toggleDescription}>
-                {bonus >= 0 ? '+' : ''}{bonus}: {skill.name + ' '}
-                {`${isProficient ? `| Proficient from ${originMap(proficiencyFrom)}` : ""}`}
+                {bonus >= 0 && '+'}{bonus}: {skill.name + ' '}
+                {`${isProficient && `| Proficient from ${originMap(proficiencyFrom)}`}`}
             </li>
             {description}
         </div>

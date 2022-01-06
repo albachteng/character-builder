@@ -1,7 +1,6 @@
 const withOnClick = (Child: (props: any) => JSX.Element) => ({...props}) => {
 
     const handleClick = () => {
-        console.log('id: ', props.id)
         const target = document.getElementById(props.id);
         target && (target.style.display === 'block'
             ? target.style.display = 'none' 

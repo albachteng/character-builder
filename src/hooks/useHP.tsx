@@ -41,7 +41,7 @@ export const useHP = (characterLevel: number, characterClass: CharacterClass) =>
 
     const [rolls, setRolls] = useState<Rolls>({});
 
-    // add another dice roll to rolls when the level changes
+    // add another dice roll to rolls when the level increases
     useEffect(() => {
         if (characterLevel >= 2) {
             let toAdd = dice.rollDice(calculateHitDice(characterClass));
@@ -53,7 +53,7 @@ export const useHP = (characterLevel: number, characterClass: CharacterClass) =>
         }
     }, [characterLevel, characterClass]);
 
-    // if the level is reset to 1 we must reset everything
+    // if the level is reset to 1 we must reset all rolls
     useEffect(() => {
         if (characterLevel === 1) {
             const levelOne = calculateHitDice(characterClass);

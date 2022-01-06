@@ -8,7 +8,7 @@ type Props = {
     characterClass: CharacterClass,
 }
 
-const calculateHP = (characterClass: CharacterClass, characterStats: AbilityScore, characterLevel: number, rolls: Rolls) => {
+const calculateHP = (characterStats: AbilityScore, characterLevel: number, rolls: Rolls) => {
     let total = 0;
     for (let i = 1; i <= characterLevel; i += 1) {
         const toAdd = rolls[i] + dice.mod(characterStats['CON']);
@@ -20,11 +20,11 @@ const calculateHP = (characterClass: CharacterClass, characterStats: AbilityScor
 
 const HitPoints = ({characterStats, characterLevel, characterClass}: Props) => {
 
-    const { rolls, calculateHitDice } = useHP(characterStats, characterLevel, characterClass)
+    const { rolls, calculateHitDice } = useHP(characterLevel, characterClass)
 
     return (
         <>
-            <h1>HP: {calculateHP(characterClass, characterStats, characterLevel, rolls)}</h1>
+            <h1>HP: {calculateHP(characterStats, characterLevel, rolls)}</h1>
             <h2>
                 hit die: {calculateHitDice(characterClass)} 
                 + CON mod: {dice.mod(characterStats['CON'])} 

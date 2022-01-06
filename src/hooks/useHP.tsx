@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { AbilityScore, CharacterClass } from "../types";
+import { CharacterClass } from "../types";
 import dice from "../utilities/dice";
 
 export interface Rolls {
     [key: number]: number
 }
 
-export const useHP = (characterStats: AbilityScore, characterLevel: number, characterClass: CharacterClass) => {
+export const useHP = (characterLevel: number, characterClass: CharacterClass) => {
 
     const calculateHitDice = (characterClass: string): number => {
         switch (characterClass) {

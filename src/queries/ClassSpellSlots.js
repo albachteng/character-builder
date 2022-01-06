@@ -6,6 +6,7 @@ export const ClassSpellSlots = gql`query SpellSlots ($filter: FilterFindOneClass
         level
         spellcasting {
           cantrips_known
+          spells_known
           spell_slots_level_1
           spell_slots_level_2
           spell_slots_level_3

@@ -1,4 +1,4 @@
-const withOnClick = (Child: (props: any) => JSX.Element) => ({...props}) => {
+const withOnClick = (Child: (props: any) => JSX.Element, Heading: (props: any) => JSX.Element) => ({...props}) => {
 
     const handleClick = () => {
         const target = document.getElementById(props.id);
@@ -10,7 +10,9 @@ const withOnClick = (Child: (props: any) => JSX.Element) => ({...props}) => {
 
     return (
         <>
-            <p onClick={handleClick}>click me!</p>
+            <div onClick={handleClick}>
+                <Heading></Heading>
+            </div>
             <div 
                 id={props.id} 
                 key={props.id}

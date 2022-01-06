@@ -35,7 +35,6 @@ const QueryMap = ({query, mappingFunc, variables, dataType, useOption = false, s
                 .map(mappingFunc));
         };
         if (data && !useOption && !Array.isArray(response)) setRender([mappingFunc(response, 0, [])]);
-        if (useOption) return; // if we're using option, this component is not responsible for rendering
     }, [mappingFunc, response, data, useOption, sortBy])
 
     return (

@@ -14,8 +14,8 @@ const handleStringArray = (arr: string[], type: string) => {
             });
         }
         if (type === 'span') {
-            return arr.map((str: string, index) => {
-                return <span key={`${str}${index}`}>{str}, </span>
+            return arr.map((str: string, index, arr) => {
+                return <span key={`${str}${index}`}>{str}{arr.length - 1 !== index ? ', ' : ''}</span>
             });
         }
         if (type === 'p') {

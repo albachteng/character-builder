@@ -26,9 +26,9 @@ const handleStringArray = (arr: string[], type: string) => {
     } else return []};
 
 const SpellDetails = ({spell}: Props) => {
-
+    console.log({spell});
     return (
-        <>
+        <div>
             {spell.desc && handleStringArray(spell.desc, 'p')}
 
             <div>
@@ -37,9 +37,9 @@ const SpellDetails = ({spell}: Props) => {
                 {spell.components && <p>Components: {handleStringArray(spell.components, 'span')}</p>}
                 {spell.material && <p>Materials: {spell.material}</p>}
                 {spell.duration && <p>Duration: {spell.duration}</p>}
-                {spell.classes && handleStringArray(spell.classes.map((characterClass) => characterClass.name), 'span')}
+                {spell.classes && <p>Classes: {handleStringArray(spell.classes.map((characterClass) => characterClass.index), 'span')}</p>}
             </div>
-            {spell.area_of_effect && <p>Area of Effect: {spell.area_of_effect.size} ft. {spell.area_of_effect.type}</p>}
+            {spell.area_of_effect && <p>Area of Effect: {spell.area_of_effect.size}ft. {spell.area_of_effect.type}</p>}
             {spell.attack_type && <p>Attack Type: {spell.attack_type}</p>}
             {spell.concentration && <p>Concentration</p>}
             {spell.ritual && <p>Ritual</p>}
@@ -50,9 +50,9 @@ const SpellDetails = ({spell}: Props) => {
             {spell.higher_level && <h5>At Higher Levels: </h5>}
             {spell.higher_level && handleStringArray(spell.higher_level, 'p')}
             {spell.school && <p>School: {spell.school.name}</p> /* name, index, desc, typename */ }
-            {spell.school && spell.school.desc && handleStringArray(spell.school.desc, 'p')}
+            {spell.school && spell.school.desc && <span>{spell.school.desc}</span>}
             {spell.subclasses && <p>Subclasses: {handleStringArray(spell.subclasses.map((subclass) => subclass.name), 'span')}</p>}
-        </>
+        </div>
     )
 };
 

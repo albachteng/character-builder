@@ -10,7 +10,6 @@ const withOnClick = (Child: (props: any) => JSX.Element) => ({...props}) => {
 
     return (
         <>
-            
             <p onClick={handleClick}>click me!</p>
             <div 
                 id={props.id} 

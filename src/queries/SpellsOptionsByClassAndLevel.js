@@ -49,7 +49,6 @@ export const SpellsOptionsByClassAndLevel = gql`query SpellsOptionsByClassAndLev
         index
         _id
       }
-      url
       }
     }
 `;

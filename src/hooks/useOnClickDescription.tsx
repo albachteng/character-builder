@@ -9,14 +9,14 @@ type WithDescription = {
     [key: string]: any,
     [key: number]: any,
     desc: string[],
-    name: string,
+    name?: string,
 }
 
-const useOnClickDescription = (withDescription: WithDescription) => {
+const useOnClickDescription = (withDescription: WithDescription, name?: string | undefined) => {
 
     const toggleDescription = () => { 
         for (let i = 0; i < withDescription.desc.length; i += 1) {
-            const target = document.getElementById(`${withDescription.name}-desc${i}`);
+            const target = document.getElementById(`${withDescription.name || name}-desc${i}`);
             target && (target.style.display === 'block' 
                 ? target.style.display = 'none' 
                 : target.style.display = 'block');
@@ -27,8 +27,8 @@ const useOnClickDescription = (withDescription: WithDescription) => {
         return ( 
             <p 
                 style={{display: 'none'}} 
-                id={`${withDescription.name}-desc${i}`}
-                key={`${withDescription.name}-desc${i}`}
+                id={`${withDescription.name || name}-desc${i}`}
+                key={`${withDescription.name || name}-desc${i}`}
             >
                 {paragraph}
             </p>)

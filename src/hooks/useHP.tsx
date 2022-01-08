@@ -61,7 +61,6 @@ export const useHP = (characterLevel: number, characterClass: CharacterClass) =>
         }
     }, [characterLevel, characterClass]); 
 
-    // return setHP for future override functionality
     return { calculateHitDice, rolls };
 }
 

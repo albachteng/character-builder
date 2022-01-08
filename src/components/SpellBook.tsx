@@ -1,8 +1,10 @@
 import { SpellsOptionsByClassAndLevel } from "../queries";
 import { CharacterClass, Spell as SpellType} from "../types";
-import Spell from './Spell';
+// import Spell from './Spell';
 import QueryWrapper from './QueryWrapper';
 import RenderMap, { MappingFunc } from './RenderMap';
+import withOnClick from "./withOnClick";
+import SpellDetails from './SpellDetails';
 
 type Props = { 
     characterClass: CharacterClass,
@@ -20,11 +22,14 @@ const buildSpellVariables = (characterClass: string, characterLevel: number) => 
     return variables
 };
 
-const spellMapFunc: MappingFunc<SpellType> = (spell, index, arr) => {
-    return <Spell spell={spell} id={`${spell.name}${index}`} key={`${spell.name}${index}`}/>
-};
 
 const SpellBook = ({ characterClass, characterLevel }: Props) => {
+
+    const spellMapFunc: MappingFunc<SpellType> = (spell, index, arr) => {
+        const Header = () => <p>{spell.name}{spell.level ? `, Level ${spell.level}` : `, Cantrip`}</p>;
+        const SpellDetailsWithOnClick = withOnClick(SpellDetails, Header);
+        return <SpellDetailsWithOnClick spell={spell} id={`${spell.name}${index}`} key={`${spell.name}${index}`}/>
+    };
 
     return (
         <ul>
@@ -32,9 +37,8 @@ const SpellBook = ({ characterClass, characterLevel }: Props) => {
                 query={SpellsOptionsByClassAndLevel}
                 variables={buildSpellVariables(characterClass, characterLevel)}
                 dataType={['spells']}
-                // sortBy={'levelAsc'}
             >
-                <RenderMap mappingFunc={spellMapFunc} data={{}} />
+                <RenderMap mappingFunc={spellMapFunc} data={{}} sortBy={'levelAsc'} />
             </QueryWrapper> 
         </ul>
     );

@@ -21,9 +21,9 @@ const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, charac
     const { proficiencies } = useSkillProficiencies(characterClass, characterRace, characterBackground);
     const { loading, error, data } = useQuery(AllSkills);
 
-    const mappingFunc: MappingFunc<Skill> = (skill) => {
-        return (<li>{skill.name}</li>);
-    }
+    // const mappingFunc: MappingFunc<Skill> = (skill) => {
+    //     return (<li>{skill.name}</li>);
+    // }
 
     return (
         <>

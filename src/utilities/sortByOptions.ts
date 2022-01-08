@@ -18,4 +18,3 @@ export const sortByOptions: {[k: string]: any} = {
     levelDesc: (a: WithKey, b: WithKey) => descending(a.level, b.level),
     default: (a: any, b: any) => 0, // the default sort method, in most browsers transforms the values to strings and then sorts them
 }
-

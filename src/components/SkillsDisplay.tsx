@@ -6,8 +6,7 @@ import type { AbilityScore } from '../types/AbilityScore';
 import { CharacterClass, Race, Skill } from "../types";
 import useSkillProficiencies from "../hooks/useSkillProficiencies";
 import QueryWrapper from './QueryWrapper';
-import QueryRender from './QueryRender';
-import { MappingFunc } from "./QueryMap";
+import RenderMap, { MappingFunc } from './RenderMap';
 
 type Props = {
     characterClass: CharacterClass, 
@@ -38,9 +37,9 @@ const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, charac
                     allSkills={data.skills}
                 />
             }
-            <QueryWrapper query={AllSkills} variables={{}} dataType={['skills']}>
+            {/* <QueryWrapper query={AllSkills} variables={{}} dataType={['skills']}>
                 <QueryRender mappingFunc={mappingFunc} data={{}}></QueryRender>
-            </QueryWrapper>
+            </QueryWrapper> */}
         </>
     );
 };

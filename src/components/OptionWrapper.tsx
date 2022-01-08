@@ -1,6 +1,6 @@
 import { Choice } from "../types";
 import useOption from '../hooks/useOption';
-import { MappingFunc } from './QueryMap';
+import { MappingFunc } from './RenderMap';
 
 type Props = {
     mappingFunc: MappingFunc<any>, 

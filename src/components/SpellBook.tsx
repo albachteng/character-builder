@@ -1,7 +1,8 @@
 import { SpellsOptionsByClassAndLevel } from "../queries";
 import { CharacterClass, Spell as SpellType} from "../types";
 import Spell from './Spell';
-import QueryMap, { MappingFunc } from './QueryMap';
+import QueryWrapper from './QueryWrapper';
+import RenderMap, { MappingFunc } from './RenderMap';
 
 type Props = { 
     characterClass: CharacterClass,
@@ -27,13 +28,14 @@ const SpellBook = ({ characterClass, characterLevel }: Props) => {
 
     return (
         <ul>
-            <QueryMap
+            <QueryWrapper
                 query={SpellsOptionsByClassAndLevel}
                 variables={buildSpellVariables(characterClass, characterLevel)}
-                mappingFunc={spellMapFunc}
                 dataType={['spells']}
-                sortBy={'levelAsc'}
-            /> 
+                // sortBy={'levelAsc'}
+            >
+                <RenderMap mappingFunc={spellMapFunc} data={{}} />
+            </QueryWrapper> 
         </ul>
     );
 };

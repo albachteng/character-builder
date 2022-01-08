@@ -1,11 +1,12 @@
 import { SpellModByClass, SpellcastingInfo } from '../queries';
 import { AbilityScore, CharacterClass } from '../types';
 import SpellSlots from './SpellSlots';
-import QueryMap, { MappingFunc } from './QueryMap';
 import dice from '../utilities/dice';
 import { ability_score_abbr } from '../types/ability_score';
 import SpellBook from './SpellBook';
 import { ReactNode } from 'react';
+import QueryWrapper from './QueryWrapper';
+import RenderMap, {MappingFunc} from './RenderMap';
 
 type Props = {
     characterClass: CharacterClass,
@@ -46,18 +47,20 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
                 characterLevel={characterLevel}
             />
             <h3>Spell Mod</h3>
-            <QueryMap
+            <QueryWrapper
                 query={SpellModByClass}
                 variables={{filter: { index: characterClass}}}
-                mappingFunc={spellModMapFunc}
                 dataType={['class', 'spellcasting', 'spellcasting_ability']}
-            />
-            <QueryMap
+            >
+                <RenderMap mappingFunc={spellModMapFunc} data={{}}/>
+            </QueryWrapper>
+            <QueryWrapper
                 query={SpellcastingInfo}
                 variables={{filter: {index: characterClass}}}
-                mappingFunc={spellcastingInfoMapFunc}
                 dataType={['class', 'spellcasting', 'info']}
-            />
+            >
+                <RenderMap mappingFunc={spellcastingInfoMapFunc} data={{}} />
+            </QueryWrapper>
             <h3>Spellbook</h3>
             <SpellBook characterClass={characterClass} characterLevel={characterLevel}/>
         </>

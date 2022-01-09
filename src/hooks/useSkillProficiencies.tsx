@@ -32,8 +32,8 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
     useEffect(() => {
         if (!characterClassChoices.loading && !characterRaceChoices.loading) {
             const classArray = findArray(characterClassChoices.data, ['class', 'proficiency_choices']) || [];
-            const raceArray = findArray(characterRaceChoices.data, ['race', 'proficiency_choices']) || null;
-            setChoicesArray([...classArray, raceArray]);
+            const raceArray = [findArray(characterRaceChoices.data, ['race', 'proficiency_choices'])] || [];
+            setChoicesArray([...classArray, ...raceArray]);
     }}, [characterRaceChoices, characterClassChoices, characterClass, characterRace]);
 
     // when we have selections, combine them with racial starting proficiencies and background proficiencies

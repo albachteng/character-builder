@@ -2,8 +2,12 @@
 ultimately responsible for displaying character name, character class, race, level, ?alignment, ?experience, ?background 
 */ 
 
+import { PersonalityByBackground } from '../queries';
 import {AbilityScore, CharacterClass, Race} from '../types';
 import HitPoints from './HitPoints';
+import QueryWrapper from './QueryWrapper';
+import RenderMap, { MappingFunc } from './RenderMap';
+import withUseOption from './withUseOption';
 
 type Props = {
     characterName: string,
@@ -27,11 +31,23 @@ const HeaderDisplay = ({
     background = ''
 }: Props) => {
 
+    const personalityMap: MappingFunc<string> = (trait, index) => {
+        if (trait) {
+            return (
+                <p>Personality Trakt: {trait}</p>
+            );
+        }
+    }
+
+    const RenderMapWithOption = withUseOption(RenderMap);
 
     return (
         <>
             <h2>Header</h2>
-                <p>
+                <div>
+                    <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'personality_traits']}>
+                        <RenderMapWithOption mappingFunc={personalityMap} data={{}}/>
+                    </QueryWrapper> 
                     <pre>
                         {JSON.stringify({
                             characterName,
@@ -48,7 +64,7 @@ const HeaderDisplay = ({
                         characterLevel={level}
                         characterClass={characterClass} 
                     />
-                </p>
+                </div>
             )
         </>
     )

@@ -16,6 +16,8 @@ const QueryWrapper = ({query, variables, children, dataType}: Props) => {
     
     const arrayData = findArray(data, dataType);
 
+    console.log('in QueryWrapper: ', {arrayData});
+
     return (
 
         <>

@@ -1,10 +1,15 @@
 import type { Choice } from '../types';
 
-export const chooseFrom = (choose: number, from: Choice[]) => {
-    const choices: any[] = [];
-    while (choices.length < choose) {
-        const choice = Math.floor(Math.random()*from.length);
-        (!choices.includes(from[choice])) && choices.push(from[choice]);
+export const chooseFrom = (choice: Choice) => {
+    console.log('in chooseFrom: ', {choice});
+    const choices: any[] = []; // ! 
+    const { choose, from } = choice;
+    if (choose && from) {
+        for (let i = 0; i < choose; i += 1) {
+            const selection = Math.floor(Math.random()*from.length);
+            (!choices.includes(from[selection])) && from[selection] && choices.push(from[selection]); 
+        }
     }
+    console.log('in chooseFrom: ', {choices})
     return choices;
 };

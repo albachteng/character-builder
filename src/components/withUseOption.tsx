@@ -1,7 +1,7 @@
 import useOption from '../hooks/useOption';
 import { Choice } from '../types';
 
-// TODO type WithUseChoiceProps = {
+// TODO type WithUseOptionProps = {
 //     data: Choice[]
 //     [key: string]: any
 // }
@@ -9,7 +9,7 @@ import { Choice } from '../types';
 const withUseOption = (Child: (props: any) => JSX.Element) => ({...props}) => {
 
     let choicesArray = props.data;
-    if (!Array.isArray(choicesArray)) choicesArray = [props.data];
+    if (!Array.isArray(choicesArray)) choicesArray = [choicesArray];
 
     const { selections } = useOption(choicesArray);
     console.log('in withUseOption: ', {selections});

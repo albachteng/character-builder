@@ -1,16 +1,17 @@
+import { ReactNode } from 'react';
+import { AbilityScore } from '../types';
 import Stat from './Stat';
-// import {AbilityScore} from '../types'
 
 type Props = {
-    stats: {[key: string]: any}
+    stats: AbilityScore 
 };
 
 const AbilityScoresDisplay = ({stats}: Props) => {
-    const scores: any = [];
-    const keys = Object.keys(stats);
-    keys.forEach((key, index) => {
-        scores.push(<Stat name={key} key={`${key}${index}`} stats={stats[key]}></Stat>)
-    });
+    const scores: ReactNode[] = [];
+    let key: keyof AbilityScore;
+    for (key in stats) {
+        scores.push(<Stat name={key} key={`${key}${stats[key]}`} stats={stats[key]}></Stat>)
+    };
 
     return (
         <div style={{display: 'flex', justifyContent: 'space-around'}}>

@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import { BackgroundProficiencies, ClassProficiencyChoices, RaceProficiencyChoices, RaceStartingProficiencies } from "../queries";
-import { CharacterClass, Race } from "../types";
+import { CharacterClass, Choice, Race } from "../types";
 import { findArray } from "../utilities/findArray";
 import useOption from "./useOption";
 
@@ -24,7 +24,7 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
     })
 
     // must update the choices and get selections before we can set the proficiencies
-    const [ choicesArray, setChoicesArray ] = useState<any>([]);
+    const [ choicesArray, setChoicesArray ] = useState<Choice[]>([]);
     const { selections } = useOption(choicesArray);
     const [ proficiencies, setProficiencies] = useState<any>([]);
 

@@ -34,7 +34,7 @@ const HeaderDisplay = ({
     const personalityMap: MappingFunc<string> = (trait, index) => {
         if (trait) {
             return (
-                <p>Personality Trakt: {trait}</p>
+                <p key={`Trait-${index}`}>Personality Trait: {trait}</p>
             );
         }
     }

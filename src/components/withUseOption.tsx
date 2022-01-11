@@ -9,7 +9,7 @@ import { Choice } from '../types';
 const withUseOption = (Child: (props: any) => JSX.Element) => ({...props}) => {
 
     let choicesArray = props.data;
-    if (!Array.isArray(choicesArray)) choicesArray = [props.data];
+    if (!Array.isArray(choicesArray)) choicesArray = [choicesArray];
 
     const { selections } = useOption(choicesArray);
 

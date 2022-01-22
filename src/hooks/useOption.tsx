@@ -7,7 +7,9 @@ const useOption = (choicesArray: Choice[]) => {
     const [selections, setSelections]: [any[], React.Dispatch<any>] = useState([]); // ! 
 
     useEffect(() => {
-        setSelections(choicesArray.map((choice) => chooseFrom(choice)).flat());
+        if (Array.isArray(choicesArray)) {
+            setSelections(choicesArray.map((choice) => chooseFrom(choice)).flat());
+        }
     }, [choicesArray]);
 
     return {

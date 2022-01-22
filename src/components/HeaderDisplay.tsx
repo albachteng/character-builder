@@ -46,7 +46,7 @@ const HeaderDisplay = ({
             <h2>Header</h2>
                 <div>
                     <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'personality_traits']}>
-                        <RenderMapWithOption mappingFunc={personalityMap} data={{}}/>
+                        <RenderMapWithOption mappingFunc={personalityMap} data={null}/>
                     </QueryWrapper> 
                     <pre>
                         {JSON.stringify({

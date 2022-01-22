@@ -29,7 +29,7 @@ const App = () => {
       <button onClick={() => dispatch({type: 'reroll'})}>These stats are bullshit, roll again!</button>
       <h1>Play a fucking {state.characterRace} {state.characterClass}, coward!</h1>
       <Suspense fallback={'Suspense Loading...'}>
-        {/* <HeaderDisplay background={characterBackground} characterStats={characterStats} characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/> */}
+        {<HeaderDisplay background={characterBackground} characterStats={characterStats} characterName='nonsense' characterClass={characterClass} race={characterRace} level={characterLevel}/>}
         {/* <AbilityScoresDisplay stats={characterStats} /> */}
         {/* <FeatureDisplay characterBackground={characterBackground} characterRace={characterRace} characterLevel={characterLevel} characterClass={characterClass} /> */}
         {/* <InventoryDisplay characterClass={characterClass} characterBackground={characterBackground}></InventoryDisplay> */}

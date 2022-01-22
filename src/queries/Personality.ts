@@ -1,31 +1,30 @@
 import { gql } from '@apollo/client';
 
-export const PersonalityByBackground =  
-    gql`query PersonalityByBackgound ($filter: FilterFindOneBackgroundInput) {
-        background (filter: $filter) {
+export const PersonalityByBackground = gql`query PersonalityByBackgound ($filter: FilterFindOneBackgroundInput) {
+    background (filter: $filter) {
         name
-            personality_traits {
+        personality_traits {
             __typename
             choose
             from 
-        }
+            }
         ideals {
-        choose
-        from {
-            desc
-            alignments {
-            name
+            choose
+            from {
+                desc
+                alignments {
+                    name
+                }
             }
         }
-        }
         bonds {
-        choose
-        from
-        }
+            choose
+            from
+            }
         flaws {
-        choose
-        from
-        }
+            choose
+            from
+            }
         }
     }
 `;

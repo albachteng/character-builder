@@ -48,6 +48,15 @@ const HeaderDisplay = ({
                     <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'personality_traits']}>
                         <RenderMapWithOption mappingFunc={personalityMap} data={null}/>
                     </QueryWrapper> 
+                    {/* <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'ideals']}>
+                    //    <RenderMapWithOption mappingFunc={personalityMap} data={null}/>
+                    // </QueryWrapper>*/}
+                    <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'bonds']}>
+                        <RenderMapWithOption mappingFunc={personalityMap} data={null}/>
+                    </QueryWrapper> 
+                    <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'flaws']}>
+                        <RenderMapWithOption mappingFunc={personalityMap} data={null}/>
+                    </QueryWrapper> 
                     <pre>
                         {JSON.stringify({
                             characterName,

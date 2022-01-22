@@ -1,17 +1,26 @@
 import useOption from '../hooks/useOption';
 import { Choice } from '../types';
+import { useState, useEffect } from 'react';
 
-type WithUseChoiceProps = {
-    data: Choice[]
-    [key: string]: any
-}
+// TODO type WithUseOptionProps = {
+//     data: Choice[]
+//     [key: string]: any
+// }
 
 const withUseOption = (Child: (props: any) => JSX.Element) => ({...props}) => {
 
-    const { selections } = useOption(props.data);
+    const [ choicesArray, setChoicesArray] = useState(props.data);
+
+    useEffect(() => {
+        if (!Array.isArray(choicesArray)) setChoicesArray([choicesArray]);
+    }, [choicesArray]);
+
+    const { selections } = useOption(choicesArray);
 
     return (
-        <Child {...{...props, data: selections}}></Child>
+        <>
+            {selections && <Child {...{...props, data: selections}}></Child>}
+        </>
     )
 }
 

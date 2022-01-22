@@ -26,7 +26,7 @@ const handleStringArray = (arr: string[], type: string) => {
     } else return []};
 
 const SpellDetails = ({spell}: Props) => {
-    console.log({spell});
+
     return (
         <div>
             {spell.desc && handleStringArray(spell.desc, 'p')}

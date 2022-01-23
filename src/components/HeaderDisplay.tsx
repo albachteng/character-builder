@@ -39,6 +39,16 @@ const HeaderDisplay = ({
         }
     }
 
+    const idealsMap: MappingFunc<any> = (ideal, index) => {
+        if (ideal) {
+            console.log(ideal);
+            return ( 
+                <>
+                    <p key={`Ideal-${index}`}>Ideal: {ideal.desc}</p>
+                </>
+            )}
+    };
+
     const RenderMapWithOption = withUseOption(RenderMap);
 
     return (
@@ -48,9 +58,9 @@ const HeaderDisplay = ({
                     <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'personality_traits']}>
                         <RenderMapWithOption mappingFunc={personalityMap} data={null}/>
                     </QueryWrapper> 
-                    {/* <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'ideals']}>
-                    //    <RenderMapWithOption mappingFunc={personalityMap} data={null}/>
-                    // </QueryWrapper>*/}
+                    <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'ideals']}>
+                        <RenderMapWithOption mappingFunc={idealsMap} data={null}/>
+                    </QueryWrapper>
                     <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'bonds']}>
                         <RenderMapWithOption mappingFunc={personalityMap} data={null}/>
                     </QueryWrapper> 

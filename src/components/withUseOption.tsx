@@ -1,5 +1,5 @@
 import useOption from '../hooks/useOption';
-import { Choice } from '../types';
+// import { Choice } from '../types';
 import { useState, useEffect } from 'react';
 
 // TODO type WithUseOptionProps = {

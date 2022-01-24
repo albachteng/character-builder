@@ -11,13 +11,23 @@ import App from './components/App';
 const client = new ApolloClient({
   uri: 'https://www.dnd5eapi.co/graphql',
   cache: new InMemoryCache({
-    typePolicies: {
-      Class: {keyFields: ['index']},
+    typePolicies: { // most of this API uses unique 'index' strings rather than id or _id
+      Class: {
+        keyFields: ['index'],
+        merge: true 
+      },
       Race: {keyFields: ['index']},
       Background: {keyFields: ['index']},
-      // Skill: {keyFields: ['index']},
-      // Proficiency: {keyFields: ['index']},
-      // Feature: {keyFields: ['index']},
+      ClassSpellcasting: {
+        keyFields: [], // class spellcasting data is unique per class
+        fields: {
+          info: { // and therefore so is the info
+            merge(existing, incoming) {
+              return {...existing, ...incoming};
+            }
+          }
+        }
+      },
     }
   }),
 });

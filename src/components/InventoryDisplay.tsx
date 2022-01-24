@@ -11,7 +11,7 @@ type Props = {
 
 const InventoryDisplay = ({characterClass, characterBackground}: Props) => {
     
-    const equipmentMap: MappingFunc<{[key: string]: any}> = (item, index) => item && <li key={`${item?.equipment?.name}${index}`}>{item?.equipment?.name}: {item?.quantity}</li>;
+    const equipmentMap: MappingFunc<{[key: string]: any}> = (item, index) => item?.equipment?.name && <li key={`${item?.equipment?.name}${index}`}>{item?.equipment?.name}: {item?.quantity}</li>;
 
     const RenderMapWithUseOption = withUseOption(RenderMap);
 

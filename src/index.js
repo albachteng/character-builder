@@ -10,7 +10,16 @@ import App from './components/App';
 
 const client = new ApolloClient({
   uri: 'https://www.dnd5eapi.co/graphql',
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Class: {keyFields: ['index']},
+      Race: {keyFields: ['index']},
+      Background: {keyFields: ['index']},
+      // Skill: {keyFields: ['index']},
+      // Proficiency: {keyFields: ['index']},
+      // Feature: {keyFields: ['index']},
+    }
+  }),
 });
 
 ReactDOM.render(

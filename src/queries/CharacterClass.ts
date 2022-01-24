@@ -4,6 +4,7 @@ export const CharaceterClass = gql`
 query characterClassQuery ($filter: FilterFindOneClassInput){
   class (filter: $filter) {
     name
+    index
     class_levels {
       ability_score_bonuses
       index

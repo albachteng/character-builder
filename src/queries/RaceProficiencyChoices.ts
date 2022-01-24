@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 export const RaceProficiencyChoices = gql`
   query RaceProficiencyChoices ($filter: FilterFindOneRaceInput) {
       race (filter: $filter) {
+        index
         proficiency_choices: starting_proficiency_options {
           choose
           __typename

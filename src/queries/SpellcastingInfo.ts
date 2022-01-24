@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 export const SpellcastingInfo = gql`
     query SpellcastingInfo ($filter: FilterFindOneClassInput) {
         class (filter: $filter) {
+            index
             spellcasting {
                 info {
                     name

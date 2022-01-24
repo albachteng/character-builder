@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 export const ClassSpellSlots = gql`query SpellSlots ($filter: FilterFindOneClassInput) {
     class (filter: $filter) {
+      index
       name
       class_levels (sort: LEVEL_ASC) {
         level

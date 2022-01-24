@@ -14,7 +14,7 @@ const client = new ApolloClient({
     typePolicies: { // most of this API uses unique 'index' strings rather than id or _id
       Class: {
         keyFields: ['index'],
-        merge: true 
+        // merge: true 
       },
       Race: {keyFields: ['index']},
       Background: {keyFields: ['index']},

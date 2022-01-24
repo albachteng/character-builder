@@ -18,7 +18,7 @@ const RenderMap = ({mappingFunc, sortBy, data = []}: RenderProps) => {
 
     return (
         <>
-            {toRender.length && toRender.map(mappingFunc)}
+            {toRender.length > 0 && toRender.map(mappingFunc)}
         </>
     )
 }

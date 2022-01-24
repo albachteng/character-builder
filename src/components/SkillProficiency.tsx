@@ -12,7 +12,7 @@ type Props = {
     stat: AbilityScoreTotal,
     skill: Skill
     proficiencyBonus?: number,
-    isProficient?: boolean,
+    isProficient: boolean,
     proficiencyFrom?: string, 
 }
 
@@ -41,7 +41,7 @@ const SkillProficiency = ({stat, skill, proficiencyBonus = 2, isProficient, prof
         <div>
             <li onClick={toggleDescription}>
                 {bonus >= 0 && '+'}{bonus}: {skill.name + ' '}
-                {`${isProficient && `| Proficient from ${originMap(proficiencyFrom)}`}`}
+                <span>{`${isProficient ? `| Proficient from ${originMap(proficiencyFrom)}` : ''}`}</span>
             </li>
             {description}
         </div>

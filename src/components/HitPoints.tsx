@@ -13,6 +13,7 @@ const calculateHP = (characterStats: AbilityScore, characterLevel: number, rolls
     for (let i = 1; i <= characterLevel; i += 1) {
         const toAdd = rolls[i] + dice.mod(characterStats['CON']);
         if (toAdd >= 1) total += toAdd;
+        // minimum + 1 HP per level, regardless of roll and mod
         else total += 1;
     }
     return total;
@@ -25,12 +26,8 @@ const HitPoints = ({characterStats, characterLevel, characterClass}: Props) => {
     return (
         <>
             <h1>HP: {calculateHP(characterStats, characterLevel, rolls)}</h1>
-            <h2>
-                hit die: {calculateHitDice(characterClass)} 
-                + CON mod: {dice.mod(characterStats['CON'])} 
-                * level: {characterLevel} 
-                + rolls: {JSON.stringify(rolls, null, 2)}
-            </h2>
+            <h1>Hit dice: {characterLevel}d{calculateHitDice(characterClass)}</h1>
+            
         </>
     )
 }

@@ -26,7 +26,7 @@ const handleStringArray = (arr: string[], type: string) => {
     } else return []};
 
 const SpellDetails = ({spell}: Props) => {
-    console.log({spell});
+
     return (
         <div>
             {spell.desc && handleStringArray(spell.desc, 'p')}
@@ -37,7 +37,7 @@ const SpellDetails = ({spell}: Props) => {
                 {spell.components && <p>Components: {handleStringArray(spell.components, 'span')}</p>}
                 {spell.material && <p>Materials: {spell.material}</p>}
                 {spell.duration && <p>Duration: {spell.duration}</p>}
-                {spell.classes && <p>Classes: {handleStringArray(spell.classes.map((characterClass) => characterClass.index), 'span')}</p>}
+                {spell.classes && <p>Classes: {handleStringArray(spell.classes.map((namedClassIndex) => namedClassIndex.index), 'span')}</p>}
             </div>
             {spell.area_of_effect && <p>Area of Effect: {spell.area_of_effect.size}ft. {spell.area_of_effect.type}</p>}
             {spell.attack_type && <p>Attack Type: {spell.attack_type}</p>}

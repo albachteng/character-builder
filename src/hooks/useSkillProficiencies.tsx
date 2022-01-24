@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import { BackgroundProficiencies, ClassProficiencyChoices, RaceProficiencyChoices, RaceStartingProficiencies } from "../queries";
-import { CharacterClass, Race } from "../types";
+import { CharacterClass, Choice, Race } from "../types";
 import { findArray } from "../utilities/findArray";
 import useOption from "./useOption";
 
@@ -24,7 +24,7 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
     })
 
     // must update the choices and get selections before we can set the proficiencies
-    const [ choicesArray, setChoicesArray ] = useState<any>([]);
+    const [ choicesArray, setChoicesArray ] = useState<Choice[]>([]);
     const { selections } = useOption(choicesArray);
     const [ proficiencies, setProficiencies] = useState<any>([]);
 
@@ -32,18 +32,20 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
     useEffect(() => {
         if (!characterClassChoices.loading && !characterRaceChoices.loading) {
             const classArray = findArray(characterClassChoices.data, ['class', 'proficiency_choices']) || [];
-            const raceArray = findArray(characterRaceChoices.data, ['race', 'proficiency_choices']) || null;
-            setChoicesArray([...classArray, raceArray]);
+            const raceArray = [findArray(characterRaceChoices.data, ['race', 'proficiency_choices'])] || [];
+            setChoicesArray([...classArray, ...raceArray]);
     }}, [characterRaceChoices, characterClassChoices, characterClass, characterRace]);
 
     // when we have selections, combine them with racial starting proficiencies and background proficiencies
     useEffect(() => {
         selections && characterRaceProficiencies.data && characterBackgroundProficiencies.data && 
+        // console.log({selections});
             setProficiencies([
                 ...selections, 
                 ...findArray(characterRaceProficiencies.data, ['race', 'proficiencies']),
                 ...findArray(characterBackgroundProficiencies.data, ['background', 'proficiencies']),
             ]);
+            // console.log({proficiencies});
     }, [selections, characterRaceProficiencies, characterBackgroundProficiencies])
 
     return {

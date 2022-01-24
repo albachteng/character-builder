@@ -1,6 +1,7 @@
-import QueryMap, { MappingFunc } from "./QueryMap";
 import { ClassSpellSlots } from '../queries';
 import { CharacterClass } from "../types";
+import QueryWrapper from "./QueryWrapper";
+import RenderMap, { MappingFunc } from './RenderMap';
 
 type Props = {
     characterClass: CharacterClass,
@@ -16,12 +17,13 @@ const SpellSlots = ({ characterClass, characterLevel }: Props) => {
     }
 
     return (
-        <QueryMap
+        <QueryWrapper
             query={ClassSpellSlots}
             variables={{filter: {index: characterClass }}}
-            mappingFunc={mappingFunc}
             dataType={['class', 'class_levels']}
-        />
+        >
+            <RenderMap mappingFunc={mappingFunc} data={{}}/>
+        </QueryWrapper>
     );
 }
 

@@ -52,14 +52,14 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
                 variables={{filter: { index: characterClass}}}
                 dataType={['class', 'spellcasting', 'spellcasting_ability']}
             >
-                <RenderMap mappingFunc={spellModMapFunc} data={{}}/>
+                <RenderMap mappingFunc={spellModMapFunc} />
             </QueryWrapper>
             <QueryWrapper
                 query={SpellcastingInfo}
                 variables={{filter: {index: characterClass}}}
                 dataType={['class', 'spellcasting', 'info']}
             >
-                <RenderMap mappingFunc={spellcastingInfoMapFunc} data={{}} />
+                <RenderMap mappingFunc={spellcastingInfoMapFunc} />
             </QueryWrapper>
             <h3>Spellbook</h3>
             <SpellBook characterClass={characterClass} characterLevel={characterLevel}/>

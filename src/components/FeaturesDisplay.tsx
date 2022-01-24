@@ -29,21 +29,21 @@ const FeaturesDisplay = ({characterLevel, characterClass, characterRace, charact
                 variables={{"filter": {"class": {"index": characterClass}}}}
                 dataType={['features']}
             >
-                <RenderMap mappingFunc={featuresMap} data={{}} />
+                <RenderMap mappingFunc={featuresMap} />
             </QueryWrapper>
             <QueryWrapper 
                 query={RacialFeatures}
                 variables={{"filter": {"races": { "index": characterRace}}}}
                 dataType={['features']}
             >
-                <RenderMap mappingFunc={featuresMap} data={{}} />
+                <RenderMap mappingFunc={featuresMap} />
             </QueryWrapper>
             <QueryWrapper 
                 query={BackgroundFeatures}
                 variables={{"filter": { "index": characterBackground}}}
                 dataType={['background', 'feature']}
             >
-                <RenderMap mappingFunc={featuresMap} data={{}} />
+                <RenderMap mappingFunc={featuresMap} />
             </QueryWrapper>
         </div>
     )

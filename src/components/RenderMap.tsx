@@ -4,11 +4,11 @@ export type MappingFunc<T extends unknown> = (value: T, index: number, arr: T[])
 
 type RenderProps = {
     mappingFunc: MappingFunc<any>
-    data: {[key: string]: any}
+    data?: {[key: string]: any}
     sortBy?: string
 }
 
-const RenderMap = ({mappingFunc, data, sortBy}: RenderProps) => {
+const RenderMap = ({mappingFunc, sortBy, data = []}: RenderProps) => {
 
     let toRender = data;
 

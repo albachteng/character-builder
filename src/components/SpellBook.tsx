@@ -38,7 +38,7 @@ const SpellBook = ({ characterClass, characterLevel }: Props) => {
                 variables={buildSpellVariables(characterClass, characterLevel)}
                 dataType={['spells']}
             >
-                <RenderMap mappingFunc={spellMapFunc} data={{}} sortBy={'levelAsc'} />
+                <RenderMap mappingFunc={spellMapFunc} sortBy={'levelAsc'} />
             </QueryWrapper> 
         </ul>
     );

@@ -22,7 +22,7 @@ const SpellSlots = ({ characterClass, characterLevel }: Props) => {
             variables={{filter: {index: characterClass }}}
             dataType={['class', 'class_levels']}
         >
-            <RenderMap mappingFunc={mappingFunc} data={{}}/>
+            <RenderMap mappingFunc={mappingFunc} />
         </QueryWrapper>
     );
 }

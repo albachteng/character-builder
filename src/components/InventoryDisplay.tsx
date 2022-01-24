@@ -21,13 +21,13 @@ const InventoryDisplay = ({characterClass, characterBackground}: Props) => {
                     <h2>Inventory:</h2>
                     <ul>
                         <QueryWrapper query={ClassStartingEquipment} variables={{"filter": {"index": characterClass}}} dataType={["class", "starting_equipment"]}>
-                            <RenderMap mappingFunc={equipmentMap} data={{}}/>
+                            <RenderMap mappingFunc={equipmentMap} />
                         </QueryWrapper>
                         <QueryWrapper query={ClassEquipmentOptions} variables={{"filter": {"index": characterClass}}} dataType={["class", "starting_equipment_options"]}>
-                            <RenderMapWithUseOption mappingFunc={equipmentMap} data={{}}/>
+                            <RenderMapWithUseOption mappingFunc={equipmentMap} />
                         </QueryWrapper>
                         <QueryWrapper query={BackgroundEquipment} variables={{"filter": {"index": characterBackground}}} dataType={["background", "starting_equipment"]}>
-                            <RenderMap mappingFunc={equipmentMap} data={{}}/>
+                            <RenderMap mappingFunc={equipmentMap} />
                         </QueryWrapper>
                     </ul>
                 </div>

@@ -56,16 +56,16 @@ const HeaderDisplay = ({
             <h2>Header</h2>
                 <div>
                     <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'personality_traits']}>
-                        <RenderMapWithOption mappingFunc={personalityMap} data={null}/>
+                        <RenderMapWithOption mappingFunc={personalityMap} />
                     </QueryWrapper> 
                     <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'ideals']}>
-                        <RenderMapWithOption mappingFunc={idealsMap} data={null}/>
+                        <RenderMapWithOption mappingFunc={idealsMap} />
                     </QueryWrapper>
                     <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'bonds']}>
-                        <RenderMapWithOption mappingFunc={personalityMap} data={null}/>
+                        <RenderMapWithOption mappingFunc={personalityMap} />
                     </QueryWrapper> 
                     <QueryWrapper query={PersonalityByBackground} variables={{filter: {index: background}}} dataType={['background', 'flaws']}>
-                        <RenderMapWithOption mappingFunc={personalityMap} data={null}/>
+                        <RenderMapWithOption mappingFunc={personalityMap} />
                     </QueryWrapper> 
                     <pre>
                         {JSON.stringify({
@@ -84,7 +84,6 @@ const HeaderDisplay = ({
                         characterClass={characterClass} 
                     />
                 </div>
-            )
         </>
     )
 };

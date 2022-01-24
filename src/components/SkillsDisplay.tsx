@@ -45,7 +45,7 @@ const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, charac
     return (
         <>
             <QueryWrapper query={AllSkills} variables={{}} dataType={['skills']}>
-                <RenderMap mappingFunc={makeProficienciesArray} data={{}}></RenderMap>
+                <RenderMap mappingFunc={makeProficienciesArray} />
             </QueryWrapper>
         </>
     );

@@ -5,6 +5,7 @@ export type { AbilityScoreTotal } from './AbilityScoreTotal';
 export type { CharacterClass } from './CharacterClass';
 export type { CoreSkills } from './CoreSkills';
 export type { FeatureType } from './FeatureType';
+export type { JSON } from './JSON';
 export type { NamedIndex } from './NamedIndex';
 export type { Race } from './Race';
 export type { Skill } from './Skill';

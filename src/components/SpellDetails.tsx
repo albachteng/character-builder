@@ -1,5 +1,4 @@
 import { AbilityScore, Spell } from '../types';
-import useAddToList from '../hooks/useAddToList';
 
 type Props = {
     spell: Spell
@@ -27,11 +26,10 @@ const handleStringArray = (arr: string[], type: string) => {
     } else return []};
 
 const SpellDetails = ({spell}: Props) => {
-    const { handleClick } = useAddToList<Spell>({toAdd: spell});
+
     return (
         <div>
             {spell.desc && handleStringArray(spell.desc, 'p')}
-
             <div>
                 {spell.casting_time && <p>Casting Time: {spell.casting_time}</p>}
                 {spell.range && <p>Range: {spell.range}</p>}

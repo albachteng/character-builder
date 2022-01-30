@@ -1,5 +1,5 @@
 import { SpellModByClass, SpellcastingInfo } from '../queries';
-import { AbilityScore, CharacterClass } from '../types';
+import { AbilityScore, CharacterClass, Spell } from '../types';
 import SpellSlots from './SpellSlots';
 import dice from '../utilities/dice';
 import { ability_score_abbr } from '../types/ability_score';
@@ -7,6 +7,7 @@ import SpellBook from './SpellBook';
 import { ReactNode } from 'react';
 import QueryWrapper from './QueryWrapper';
 import RenderMap, {MappingFunc} from './RenderMap';
+import useAddToList from '../hooks/useAddToList';
 
 type Props = {
     characterClass: CharacterClass,
@@ -38,6 +39,9 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
         )
     };
 
+    const { handleClick, list } = useAddToList<Spell>();
+    console.log({list});
+
     return (
         <>
             <h2>Spells Display</h2>
@@ -62,7 +66,9 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
                 <RenderMap mappingFunc={spellcastingInfoMapFunc} />
             </QueryWrapper>
             <h3>Spellbook</h3>
-            <SpellBook characterClass={characterClass} characterLevel={characterLevel}/>
+            <SpellBook characterClass={characterClass} characterLevel={characterLevel} handleClick={handleClick}/>
+            <h4>Added: </h4>
+            <pre>{JSON.stringify(list, null, 2)}</pre>
         </>
     )
 }

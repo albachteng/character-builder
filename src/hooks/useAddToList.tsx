@@ -1,20 +1,14 @@
 /* */
-import { useState, useEffect, useReducer } from "react";
+import { useState } from "react";
 
-type Props<T> = {
-    toAdd: T;
-}
+const useAddToList = <T,>() => {
 
-type ListToggle<T> = (toAdd: T) => void;
+    const [list, setList] = useState<T[]>([]);
 
-function addToList<T>({toAdd}: Props<T>) {
-
-    const [list, useList] = useState<T[]>([]);
-
-    const handleClick: ListToggle<T> = () => {
+    const handleClick = <U extends T,>(toAdd: U) => {
         list.includes(toAdd) 
-            ? useList(list.slice().filter((item: T) => item !== toAdd))
-            : useList(prev => [...prev, toAdd]);
+            ? setList(list.slice().filter((item) => item !== toAdd))
+            : setList(prev => [...prev, toAdd]); 
     };
 
     return {
@@ -23,4 +17,4 @@ function addToList<T>({toAdd}: Props<T>) {
     };
 };
 
-export default addToList;
+export default useAddToList;

@@ -26,9 +26,9 @@ const buildSpellVariables = (characterClass: string, characterLevel: number) => 
 const SpellBook = ({ characterClass, characterLevel }: Props) => {
 
     const spellMapFunc: MappingFunc<SpellType> = (spell, index, arr) => {
-        const Header = () => <p>{spell.name}{spell.level ? `, Level ${spell.level}` : `, Cantrip`}</p>;
+        const Header = () => <p key={`${spell?.name}${index}`}>{spell?.name}{spell?.level ? `, Level ${spell?.level}` : `, Cantrip`}</p>;
         const SpellDetailsWithOnClick = withOnClick(SpellDetails, Header);
-        return <SpellDetailsWithOnClick spell={spell} id={`${spell.name}${index}`} key={`${spell.name}${index}`}/>
+        return <SpellDetailsWithOnClick spell={spell} id={`${spell?.name}${index}`} key={`${spell?.name}${index}`}/>
     };
 
     return (

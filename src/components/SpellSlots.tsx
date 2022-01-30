@@ -10,9 +10,9 @@ type Props = {
 
 const SpellSlots = ({ characterClass, characterLevel }: Props) => {
     
-    const mappingFunc: MappingFunc<{[key: string]: any}> = (spellSlot) => {
+    const mappingFunc: MappingFunc<{[key: string]: any}> = (spellSlot, index) => {
         if (spellSlot.level === characterLevel && spellSlot.spellcasting.spell_slots_level_1) {
-            return <pre>{JSON.stringify(spellSlot.spellcasting, null, 3)}</pre>
+            return <pre key={`${spellSlot.__typename}${index}`}>{JSON.stringify(spellSlot.spellcasting, null, 3)}</pre>
         }
     }
 

@@ -22,13 +22,13 @@ type SpellMod = {
 const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props) => {
 
     const spellModMapFunc: MappingFunc<SpellMod> = (item) => {
-        return <p>{item.name}: {dice.mod(characterStats[item.name])}</p>
+        return <p key={item?.name}>{item?.name}: {dice.mod(characterStats[item?.name])}</p>
     };   
 
-    const spellcastingInfoMapFunc: MappingFunc<any> = (info, index) => {
+    const spellcastingInfoMapFunc: MappingFunc<any> = (info, index) => { // TODO
         const desc: ReactNode[] = [];
         info?.desc?.forEach((paragraph: string, index: number) => {
-            desc.push(<p key={`${info.name}-paragraph-${index}`}>{paragraph}</p>);
+            desc.push(<p key={`${info?.name}-paragraph-${index}`}>{paragraph}</p>);
         });
         return (
             <div>

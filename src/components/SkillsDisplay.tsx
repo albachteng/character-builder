@@ -18,7 +18,7 @@ type Props = {
 const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, characterRace, characterBackground}: Props) => {
 
     const { proficiencies } = useSkillProficiencies(characterClass, characterRace, characterBackground);
-    console.log(proficiencies);
+    
     const isProficient = (proficiencies: Skill[], skill: Skill): [boolean, string | undefined] => {
         for (let i = 0; i < proficiencies.length; i += 1) {
             if (proficiencies[i] && proficiencies[i].index && proficiencies[i].index.slice(6)  === skill.index) {

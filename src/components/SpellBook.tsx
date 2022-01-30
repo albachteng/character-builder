@@ -5,10 +5,12 @@ import QueryWrapper from './QueryWrapper';
 import RenderMap, { MappingFunc } from './RenderMap';
 import withOnClick from "./withOnClick";
 import SpellDetails from './SpellDetails';
+import useAddToList from "../hooks/useAddToList";
 
 type Props = { 
     characterClass: CharacterClass,
     characterLevel: number,
+    handleClick: Function // TODO
 }
 
 const buildSpellVariables = (characterClass: string, characterLevel: number) => {
@@ -23,10 +25,17 @@ const buildSpellVariables = (characterClass: string, characterLevel: number) => 
 };
 
 
-const SpellBook = ({ characterClass, characterLevel }: Props) => {
+const SpellBook = ({ characterClass, characterLevel, handleClick }: Props) => {
 
     const spellMapFunc: MappingFunc<SpellType> = (spell, index, arr) => {
-        const Header = () => <p key={`${spell?.name}${index}`}>{spell?.name}{spell?.level ? `, Level ${spell?.level}` : `, Cantrip`}</p>;
+        const Header = () => {
+            return (
+                <div>
+                    <p key={`${spell?.name}${index}`}>{spell?.name}{spell?.level ? `, Level ${spell?.level}` : `, Cantrip`}</p>
+                    <button onClick={() => handleClick(spell)}>Add</button>
+                </div>
+            )
+        };
         const SpellDetailsWithOnClick = withOnClick(SpellDetails, Header);
         return <SpellDetailsWithOnClick spell={spell} id={`${spell?.name}${index}`} key={`${spell?.name}${index}`}/>
     };

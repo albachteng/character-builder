@@ -8,6 +8,7 @@ import { ReactNode } from 'react';
 import QueryWrapper from './QueryWrapper';
 import RenderMap, {MappingFunc} from './RenderMap';
 import useAddToList from '../hooks/useAddToList';
+import SpellDetails from './SpellDetails';
 
 type Props = {
     characterClass: CharacterClass,
@@ -68,6 +69,7 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
             <h3>Spellbook</h3>
             <SpellBook characterClass={characterClass} characterLevel={characterLevel} handleClick={handleClick}/>
             <h4>Added: </h4>
+            {list.map((spell, index, arr) => <SpellDetails spell={spell} />)} 
             <pre>{JSON.stringify(list, null, 2)}</pre>
         </>
     )

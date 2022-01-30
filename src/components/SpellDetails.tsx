@@ -2,8 +2,6 @@ import { AbilityScore, Spell } from '../types';
 
 type Props = {
     spell: Spell
-    id: string
-    characterStats: AbilityScore 
 }
 
 const handleStringArray = (arr: string[], type: string) => {

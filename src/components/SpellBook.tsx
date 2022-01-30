@@ -11,6 +11,7 @@ type Props = {
     characterClass: CharacterClass,
     characterLevel: number,
     handleClick: (spell: SpellType) => void // TODO
+    list: SpellType[]
 }
 
 const buildSpellVariables = (characterClass: string, characterLevel: number) => {
@@ -25,10 +26,10 @@ const buildSpellVariables = (characterClass: string, characterLevel: number) => 
 };
 
 
-const SpellBook = ({ characterClass, characterLevel, handleClick }: Props) => {
+const SpellBook = ({ characterClass, characterLevel, handleClick, list }: Props) => {
 
     const spellMapFunc: MappingFunc<SpellType> = (spell, index, arr) => {
-        const Header = () => <SpellHeader {...{spell, index, handleClick}} />;
+        const Header = () => <SpellHeader {...{spell, index, handleClick, list}} />;
         const SpellDetailsWithOnClick = withOnClick(SpellDetails, Header);
         return <SpellDetailsWithOnClick spell={spell} id={`${spell?.name}${index}`} key={`${spell?.name}${index}`}/>
     };

@@ -9,6 +9,8 @@ import QueryWrapper from './QueryWrapper';
 import RenderMap, {MappingFunc} from './RenderMap';
 import useAddToList from '../hooks/useAddToList';
 import SpellDetails from './SpellDetails';
+import withOnClick from './withOnClick';
+import SpellHeader from './SpellHeader';
 
 type Props = {
     characterClass: CharacterClass,
@@ -40,6 +42,7 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
         )
     };
 
+
     const { handleClick, list } = useAddToList<Spell>();
     console.log({list});
 
@@ -67,10 +70,13 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
                 <RenderMap mappingFunc={spellcastingInfoMapFunc} />
             </QueryWrapper>
             <h3>Spellbook</h3>
-            <SpellBook characterClass={characterClass} characterLevel={characterLevel} handleClick={handleClick}/>
+            <SpellBook characterClass={characterClass} characterLevel={characterLevel} handleClick={handleClick} list={list}/>
             <h4>Added: </h4>
-            {list.map((spell, index, arr) => <SpellDetails spell={spell} />)} 
-            <pre>{JSON.stringify(list, null, 2)}</pre>
+            {list.map((spell, index, arr) => {
+                const Header = () => <SpellHeader {...{spell, index, handleClick, list}} />;
+                const SpellDetailsWithOnClick = withOnClick(SpellDetails, Header);
+                return <SpellDetailsWithOnClick spell={spell} id={`${spell?.name}${index}-added`} key={`${spell?.name}${index}-added`} />
+            })} 
         </>
     )
 }

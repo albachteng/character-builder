@@ -2,7 +2,7 @@ import { SpellModByClass, SpellcastingInfo } from '../queries';
 import { AbilityScore, CharacterClass, Spell } from '../types';
 import SpellSlots from './SpellSlots';
 import dice from '../utilities/dice';
-import { ability_score_abbr } from '../types/ability_score';
+import { ability_score_abbr } from '../types/AbilityScoreName';
 import SpellBook from './SpellBook';
 import { ReactNode } from 'react';
 import QueryWrapper from './QueryWrapper';
@@ -71,7 +71,7 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
             </QueryWrapper>
             <h3>Spellbook</h3>
             <SpellBook characterClass={characterClass} characterLevel={characterLevel} handleClick={handleClick} list={list}/>
-            <h4>Added: </h4>
+            <h4>Added: {`${list.length}`} </h4>
             {list.map((spell, index, arr) => {
                 const Header = () => <SpellHeader {...{spell, index, handleClick, list}} />;
                 const SpellDetailsWithOnClick = withOnClick(SpellDetails, Header);

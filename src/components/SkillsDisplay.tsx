@@ -1,6 +1,6 @@
 /* renders skill proficiencies display and handles query for class skill choices */ 
 import { AllSkills } from "../queries";
-import type { AbilityScore } from '../types/AbilityScore';
+import type { AbilityScore } from '../types/AbilityScores';
 import { CharacterClass, Race, Skill } from "../types";
 import useSkillProficiencies from "../hooks/useSkillProficiencies";
 import QueryWrapper from './QueryWrapper';

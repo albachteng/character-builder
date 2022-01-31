@@ -2,11 +2,13 @@ import RenderMap, { MappingFunc } from './RenderMap';
 import QueryWrapper from './QueryWrapper';
 import { ClassEquipmentOptions, ClassStartingEquipment, BackgroundEquipment } from "../queries";
 import withUseOption from './withUseOption';
+import { Background } from '../types/Background';
+import { CharacterClass } from '../types';
 
 
 type Props = {
-    characterClass: string,
-    characterBackground: string,
+    characterClass: CharacterClass,
+    characterBackground: Background,
 }
 
 const InventoryDisplay = ({characterClass, characterBackground}: Props) => {

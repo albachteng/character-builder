@@ -1,14 +1,14 @@
-import { CharacterClass, AbilityScore } from '../types';
+import { CharacterClass, AbilityScores, ZeroToTwenty } from '../types';
 import useHP, { Rolls } from '../hooks/useHP';
 import dice from '../utilities/dice';
 
 type Props = {
-    characterStats: AbilityScore,
-    characterLevel: number,
+    characterStats: AbilityScores,
+    characterLevel: ZeroToTwenty,
     characterClass: CharacterClass,
 }
 
-const calculateHP = (characterStats: AbilityScore, characterLevel: number, rolls: Rolls) => {
+const calculateHP = (characterStats: AbilityScores, characterLevel: number, rolls: Rolls) => {
     let total = 0;
     for (let i = 1; i <= characterLevel; i += 1) {
         const toAdd = rolls[i] + dice.mod(characterStats['CON']);

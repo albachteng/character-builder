@@ -1,4 +1,4 @@
-export interface FeatureType {
+export interface Feature {
     name: string
     index: string
     desc: string[]

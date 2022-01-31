@@ -1,8 +1,8 @@
 import { SpellModByClass, SpellcastingInfo } from '../queries';
-import { AbilityScore, CharacterClass, Spell } from '../types';
+import { AbilityScores, CharacterClass, Spell } from '../types';
 import SpellSlots from './SpellSlots';
 import dice from '../utilities/dice';
-import { ability_score_abbr } from '../types/AbilityScoreName';
+import { AbilityScoreName } from '../types/AbilityScoreName';
 import SpellBook from './SpellBook';
 import { ReactNode } from 'react';
 import QueryWrapper from './QueryWrapper';
@@ -15,12 +15,12 @@ import SpellHeader from './SpellHeader';
 type Props = {
     characterClass: CharacterClass,
     characterLevel: number,
-    characterStats: AbilityScore
+    characterStats: AbilityScores
 }
 
 type SpellMod = {
-    [key: string]: any,
-    name: ability_score_abbr
+    [key: string]: any, // ! 
+    name: AbilityScoreName
 }
 
 const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props) => {

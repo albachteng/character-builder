@@ -1,15 +1,16 @@
 import Feature from './Feature';
-import { FeatureType } from '../types';
+import type { Feature as FeatureType, ZeroToTwenty } from '../types';
 import { CharacterClass, Race } from '../types';
 import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../queries';
 import RenderMap, { MappingFunc } from './RenderMap';
 import QueryWrapper from './QueryWrapper';
+import { Background } from '../types/Background';
 
 type Props = {
-    characterLevel: number,
+    characterLevel: ZeroToTwenty,
     characterClass: CharacterClass,
     characterRace: Race
-    characterBackground: string,
+    characterBackground: Background,
 };
 
 const FeaturesDisplay = ({characterLevel, characterClass, characterRace, characterBackground }: Props): JSX.Element => {

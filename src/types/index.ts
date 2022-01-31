@@ -1,10 +1,11 @@
 export type { AbilityScores } from './AbilityScores';
 export type { Action } from './Action';
 export type { AbilityScoreName, AbilityScoreNameObject } from './AbilityScoreName';
+export type { Background } from './Background';
 export type { CharacterClass } from './CharacterClass';
 export type { Choice } from './choice';
 export type { CoreSkills } from './CoreSkills';
-export type { FeatureType } from './FeatureType';
+export type { Feature } from './Feature';
 export type { JSONValue } from './JSONValue';
 export type { NamedIndex } from './NamedIndex';
 export type { Race } from './Race';

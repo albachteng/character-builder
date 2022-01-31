@@ -30,7 +30,11 @@ const useSkillProficiencies = (characterClass: CharacterClass, characterRace: Ra
 
     // when we have the choice arrays, combine them so that useOption can update selections
     useEffect(() => {
-        if (!characterClassChoices.loading && !characterRaceChoices.loading) {
+        if (!characterClassChoices.loading 
+            && !characterRaceChoices.loading 
+            && characterClassChoices.data !== null 
+            && characterRaceChoices.data !== null
+            ) {
             const classArray = findArray(characterClassChoices.data, ['class', 'proficiency_choices']) || [];
             const raceArray = [findArray(characterRaceChoices.data, ['race', 'proficiency_choices'])] || [];
             setChoicesArray([...classArray, ...raceArray]);

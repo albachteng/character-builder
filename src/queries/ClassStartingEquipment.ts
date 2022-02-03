@@ -1,7 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const ClassStartingEquipment = gql`query ClassStartingEquipment ($filter: FilterFindOneClassInput) {
-    class (filter:$filter) {
+export const ClassStartingEquipment = gql`
+  query ClassStartingEquipment($filter: FilterFindOneClassInput) {
+    class(filter: $filter) {
       index
       starting_equipment {
         __typename
@@ -13,4 +14,5 @@ export const ClassStartingEquipment = gql`query ClassStartingEquipment ($filter:
         }
       }
     }
-  }`
+  }
+`;

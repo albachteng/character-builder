@@ -1,9 +1,10 @@
 import { gql } from '@apollo/client';
-export const ClassSpellSlots = gql`query SpellSlots ($filter: FilterFindOneClassInput) {
-    class (filter: $filter) {
+export const ClassSpellSlots = gql`
+  query SpellSlots($filter: FilterFindOneClassInput) {
+    class(filter: $filter) {
       index
       name
-      class_levels (sort: LEVEL_ASC) {
+      class_levels(sort: LEVEL_ASC) {
         level
         spellcasting {
           cantrips_known

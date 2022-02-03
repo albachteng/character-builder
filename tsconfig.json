@@ -14,18 +14,12 @@
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": false,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowSyntheticDefaultImports": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": [
-    "src"
-, "src/react-app-env.d.ts"  ]
+  "include": ["src", "src/react-app-env.d.ts"]
 }

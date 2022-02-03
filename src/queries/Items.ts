@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const Items = gql`query Items {
+export const Items = gql`
+  query Items {
     equipments {
       name
       index
@@ -19,11 +20,11 @@ export const Items = gql`query Items {
         desc
       }
       __typename
-        desc
+      desc
       armor_category
-          name
-          index
-          armor_class {
+      name
+      index
+      armor_class {
         base
         max_bonus
       }
@@ -76,6 +77,7 @@ export const Items = gql`query Items {
         __typename
       }
       weight
-        str_minimum
+      str_minimum
     }
-  }`;
+  }
+`;

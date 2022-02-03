@@ -1,6 +1,9 @@
 export type { AbilityScores } from './AbilityScores';
 export type { Action } from './Action';
-export type { AbilityScoreName, AbilityScoreNameObject } from './AbilityScoreName';
+export type {
+  AbilityScoreName,
+  AbilityScoreNameObject
+} from './AbilityScoreName';
 export type { Background } from './Background';
 export type { CharacterClass } from './CharacterClass';
 export type { Choice } from './choice';

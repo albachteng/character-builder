@@ -1,2 +1,1 @@
-export type Background = 
-    | 'acolyte';
+export type Background = 'acolyte';

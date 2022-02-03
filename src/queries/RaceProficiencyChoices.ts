@@ -1,19 +1,19 @@
 import { gql } from '@apollo/client';
 
 export const RaceProficiencyChoices = gql`
-  query RaceProficiencyChoices ($filter: FilterFindOneRaceInput) {
-      race (filter: $filter) {
-        index
-        proficiency_choices: starting_proficiency_options {
-          choose
+  query RaceProficiencyChoices($filter: FilterFindOneRaceInput) {
+    race(filter: $filter) {
+      index
+      proficiency_choices: starting_proficiency_options {
+        choose
+        __typename
+        from {
+          name
           __typename
-          from {
-            name
-            __typename
-            index
-            url
-          }
+          index
+          url
         }
       }
     }
-  `;
+  }
+`;

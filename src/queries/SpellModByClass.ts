@@ -1,7 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const SpellModByClass = gql`query SpellModByClass ($filter: FilterFindOneClassInput) {
-    class (filter: $filter) {
+export const SpellModByClass = gql`
+  query SpellModByClass($filter: FilterFindOneClassInput) {
+    class(filter: $filter) {
       index
       spellcasting {
         spellcasting_ability {
@@ -16,4 +17,3 @@ export const SpellModByClass = gql`query SpellModByClass ($filter: FilterFindOne
     }
   }
 `;
-    

@@ -4,16 +4,16 @@ export const AllSkills = gql`
   query AllSkills {
     skills {
       name
-        __typename
+      __typename
+      index
+      url
+      desc
+      ability_score {
+        name
         index
+        __typename
         url
-        desc
-        ability_score {
-            name
-            index
-            __typename
-            url
-        }
+      }
     }
   }
 `;

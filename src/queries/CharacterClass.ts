@@ -1,60 +1,61 @@
 import { gql } from '@apollo/client';
 
 export const CharaceterClass = gql`
-query characterClassQuery ($filter: FilterFindOneClassInput){
-  class (filter: $filter) {
-    name
-    index
-    class_levels {
-      ability_score_bonuses
+  query characterClassQuery($filter: FilterFindOneClassInput) {
+    class(filter: $filter) {
+      name
       index
-      level
-      prof_bonus
-    }
-    saving_throws {
-      name
-    }
-    spells {
-      name
-      url
-    }
-    spellcasting {
-      spellcasting_ability {
+      class_levels {
+        ability_score_bonuses
+        index
+        level
+        prof_bonus
+      }
+      saving_throws {
         name
       }
-      info {
+      spells {
         name
-        desc
+        url
       }
-      level
-    }
-  	starting_equipment {
-      quantity
-      equipment {
-        name
+      spellcasting {
+        spellcasting_ability {
+          name
+        }
+        info {
+          name
+          desc
+        }
+        level
       }
-    }
-    proficiencies {
-      name
-    }
-    proficiency_choices {
-      choose
-      from {
-        name
-      }
-    }
-    starting_equipment_options {
-      choose
-      from {
+      starting_equipment {
+        quantity
         equipment {
           name
         }
-        quantity
       }
+      proficiencies {
+        name
+      }
+      proficiency_choices {
+        choose
+        from {
+          name
+        }
+      }
+      starting_equipment_options {
+        choose
+        from {
+          equipment {
+            name
+          }
+          quantity
+        }
+      }
+      subclasses {
+        name
+      }
+      hit_die
     }
-    subclasses {
-      name
-    }
-    hit_die
   }
-}`;
+`;

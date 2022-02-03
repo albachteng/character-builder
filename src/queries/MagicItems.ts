@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const MagicItems = gql`query MagicItems {
+export const MagicItems = gql`
+  query MagicItems {
     magicItems {
       name
       index
@@ -12,4 +13,5 @@ export const MagicItems = gql`query MagicItems {
       __typename
       desc
     }
-  }`;
+  }
+`;

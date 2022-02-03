@@ -7,21 +7,20 @@ import { useState, useEffect } from 'react';
 //     [key: string]: any
 // }
 
-const withUseOption = (Child: (props: any) => JSX.Element) => ({...props}) => {
-
-    const [ choicesArray, setChoicesArray] = useState(props.data);
+const withUseOption =
+  (Child: (props: any) => JSX.Element) =>
+  ({ ...props }) => {
+    const [choicesArray, setChoicesArray] = useState(props.data);
 
     useEffect(() => {
-        if (!Array.isArray(choicesArray)) setChoicesArray([choicesArray]);
+      if (!Array.isArray(choicesArray)) setChoicesArray([choicesArray]);
     }, [choicesArray]);
 
     const { selections } = useOption(choicesArray);
 
     return (
-        <>
-            {selections && <Child {...{...props, data: selections}}></Child>}
-        </>
-    )
-}
+      <>{selections && <Child {...{ ...props, data: selections }}></Child>}</>
+    );
+  };
 
 export default withUseOption;

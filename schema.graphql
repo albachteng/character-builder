@@ -21,7 +21,11 @@ type Background {
   _id: String!
   index: String
   name: String
-  starting_proficiencies(skip: Int, limit: Int = 100, sort: SortFindManyProficiencyInput): [Proficiency!]!
+  starting_proficiencies(
+    skip: Int
+    limit: Int = 100
+    sort: SortFindManyProficiencyInput
+  ): [Proficiency!]!
   language_options: BackgroundLanguage_options
   url: String
   starting_equipment: [BackgroundStarting_equipment]
@@ -118,12 +122,20 @@ type BackgroundStarting_equipmentEquipment {
 
 type Class {
   _id: String!
-  class_levels(skip: Int, limit: Int = 100, sort: SortFindManyLevelInput): [Level!]!
+  class_levels(
+    skip: Int
+    limit: Int = 100
+    sort: SortFindManyLevelInput
+  ): [Level!]!
   multi_classing: ClassMulti_classing
   hit_die: Float
   index: String
   name: String
-  proficiencies(skip: Int, limit: Int = 100, sort: SortFindManyProficiencyInput): [Proficiency!]!
+  proficiencies(
+    skip: Int
+    limit: Int = 100
+    sort: SortFindManyProficiencyInput
+  ): [Proficiency!]!
   proficiency_choices: [ClassProficiency_choices]
   saving_throws: [ClassSaving_throws]
   spellcasting: ClassSpellcasting
@@ -299,7 +311,11 @@ type Equipment {
   gear_category: EquipmentGear_category
   index: String
   name: String
-  properties(skip: Int, limit: Int = 100, sort: SortFindManyWeaponPropertyInput): [WeaponProperty!]!
+  properties(
+    skip: Int
+    limit: Int = 100
+    sort: SortFindManyWeaponPropertyInput
+  ): [WeaponProperty!]!
   quantity: Float
   range: EquipmentRange
   special: [String]
@@ -324,7 +340,11 @@ type EquipmentArmor_class {
 
 type EquipmentCategory {
   _id: String!
-  equipment(skip: Int, limit: Int = 100, sort: SortFindManyEquipmentInput): [Equipment!]!
+  equipment(
+    skip: Int
+    limit: Int = 100
+    sort: SortFindManyEquipmentInput
+  ): [Equipment!]!
   index: String
   name: String
   url: String
@@ -546,7 +566,9 @@ input FilterFindManyAbilityScoreInput {
   skills: [FilterFindManyAbilityScoreSkillsInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyAbilityScoreOperatorsInput
   OR: [FilterFindManyAbilityScoreInput!]
   AND: [FilterFindManyAbilityScoreInput!]
@@ -564,7 +586,9 @@ input FilterFindManyAbilityScoreNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyAbilityScoreOperatorsInput {
   _id: FilterFindManyAbilityScore_idOperatorsInput
   desc: FilterFindManyAbilityScoreDescOperatorsInput
@@ -649,7 +673,9 @@ input FilterFindManyAlignmentInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyAlignmentOperatorsInput
   OR: [FilterFindManyAlignmentInput!]
   AND: [FilterFindManyAlignmentInput!]
@@ -667,7 +693,9 @@ input FilterFindManyAlignmentNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyAlignmentOperatorsInput {
   _id: FilterFindManyAlignment_idOperatorsInput
   desc: FilterFindManyAlignmentDescOperatorsInput
@@ -903,7 +931,9 @@ input FilterFindManyBackgroundInput {
   bonds: FilterFindManyBackgroundBondsInput
   flaws: FilterFindManyBackgroundFlawsInput
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyBackgroundOperatorsInput
   OR: [FilterFindManyBackgroundInput!]
   AND: [FilterFindManyBackgroundInput!]
@@ -962,7 +992,9 @@ input FilterFindManyBackgroundNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyBackgroundOperatorsInput {
   _id: FilterFindManyBackground_idOperatorsInput
   index: FilterFindManyBackgroundIndexOperatorsInput
@@ -1134,7 +1166,9 @@ input FilterFindManyClassInput {
   subclasses: [FilterFindManyClassSubclassesInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyClassOperatorsInput
   OR: [FilterFindManyClassInput!]
   AND: [FilterFindManyClassInput!]
@@ -1242,7 +1276,9 @@ input FilterFindManyClassNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyClassOperatorsInput {
   _id: FilterFindManyClass_idOperatorsInput
   class_levels: FilterFindManyClassClass_levelsOperatorsInput
@@ -1464,7 +1500,9 @@ input FilterFindManyConditionInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyConditionOperatorsInput
   OR: [FilterFindManyConditionInput!]
   AND: [FilterFindManyConditionInput!]
@@ -1482,7 +1520,9 @@ input FilterFindManyConditionNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyConditionOperatorsInput {
   _id: FilterFindManyCondition_idOperatorsInput
   desc: FilterFindManyConditionDescOperatorsInput
@@ -1546,7 +1586,9 @@ input FilterFindManyDamageTypeInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyDamageTypeOperatorsInput
   OR: [FilterFindManyDamageTypeInput!]
   AND: [FilterFindManyDamageTypeInput!]
@@ -1564,7 +1606,9 @@ input FilterFindManyDamageTypeNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyDamageTypeOperatorsInput {
   _id: FilterFindManyDamageType_idOperatorsInput
   desc: FilterFindManyDamageTypeDescOperatorsInput
@@ -1716,7 +1760,9 @@ input FilterFindManyEquipmentCategoryInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyEquipmentCategoryOperatorsInput
   OR: [FilterFindManyEquipmentCategoryInput!]
   AND: [FilterFindManyEquipmentCategoryInput!]
@@ -1734,7 +1780,9 @@ input FilterFindManyEquipmentCategoryNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyEquipmentCategoryOperatorsInput {
   _id: FilterFindManyEquipmentCategory_idOperatorsInput
   index: FilterFindManyEquipmentCategoryIndexOperatorsInput
@@ -2019,7 +2067,9 @@ input FilterFindManyEquipmentInput {
   weapon_range: String
   weight: Float
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyEquipmentOperatorsInput
   OR: [FilterFindManyEquipmentInput!]
   AND: [FilterFindManyEquipmentInput!]
@@ -2037,7 +2087,9 @@ input FilterFindManyEquipmentNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyEquipmentOperatorsInput {
   _id: FilterFindManyEquipment_idOperatorsInput
   armor_category: FilterFindManyEquipmentArmor_categoryOperatorsInput
@@ -2401,7 +2453,9 @@ input FilterFindManyFeatInput {
   desc: [String]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyFeatOperatorsInput
   OR: [FilterFindManyFeatInput!]
   AND: [FilterFindManyFeatInput!]
@@ -2419,7 +2473,9 @@ input FilterFindManyFeatNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyFeatOperatorsInput {
   _id: FilterFindManyFeat_idOperatorsInput
   index: FilterFindManyFeatIndexOperatorsInput
@@ -2672,7 +2728,9 @@ input FilterFindManyFeatureInput {
   feature_specific: FilterFindManyFeatureFeature_specificInput
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyFeatureOperatorsInput
   OR: [FilterFindManyFeatureInput!]
   AND: [FilterFindManyFeatureInput!]
@@ -2701,7 +2759,9 @@ input FilterFindManyFeatureNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyFeatureOperatorsInput {
   _id: FilterFindManyFeature_idOperatorsInput
   choice: FilterFindManyFeatureChoiceOperatorsInput
@@ -2901,7 +2961,9 @@ input FilterFindManyLanguageInput {
   typical_speakers: [String]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyLanguageOperatorsInput
   OR: [FilterFindManyLanguageInput!]
   AND: [FilterFindManyLanguageInput!]
@@ -2919,7 +2981,9 @@ input FilterFindManyLanguageNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyLanguageOperatorsInput {
   _id: FilterFindManyLanguage_idOperatorsInput
   desc: FilterFindManyLanguageDescOperatorsInput
@@ -3541,7 +3605,9 @@ input FilterFindManyLevelInput {
   subclass_specific: FilterFindManyLevelSubclass_specificInput
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyLevelOperatorsInput
   OR: [FilterFindManyLevelInput!]
   AND: [FilterFindManyLevelInput!]
@@ -3558,7 +3624,9 @@ input FilterFindManyLevelLevelOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyLevelOperatorsInput {
   _id: FilterFindManyLevel_idOperatorsInput
   ability_score_bonuses: FilterFindManyLevelAbility_score_bonusesOperatorsInput
@@ -3917,7 +3985,9 @@ input FilterFindManyMagicItemInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyMagicItemOperatorsInput
   OR: [FilterFindManyMagicItemInput!]
   AND: [FilterFindManyMagicItemInput!]
@@ -3935,7 +4005,9 @@ input FilterFindManyMagicItemNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyMagicItemOperatorsInput {
   _id: FilterFindManyMagicItem_idOperatorsInput
   desc: FilterFindManyMagicItemDescOperatorsInput
@@ -4000,7 +4072,9 @@ input FilterFindManyMagicSchoolInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyMagicSchoolOperatorsInput
   OR: [FilterFindManyMagicSchoolInput!]
   AND: [FilterFindManyMagicSchoolInput!]
@@ -4018,7 +4092,9 @@ input FilterFindManyMagicSchoolNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyMagicSchoolOperatorsInput {
   _id: FilterFindManyMagicSchool_idOperatorsInput
   desc: FilterFindManyMagicSchoolDescOperatorsInput
@@ -4221,7 +4297,9 @@ input FilterFindManyMonsterInput {
   wisdom: Float
   xp: Float
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyMonsterOperatorsInput
   OR: [FilterFindManyMonsterInput!]
   AND: [FilterFindManyMonsterInput!]
@@ -4269,7 +4347,9 @@ input FilterFindManyMonsterNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyMonsterOperatorsInput {
   _id: FilterFindManyMonster_idOperatorsInput
   alignment: FilterFindManyMonsterAlignmentOperatorsInput
@@ -4605,7 +4685,9 @@ input FilterFindManyProficiencyInput {
   type: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyProficiencyOperatorsInput
   OR: [FilterFindManyProficiencyInput!]
   AND: [FilterFindManyProficiencyInput!]
@@ -4623,7 +4705,9 @@ input FilterFindManyProficiencyNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyProficiencyOperatorsInput {
   _id: FilterFindManyProficiency_idOperatorsInput
   index: FilterFindManyProficiencyIndexOperatorsInput
@@ -4797,7 +4881,9 @@ input FilterFindManyRaceInput {
   traits: [FilterFindManyRaceTraitsInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyRaceOperatorsInput
   OR: [FilterFindManyRaceInput!]
   AND: [FilterFindManyRaceInput!]
@@ -4875,7 +4961,9 @@ input FilterFindManyRaceNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyRaceOperatorsInput {
   _id: FilterFindManyRace_idOperatorsInput
   ability_bonus_options: FilterFindManyRaceAbility_bonus_optionsOperatorsInput
@@ -5045,7 +5133,9 @@ input FilterFindManyRuleInput {
   subsections: [FilterFindManyRuleSubsectionsInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyRuleOperatorsInput
   OR: [FilterFindManyRuleInput!]
   AND: [FilterFindManyRuleInput!]
@@ -5063,7 +5153,9 @@ input FilterFindManyRuleNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyRuleOperatorsInput {
   _id: FilterFindManyRule_idOperatorsInput
   desc: FilterFindManyRuleDescOperatorsInput
@@ -5115,7 +5207,9 @@ input FilterFindManyRuleSectionInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyRuleSectionOperatorsInput
   OR: [FilterFindManyRuleSectionInput!]
   AND: [FilterFindManyRuleSectionInput!]
@@ -5133,7 +5227,9 @@ input FilterFindManyRuleSectionNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyRuleSectionOperatorsInput {
   _id: FilterFindManyRuleSection_idOperatorsInput
   desc: FilterFindManyRuleSectionDescOperatorsInput
@@ -5265,7 +5361,9 @@ input FilterFindManySkillInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManySkillOperatorsInput
   OR: [FilterFindManySkillInput!]
   AND: [FilterFindManySkillInput!]
@@ -5283,7 +5381,9 @@ input FilterFindManySkillNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManySkillOperatorsInput {
   _id: FilterFindManySkill_idOperatorsInput
   ability_score: FilterFindManySkillAbility_scoreOperatorsInput
@@ -5377,13 +5477,17 @@ input FilterFindManySpellInput {
   subclasses: [FilterFindManySpellSubclassesInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManySpellOperatorsInput
   OR: [FilterFindManySpellInput!]
   AND: [FilterFindManySpellInput!]
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManySpellOperatorsInput {
   _id: FilterFindManySpell_idOperatorsInput
   school: FilterFindManySpellSchoolOperatorsInput
@@ -5539,7 +5643,9 @@ input FilterFindManySubclassInput {
   subclass_levels: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManySubclassOperatorsInput
   OR: [FilterFindManySubclassInput!]
   AND: [FilterFindManySubclassInput!]
@@ -5557,7 +5663,9 @@ input FilterFindManySubclassNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManySubclassOperatorsInput {
   _id: FilterFindManySubclass_idOperatorsInput
   class: FilterFindManySubclassClassOperatorsInput
@@ -5685,7 +5793,9 @@ input FilterFindManySubraceInput {
   starting_proficiencies: [FilterFindManySubraceStarting_proficienciesInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManySubraceOperatorsInput
   OR: [FilterFindManySubraceInput!]
   AND: [FilterFindManySubraceInput!]
@@ -5744,7 +5854,9 @@ input FilterFindManySubraceNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManySubraceOperatorsInput {
   _id: FilterFindManySubrace_idOperatorsInput
   desc: FilterFindManySubraceDescOperatorsInput
@@ -5878,7 +5990,9 @@ input FilterFindManyTraitInput {
   trait_specific: FilterFindManyTraitTrait_specificInput
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyTraitOperatorsInput
   OR: [FilterFindManyTraitInput!]
   AND: [FilterFindManyTraitInput!]
@@ -5896,7 +6010,9 @@ input FilterFindManyTraitNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyTraitOperatorsInput {
   _id: FilterFindManyTrait_idOperatorsInput
   desc: FilterFindManyTraitDescOperatorsInput
@@ -6371,7 +6487,9 @@ input FilterFindManyWeaponPropertyInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindManyWeaponPropertyOperatorsInput
   OR: [FilterFindManyWeaponPropertyInput!]
   AND: [FilterFindManyWeaponPropertyInput!]
@@ -6389,7 +6507,9 @@ input FilterFindManyWeaponPropertyNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindManyWeaponPropertyOperatorsInput {
   _id: FilterFindManyWeaponProperty_idOperatorsInput
   desc: FilterFindManyWeaponPropertyDescOperatorsInput
@@ -6467,7 +6587,9 @@ input FilterFindOneAbilityScoreInput {
   skills: [FilterFindOneAbilityScoreSkillsInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneAbilityScoreOperatorsInput
   OR: [FilterFindOneAbilityScoreInput!]
   AND: [FilterFindOneAbilityScoreInput!]
@@ -6485,7 +6607,9 @@ input FilterFindOneAbilityScoreNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneAbilityScoreOperatorsInput {
   _id: FilterFindOneAbilityScore_idOperatorsInput
   desc: FilterFindOneAbilityScoreDescOperatorsInput
@@ -6570,7 +6694,9 @@ input FilterFindOneAlignmentInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneAlignmentOperatorsInput
   OR: [FilterFindOneAlignmentInput!]
   AND: [FilterFindOneAlignmentInput!]
@@ -6588,7 +6714,9 @@ input FilterFindOneAlignmentNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneAlignmentOperatorsInput {
   _id: FilterFindOneAlignment_idOperatorsInput
   desc: FilterFindOneAlignmentDescOperatorsInput
@@ -6824,7 +6952,9 @@ input FilterFindOneBackgroundInput {
   bonds: FilterFindOneBackgroundBondsInput
   flaws: FilterFindOneBackgroundFlawsInput
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneBackgroundOperatorsInput
   OR: [FilterFindOneBackgroundInput!]
   AND: [FilterFindOneBackgroundInput!]
@@ -6883,7 +7013,9 @@ input FilterFindOneBackgroundNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneBackgroundOperatorsInput {
   _id: FilterFindOneBackground_idOperatorsInput
   index: FilterFindOneBackgroundIndexOperatorsInput
@@ -7055,7 +7187,9 @@ input FilterFindOneClassInput {
   subclasses: [FilterFindOneClassSubclassesInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneClassOperatorsInput
   OR: [FilterFindOneClassInput!]
   AND: [FilterFindOneClassInput!]
@@ -7163,7 +7297,9 @@ input FilterFindOneClassNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneClassOperatorsInput {
   _id: FilterFindOneClass_idOperatorsInput
   class_levels: FilterFindOneClassClass_levelsOperatorsInput
@@ -7385,7 +7521,9 @@ input FilterFindOneConditionInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneConditionOperatorsInput
   OR: [FilterFindOneConditionInput!]
   AND: [FilterFindOneConditionInput!]
@@ -7403,7 +7541,9 @@ input FilterFindOneConditionNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneConditionOperatorsInput {
   _id: FilterFindOneCondition_idOperatorsInput
   desc: FilterFindOneConditionDescOperatorsInput
@@ -7467,7 +7607,9 @@ input FilterFindOneDamageTypeInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneDamageTypeOperatorsInput
   OR: [FilterFindOneDamageTypeInput!]
   AND: [FilterFindOneDamageTypeInput!]
@@ -7485,7 +7627,9 @@ input FilterFindOneDamageTypeNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneDamageTypeOperatorsInput {
   _id: FilterFindOneDamageType_idOperatorsInput
   desc: FilterFindOneDamageTypeDescOperatorsInput
@@ -7637,7 +7781,9 @@ input FilterFindOneEquipmentCategoryInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneEquipmentCategoryOperatorsInput
   OR: [FilterFindOneEquipmentCategoryInput!]
   AND: [FilterFindOneEquipmentCategoryInput!]
@@ -7655,7 +7801,9 @@ input FilterFindOneEquipmentCategoryNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneEquipmentCategoryOperatorsInput {
   _id: FilterFindOneEquipmentCategory_idOperatorsInput
   index: FilterFindOneEquipmentCategoryIndexOperatorsInput
@@ -7940,7 +8088,9 @@ input FilterFindOneEquipmentInput {
   weapon_range: String
   weight: Float
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneEquipmentOperatorsInput
   OR: [FilterFindOneEquipmentInput!]
   AND: [FilterFindOneEquipmentInput!]
@@ -7958,7 +8108,9 @@ input FilterFindOneEquipmentNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneEquipmentOperatorsInput {
   _id: FilterFindOneEquipment_idOperatorsInput
   armor_category: FilterFindOneEquipmentArmor_categoryOperatorsInput
@@ -8322,7 +8474,9 @@ input FilterFindOneFeatInput {
   desc: [String]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneFeatOperatorsInput
   OR: [FilterFindOneFeatInput!]
   AND: [FilterFindOneFeatInput!]
@@ -8340,7 +8494,9 @@ input FilterFindOneFeatNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneFeatOperatorsInput {
   _id: FilterFindOneFeat_idOperatorsInput
   index: FilterFindOneFeatIndexOperatorsInput
@@ -8593,7 +8749,9 @@ input FilterFindOneFeatureInput {
   feature_specific: FilterFindOneFeatureFeature_specificInput
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneFeatureOperatorsInput
   OR: [FilterFindOneFeatureInput!]
   AND: [FilterFindOneFeatureInput!]
@@ -8622,7 +8780,9 @@ input FilterFindOneFeatureNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneFeatureOperatorsInput {
   _id: FilterFindOneFeature_idOperatorsInput
   choice: FilterFindOneFeatureChoiceOperatorsInput
@@ -8822,7 +8982,9 @@ input FilterFindOneLanguageInput {
   typical_speakers: [String]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneLanguageOperatorsInput
   OR: [FilterFindOneLanguageInput!]
   AND: [FilterFindOneLanguageInput!]
@@ -8840,7 +9002,9 @@ input FilterFindOneLanguageNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneLanguageOperatorsInput {
   _id: FilterFindOneLanguage_idOperatorsInput
   desc: FilterFindOneLanguageDescOperatorsInput
@@ -9462,7 +9626,9 @@ input FilterFindOneLevelInput {
   subclass_specific: FilterFindOneLevelSubclass_specificInput
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneLevelOperatorsInput
   OR: [FilterFindOneLevelInput!]
   AND: [FilterFindOneLevelInput!]
@@ -9479,7 +9645,9 @@ input FilterFindOneLevelLevelOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneLevelOperatorsInput {
   _id: FilterFindOneLevel_idOperatorsInput
   ability_score_bonuses: FilterFindOneLevelAbility_score_bonusesOperatorsInput
@@ -9838,7 +10006,9 @@ input FilterFindOneMagicItemInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneMagicItemOperatorsInput
   OR: [FilterFindOneMagicItemInput!]
   AND: [FilterFindOneMagicItemInput!]
@@ -9856,7 +10026,9 @@ input FilterFindOneMagicItemNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneMagicItemOperatorsInput {
   _id: FilterFindOneMagicItem_idOperatorsInput
   desc: FilterFindOneMagicItemDescOperatorsInput
@@ -9921,7 +10093,9 @@ input FilterFindOneMagicSchoolInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneMagicSchoolOperatorsInput
   OR: [FilterFindOneMagicSchoolInput!]
   AND: [FilterFindOneMagicSchoolInput!]
@@ -9939,7 +10113,9 @@ input FilterFindOneMagicSchoolNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneMagicSchoolOperatorsInput {
   _id: FilterFindOneMagicSchool_idOperatorsInput
   desc: FilterFindOneMagicSchoolDescOperatorsInput
@@ -10142,7 +10318,9 @@ input FilterFindOneMonsterInput {
   wisdom: Float
   xp: Float
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneMonsterOperatorsInput
   OR: [FilterFindOneMonsterInput!]
   AND: [FilterFindOneMonsterInput!]
@@ -10190,7 +10368,9 @@ input FilterFindOneMonsterNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneMonsterOperatorsInput {
   _id: FilterFindOneMonster_idOperatorsInput
   alignment: FilterFindOneMonsterAlignmentOperatorsInput
@@ -10526,7 +10706,9 @@ input FilterFindOneProficiencyInput {
   type: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneProficiencyOperatorsInput
   OR: [FilterFindOneProficiencyInput!]
   AND: [FilterFindOneProficiencyInput!]
@@ -10544,7 +10726,9 @@ input FilterFindOneProficiencyNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneProficiencyOperatorsInput {
   _id: FilterFindOneProficiency_idOperatorsInput
   index: FilterFindOneProficiencyIndexOperatorsInput
@@ -10718,7 +10902,9 @@ input FilterFindOneRaceInput {
   traits: [FilterFindOneRaceTraitsInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneRaceOperatorsInput
   OR: [FilterFindOneRaceInput!]
   AND: [FilterFindOneRaceInput!]
@@ -10796,7 +10982,9 @@ input FilterFindOneRaceNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneRaceOperatorsInput {
   _id: FilterFindOneRace_idOperatorsInput
   ability_bonus_options: FilterFindOneRaceAbility_bonus_optionsOperatorsInput
@@ -10966,7 +11154,9 @@ input FilterFindOneRuleInput {
   subsections: [FilterFindOneRuleSubsectionsInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneRuleOperatorsInput
   OR: [FilterFindOneRuleInput!]
   AND: [FilterFindOneRuleInput!]
@@ -10984,7 +11174,9 @@ input FilterFindOneRuleNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneRuleOperatorsInput {
   _id: FilterFindOneRule_idOperatorsInput
   desc: FilterFindOneRuleDescOperatorsInput
@@ -11036,7 +11228,9 @@ input FilterFindOneRuleSectionInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneRuleSectionOperatorsInput
   OR: [FilterFindOneRuleSectionInput!]
   AND: [FilterFindOneRuleSectionInput!]
@@ -11054,7 +11248,9 @@ input FilterFindOneRuleSectionNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneRuleSectionOperatorsInput {
   _id: FilterFindOneRuleSection_idOperatorsInput
   desc: FilterFindOneRuleSectionDescOperatorsInput
@@ -11186,7 +11382,9 @@ input FilterFindOneSkillInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneSkillOperatorsInput
   OR: [FilterFindOneSkillInput!]
   AND: [FilterFindOneSkillInput!]
@@ -11204,7 +11402,9 @@ input FilterFindOneSkillNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneSkillOperatorsInput {
   _id: FilterFindOneSkill_idOperatorsInput
   ability_score: FilterFindOneSkillAbility_scoreOperatorsInput
@@ -11298,13 +11498,17 @@ input FilterFindOneSpellInput {
   subclasses: [FilterFindOneSpellSubclassesInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneSpellOperatorsInput
   OR: [FilterFindOneSpellInput!]
   AND: [FilterFindOneSpellInput!]
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneSpellOperatorsInput {
   _id: FilterFindOneSpell_idOperatorsInput
   school: FilterFindOneSpellSchoolOperatorsInput
@@ -11460,7 +11664,9 @@ input FilterFindOneSubclassInput {
   subclass_levels: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneSubclassOperatorsInput
   OR: [FilterFindOneSubclassInput!]
   AND: [FilterFindOneSubclassInput!]
@@ -11478,7 +11684,9 @@ input FilterFindOneSubclassNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneSubclassOperatorsInput {
   _id: FilterFindOneSubclass_idOperatorsInput
   class: FilterFindOneSubclassClassOperatorsInput
@@ -11606,7 +11814,9 @@ input FilterFindOneSubraceInput {
   starting_proficiencies: [FilterFindOneSubraceStarting_proficienciesInput]
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneSubraceOperatorsInput
   OR: [FilterFindOneSubraceInput!]
   AND: [FilterFindOneSubraceInput!]
@@ -11665,7 +11875,9 @@ input FilterFindOneSubraceNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneSubraceOperatorsInput {
   _id: FilterFindOneSubrace_idOperatorsInput
   desc: FilterFindOneSubraceDescOperatorsInput
@@ -11799,7 +12011,9 @@ input FilterFindOneTraitInput {
   trait_specific: FilterFindOneTraitTrait_specificInput
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneTraitOperatorsInput
   OR: [FilterFindOneTraitInput!]
   AND: [FilterFindOneTraitInput!]
@@ -11817,7 +12031,9 @@ input FilterFindOneTraitNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneTraitOperatorsInput {
   _id: FilterFindOneTrait_idOperatorsInput
   desc: FilterFindOneTraitDescOperatorsInput
@@ -12292,7 +12508,9 @@ input FilterFindOneWeaponPropertyInput {
   name: String
   url: String
 
-  """List of *indexed* fields that can be filtered via operators."""
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
   _operators: FilterFindOneWeaponPropertyOperatorsInput
   OR: [FilterFindOneWeaponPropertyInput!]
   AND: [FilterFindOneWeaponPropertyInput!]
@@ -12310,7 +12528,9 @@ input FilterFindOneWeaponPropertyNameOperatorsInput {
   exists: Boolean
 }
 
-"""For performance reason this type contains only *indexed* fields."""
+"""
+For performance reason this type contains only *indexed* fields.
+"""
 input FilterFindOneWeaponPropertyOperatorsInput {
   _id: FilterFindOneWeaponProperty_idOperatorsInput
   desc: FilterFindOneWeaponPropertyDescOperatorsInput
@@ -12352,7 +12572,11 @@ type Level {
   ability_score_bonuses: Float
   class: LevelClass
   class_specific: LevelClass_specific
-  features(skip: Int, limit: Int = 100, sort: SortFindManyFeatureInput): [Feature!]!
+  features(
+    skip: Int
+    limit: Int = 100
+    sort: SortFindManyFeatureInput
+  ): [Feature!]!
   index: String
   level: Float
   prof_bonus: Float
@@ -12627,325 +12851,425 @@ type ProficiencyReferences {
 
 type Query {
   abilityScore(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneAbilityScoreInput
     skip: Int
     sort: SortFindOneAbilityScoreInput
   ): AbilityScore
   abilityScores(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyAbilityScoreInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyAbilityScoreInput
   ): [AbilityScore!]!
   alignment(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneAlignmentInput
     skip: Int
     sort: SortFindOneAlignmentInput
   ): Alignment
   alignments(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyAlignmentInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyAlignmentInput
   ): [Alignment!]!
   background(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneBackgroundInput
     skip: Int
     sort: SortFindOneBackgroundInput
   ): Background
   backgrounds(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyBackgroundInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyBackgroundInput
   ): [Background!]!
   condition(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneConditionInput
     skip: Int
     sort: SortFindOneConditionInput
   ): Condition
   conditions(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyConditionInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyConditionInput
   ): [Condition!]!
   class(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneClassInput
     skip: Int
     sort: SortFindOneClassInput
   ): Class
   classes(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyClassInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyClassInput
   ): [Class!]!
   damageType(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneDamageTypeInput
     skip: Int
     sort: SortFindOneDamageTypeInput
   ): DamageType
   damageTypes(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyDamageTypeInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyDamageTypeInput
   ): [DamageType!]!
   equipment(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneEquipmentInput
     skip: Int
     sort: SortFindOneEquipmentInput
   ): Equipment
   equipments(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyEquipmentInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyEquipmentInput
   ): [Equipment!]!
   equipmentCategory(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneEquipmentCategoryInput
     skip: Int
     sort: SortFindOneEquipmentCategoryInput
   ): EquipmentCategory
   equipmentCategories(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyEquipmentCategoryInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyEquipmentCategoryInput
   ): [EquipmentCategory!]!
   feat(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneFeatInput
     skip: Int
     sort: SortFindOneFeatInput
   ): Feat
   feats(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyFeatInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyFeatInput
   ): [Feat!]!
   feature(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneFeatureInput
     skip: Int
     sort: SortFindOneFeatureInput
   ): Feature
   features(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyFeatureInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyFeatureInput
   ): [Feature!]!
   language(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneLanguageInput
     skip: Int
     sort: SortFindOneLanguageInput
   ): Language
   languages(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyLanguageInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyLanguageInput
   ): [Language!]!
   level(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneLevelInput
     skip: Int
     sort: SortFindOneLevelInput
   ): Level
   levels(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyLevelInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyLevelInput
   ): [Level!]!
   magicItem(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneMagicItemInput
     skip: Int
     sort: SortFindOneMagicItemInput
   ): MagicItem
   magicItems(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyMagicItemInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyMagicItemInput
   ): [MagicItem!]!
   magicSchool(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneMagicSchoolInput
     skip: Int
     sort: SortFindOneMagicSchoolInput
   ): MagicSchool
   magicSchools(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyMagicSchoolInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyMagicSchoolInput
   ): [MagicSchool!]!
   monster(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneMonsterInput
     skip: Int
     sort: SortFindOneMonsterInput
   ): Monster
   monsters(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyMonsterInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyMonsterInput
   ): [Monster!]!
   proficiency(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneProficiencyInput
     skip: Int
     sort: SortFindOneProficiencyInput
   ): Proficiency
   proficiencies(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyProficiencyInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyProficiencyInput
   ): [Proficiency!]!
   race(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneRaceInput
     skip: Int
     sort: SortFindOneRaceInput
   ): Race
   races(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyRaceInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyRaceInput
   ): [Race!]!
   rule(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneRuleInput
     skip: Int
     sort: SortFindOneRuleInput
   ): Rule
   rules(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyRuleInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyRuleInput
   ): [Rule!]!
   ruleSection(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneRuleSectionInput
     skip: Int
     sort: SortFindOneRuleSectionInput
   ): RuleSection
   ruleSections(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyRuleSectionInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyRuleSectionInput
   ): [RuleSection!]!
   skill(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneSkillInput
     skip: Int
     sort: SortFindOneSkillInput
   ): Skill
   skills(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManySkillInput
     skip: Int
     limit: Int = 100
     sort: SortFindManySkillInput
   ): [Skill!]!
   spell(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneSpellInput
     skip: Int
     sort: SortFindOneSpellInput
   ): Spell
   spells(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManySpellInput
     skip: Int
     limit: Int = 100
     sort: SortFindManySpellInput
   ): [Spell!]!
   subclass(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneSubclassInput
     skip: Int
     sort: SortFindOneSubclassInput
   ): Subclass
   subclasses(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManySubclassInput
     skip: Int
     limit: Int = 100
     sort: SortFindManySubclassInput
   ): [Subclass!]!
   subrace(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneSubraceInput
     skip: Int
     sort: SortFindOneSubraceInput
   ): Subrace
   subraces(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManySubraceInput
     skip: Int
     limit: Int = 100
     sort: SortFindManySubraceInput
   ): [Subrace!]!
   trait(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneTraitInput
     skip: Int
     sort: SortFindOneTraitInput
   ): Trait
   traits(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyTraitInput
     skip: Int
     limit: Int = 100
     sort: SortFindManyTraitInput
   ): [Trait!]!
   weaponProperty(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindOneWeaponPropertyInput
     skip: Int
     sort: SortFindOneWeaponPropertyInput
   ): WeaponProperty
   weaponProperties(
-    """Filter by fields"""
+    """
+    Filter by fields
+    """
     filter: FilterFindManyWeaponPropertyInput
     skip: Int
     limit: Int = 100
@@ -13062,7 +13386,11 @@ type Rule {
   desc: String
   index: String
   name: String
-  subsections(skip: Int, limit: Int = 100, sort: SortFindManyRuleSectionInput): [RuleSection!]!
+  subsections(
+    skip: Int
+    limit: Int = 100
+    sort: SortFindManyRuleSectionInput
+  ): [RuleSection!]!
   url: String
 }
 
@@ -14635,7 +14963,11 @@ type Subclass {
   name: String
   spells: [SubclassSpells]
   subclass_flavor: String
-  subclass_levels(skip: Int, limit: Int = 100, sort: SortFindManyLevelInput): [Level!]!
+  subclass_levels(
+    skip: Int
+    limit: Int = 100
+    sort: SortFindManyLevelInput
+  ): [Level!]!
   url: String
 }
 
@@ -14673,7 +15005,11 @@ type Subrace {
   language_options: SubraceLanguage_options
   name: String
   race: SubraceRace
-  racial_traits(skip: Int, limit: Int = 100, sort: SortFindManyTraitInput): [Trait!]!
+  racial_traits(
+    skip: Int
+    limit: Int = 100
+    sort: SortFindManyTraitInput
+  ): [Trait!]!
   starting_proficiencies: [SubraceStarting_proficiencies]
   url: String
 }
@@ -14721,7 +15057,11 @@ type Trait {
   desc: [String]
   index: String
   name: String
-  proficiencies(skip: Int, limit: Int = 100, sort: SortFindManyProficiencyInput): [Proficiency!]!
+  proficiencies(
+    skip: Int
+    limit: Int = 100
+    sort: SortFindManyProficiencyInput
+  ): [Proficiency!]!
   proficiency_choices: TraitProficiency_choices
   races: [TraitRaces]
   subraces: [TraitSubraces]
@@ -14845,4 +15185,3 @@ type WeaponProperty {
   name: String
   url: String
 }
-

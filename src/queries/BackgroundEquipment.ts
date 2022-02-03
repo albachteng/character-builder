@@ -1,7 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const BackgroundEquipment = gql`query BackgroundEquipment ($filter: FilterFindOneBackgroundInput) {
-    background (filter: $filter) {
+export const BackgroundEquipment = gql`
+  query BackgroundEquipment($filter: FilterFindOneBackgroundInput) {
+    background(filter: $filter) {
       name
       index
       starting_equipment {

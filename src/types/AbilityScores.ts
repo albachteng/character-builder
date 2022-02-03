@@ -1,6 +1,6 @@
-import { ZeroToTwenty } from './ZeroToTwenty'
-import type { AbilityScoreName } from './AbilityScoreName'
+import { ZeroToTwenty } from './ZeroToTwenty';
+import type { AbilityScoreName } from './AbilityScoreName';
 
 export type AbilityScores = {
-  [key in AbilityScoreName]: ZeroToTwenty
+  [key in AbilityScoreName]: ZeroToTwenty;
 };

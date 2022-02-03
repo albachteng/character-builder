@@ -1,7 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const SpellsOptionsByClassAndLevel = gql`query SpellsOptionsByClassAndLevel ($filter: FilterFindManySpellInput) {
-    spells (filter: $filter) {
+export const SpellsOptionsByClassAndLevel = gql`
+  query SpellsOptionsByClassAndLevel($filter: FilterFindManySpellInput) {
+    spells(filter: $filter) {
       area_of_effect {
         size
         type
@@ -49,6 +50,6 @@ export const SpellsOptionsByClassAndLevel = gql`query SpellsOptionsByClassAndLev
         index
         _id
       }
-      }
     }
+  }
 `;

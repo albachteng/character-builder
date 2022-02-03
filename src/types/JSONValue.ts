@@ -1,7 +1,7 @@
 export type JSONValue =
-    | string
-    | number
-    | boolean
-    | { [key: string]: JSONValue }
-    | Array<JSONValue>
-    | null;
+  | string
+  | number
+  | boolean
+  | { [key: string]: JSONValue }
+  | Array<JSONValue>
+  | null;

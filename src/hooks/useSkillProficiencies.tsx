@@ -56,8 +56,8 @@ const useSkillProficiencies = (
       setChoicesArray([...classArray, ...raceArray]);
     }
   }, [
-    characterRaceChoices,
-    characterClassChoices,
+    characterRaceChoices.data,
+    characterClassChoices.data,
     characterClass,
     characterRace
   ]);

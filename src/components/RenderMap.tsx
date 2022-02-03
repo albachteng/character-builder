@@ -1,11 +1,12 @@
+import { JSONValue } from "../types";
 import { sortByOptions } from "../utilities/sortByOptions";
 
 export type MappingFunc<T extends unknown> = (value: T, index: number, arr: T[]) => React.ReactNode;
 
 type RenderProps = {
     mappingFunc: MappingFunc<any>
-    data?: {[key: string]: any}
-    sortBy?: string
+    data?: JSONValue[]
+    sortBy?: keyof typeof sortByOptions;
 }
 
 const RenderMap = ({mappingFunc, sortBy, data = []}: RenderProps) => {
@@ -13,8 +14,9 @@ const RenderMap = ({mappingFunc, sortBy, data = []}: RenderProps) => {
     let toRender = data;
 
     if (!Array.isArray(data)) toRender = [data];
-
-    if (sortBy) toRender = toRender.slice().sort(sortByOptions[sortBy]);
+    // ! NTS
+    //@ts-ignore
+    if (sortBy) toRender = toRender.slice().filter((item) => item !== null).sort(sortByOptions[sortBy]);
 
     return (
         <>

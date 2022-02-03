@@ -1,12 +1,12 @@
 import { useQuery } from "@apollo/client";
 import { DocumentNode } from "graphql";
 import { cloneElement, ReactElement } from 'react';
-import { JSON } from "../types";
+import { JSONValue } from "../types";
 import { findArray } from "../utilities/findArray";
 
 type Props = {
     query: DocumentNode
-    variables: JSON
+    variables: JSONValue
     children: ReactElement
     dataType: string[]
 };

@@ -1,34 +1,38 @@
 import { SpellModByClass, SpellcastingInfo } from '../queries';
-import { AbilityScore, CharacterClass } from '../types';
+import { AbilityScores, CharacterClass, Spell } from '../types';
 import SpellSlots from './SpellSlots';
 import dice from '../utilities/dice';
-import { ability_score_abbr } from '../types/ability_score';
+import { AbilityScoreName } from '../types/AbilityScoreName';
 import SpellBook from './SpellBook';
 import { ReactNode } from 'react';
 import QueryWrapper from './QueryWrapper';
 import RenderMap, {MappingFunc} from './RenderMap';
+import useAddToList from '../hooks/useAddToList';
+import SpellDetails from './SpellDetails';
+import withOnClick from './withOnClick';
+import SpellHeader from './SpellHeader';
 
 type Props = {
     characterClass: CharacterClass,
     characterLevel: number,
-    characterStats: AbilityScore
+    characterStats: AbilityScores
 }
 
 type SpellMod = {
-    [key: string]: any,
-    name: ability_score_abbr
+    [key: string]: any, // ! 
+    name: AbilityScoreName
 }
 
 const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props) => {
 
     const spellModMapFunc: MappingFunc<SpellMod> = (item) => {
-        return <p>{item.name}: {dice.mod(characterStats[item.name])}</p>
+        return <p key={item?.name}>{item?.name}: {dice.mod(characterStats[item?.name])}</p>
     };   
 
-    const spellcastingInfoMapFunc: MappingFunc<any> = (info, index) => {
+    const spellcastingInfoMapFunc: MappingFunc<any> = (info, index) => { // TODO
         const desc: ReactNode[] = [];
         info?.desc?.forEach((paragraph: string, index: number) => {
-            desc.push(<p key={`${info.name}-paragraph-${index}`}>{paragraph}</p>);
+            desc.push(<p key={`${info?.name}-paragraph-${index}`}>{paragraph}</p>);
         });
         return (
             <div>
@@ -37,6 +41,10 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
             </div>
         )
     };
+
+
+    const { handleClick, list } = useAddToList<Spell>();
+    console.log({list});
 
     return (
         <>
@@ -62,7 +70,13 @@ const SpellsDisplay = ({ characterClass, characterLevel, characterStats }: Props
                 <RenderMap mappingFunc={spellcastingInfoMapFunc} />
             </QueryWrapper>
             <h3>Spellbook</h3>
-            <SpellBook characterClass={characterClass} characterLevel={characterLevel}/>
+            <SpellBook characterClass={characterClass} characterLevel={characterLevel} handleClick={handleClick} list={list}/>
+            <h4>Added: {`${list.length}`} </h4>
+            {list.map((spell, index, arr) => {
+                const Header = () => <SpellHeader {...{spell, index, handleClick, list}} />;
+                const SpellDetailsWithOnClick = withOnClick(SpellDetails, Header);
+                return <SpellDetailsWithOnClick spell={spell} id={`${spell?.name}${index}-added`} key={`${spell?.name}${index}-added`} />
+            })} 
         </>
     )
 }

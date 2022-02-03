@@ -1,3 +1,4 @@
+import { JSONValue } from "./JSONValue";
 import { NamedIndex } from "./NamedIndex";
 
 export interface Spell {
@@ -11,8 +12,8 @@ export interface Spell {
     components: string[]
     concentration: boolean
     damage: {
-        damage_at_slot_level: JSON
-        damage_at_character_level: JSON
+        damage_at_slot_level: JSONValue
+        damage_at_character_level: JSONValue
         damage_type: NamedIndex 
     }
     dc: {
@@ -22,7 +23,7 @@ export interface Spell {
     }
     desc: string[]
     duration: string
-    heal_at_slot_level: JSON
+    heal_at_slot_level: JSONValue
     higher_level: string[]
     index: string
     level: number

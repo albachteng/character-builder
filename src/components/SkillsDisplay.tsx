@@ -1,6 +1,6 @@
 /* renders skill proficiencies display and handles query for class skill choices */ 
 import { AllSkills } from "../queries";
-import type { AbilityScore } from '../types/AbilityScore';
+import type { AbilityScores } from '../types/AbilityScores';
 import { CharacterClass, Race, Skill } from "../types";
 import useSkillProficiencies from "../hooks/useSkillProficiencies";
 import QueryWrapper from './QueryWrapper';
@@ -10,7 +10,7 @@ import SkillProficiency from './SkillProficiency';
 type Props = {
     characterClass: CharacterClass, 
     characterRace: Race,
-    characterStats: AbilityScore,
+    characterStats: AbilityScores,
     proficiencyBonus: number, 
     characterBackground: string,
 }
@@ -18,7 +18,7 @@ type Props = {
 const SkillsDisplay = ({characterClass, characterStats, proficiencyBonus, characterRace, characterBackground}: Props) => {
 
     const { proficiencies } = useSkillProficiencies(characterClass, characterRace, characterBackground);
-    console.log(proficiencies);
+    
     const isProficient = (proficiencies: Skill[], skill: Skill): [boolean, string | undefined] => {
         for (let i = 0; i < proficiencies.length; i += 1) {
             if (proficiencies[i] && proficiencies[i].index && proficiencies[i].index.slice(6)  === skill.index) {

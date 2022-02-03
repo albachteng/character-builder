@@ -1,4 +1,4 @@
-export type AbilityScoreTotal = 
+export type ZeroToTwenty = 
     0
     | 1
     | 2

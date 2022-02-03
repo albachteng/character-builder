@@ -1,9 +1,7 @@
-import { AbilityScore, Spell } from '../types';
+import { AbilityScores, Spell } from '../types';
 
 type Props = {
     spell: Spell
-    id: string
-    characterStats: AbilityScore 
 }
 
 const handleStringArray = (arr: string[], type: string) => {
@@ -30,7 +28,6 @@ const SpellDetails = ({spell}: Props) => {
     return (
         <div>
             {spell.desc && handleStringArray(spell.desc, 'p')}
-
             <div>
                 {spell.casting_time && <p>Casting Time: {spell.casting_time}</p>}
                 {spell.range && <p>Range: {spell.range}</p>}

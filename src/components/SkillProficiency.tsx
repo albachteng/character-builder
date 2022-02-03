@@ -5,11 +5,11 @@ will also need proficiency bonus which is based on level
 */
 
 import dice from '../utilities/dice';
-import { AbilityScoreTotal, Skill } from '../types';
+import { ZeroToTwenty, Skill } from '../types';
 import useOnClickDescription from '../hooks/useOnClickDescription';
 
 type Props = {
-    stat: AbilityScoreTotal,
+    stat: ZeroToTwenty,
     skill: Skill
     proficiencyBonus?: number,
     isProficient: boolean,

@@ -1,14 +1,14 @@
 import { ReactNode } from 'react';
-import { AbilityScore } from '../types';
+import { AbilityScores } from '../types';
 import Stat from './Stat';
 
 type Props = {
-    stats: AbilityScore 
+    stats: AbilityScores 
 };
 
 const AbilityScoresDisplay = ({stats}: Props) => {
     const scores: ReactNode[] = [];
-    let key: keyof AbilityScore;
+    let key: keyof AbilityScores;
     for (key in stats) {
         scores.push(<Stat name={key} key={`${key}${stats[key]}`} stats={stats[key]}></Stat>)
     };

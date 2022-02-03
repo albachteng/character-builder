@@ -1,6 +1,5 @@
-export interface Choice<T> {
-    [key: string]: any, // can we rule out that the choices will have other fields? 
+export type Choice<T> = {
     choose: number,
-    from: T[]; // !  
+    from: T[]; 
     __typename?: string
 }

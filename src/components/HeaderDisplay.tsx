@@ -3,7 +3,8 @@ ultimately responsible for displaying character name, character class, race, lev
 */ 
 
 import { PersonalityByBackground } from '../queries';
-import {AbilityScore, CharacterClass, Race} from '../types';
+import {AbilityScores, CharacterClass, Race, ZeroToTwenty} from '../types';
+import { Background } from '../types/Background';
 import HitPoints from './HitPoints';
 import QueryWrapper from './QueryWrapper';
 import RenderMap, { MappingFunc } from './RenderMap';
@@ -12,12 +13,12 @@ import withUseOption from './withUseOption';
 type Props = {
     characterName: string,
     characterClass: CharacterClass,
-    characterStats: AbilityScore, 
+    characterStats: AbilityScores, 
     race: Race,
-    level: number,
+    level: ZeroToTwenty,
     alignment?: string,
     experience?: number,
-    background?: string,
+    background?: Background,
 };
 
 const HeaderDisplay = ({
@@ -28,13 +29,13 @@ const HeaderDisplay = ({
     level,
     alignment = 'Neutral',
     experience = 0,
-    background = ''
+    background = 'acolyte'
 }: Props) => {
 
     const personalityMap: MappingFunc<string> = (trait, index) => {
         if (trait) {
             return (
-                <p key={`${trait}${index}`}>Personality Trait: {trait}</p>
+                <p key={`${trait}${index}`}>Trait: {trait}</p>
             );
         }
     }

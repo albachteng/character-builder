@@ -16,6 +16,5 @@ export type { Race } from './Race';
 export type { Skill } from './Skill';
 export type { SkillIndex } from './SkillIndex';
 export type { SkillName } from './SkillName';
-export type { Spell } from './Spell';
 export type { Store } from './Store';
 export type { ZeroToTwenty } from './ZeroToTwenty';

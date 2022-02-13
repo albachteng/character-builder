@@ -25,6 +25,7 @@ const ItemStore = () => {
          dataType={['equipments']}
       >
          <RenderMap
+            sortBy={'nameAsc'}
             mappingFunc={itemMap}
          />
       </QueryWrapper>

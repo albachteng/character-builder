@@ -12,5 +12,9 @@ export const sortByOptions = {
     ascending(a.level, b.level),
   levelDesc: <T extends JSONValue & { level: number }>(a: T, b: T) =>
     descending(a.level, b.level),
-  default: <T extends JSONValue>(a: T, b: T) => 0 
+  nameAsc: <T extends JSONValue & { name: string }>(a: T, b: T) =>
+    ascending(a.name, b.name),
+  nameDesc: <T extends JSONValue & { name: string }>(a: T, b: T) =>
+    descending(a.name, b.name),
+  default: undefined  
 };

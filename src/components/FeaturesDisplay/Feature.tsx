@@ -1,5 +1,5 @@
-import useOnClickDescription from '../hooks/useOnClickDescription';
-import { Feature as FeatureType } from '../types';
+import useOnClickDescription from '../../hooks/useOnClickDescription';
+import { Feature as FeatureType } from '../../types';
 
 type Props = {
   feature: FeatureType;

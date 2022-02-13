@@ -1,4 +1,4 @@
-import { AbilityScores, Spell } from '../types';
+import { AbilityScores, Spell } from '../../types';
 
 type Props = {
   spell: Spell;

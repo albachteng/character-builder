@@ -8,6 +8,7 @@ export type { Background } from './Background';
 export type { CharacterClass } from './CharacterClass';
 export type { Choice } from './choice';
 export type { CoreSkills } from './CoreSkills';
+export type { Equipment } from './Equipment';
 export type { Feature } from './Feature';
 export type { JSONValue } from './JSONValue';
 export type { NamedIndex } from './NamedIndex';

@@ -8,6 +8,7 @@ import SkillsDisplay from './SkillsDisplay';
 import useCharacter from '../hooks/useCharacter';
 import SpellsDisplay from './SpellsDisplay';
 import { CharacterClass } from '../types';
+import ItemStore from './ItemStore';
 
 const App = () => {
   const { state, dispatch } = useCharacter();
@@ -69,6 +70,8 @@ const App = () => {
             level={characterLevel}
           />
         }
+
+        {<ItemStore />}
 
         {<AbilityScoresDisplay stats={characterStats} />}
 

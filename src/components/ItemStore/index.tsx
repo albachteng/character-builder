@@ -3,9 +3,9 @@ import RenderMap, { MappingFunc } from "../RenderMap";
 import { Items } from "../../queries";
 import withOnClick from "../withOnClick";
 import EquipmentDetails from './EquipmentDetails';
-import { Equipment as EquipmentType } from '../../types';
+import { Equipment } from '../../types';
 
-const itemMap: MappingFunc<EquipmentType> = (equipment, index, arr) => {
+const itemMap: MappingFunc<Equipment> = (equipment, index, arr) => {
    const Header = () => <h5>{equipment?.name}</h5>
    const ItemWithOnClick = withOnClick(EquipmentDetails, Header);
    return (

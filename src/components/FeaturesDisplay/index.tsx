@@ -20,15 +20,15 @@ const FeaturesDisplay = ({
   characterBackground
 }: Props): JSX.Element => {
   const featuresMap: MappingFunc<FeatureType> = (feature, index) => {
-    if (feature.level) {
+    if (feature?.level) {
       return (
-        feature.level <= characterLevel && (
-          <Feature key={`${feature.name + index}`} feature={feature}></Feature>
+        feature?.level <= characterLevel && (
+          <Feature key={`Feature-${feature?.index}`} feature={feature}></Feature>
         )
       );
     }
     return (
-      <Feature key={`${feature.name + index}`} feature={feature}></Feature>
+      <Feature key={`Feature-${feature?.index}`} feature={feature}></Feature>
     );
   };
 

@@ -12,7 +12,8 @@ const originFromTypename: { [k: string]: string } = {
 };
 
 const Feature = ({ feature }: Props) => {
-  const { description, toggleDescription } = useOnClickDescription(feature);
+
+  const { description, toggleDescription } = useOnClickDescription<FeatureType>(feature);
 
   return (
     <div>

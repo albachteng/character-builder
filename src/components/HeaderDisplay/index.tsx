@@ -2,13 +2,13 @@
 ultimately responsible for displaying character name, character class, race, level, ?alignment, ?experience, ?background 
 */
 
-import { PersonalityByBackground } from '../queries';
-import { AbilityScores, CharacterClass, Race, ZeroToTwenty } from '../types';
-import { Background } from '../types/Background';
+import { PersonalityByBackground } from '../../queries';
+import { AbilityScores, CharacterClass, Race, ZeroToTwenty } from '../../types';
+import { Background } from '../../types/Background';
 import HitPoints from './HitPoints';
-import QueryWrapper from './QueryWrapper';
-import RenderMap, { MappingFunc } from './RenderMap';
-import withUseOption from './withUseOption';
+import QueryWrapper from '../QueryWrapper';
+import RenderMap, { MappingFunc } from '../RenderMap';
+import withUseOption from '../withUseOption';
 
 type Props = {
   characterName: string;

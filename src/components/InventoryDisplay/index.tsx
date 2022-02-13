@@ -1,13 +1,13 @@
-import RenderMap, { MappingFunc } from './RenderMap';
-import QueryWrapper from './QueryWrapper';
+import RenderMap, { MappingFunc } from '../RenderMap';
+import QueryWrapper from '../QueryWrapper';
 import {
   ClassEquipmentOptions,
   ClassStartingEquipment,
   BackgroundEquipment
-} from '../queries';
-import withUseOption from './withUseOption';
-import { Background } from '../types/Background';
-import { CharacterClass } from '../types';
+} from '../../queries';
+import withUseOption from '../withUseOption';
+import { Background } from '../../types/Background';
+import { CharacterClass } from '../../types';
 
 type Props = {
   characterClass: CharacterClass;

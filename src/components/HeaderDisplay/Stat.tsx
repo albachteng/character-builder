@@ -1,4 +1,4 @@
-import dice from '../utilities/dice';
+import dice from '../../utilities/dice';
 // import { AbilityScore } from '../types';
 
 type Props = {

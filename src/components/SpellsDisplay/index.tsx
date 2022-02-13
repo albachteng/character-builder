@@ -1,15 +1,15 @@
-import { SpellModByClass, SpellcastingInfo } from '../queries';
-import { AbilityScores, CharacterClass, Spell } from '../types';
+import { SpellModByClass, SpellcastingInfo } from '../../queries';
+import { AbilityScores, CharacterClass, Spell } from '../../types';
 import SpellSlots from './SpellSlots';
-import dice from '../utilities/dice';
-import { AbilityScoreName } from '../types/AbilityScoreName';
+import dice from '../../utilities/dice';
+import { AbilityScoreName } from '../../types/AbilityScoreName';
 import SpellBook from './SpellBook';
 import { ReactNode } from 'react';
-import QueryWrapper from './QueryWrapper';
-import RenderMap, { MappingFunc } from './RenderMap';
-import useAddToList from '../hooks/useAddToList';
+import QueryWrapper from '../QueryWrapper';
+import RenderMap, { MappingFunc } from '../RenderMap';
+import useAddToList from '../../hooks/useAddToList';
 import SpellDetails from './SpellDetails';
-import withOnClick from './withOnClick';
+import withOnClick from '../withOnClick';
 import SpellHeader from './SpellHeader';
 
 type Props = {

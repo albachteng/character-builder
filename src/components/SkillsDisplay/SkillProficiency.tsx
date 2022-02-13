@@ -4,9 +4,9 @@ will need character stats and the name of the skill to render
 will also need proficiency bonus which is based on level 
 */
 
-import dice from '../utilities/dice';
-import { ZeroToTwenty, Skill } from '../types';
-import useOnClickDescription from '../hooks/useOnClickDescription';
+import dice from '../../utilities/dice';
+import { ZeroToTwenty, Skill } from '../../types';
+import useOnClickDescription from '../../hooks/useOnClickDescription';
 
 type Props = {
   stat: ZeroToTwenty;

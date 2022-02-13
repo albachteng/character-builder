@@ -1,6 +1,6 @@
-import { CharacterClass, AbilityScores, ZeroToTwenty } from '../types';
-import useHP, { Rolls } from '../hooks/useHP';
-import dice from '../utilities/dice';
+import { CharacterClass, AbilityScores, ZeroToTwenty } from '../../types';
+import useHP, { Rolls } from '../../hooks/useHP';
+import dice from '../../utilities/dice';
 
 type Props = {
   characterStats: AbilityScores;

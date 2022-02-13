@@ -1,10 +1,10 @@
 import Feature from './Feature';
-import type { Feature as FeatureType, ZeroToTwenty } from '../types';
-import { CharacterClass, Race } from '../types';
-import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../queries';
-import RenderMap, { MappingFunc } from './RenderMap';
-import QueryWrapper from './QueryWrapper';
-import { Background } from '../types/Background';
+import type { Feature as FeatureType, ZeroToTwenty } from '../../types';
+import { CharacterClass, Race } from '../../types';
+import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../../queries';
+import RenderMap, { MappingFunc } from '../RenderMap';
+import QueryWrapper from '../QueryWrapper';
+import { Background } from '../../types/Background';
 
 type Props = {
   characterLevel: ZeroToTwenty;

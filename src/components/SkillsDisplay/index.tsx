@@ -1,10 +1,10 @@
 /* renders skill proficiencies display and handles query for class skill choices */
-import { AllSkills } from '../queries';
-import type { AbilityScores } from '../types/AbilityScores';
-import { CharacterClass, Race, Skill } from '../types';
-import useSkillProficiencies from '../hooks/useSkillProficiencies';
-import QueryWrapper from './QueryWrapper';
-import RenderMap, { MappingFunc } from './RenderMap';
+import { AllSkills } from '../../queries';
+import type { AbilityScores } from '../../types/AbilityScores';
+import { CharacterClass, Race, Skill } from '../../types';
+import useSkillProficiencies from '../../hooks/useSkillProficiencies';
+import QueryWrapper from '../QueryWrapper';
+import RenderMap, { MappingFunc } from '../RenderMap';
 import SkillProficiency from './SkillProficiency';
 
 type Props = {

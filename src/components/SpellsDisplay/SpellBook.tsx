@@ -1,16 +1,16 @@
-import { SpellsOptionsByClassAndLevel } from '../queries';
-import { CharacterClass, Spell as SpellType } from '../types';
+import { SpellsOptionsByClassAndLevel } from '../../queries';
+import { CharacterClass, Spell as SpellType } from '../../types';
 // import Spell from './Spell';
-import QueryWrapper from './QueryWrapper';
-import RenderMap, { MappingFunc } from './RenderMap';
-import withOnClick from './withOnClick';
+import QueryWrapper from '../QueryWrapper';
+import RenderMap, { MappingFunc } from '../RenderMap';
+import withOnClick from '../withOnClick';
 import SpellDetails from './SpellDetails';
 import SpellHeader from './SpellHeader';
 
 type Props = {
   characterClass: CharacterClass;
   characterLevel: number;
-  handleClick: (spell: SpellType) => void; // TODO
+  handleClick: (spell: SpellType) => void; 
   list: SpellType[];
 };
 

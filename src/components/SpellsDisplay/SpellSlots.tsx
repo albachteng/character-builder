@@ -1,7 +1,7 @@
-import { ClassSpellSlots } from '../queries';
-import { CharacterClass } from '../types';
-import QueryWrapper from './QueryWrapper';
-import RenderMap, { MappingFunc } from './RenderMap';
+import { ClassSpellSlots } from '../../queries';
+import { CharacterClass } from '../../types';
+import QueryWrapper from '../QueryWrapper';
+import RenderMap, { MappingFunc } from '../RenderMap';
 
 type Props = {
   characterClass: CharacterClass;
@@ -10,8 +10,8 @@ type Props = {
 
 const SpellSlots = ({ characterClass, characterLevel }: Props) => {
   const mappingFunc: MappingFunc<{ [key: string]: any }> = (
-    spellSlot,
-    index
+    spellSlot: any,
+    index: number
   ) => {
     if (
       spellSlot.level === characterLevel &&

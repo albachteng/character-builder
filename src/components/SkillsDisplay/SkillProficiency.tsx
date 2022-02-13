@@ -46,7 +46,7 @@ const SkillProficiency = ({
     <div>
       <li onClick={toggleDescription}>
         {bonus >= 0 && '+'}
-        {bonus}: {skill.name + ' '}
+        {bonus}: {skill?.name + ' '}
         <span>{`${
           isProficient ? `| Proficient from ${originMap(proficiencyFrom)}` : ''
         }`}</span>

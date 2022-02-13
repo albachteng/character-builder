@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { AbilityScores } from '../../types';
-import Stat from '../HeaderDisplay/Stat';
+import Stat from './Stat';
 
 type Props = {
   stats: AbilityScores;

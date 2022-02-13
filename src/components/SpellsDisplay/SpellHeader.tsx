@@ -15,7 +15,7 @@ const SpellHeader = ({ spell, index, handleClick, list }: Props) => {
         {spell?.level ? `, Level ${spell?.level}` : `, Cantrip`}
       </p>
       <button onClick={() => handleClick(spell)}>
-        {list.includes(spell) ? 'Remove' : 'Add'}
+        {list?.includes(spell) ? 'Remove' : 'Add'}
       </button>
     </div>
   );

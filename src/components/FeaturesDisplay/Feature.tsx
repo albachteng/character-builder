@@ -17,10 +17,10 @@ const Feature = ({ feature }: Props) => {
   return (
     <div>
       <p onClick={toggleDescription}>
-        {feature.name}
-        {feature.level && `, Level ${feature.level}`}
-        {feature.__typename &&
-          ` | From: ${originFromTypename[feature.__typename]}`}
+        {feature?.name}
+        {feature?.level && `, Level ${feature?.level}`}
+        {feature?.__typename &&
+          ` | From: ${originFromTypename[feature?.__typename]}`}
       </p>
       {description}
     </div>

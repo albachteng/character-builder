@@ -17,23 +17,23 @@ const useOnClickDescription = (
   name?: string | undefined
 ) => {
   const toggleDescription = () => {
-    for (let i = 0; i < withDescription.desc.length; i += 1) {
+    for (let i = 0; i < withDescription?.desc?.length; i += 1) {
       const target = document.getElementById(
-        `${withDescription.name || name}-desc${i}`
+        `${withDescription?.name || name}-desc${i}`
       );
       target &&
-        (target.style.display === 'block'
+        (target?.style?.display === 'block'
           ? (target.style.display = 'none')
           : (target.style.display = 'block'));
     }
   };
 
-  const description = withDescription.desc.map((paragraph, i) => {
+  const description = withDescription?.desc?.map((paragraph, i) => {
     return (
       <p
         style={{ display: 'none' }}
-        id={`${withDescription.name || name}-desc${i}`}
-        key={`${withDescription.name || name}-desc${i}`}
+        id={`${withDescription?.name || name}-desc${i}`}
+        key={`${withDescription?.name || name}-desc${i}`}
       >
         {paragraph}
       </p>

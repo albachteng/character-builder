@@ -8,7 +8,7 @@ export { ClassFeatures } from './ClassFeatures';
 export { ClassProficiencyChoices } from './ClassProficiencyChoices';
 export { ClassSpellSlots } from './ClassSpellSlots';
 export { ClassStartingEquipment } from './ClassStartingEquipment';
-export { Items } from './Items';
+export { Items } from './Equipments';
 export { MagicItems } from './MagicItems';
 export { PersonalityByBackground } from './Personality';
 export { RacialFeatures } from './RacialFeatures';

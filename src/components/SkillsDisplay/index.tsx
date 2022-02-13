@@ -1,7 +1,7 @@
 /* renders skill proficiencies display and handles query for class skill choices */
 import { AllSkills } from '../../queries';
 import type { AbilityScores } from '../../types/AbilityScores';
-import { CharacterClass, Race, Skill } from '../../types';
+import { AbilityScoreName, CharacterClass, Race, Skill } from '../../types';
 import useSkillProficiencies from '../../hooks/useSkillProficiencies';
 import QueryWrapper from '../QueryWrapper';
 import RenderMap, { MappingFunc } from '../RenderMap';
@@ -34,9 +34,7 @@ const SkillsDisplay = ({
   ): [boolean, string | undefined] => {
     for (let i = 0; i < proficiencies.length; i += 1) {
       if (
-        proficiencies[i] &&
-        proficiencies[i].index &&
-        proficiencies[i].index.slice(6) === skill.index
+        proficiencies[i]?.index?.slice(6) === skill.index
       ) {
         return [true, proficiencies[i].__typename];
       }
@@ -49,7 +47,7 @@ const SkillsDisplay = ({
     return (
       <SkillProficiency
         skill={skill}
-        stat={characterStats[skill?.ability_score?.name]}
+        stat={characterStats[skill?.ability_score?.name as AbilityScoreName]}
         proficiencyBonus={proficiencyBonus}
         isProficient={proficiency[0]}
         key={`${skill.name}${index}`}

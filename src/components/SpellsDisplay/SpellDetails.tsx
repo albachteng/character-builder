@@ -1,18 +1,18 @@
-import { AbilityScores, Spell } from '../../types';
+import { AbilityScores, Maybe, Spell } from '../../types';
 
 type Props = {
   spell: Spell;
 };
 
-const handleStringArray = (arr: string[], type: string) => {
+const handleStringArray = (arr: Maybe<string>[], type: string) => {
   if (Array.isArray(arr)) {
     if (type === 'li') {
-      return arr.map((str: string, index) => {
+      return arr.map((str: string | null, index) => {
         return <li key={`${str}${index}`}>{str}</li>;
       });
     }
     if (type === 'span') {
-      return arr.map((str: string, index, arr) => {
+      return arr.map((str: string | null, index, arr) => {
         return (
           <span key={`${str}${index}`}>
             {str}
@@ -22,7 +22,7 @@ const handleStringArray = (arr: string[], type: string) => {
       });
     }
     if (type === 'p') {
-      return arr.map((str: string, index) => {
+      return arr.map((str: string | null, index) => {
         return <p key={`${str}${index}`}>{str}</p>;
       });
     }
@@ -32,7 +32,7 @@ const handleStringArray = (arr: string[], type: string) => {
 const SpellDetails = ({ spell }: Props) => {
   return (
     <div>
-      {spell?.desc && handleStringArray(spell.desc, 'p')}
+      {spell?.desc && handleStringArray(spell?.desc, 'p')}
       <div>
         {spell?.casting_time && <p>Casting Time: {spell?.casting_time}</p>}
         {spell?.range && <p>Range: {spell?.range}</p>}
@@ -45,7 +45,7 @@ const SpellDetails = ({ spell }: Props) => {
           <p>
             Classes:{' '}
             {handleStringArray(
-              spell?.classes?.map((namedClassIndex) => namedClassIndex?.index),
+              spell?.classes?.map((namedClassIndex) => namedClassIndex?.index || ''),
               'span'
             )}
           </p>
@@ -66,7 +66,7 @@ const SpellDetails = ({ spell }: Props) => {
           DC: {spell?.dc?.dc_success} {spell?.dc?.dc_type?.name} save
         </p>
       )}
-      {spell?.dc && spell?.dc?.desc && handleStringArray(spell?.dc?.desc, 'p')}
+      {spell?.dc && spell?.dc?.desc && handleStringArray([spell?.dc?.desc], 'p')}
       {spell?.heal_at_slot_level && (
         <p>Healing: {JSON.stringify(spell?.heal_at_slot_level)}</p>
       )}
@@ -82,7 +82,7 @@ const SpellDetails = ({ spell }: Props) => {
         <p>
           Subclasses:{' '}
           {handleStringArray(
-            spell?.subclasses.map((subclass) => subclass?.name),
+            spell?.subclasses.map((subclass) => subclass?.name || ''),
             'span'
           )}
         </p>

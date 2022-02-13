@@ -4,20 +4,22 @@
     which is a string) and returning the functionality to hide or show that 
     information on a click
 */
+import { Maybe, Scalars } from '../types';
 
 type WithDescription = {
   [key: string]: any;
   [key: number]: any;
-  desc: string[];
-  name?: string;
+  desc?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name?: Maybe<string> | undefined 
 };
 
-const useOnClickDescription = (
-  withDescription: WithDescription,
-  name?: string | undefined
+const useOnClickDescription = <T extends WithDescription>(
+  withDescription?: T,
+  name?: string
 ) => {
   const toggleDescription = () => {
-    for (let i = 0; i < withDescription?.desc?.length; i += 1) {
+    const length = withDescription?.desc?.length || 0;
+    for (let i = 0; i < length; i += 1) {
       const target = document.getElementById(
         `${withDescription?.name || name}-desc${i}`
       );

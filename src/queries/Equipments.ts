@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const Items = gql`
-  query Items {
+  query Equipments {
     equipments {
       name
       index

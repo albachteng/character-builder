@@ -5,17 +5,8 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({ adapter: new Adapter() });
 import { shallow } from 'enzyme';
 
-const props = {
-    feature: {
-        name: 'Graham',
-        index: 'graham',
-        desc: ['it', 'works'],
-        level: 1,
-        __typename: 'test'
-    }
-}
-
-const wrapper = shallow(<Feature {...props}></Feature>)
+//@ts-ignore
+const wrapper = shallow(<Feature/>)
 
 describe("----- Feature -----", () => {
     test("it renders without crashing", () => {

@@ -5,7 +5,8 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({ adapter: new Adapter() });
 import { shallow } from 'enzyme';
 
-const wrapper = shallow(<HitPoints></HitPoints>)
+//@ts-ignore
+const wrapper = shallow(<HitPoints/>)
 
 describe("----- HitPoints -----", () => {
     test("it renders without crashing", () => {

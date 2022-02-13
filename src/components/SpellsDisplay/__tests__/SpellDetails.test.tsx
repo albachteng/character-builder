@@ -5,7 +5,8 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({ adapter: new Adapter() });
 import { shallow } from 'enzyme';
 
-const wrapper = shallow(<SpellDetails></SpellDetails>)
+//@ts-ignore
+const wrapper = shallow(<SpellDetails/>)
 
 describe("----- SpellDetails -----", () => {
     test("it renders without crashing", () => {

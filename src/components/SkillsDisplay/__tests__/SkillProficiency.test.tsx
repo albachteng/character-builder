@@ -5,7 +5,8 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({ adapter: new Adapter() });
 import { shallow } from 'enzyme';
 
-const wrapper = shallow(<SkillProficiency></SkillProficiency>)
+//@ts-ignore
+const wrapper = shallow(<SkillProficiency/>)
 
 describe("----- SkillProficiency -----", () => {
     test("it renders without crashing", () => {

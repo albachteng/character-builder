@@ -5,7 +5,8 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({ adapter: new Adapter() });
 import { shallow } from 'enzyme';
 
-const wrapper = shallow(<AbilityScoreDisplay></AbilityScoreDisplay>)
+//@ts-ignore
+const wrapper = shallow(<AbilityScoreDisplay/>)
 
 describe("----- Ability Score Display -----", () => {
     test("it renders without crashing", () => {

@@ -14,7 +14,8 @@ jest.mock(
         }
 });
 
-const wrapper = shallow(<SkillsDisplay></SkillsDisplay>)
+//@ts-ignore
+const wrapper = shallow(<SkillsDisplay/>)
 
 describe("----- SkillsDisplay -----", () => {
     test("it renders without crashing", () => {

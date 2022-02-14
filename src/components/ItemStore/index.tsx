@@ -14,7 +14,6 @@ const itemMap: MappingFunc<Equipment> = (equipment, index, arr) => {
          id={`equipment-${equipment?.index}-${index}`}   
       />
    )
-   
 }
 
 const ItemStore = () => {

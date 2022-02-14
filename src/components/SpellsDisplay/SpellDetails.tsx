@@ -4,7 +4,7 @@ type Props = {
   spell: Spell;
 };
 
-const handleStringArray = (arr: Maybe<string>[], type: string) => {
+export const handleStringArray = (arr: Maybe<string>[], type: string) => {
   if (Array.isArray(arr)) {
     if (type === 'li') {
       return arr.map((str: string | null, index) => {

@@ -1,4 +1,6 @@
 import { Equipment } from '../../types';
+import { handleStringArray } from '../SpellsDisplay/SpellDetails'
+import BuildDetails from '../BuildDetails';
 
 type EquipmentDetailsProps = {
     equipment: Equipment
@@ -8,7 +10,8 @@ type EquipmentDetailsProps = {
 const EquipmentDetails = ({equipment}: EquipmentDetailsProps) => {
     return (
         <>
-            <pre>{JSON.stringify(equipment?.desc, null, 2)}</pre>
+            <div className='equipment-desc'>{handleStringArray(equipment?.desc || [], 'p')}</div>
+            <BuildDetails item={equipment}></BuildDetails>
         </>
     )
 }

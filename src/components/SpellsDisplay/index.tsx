@@ -1,13 +1,12 @@
 import { SpellModByClass, SpellcastingInfo, SpellsOptionsByClassAndLevel } from '../../queries';
-import { AbilityScores, CharacterClass, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, ZeroToTwenty } from '../../types';
+import { AbilityScores, CharacterClass, MappingFunc, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, ZeroToTwenty } from '../../types';
 import SpellSlots from './SpellSlots';
 import dice from '../../utilities/dice';
 import { AbilityScoreName } from '../../types/AbilityScoreName';
 import { ReactNode } from 'react';
-import QueryWrapper from '../QueryWrapper';
-import RenderMap, { MappingFunc } from '../RenderMap';
 import SpellDetails from './SpellDetails';
 import ToggleList from '../ToggleList';
+import QueryRenderer from '../QueryRenderer';
 
 type Props = {
   characterClass: CharacterClass;
@@ -77,20 +76,16 @@ const SpellsDisplay = ({
         characterLevel={characterLevel}
       />
       <h3>Spell Mod</h3>
-      <QueryWrapper
+      <QueryRenderer
         query={SpellModByClass}
         variables={{ filter: { index: characterClass } }}
         dataType={['class', 'spellcasting', 'spellcasting_ability']}
-      >
-        <RenderMap mappingFunc={spellModMapFunc} />
-      </QueryWrapper>
-      <QueryWrapper
+        mappingFunc={spellModMapFunc} />
+      <QueryRenderer
         query={SpellcastingInfo}
         variables={{ filter: { index: characterClass } }}
         dataType={['class', 'spellcasting', 'info']}
-      >
-        <RenderMap mappingFunc={spellcastingInfoMapFunc} />
-      </QueryWrapper>
+        mappingFunc={spellcastingInfoMapFunc} />
       <h3>Spellbook</h3>
       <ToggleList<Spell>
         query={SpellsOptionsByClassAndLevel}

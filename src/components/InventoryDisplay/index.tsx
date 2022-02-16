@@ -1,4 +1,4 @@
-import RenderMap, { MappingFunc } from '../RenderMap';
+import RenderMap from '../RenderMap';
 import QueryWrapper from '../QueryWrapper';
 import {
   ClassEquipmentOptions,
@@ -6,8 +6,8 @@ import {
   BackgroundEquipment
 } from '../../queries';
 import withUseOption from '../withUseOption';
-import { Background } from '../../types/Background';
-import { CharacterClass } from '../../types';
+import { Background, CharacterClass, MappingFunc } from '../../types';
+import QueryRenderer from '../QueryRenderer';
 
 type Props = {
   characterClass: CharacterClass;
@@ -30,13 +30,11 @@ const InventoryDisplay = ({ characterClass, characterBackground }: Props) => {
       <div>
         <h2>Inventory:</h2>
         <ul>
-          <QueryWrapper
+          <QueryRenderer
             query={ClassStartingEquipment}
             variables={{ filter: { index: characterClass } }}
             dataType={['class', 'starting_equipment']}
-          >
-            <RenderMap mappingFunc={equipmentMap} />
-          </QueryWrapper>
+            mappingFunc={equipmentMap} />
           <QueryWrapper
             query={ClassEquipmentOptions}
             variables={{ filter: { index: characterClass } }}
@@ -44,13 +42,11 @@ const InventoryDisplay = ({ characterClass, characterBackground }: Props) => {
           >
             <RenderMapWithUseOption mappingFunc={equipmentMap} />
           </QueryWrapper>
-          <QueryWrapper
+          <QueryRenderer
             query={BackgroundEquipment}
             variables={{ filter: { index: characterBackground } }}
             dataType={['background', 'starting_equipment']}
-          >
-            <RenderMap mappingFunc={equipmentMap} />
-          </QueryWrapper>
+            mappingFunc={equipmentMap} />
         </ul>
       </div>
     </>

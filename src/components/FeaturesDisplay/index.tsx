@@ -1,10 +1,9 @@
 import Feature from './Feature';
 import type { Feature as FeatureType, ZeroToTwenty } from '../../types';
-import { CharacterClass, Race } from '../../types';
+import { CharacterClass, Race, MappingFunc } from '../../types';
 import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../../queries';
-import RenderMap, { MappingFunc } from '../RenderMap';
-import QueryWrapper from '../QueryWrapper';
 import { Background } from '../../types/Background';
+import QueryRenderer from '../QueryRenderer';
 
 type Props = {
   characterLevel: ZeroToTwenty;
@@ -35,27 +34,23 @@ const FeaturesDisplay = ({
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
       <h2>Features</h2>
-      <QueryWrapper
+      <QueryRenderer
         query={ClassFeatures}
         variables={{ filter: { class: { index: characterClass } } }}
         dataType={['features']}
-      >
-        <RenderMap mappingFunc={featuresMap} />
-      </QueryWrapper>
-      <QueryWrapper
+        mappingFunc={featuresMap} 
+      />
+      <QueryRenderer
         query={RacialFeatures}
         variables={{ filter: { races: { index: characterRace } } }}
         dataType={['features']}
-      >
-        <RenderMap mappingFunc={featuresMap} />
-      </QueryWrapper>
-      <QueryWrapper
+        mappingFunc={featuresMap} 
+      />
+      <QueryRenderer
         query={BackgroundFeatures}
         variables={{ filter: { index: characterBackground } }}
         dataType={['background', 'feature']}
-      >
-        <RenderMap mappingFunc={featuresMap} />
-      </QueryWrapper>
+      mappingFunc={featuresMap}/> 
     </div>
   );
 };

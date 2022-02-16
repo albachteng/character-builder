@@ -1,8 +1,8 @@
 import { DocumentNode } from "graphql";
-import { JSONValue } from "../types";
+import { JSONValue, MappingFunc } from "../types";
 import { sortByOptions } from "../utilities/sortByOptions";
 import QueryWrapper from "./QueryWrapper";
-import RenderMap, { MappingFunc } from "./RenderMap";
+import RenderMap from "./RenderMap";
 
 type QueryRendererProps<T> = {
     mappingFunc: MappingFunc<T>

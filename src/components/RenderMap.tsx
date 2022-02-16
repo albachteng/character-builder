@@ -1,11 +1,5 @@
-import { JSONValue } from '../types';
+import { JSONValue, MappingFunc } from '../types';
 import { sortByOptions } from '../utilities/sortByOptions';
-
-export type MappingFunc<T extends unknown> = (
-  value: T,
-  index: number,
-  arr: T[]
-) => React.ReactNode;
 
 type RenderProps = {
   mappingFunc: MappingFunc<any>;

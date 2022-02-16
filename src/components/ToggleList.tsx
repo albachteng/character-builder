@@ -1,9 +1,8 @@
 import useAddToList from "../hooks/useAddToList";
 import withOnClick from "./withOnClick";
-import { MappingFunc } from "./RenderMap";
 import QueryRenderer from "./QueryRenderer";
 import { DocumentNode } from "graphql";
-import { JSONValue, Maybe } from "../types";
+import { JSONValue, MappingFunc, Maybe } from "../types";
 import { sortByOptions } from "../utilities/sortByOptions";
 import ToggleHeader, { ToggleHeaderProps } from "./SpellsDisplay/ToggleHeader";
 
@@ -53,6 +52,7 @@ const ToggleList = <T extends {name?: Maybe<string>}>({
     return (
         <>
             <h4>Select from this list to add:</h4>
+            <div style={{height: '50vh', overflowY: 'scroll'}}>
             <QueryRenderer
                 query={query}
                 variables={variables}
@@ -60,6 +60,7 @@ const ToggleList = <T extends {name?: Maybe<string>}>({
                 mappingFunc={mappingFunc}
                 sortBy={sortBy}
             />
+            </div>
             <h4>Added: {`${list.length}`} </h4>
             {list.map(mappingFunc)}
         </>

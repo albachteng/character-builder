@@ -1,7 +1,6 @@
 import { ClassSpellSlots } from '../../queries';
-import { CharacterClass } from '../../types';
-import QueryWrapper from '../QueryWrapper';
-import RenderMap, { MappingFunc } from '../RenderMap';
+import { CharacterClass, MappingFunc } from '../../types';
+import QueryRenderer from '../QueryRenderer';
 
 type Props = {
   characterClass: CharacterClass;
@@ -26,13 +25,11 @@ const SpellSlots = ({ characterClass, characterLevel }: Props) => {
   };
 
   return (
-    <QueryWrapper
+    <QueryRenderer
       query={ClassSpellSlots}
       variables={{ filter: { index: characterClass } }}
       dataType={['class', 'class_levels']}
-    >
-      <RenderMap mappingFunc={mappingFunc} />
-    </QueryWrapper>
+      mappingFunc={mappingFunc} />
   );
 };
 

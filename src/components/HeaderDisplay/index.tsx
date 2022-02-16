@@ -3,11 +3,11 @@ ultimately responsible for displaying character name, character class, race, lev
 */
 
 import { PersonalityByBackground } from '../../queries';
-import { AbilityScores, CharacterClass, Race, ZeroToTwenty } from '../../types';
+import { AbilityScores, CharacterClass, MappingFunc, Race, ZeroToTwenty } from '../../types';
 import { Background } from '../../types/Background';
 import HitPoints from './HitPoints';
 import QueryWrapper from '../QueryWrapper';
-import RenderMap, { MappingFunc } from '../RenderMap';
+import RenderMap from '../RenderMap';
 import withUseOption from '../withUseOption';
 
 type Props = {

@@ -31,6 +31,7 @@ const HeaderDisplay = ({
   experience = 0,
   background = 'acolyte'
 }: Props) => {
+
   const personalityMap: MappingFunc<string> = (trait, index) => {
     if (trait) {
       return <p key={`${trait}${index}`}>Trait: {trait}</p>;
@@ -39,7 +40,6 @@ const HeaderDisplay = ({
 
   const idealsMap: MappingFunc<any> = (ideal, index) => {
     if (ideal) {
-      console.log(ideal);
       return (
         <>
           <p key={`${ideal}${index}`}>Ideal: {ideal.desc}</p>

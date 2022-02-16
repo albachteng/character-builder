@@ -12,6 +12,7 @@ type Props = {
 };
 
 const QueryWrapper = ({ query, variables, children, dataType }: Props) => {
+  
   const { loading, error, data } = useQuery(query, { variables });
 
   const arrayData = findArray(data, dataType);

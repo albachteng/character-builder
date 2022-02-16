@@ -1,5 +1,5 @@
 import { SpellModByClass, SpellcastingInfo } from '../../queries';
-import { AbilityScores, CharacterClass, Spell } from '../../types';
+import { AbilityScores, CharacterClass, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, ZeroToTwenty } from '../../types';
 import SpellSlots from './SpellSlots';
 import dice from '../../utilities/dice';
 import { AbilityScoreName } from '../../types/AbilityScoreName';
@@ -14,13 +14,8 @@ import SpellHeader from './SpellHeader';
 
 type Props = {
   characterClass: CharacterClass;
-  characterLevel: number;
+  characterLevel: ZeroToTwenty;
   characterStats: AbilityScores;
-};
-
-type SpellMod = {
-  [key: string]: any; // !
-  name: AbilityScoreName;
 };
 
 const SpellsDisplay = ({
@@ -28,30 +23,32 @@ const SpellsDisplay = ({
   characterLevel,
   characterStats
 }: Props) => {
-  const spellModMapFunc: MappingFunc<SpellMod> = (item) => {
-    return (
-      <p key={item?.name}>
-        {item?.name}: {dice.mod(characterStats[item?.name])}
-      </p>
-    );
+
+  const spellModMapFunc: MappingFunc<ClassSpellcastingSpellcasting_Ability> = (item) => {
+    if (item?.name) {
+      return (
+        <p key={item?.name}>
+          {item?.name}: {dice.mod(characterStats[item?.name as AbilityScoreName])}
+        </p>
+      );
+    }
   };
 
-  const spellcastingInfoMapFunc: MappingFunc<any> = (info, index) => {
+  const spellcastingInfoMapFunc: MappingFunc<Spell> = (spell) => {
     // TODO
     const desc: ReactNode[] = [];
-    info?.desc?.forEach((paragraph: string, index: number) => {
-      desc.push(<p key={`${info?.name}-paragraph-${index}`}>{paragraph}</p>);
+    spell?.desc?.forEach((paragraph: Maybe<string>, index: number) => {
+      desc.push(<p key={`${spell?.name}-paragraph-${index}`}>{paragraph}</p>);
     });
     return (
       <div>
-        <h4>{info.name}</h4>
+        <h4>{spell.name}</h4>
         {desc}
       </div>
     );
   };
 
   const { handleClick, list } = useAddToList<Spell>();
-  console.log({ list });
 
   return (
     <>

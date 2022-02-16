@@ -7,9 +7,8 @@ import { useState, useEffect } from 'react';
 //     [key: string]: any
 // }
 
-const withUseOption =
-  (Child: (props: any) => JSX.Element) =>
-  ({ ...props }) => {
+const withUseOption = (Child: (props: any) => JSX.Element) => ({ ...props }) => {
+
     const [choicesArray, setChoicesArray] = useState(props.data);
 
     useEffect(() => {

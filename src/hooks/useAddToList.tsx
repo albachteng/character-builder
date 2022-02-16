@@ -2,6 +2,7 @@
 import { useState } from 'react';
 
 function useAddToList<T>() {
+
   const [list, setList] = useState<T[]>([]);
 
   function handleClick<U extends T>(toAdd: U) {

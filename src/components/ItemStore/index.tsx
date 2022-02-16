@@ -4,31 +4,17 @@ import { Items } from "../../queries";
 import withOnClick from "../withOnClick";
 import EquipmentDetails from './EquipmentDetails';
 import { Equipment } from '../../types';
-
-const itemMap: MappingFunc<Equipment> = (equipment, index, arr) => {
-   const Header = () => <h5>{equipment?.name}</h5>
-   const ItemWithOnClick = withOnClick(EquipmentDetails, Header);
-   return (
-      <ItemWithOnClick 
-         equipment={equipment}
-         id={`equipment-${equipment?.index}-${index}`}   
-      />
-   )
-   
-}
+import ToggleList from "../ToggleList";
 
 const ItemStore = () => {
    return (
-      <QueryWrapper
+      <ToggleList<Equipment>
          query={Items}
          variables={{}}
          dataType={['equipments']}
-      >
-         <RenderMap
-            sortBy={'nameAsc'}
-            mappingFunc={itemMap}
-         />
-      </QueryWrapper>
+         sortBy={'nameAsc'}
+         Details={EquipmentDetails} 
+      />
    )
 }
 

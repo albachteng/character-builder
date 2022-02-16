@@ -1,14 +1,14 @@
 import { Equipment } from '../../types';
 
 type EquipmentDetailsProps = {
-    equipment: Equipment
+    item: Equipment
     id: string
 }
 
-const EquipmentDetails = ({equipment}: EquipmentDetailsProps) => {
+const EquipmentDetails = ({item}: EquipmentDetailsProps) => {
     return (
         <>
-            <pre>{JSON.stringify(equipment?.desc, null, 2)}</pre>
+            <pre>{JSON.stringify(item?.desc, null, 2)}</pre>
         </>
     )
 }

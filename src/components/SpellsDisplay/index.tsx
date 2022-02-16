@@ -1,57 +1,72 @@
-import { SpellModByClass, SpellcastingInfo } from '../../queries';
-import { AbilityScores, CharacterClass, Spell } from '../../types';
+import { SpellModByClass, SpellcastingInfo, SpellsOptionsByClassAndLevel } from '../../queries';
+import { AbilityScores, CharacterClass, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, ZeroToTwenty } from '../../types';
 import SpellSlots from './SpellSlots';
 import dice from '../../utilities/dice';
 import { AbilityScoreName } from '../../types/AbilityScoreName';
-import SpellBook from './SpellBook';
 import { ReactNode } from 'react';
 import QueryWrapper from '../QueryWrapper';
 import RenderMap, { MappingFunc } from '../RenderMap';
-import useAddToList from '../../hooks/useAddToList';
 import SpellDetails from './SpellDetails';
-import withOnClick from '../withOnClick';
-import SpellHeader from './SpellHeader';
+import ToggleList from '../ToggleList';
 
 type Props = {
   characterClass: CharacterClass;
-  characterLevel: number;
+  characterLevel: ZeroToTwenty;
   characterStats: AbilityScores;
 };
 
-type SpellMod = {
-  [key: string]: any; // !
-  name: AbilityScoreName;
-};
+const formatSpellTitle = (spell: Spell) => {
+  let title = `${spell?.name} `;
+  if (spell?.level && spell?.level > 0) title += `, Level ${spell?.level}`
+  else title += `, Cantrip`;
+  return title;
+}
 
 const SpellsDisplay = ({
   characterClass,
   characterLevel,
   characterStats
 }: Props) => {
-  const spellModMapFunc: MappingFunc<SpellMod> = (item) => {
-    return (
-      <p key={item?.name}>
-        {item?.name}: {dice.mod(characterStats[item?.name])}
-      </p>
-    );
+
+  const spellModMapFunc: MappingFunc<ClassSpellcastingSpellcasting_Ability> = (item) => {
+    if (item?.name) {
+      return (
+        <p key={item?.name}>
+          {item?.name}: {dice.mod(characterStats[item?.name as AbilityScoreName])}
+        </p>
+      );
+    }
   };
 
-  const spellcastingInfoMapFunc: MappingFunc<any> = (info, index) => {
+  const spellcastingInfoMapFunc: MappingFunc<Spell> = (spell) => {
     // TODO
     const desc: ReactNode[] = [];
-    info?.desc?.forEach((paragraph: string, index: number) => {
-      desc.push(<p key={`${info?.name}-paragraph-${index}`}>{paragraph}</p>);
+    spell?.desc?.forEach((paragraph: Maybe<string>, index: number) => {
+      desc.push(<p key={`${spell?.name}-paragraph-${index}`}>{paragraph}</p>);
     });
     return (
       <div>
-        <h4>{info.name}</h4>
+        <h4>{spell.name}</h4>
         {desc}
       </div>
     );
   };
 
-  const { handleClick, list } = useAddToList<Spell>();
-  console.log({ list });
+  const buildSpellVariables = (
+    characterClass: string,
+    characterLevel: number
+  ) => {
+    const variables: { [key: string]: any } = {
+      filter: {
+        AND: { classes: { index: characterClass } },
+        OR: []
+      }
+    };
+    for (let i = 0; i <= characterLevel; i += 1) {
+      variables.filter.OR.push({ level: i });
+    }
+    return variables;
+  };
 
   return (
     <>
@@ -77,26 +92,14 @@ const SpellsDisplay = ({
         <RenderMap mappingFunc={spellcastingInfoMapFunc} />
       </QueryWrapper>
       <h3>Spellbook</h3>
-      <SpellBook
-        characterClass={characterClass}
-        characterLevel={characterLevel}
-        handleClick={handleClick}
-        list={list}
+      <ToggleList<Spell>
+        query={SpellsOptionsByClassAndLevel}
+        variables={buildSpellVariables(characterClass, characterLevel)}
+        dataType={['spells']}
+        Details={SpellDetails}
+        sortBy={'levelAsc'}
+        title={formatSpellTitle}
       />
-      <h4>Added: {`${list.length}`} </h4>
-      {list.map((spell, index, arr) => {
-        const Header = () => (
-          <SpellHeader {...{ spell, index, handleClick, list }} />
-        );
-        const SpellDetailsWithOnClick = withOnClick(SpellDetails, Header);
-        return (
-          <SpellDetailsWithOnClick
-            spell={spell}
-            id={`${spell?.name}${index}-added`}
-            key={`${spell?.name}${index}-added`}
-          />
-        );
-      })}
     </>
   );
 };

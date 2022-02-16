@@ -2,7 +2,7 @@ import { Maybe } from "../../types";
 
 export type ToggleHeaderProps<T> = {
     type: T
-    title?: string
+    title?: (item: T) => string
     index: number
     handleClick: <U extends T>(toAdd: U) => void 
     list: T[]
@@ -13,7 +13,7 @@ const ToggleHeader = <T extends {name?: Maybe<string>}>({type, title, index, han
     return (
         <div>
         <p key={`${type?.name}${index}`}>
-            {title ? `${title}` : type?.name}
+            {title ? `${title(type)}` : type?.name}
         </p>
         <button onClick={() => handleClick(type)}>
             {list?.includes(type) ? 'Remove' : 'Add'}

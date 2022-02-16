@@ -3,14 +3,10 @@ import { AbilityScores, CharacterClass, Maybe, Spell, ClassSpellcastingSpellcast
 import SpellSlots from './SpellSlots';
 import dice from '../../utilities/dice';
 import { AbilityScoreName } from '../../types/AbilityScoreName';
-import SpellBook, { buildSpellVariables } from './SpellBook';
 import { ReactNode } from 'react';
 import QueryWrapper from '../QueryWrapper';
 import RenderMap, { MappingFunc } from '../RenderMap';
-import useAddToList from '../../hooks/useAddToList';
 import SpellDetails from './SpellDetails';
-import withOnClick from '../withOnClick';
-import SpellHeader from './SpellHeader';
 import ToggleList from '../ToggleList';
 
 type Props = {
@@ -18,6 +14,13 @@ type Props = {
   characterLevel: ZeroToTwenty;
   characterStats: AbilityScores;
 };
+
+const formatSpellTitle = (spell: Spell) => {
+  let title = `${spell?.name} `;
+  if (spell?.level && spell?.level > 0) title += `, Level ${spell?.level}`
+  else title += `, Cantrip`;
+  return title;
+}
 
 const SpellsDisplay = ({
   characterClass,
@@ -49,7 +52,21 @@ const SpellsDisplay = ({
     );
   };
 
-  const { handleClick, list } = useAddToList<Spell>();
+  const buildSpellVariables = (
+    characterClass: string,
+    characterLevel: number
+  ) => {
+    const variables: { [key: string]: any } = {
+      filter: {
+        AND: { classes: { index: characterClass } },
+        OR: []
+      }
+    };
+    for (let i = 0; i <= characterLevel; i += 1) {
+      variables.filter.OR.push({ level: i });
+    }
+    return variables;
+  };
 
   return (
     <>
@@ -80,29 +97,9 @@ const SpellsDisplay = ({
         variables={buildSpellVariables(characterClass, characterLevel)}
         dataType={['spells']}
         Details={SpellDetails}
-        title={'Hello World'}
-        sortBy={'default'}
+        sortBy={'levelAsc'}
+        title={formatSpellTitle}
       />
-      {/* <SpellBook
-        characterClass={characterClass}
-        characterLevel={characterLevel}
-        handleClick={handleClick}
-        list={list}
-      />
-      <h4>Added: {`${list.length}`} </h4>
-      {list.map((spell, index, arr) => {
-        const Header = () => (
-          <SpellHeader {...{ spell, index, handleClick, list }} />
-        );
-        const SpellDetailsWithOnClick = withOnClick(SpellDetails, Header);
-        return (
-          <SpellDetailsWithOnClick
-            spell={spell}
-            id={`${spell?.name}${index}-added`}
-            key={`${spell?.name}${index}-added`}
-          />
-        );
-      })} */}
     </>
   );
 };

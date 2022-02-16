@@ -14,7 +14,7 @@ type ToggleListProps<T> = {
     dataType: string[]
     sortBy?: keyof typeof sortByOptions
     Details: (props: any) => JSX.Element // ! 
-    title?: string
+    title?: (item: T) => string
 }
 
 const ToggleList = <T extends {name?: Maybe<string>}>({

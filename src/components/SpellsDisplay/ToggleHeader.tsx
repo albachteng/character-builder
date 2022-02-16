@@ -1,6 +1,6 @@
 import { Maybe } from "../../types";
 
-type ToggleHeaderProps<T> = {
+export type ToggleHeaderProps<T> = {
     type: T
     title?: string
     index: number
@@ -8,7 +8,7 @@ type ToggleHeaderProps<T> = {
     list: T[]
 }
 
-const ToggleHeader = <T extends {name: Maybe<string>, level: Maybe<number>}>({type, title, index, handleClick, list}: ToggleHeaderProps<T>) => {
+const ToggleHeader = <T extends {name: Maybe<string>}>({type, title, index, handleClick, list}: ToggleHeaderProps<T>) => {
 
     return (
         <div>

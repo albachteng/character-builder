@@ -1,30 +1,55 @@
 import useAddToList from "../hooks/useAddToList";
 import withOnClick from "./withOnClick";
-import QueryWrapper from "./QueryWrapper";
-import RenderMap, { MappingFunc } from "./RenderMap";
+import { MappingFunc } from "./RenderMap";
 import QueryRenderer from "./QueryRenderer";
 import { DocumentNode } from "graphql";
-import { JSONValue } from "../types";
+import { JSONValue, Maybe } from "../types";
 import { sortByOptions } from "../utilities/sortByOptions";
+import ToggleHeader, { ToggleHeaderProps } from "./SpellsDisplay/ToggleHeader";
 
 
-type ToggleListProps<T> = {
-    mappingFunc: MappingFunc<T>
+type ToggleListProps<T, U> = {
     query: DocumentNode
     variables: JSONValue
     dataType: string[]
     sortBy?: keyof typeof sortByOptions
+    Details: (props: U) => JSX.Element // ! 
+    title?: string
+    DetailsProps: U
 }
 
-const ToggleList = <T,>({mappingFunc, query, variables, dataType, sortBy = 'default'}: ToggleListProps<T>) => {
+const ToggleList = <T extends {name: Maybe<string>}, U>({
+    query, 
+    variables, 
+    dataType, 
+    Details, 
+    DetailsProps, 
+    title, 
+    sortBy = 'default'
+}: ToggleListProps<T, U>) => {
 
     const { handleClick, list } = useAddToList<T>();
 
-    /* 
-    to render the toggle list and selection list, we need a header (that accepts 
-    handleClick and list) and a description so that we can add useonclickdesc. 
-
-    */
+    const mappingFunc: MappingFunc<T> = (item, index, arr) => {
+        
+        const ToggleHeaderProps: ToggleHeaderProps<T> = {
+            type: item,
+            title,
+            index,
+            handleClick,
+            list 
+        } 
+        
+        const Header = () => <ToggleHeader<T> {...ToggleHeaderProps}/>;
+        const DetailsWithOnClick = withOnClick(Details, Header);
+        return (
+            <DetailsWithOnClick 
+                id={`${item.name}-${index}`} 
+                key={`${item.name}-${index}`}
+                {...DetailsProps}
+            />
+        )
+    }
 
     return (
         <>

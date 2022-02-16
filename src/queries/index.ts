@@ -3,6 +3,7 @@ export { AllSkills } from './AllSkills';
 export { BackgroundEquipment } from './BackgroundEquipment';
 export { BackgroundFeatures } from './BackgroundFeatures';
 export { BackgroundProficiencies } from './BackgroundProficiencies';
+export { CharacterProficiencies } from './CharacterProficiencies';
 export { ClassEquipmentOptions } from './ClassEquipmentOptions';
 export { ClassFeatures } from './ClassFeatures';
 export { ClassProficiencyChoices } from './ClassProficiencyChoices';

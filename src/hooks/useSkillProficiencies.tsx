@@ -1,10 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useState, useEffect } from 'react';
 import {
-  BackgroundProficiencies,
-  ClassProficiencyChoices,
-  RaceProficiencyChoices,
-  RaceStartingProficiencies
+  CharacterProficiencies
 } from '../queries';
 import { CharacterClass, Choice, Race, Skill } from '../types';
 import { findArray } from '../utilities/findArray';
@@ -15,21 +12,20 @@ const useSkillProficiencies = (
   characterRace: Race,
   characterBackground: string
 ) => {
-  /* we need to do work on several queries 
-    in the future, we can combine these queries into 
-    one to make this cleaner and to avoid multiple round trips */
-  const characterClassChoices = useQuery(ClassProficiencyChoices, {
-    variables: { filter: { index: characterClass } }
-  });
-  const characterRaceChoices = useQuery(RaceProficiencyChoices, {
-    variables: { filter: { index: characterRace } }
-  });
-  const characterRaceProficiencies = useQuery(RaceStartingProficiencies, {
-    variables: { filter: { index: characterRace } }
-  });
-  const characterBackgroundProficiencies = useQuery(BackgroundProficiencies, {
-    variables: { filter: { index: characterBackground } }
-  });
+
+  const characterProficiencies = useQuery(CharacterProficiencies, {
+    variables: {
+      "background": {
+        "index": characterBackground
+      },
+      "race": {
+        "index": characterRace
+      },
+      "class": {
+        "index": characterClass
+      }
+    }}
+   );
 
   // must update the choices and get selections before we can set the proficiencies
   const [choicesArray, setChoicesArray] = useState<Choice<Skill>[]>([]);
@@ -39,25 +35,22 @@ const useSkillProficiencies = (
   // when we have the choice arrays, combine them so that useOption can update selections
   useEffect(() => {
     if (
-      !characterClassChoices.loading &&
-      !characterRaceChoices.loading &&
-      characterClassChoices.data !== null &&
-      characterRaceChoices.data !== null
+      !characterProficiencies.loading
+      && characterProficiencies.data !== null
     ) {
       const classArray =
-        findArray(characterClassChoices.data, [
+        findArray(characterProficiencies.data, [
           'class',
           'proficiency_choices'
         ]) || [];
       const raceArray =
         [
-          findArray(characterRaceChoices.data, ['race', 'proficiency_choices'])
+          findArray(characterProficiencies.data, ['race', 'proficiency_choices'])
         ] || [];
       setChoicesArray([...classArray, ...raceArray]);
     }
   }, [
-    characterRaceChoices.data,
-    characterClassChoices.data,
+    characterProficiencies.data,
     characterClass,
     characterRace
   ]);
@@ -65,16 +58,15 @@ const useSkillProficiencies = (
   // when we have selections, combine them with racial starting proficiencies and background proficiencies
   useEffect(() => {
     selections &&
-      characterRaceProficiencies.data &&
-      characterBackgroundProficiencies.data &&
+      characterProficiencies.data &&
       // console.log({selections});
       setProficiencies([
         ...selections,
-        ...findArray(characterRaceProficiencies.data, [
+        ...findArray(characterProficiencies.data, [
           'race',
           'proficiencies'
         ]),
-        ...findArray(characterBackgroundProficiencies.data, [
+        ...findArray(characterProficiencies.data, [
           'background',
           'proficiencies'
         ])
@@ -82,8 +74,7 @@ const useSkillProficiencies = (
     // console.log({proficiencies});
   }, [
     selections,
-    characterRaceProficiencies,
-    characterBackgroundProficiencies
+    characterProficiencies.data
   ]);
 
   return {

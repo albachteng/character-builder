@@ -8,7 +8,7 @@ export type ToggleHeaderProps<T> = {
     list: T[]
 }
 
-const ToggleHeader = <T extends {name: Maybe<string>}>({type, title, index, handleClick, list}: ToggleHeaderProps<T>) => {
+const ToggleHeader = <T extends {name?: Maybe<string>}>({type, title, index, handleClick, list}: ToggleHeaderProps<T>) => {
 
     return (
         <div>

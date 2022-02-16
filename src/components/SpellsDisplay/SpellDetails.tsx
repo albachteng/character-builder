@@ -1,7 +1,7 @@
 import { AbilityScores, Maybe, Spell } from '../../types';
 
 type Props = {
-  spell: Spell;
+  item: Spell;
 };
 
 const handleStringArray = (arr: Maybe<string>[], type: string) => {
@@ -29,7 +29,10 @@ const handleStringArray = (arr: Maybe<string>[], type: string) => {
   } else return [];
 };
 
-const SpellDetails = ({ spell }: Props) => {
+const SpellDetails = ({ item }: Props) => {
+
+  const spell = item;
+
   return (
     <div>
       {spell?.desc && handleStringArray(spell?.desc, 'p')}

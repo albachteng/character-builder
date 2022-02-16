@@ -14,7 +14,7 @@ type Props = {
   list: SpellType[];
 };
 
-const buildSpellVariables = (
+export const buildSpellVariables = (
   characterClass: string,
   characterLevel: number
 ) => {

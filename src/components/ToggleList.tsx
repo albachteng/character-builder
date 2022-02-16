@@ -8,25 +8,23 @@ import { sortByOptions } from "../utilities/sortByOptions";
 import ToggleHeader, { ToggleHeaderProps } from "./SpellsDisplay/ToggleHeader";
 
 
-type ToggleListProps<T, U> = {
+type ToggleListProps<T> = {
     query: DocumentNode
     variables: JSONValue
     dataType: string[]
     sortBy?: keyof typeof sortByOptions
-    Details: (props: U) => JSX.Element // ! 
+    Details: (props: any) => JSX.Element // ! 
     title?: string
-    DetailsProps: U
 }
 
-const ToggleList = <T extends {name: Maybe<string>}, U>({
+const ToggleList = <T extends {name?: Maybe<string>}>({
     query, 
     variables, 
     dataType, 
     Details, 
-    DetailsProps, 
     title, 
     sortBy = 'default'
-}: ToggleListProps<T, U>) => {
+}: ToggleListProps<T>) => {
 
     const { handleClick, list } = useAddToList<T>();
 
@@ -42,11 +40,12 @@ const ToggleList = <T extends {name: Maybe<string>}, U>({
         
         const Header = () => <ToggleHeader<T> {...ToggleHeaderProps}/>;
         const DetailsWithOnClick = withOnClick(Details, Header);
+        
         return (
             <DetailsWithOnClick 
+                item={item}
                 id={`${item.name}-${index}`} 
                 key={`${item.name}-${index}`}
-                {...DetailsProps}
             />
         )
     }

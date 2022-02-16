@@ -1,9 +1,9 @@
-import { SpellModByClass, SpellcastingInfo } from '../../queries';
+import { SpellModByClass, SpellcastingInfo, SpellsOptionsByClassAndLevel } from '../../queries';
 import { AbilityScores, CharacterClass, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, ZeroToTwenty } from '../../types';
 import SpellSlots from './SpellSlots';
 import dice from '../../utilities/dice';
 import { AbilityScoreName } from '../../types/AbilityScoreName';
-import SpellBook from './SpellBook';
+import SpellBook, { buildSpellVariables } from './SpellBook';
 import { ReactNode } from 'react';
 import QueryWrapper from '../QueryWrapper';
 import RenderMap, { MappingFunc } from '../RenderMap';
@@ -11,6 +11,7 @@ import useAddToList from '../../hooks/useAddToList';
 import SpellDetails from './SpellDetails';
 import withOnClick from '../withOnClick';
 import SpellHeader from './SpellHeader';
+import ToggleList from '../ToggleList';
 
 type Props = {
   characterClass: CharacterClass;
@@ -74,7 +75,15 @@ const SpellsDisplay = ({
         <RenderMap mappingFunc={spellcastingInfoMapFunc} />
       </QueryWrapper>
       <h3>Spellbook</h3>
-      <SpellBook
+      <ToggleList<Spell>
+        query={SpellsOptionsByClassAndLevel}
+        variables={buildSpellVariables(characterClass, characterLevel)}
+        dataType={['spells']}
+        Details={SpellDetails}
+        title={'Hello World'}
+        sortBy={'default'}
+      />
+      {/* <SpellBook
         characterClass={characterClass}
         characterLevel={characterLevel}
         handleClick={handleClick}
@@ -93,7 +102,7 @@ const SpellsDisplay = ({
             key={`${spell?.name}${index}-added`}
           />
         );
-      })}
+      })} */}
     </>
   );
 };

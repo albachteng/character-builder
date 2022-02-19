@@ -20,11 +20,10 @@ const rollDice = function (
     // represents a single roll of a dice-sided die
     result.push(Math.ceil(Math.random() * dice));
   }
-  // ! NTS this doesn't work for drops higher than 1
-  // TODO
-  if (drop) {
-    // sets the lowest number instead to zero, effectively removing it
-    result[result.indexOf(Math.min(...result))] = 0;
+  while (drop > 0) {
+    const indexOfLowestValue = result.indexOf(Math.min(...result));
+    result.splice(indexOfLowestValue, 1);
+    drop -= 1;
   }
   // if a modifier is provided, it is added at the end before returning
   return result.reduce((a, b) => a + b) + modifier;

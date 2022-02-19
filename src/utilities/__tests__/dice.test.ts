@@ -23,6 +23,16 @@ describe('----- dice -----', () => {
             // lowest: 1 + 1 + 1 + 0(drop) + 1(mod);
             expect(number).toBeGreaterThanOrEqual(4);
         });
+        numbers = [];
+        for (let i = 0; i < 1000; i += 1) {
+            numbers.push(rollDice(6, 4, 0, 2));
+        }
+        numbers.forEach((number) => {
+            // highest: 6 + 6 + 0(drop) + 0(drop) + 0(mod)
+            expect(number).toBeLessThanOrEqual(12);
+            // lowerst: 1 + 1 + 0(drop) + 0(drop) + 0(mod)
+            expect(number).toBeGreaterThanOrEqual(2);
+        })
     });
     test('mod returns the correct modifier', () => {
         const five = mod(20); 

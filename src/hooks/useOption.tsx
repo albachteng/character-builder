@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { chooseFrom } from '../utilities/chooseFrom';
+import chooseFrom from '../utilities/chooseFrom';
 import type { Choice } from '../types';
 
 const useOption = (choicesArray: Choice<unknown>[]) => {

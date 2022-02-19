@@ -1,16 +1,15 @@
-import SpellDetails from '../SpellDetails';
-import { configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { configure, shallow } from 'enzyme';
+
+import SpellDetails from '../SpellDetails';
 
 configure({ adapter: new Adapter() });
-import { shallow } from 'enzyme';
 
-//@ts-ignore
-const wrapper = shallow(<SpellDetails/>)
+// @ts-ignore
+const wrapper = shallow(<SpellDetails />);
 
-describe("----- SpellDetails -----", () => {
-    test("it renders without crashing", () => {
-        expect(wrapper.length).toEqual(1);
-    })
+describe('----- SpellDetails -----', () => {
+  test('it renders without crashing', () => {
+    expect(wrapper.length).toEqual(1);
+  });
 });
-

@@ -8,11 +8,10 @@ type Props = {
 const originFromTypename: { [k: string]: string } = {
   Feature: 'Class Feature',
   Trait: 'Racial Trait',
-  BackgroundFeature: 'Background Feature'
+  BackgroundFeature: 'Background Feature',
 };
 
-const Feature = ({ feature }: Props) => {
-
+function Feature({ feature }: Props) {
   const { description, toggleDescription } = useOnClickDescription<FeatureType>(feature);
 
   return (
@@ -20,12 +19,12 @@ const Feature = ({ feature }: Props) => {
       <p onClick={toggleDescription}>
         {feature?.name}
         {feature?.level && `, Level ${feature?.level}`}
-        {feature?.__typename &&
-          ` | From: ${originFromTypename[feature?.__typename]}`}
+        {feature?.__typename
+          && ` | From: ${originFromTypename[feature?.__typename]}`}
       </p>
       {description}
     </div>
   );
-};
+}
 
 export default Feature;

@@ -1,21 +1,20 @@
 import { useState, useEffect } from 'react';
-import chooseFrom from '../utilities/chooseFrom';
-import type { Choice } from '../types';
 
-const useOption = (choicesArray: Choice<unknown>[]) => {
-  const [selections, setSelections]: [any[], React.Dispatch<any>] = useState(
-    []
-  ); // !
+import type { Choice } from '../types';
+import chooseFrom from '../utilities/chooseFrom';
+
+function useOption<T>(choicesArray: Choice<T>[]) {
+  const [selections, setSelections] = useState<T[]>([]);
 
   useEffect(() => {
     if (Array.isArray(choicesArray)) {
-      setSelections(choicesArray.map((choice) => chooseFrom(choice)).flat());
+      setSelections(choicesArray?.map((choice) => chooseFrom(choice))?.flat());
     }
   }, [choicesArray]);
 
   return {
     selections,
-    setSelections
+    setSelections,
   };
 };
 

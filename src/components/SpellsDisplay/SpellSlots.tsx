@@ -7,14 +7,14 @@ type Props = {
   characterLevel: number;
 };
 
-const SpellSlots = ({ characterClass, characterLevel }: Props) => {
+function SpellSlots({ characterClass, characterLevel }: Props) {
   const mappingFunc: MappingFunc<{ [key: string]: any }> = (
     spellSlot: any,
-    index: number
+    index: number,
   ) => {
     if (
-      spellSlot.level === characterLevel &&
-      spellSlot.spellcasting.spell_slots_level_1
+      spellSlot.level === characterLevel
+      && spellSlot.spellcasting.spell_slots_level_1
     ) {
       return (
         <pre key={`${spellSlot.__typename}${index}`}>
@@ -29,8 +29,9 @@ const SpellSlots = ({ characterClass, characterLevel }: Props) => {
       query={ClassSpellSlots}
       variables={{ filter: { index: characterClass } }}
       dataType={['class', 'class_levels']}
-      mappingFunc={mappingFunc} />
+      mappingFunc={mappingFunc}
+    />
   );
-};
+}
 
 export default SpellSlots;

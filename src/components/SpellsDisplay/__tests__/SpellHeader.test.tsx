@@ -1,16 +1,15 @@
-import SpellHeader from '../SpellHeader';
-import { configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { configure, shallow } from 'enzyme';
+
+import SpellHeader from '../SpellHeader';
 
 configure({ adapter: new Adapter() });
-import { shallow } from 'enzyme';
 
-//@ts-ignore
-const wrapper = shallow(<SpellHeader/>)
+// @ts-ignore
+const wrapper = shallow(<SpellHeader />);
 
-describe("----- SpellHeader -----", () => {
-    test("it renders without crashing", () => {
-        expect(wrapper.length).toEqual(1);
-    })
+describe('----- SpellHeader -----', () => {
+  test('it renders without crashing', () => {
+    expect(wrapper.length).toEqual(1);
+  });
 });
-

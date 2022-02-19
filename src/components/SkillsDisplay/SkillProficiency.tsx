@@ -1,12 +1,12 @@
-/* 
-responsible for displaying a single proficiency name and score 
+/*
+responsible for displaying a single proficiency name and score
 will need character stats and the name of the skill to render
-will also need proficiency bonus which is based on level 
+will also need proficiency bonus which is based on level
 */
 
-import dice from '../../utilities/dice';
-import { ZeroToTwenty, Skill } from '../../types';
 import useOnClickDescription from '../../hooks/useOnClickDescription';
+import { ZeroToTwenty, Skill } from '../../types';
+import dice from '../../utilities/dice';
 
 type Props = {
   stat: ZeroToTwenty;
@@ -16,13 +16,13 @@ type Props = {
   proficiencyFrom?: string;
 };
 
-const SkillProficiency = ({
+function SkillProficiency({
   stat,
   skill,
   proficiencyBonus = 2,
   isProficient,
-  proficiencyFrom
-}: Props) => {
+  proficiencyFrom,
+}: Props) {
   const originMap = (origin: string | undefined) => {
     switch (origin) {
       case 'ClassProficiency_choicesFrom':
@@ -46,14 +46,18 @@ const SkillProficiency = ({
     <div>
       <li onClick={toggleDescription}>
         {bonus >= 0 && '+'}
-        {bonus}: {skill?.name + ' '}
-        <span>{`${
-          isProficient ? `| Proficient from ${originMap(proficiencyFrom)}` : ''
-        }`}</span>
+        {bonus}
+        :
+        {`${skill?.name} `}
+        <span>
+          {`${
+            isProficient ? `| Proficient from ${originMap(proficiencyFrom)}` : ''
+          }`}
+        </span>
       </li>
       {description}
     </div>
   );
-};
+}
 
 export default SkillProficiency;

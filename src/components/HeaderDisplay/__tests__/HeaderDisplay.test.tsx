@@ -1,15 +1,15 @@
-import HeaderDisplay from '../index';
-import { configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { configure, shallow } from 'enzyme';
+
+import HeaderDisplay from '../index';
 
 configure({ adapter: new Adapter() });
-import { shallow } from 'enzyme';
 
-//@ts-ignore
-const wrapper = shallow(<HeaderDisplay/>)
+// @ts-ignore
+const wrapper = shallow(<HeaderDisplay />);
 
-describe("----- HeaderDisplay -----", () => {
-    test("it renders without crashing", () => {
-        expect(wrapper.length).toEqual(1);
-    })
+describe('----- HeaderDisplay -----', () => {
+  test('it renders without crashing', () => {
+    expect(wrapper.length).toEqual(1);
+  });
 });

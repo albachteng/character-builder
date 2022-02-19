@@ -12,18 +12,24 @@ type Props = {
 //     total: number
 // };
 
-const Stat = ({ name, stats }: Props): JSX.Element => {
+function Stat({ name, stats }: Props): JSX.Element {
   return (
     <div>
       <h4>
         <strong>
-          {name}: {stats >= 10 ? '+' : ''}
+          {name}
+          :
+          {stats >= 10 ? '+' : ''}
         </strong>
-        {dice.mod(stats)};
+        {dice.mod(stats)}
+        ;
       </h4>
-      <p>Total: {stats}</p>
+      <p>
+        Total:
+        {stats}
+      </p>
     </div>
   );
-};
+}
 
 export default Stat;

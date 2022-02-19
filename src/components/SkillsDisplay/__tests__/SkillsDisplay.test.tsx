@@ -1,24 +1,21 @@
-import SkillsDisplay from '../index';
-import { configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { configure, shallow } from 'enzyme';
+
 import useSkillProficiencies from '../../../hooks/useSkillProficiencies';
+import SkillsDisplay from '../index';
 
 configure({ adapter: new Adapter() });
-import { shallow } from 'enzyme';
 
 jest.mock(
-    '../../../hooks/useSkillProficiencies', 
-    () => {
-        return () => {
-            return { proficiencies: [] }
-        }
-});
+  '../../../hooks/useSkillProficiencies',
+  () => () => ({ proficiencies: [] }),
+);
 
-//@ts-ignore
-const wrapper = shallow(<SkillsDisplay/>)
+// @ts-ignore
+const wrapper = shallow(<SkillsDisplay />);
 
-describe("----- SkillsDisplay -----", () => {
-    test("it renders without crashing", () => {
-        expect(wrapper.length).toEqual(1);
-    })
+describe('----- SkillsDisplay -----', () => {
+  test('it renders without crashing', () => {
+    expect(wrapper.length).toEqual(1);
+  });
 });

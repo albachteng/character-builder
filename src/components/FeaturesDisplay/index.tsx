@@ -1,9 +1,9 @@
-import Feature from './Feature';
+import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../../queries';
 import type { Feature as FeatureType, ZeroToTwenty } from '../../types';
 import { CharacterClass, Race, MappingFunc } from '../../types';
-import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../../queries';
 import { Background } from '../../types/Background';
 import QueryRenderer from '../QueryRenderer';
+import Feature from './Feature';
 
 type Props = {
   characterLevel: ZeroToTwenty;
@@ -12,22 +12,22 @@ type Props = {
   characterBackground: Background;
 };
 
-const FeaturesDisplay = ({
+function FeaturesDisplay({
   characterLevel,
   characterClass,
   characterRace,
-  characterBackground
-}: Props): JSX.Element => {
+  characterBackground,
+}: Props): JSX.Element {
   const featuresMap: MappingFunc<FeatureType> = (feature, index) => {
     if (feature?.level) {
       return (
         feature?.level <= characterLevel && (
-          <Feature key={`Feature-${feature?.index}`} feature={feature}></Feature>
+          <Feature key={`Feature-${feature?.index}`} feature={feature} />
         )
       );
     }
     return (
-      <Feature key={`Feature-${feature?.index}`} feature={feature}></Feature>
+      <Feature key={`Feature-${feature?.index}`} feature={feature} />
     );
   };
 
@@ -38,21 +38,22 @@ const FeaturesDisplay = ({
         query={ClassFeatures}
         variables={{ filter: { class: { index: characterClass } } }}
         dataType={['features']}
-        mappingFunc={featuresMap} 
+        mappingFunc={featuresMap}
       />
       <QueryRenderer
         query={RacialFeatures}
         variables={{ filter: { races: { index: characterRace } } }}
         dataType={['features']}
-        mappingFunc={featuresMap} 
+        mappingFunc={featuresMap}
       />
       <QueryRenderer
         query={BackgroundFeatures}
         variables={{ filter: { index: characterBackground } }}
         dataType={['background', 'feature']}
-      mappingFunc={featuresMap}/> 
+        mappingFunc={featuresMap}
+      />
     </div>
   );
-};
+}
 
 export default FeaturesDisplay;

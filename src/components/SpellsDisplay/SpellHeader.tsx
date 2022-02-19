@@ -7,18 +7,20 @@ type Props = {
   list: Spell[];
 };
 
-const SpellHeader = ({ spell, index, handleClick, list }: Props) => {
+function SpellHeader({
+  spell, index, handleClick, list,
+}: Props) {
   return (
     <div>
       <p key={`${spell?.name}${index}`}>
         {spell?.name}
-        {spell?.level ? `, Level ${spell?.level}` : `, Cantrip`}
+        {spell?.level ? `, Level ${spell?.level}` : ', Cantrip'}
       </p>
       <button onClick={() => handleClick(spell)}>
         {list?.includes(spell) ? 'Remove' : 'Add'}
       </button>
     </div>
   );
-};
+}
 
 export default SpellHeader;

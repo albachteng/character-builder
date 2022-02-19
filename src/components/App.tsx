@@ -1,16 +1,17 @@
 import { Suspense } from 'react';
+
 import '../assets/css/App.css';
+import useCharacter from '../hooks/useCharacter';
+import { CharacterClass } from '../types';
 import AbilityScoresDisplay from './AbilityScoresDisplay';
 import FeatureDisplay from './FeaturesDisplay';
 import HeaderDisplay from './HeaderDisplay';
 import InventoryDisplay from './InventoryDisplay';
-import SkillsDisplay from './SkillsDisplay';
-import useCharacter from '../hooks/useCharacter';
-import SpellsDisplay from './SpellsDisplay';
-import { CharacterClass } from '../types';
 import ItemStore from './ItemStore';
+import SkillsDisplay from './SkillsDisplay';
+import SpellsDisplay from './SpellsDisplay';
 
-const App = () => {
+function App() {
   const { state, dispatch } = useCharacter();
   const {
     proficiencyBonus,
@@ -18,7 +19,7 @@ const App = () => {
     characterBackground,
     characterClass,
     characterStats,
-    characterLevel
+    characterLevel,
   } = state;
 
   // Two fighter and rogue archetypes DO get spellcasting - Eldritch Knight and Arcane Trickster
@@ -31,7 +32,7 @@ const App = () => {
       'ranger',
       'sorcerer',
       'warlock',
-      'wizard' /* 'fighter', 'rogue' */
+      'wizard', /* 'fighter', 'rogue' */
     ];
     return whiteList.includes(characterClass);
   };
@@ -57,49 +58,46 @@ const App = () => {
         These stats are bullshit, roll again!
       </button>
       <h1>
-        Play a fucking {state.characterRace} {state.characterClass}, coward!
+        Play a fucking
+        {' '}
+        {state.characterRace}
+        {' '}
+        {state.characterClass}
+        , coward!
       </h1>
-      <Suspense fallback={'Suspense Loading...'}>
-        {
-          <HeaderDisplay
-            background={characterBackground}
-            characterStats={characterStats}
-            characterName="nonsense"
-            characterClass={characterClass}
-            race={characterRace}
-            level={characterLevel}
-          />
-        }
+      <Suspense fallback="Suspense Loading...">
+        <HeaderDisplay
+          background={characterBackground}
+          characterStats={characterStats}
+          characterName="nonsense"
+          characterClass={characterClass}
+          race={characterRace}
+          level={characterLevel}
+        />
 
-        {<ItemStore />}
+        <ItemStore />
 
-        {<AbilityScoresDisplay stats={characterStats} />}
+        <AbilityScoresDisplay stats={characterStats} />
 
-        {
-          <FeatureDisplay
-            characterBackground={characterBackground}
-            characterRace={characterRace}
-            characterLevel={characterLevel}
-            characterClass={characterClass}
-          />
-        }
+        <FeatureDisplay
+          characterBackground={characterBackground}
+          characterRace={characterRace}
+          characterLevel={characterLevel}
+          characterClass={characterClass}
+        />
 
-        {
-          <InventoryDisplay
-            characterClass={characterClass}
-            characterBackground={characterBackground}
-          ></InventoryDisplay>
-        }
+        <InventoryDisplay
+          characterClass={characterClass}
+          characterBackground={characterBackground}
+        />
 
-        {
-          <SkillsDisplay
-            characterBackground={characterBackground}
-            characterRace={characterRace}
-            characterClass={characterClass}
-            proficiencyBonus={proficiencyBonus}
-            characterStats={characterStats}
-          />
-        }
+        <SkillsDisplay
+          characterBackground={characterBackground}
+          characterRace={characterRace}
+          characterClass={characterClass}
+          proficiencyBonus={proficiencyBonus}
+          characterStats={characterStats}
+        />
 
         {isSpellcaster(characterClass) && (
           <SpellsDisplay
@@ -111,6 +109,6 @@ const App = () => {
       </Suspense>
     </div>
   );
-};
+}
 
 export default App;

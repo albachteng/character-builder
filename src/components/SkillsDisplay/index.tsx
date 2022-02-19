@@ -1,8 +1,10 @@
 /* renders skill proficiencies display and handles query for class skill choices */
-import { AllSkills } from '../../queries';
-import type { AbilityScores } from '../../types/AbilityScores';
-import { AbilityScoreName, CharacterClass, MappingFunc, Race, Skill } from '../../types';
 import useSkillProficiencies from '../../hooks/useSkillProficiencies';
+import { AllSkills } from '../../queries';
+import {
+  AbilityScoreName, CharacterClass, MappingFunc, Race, Skill,
+} from '../../types';
+import type { AbilityScores } from '../../types/AbilityScores';
 import QueryWrapper from '../QueryWrapper';
 import RenderMap from '../RenderMap';
 import SkillProficiency from './SkillProficiency';
@@ -15,22 +17,22 @@ type Props = {
   characterBackground: string;
 };
 
-const SkillsDisplay = ({
+function SkillsDisplay({
   characterClass,
   characterStats,
   proficiencyBonus,
   characterRace,
-  characterBackground
-}: Props) => {
+  characterBackground,
+}: Props) {
   const { proficiencies } = useSkillProficiencies(
     characterClass,
     characterRace,
-    characterBackground
+    characterBackground,
   );
 
   const isProficient = (
     proficiencies: Skill[],
-    skill: Skill
+    skill: Skill,
   ): [boolean, string | undefined] => {
     for (let i = 0; i < proficiencies.length; i += 1) {
       if (
@@ -57,12 +59,10 @@ const SkillsDisplay = ({
   };
 
   return (
-    <>
-      <QueryWrapper query={AllSkills} variables={{}} dataType={['skills']}>
-        <RenderMap mappingFunc={makeProficienciesArray} />
-      </QueryWrapper>
-    </>
+    <QueryWrapper query={AllSkills} variables={{}} dataType={['skills']}>
+      <RenderMap mappingFunc={makeProficienciesArray} />
+    </QueryWrapper>
   );
-};
+}
 
 export default SkillsDisplay;

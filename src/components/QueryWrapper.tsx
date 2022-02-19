@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { DocumentNode } from 'graphql';
 import { cloneElement, ReactElement } from 'react';
+
 import { JSONValue } from '../types';
 import { findArray } from '../utilities/findArray';
 
@@ -11,8 +12,9 @@ type Props = {
   dataType: string[];
 };
 
-const QueryWrapper = ({ query, variables, children, dataType }: Props) => {
-  
+function QueryWrapper({
+  query, variables, children, dataType,
+}: Props) {
   const { loading, error, data } = useQuery(query, { variables });
 
   const arrayData = findArray(data, dataType);
@@ -24,6 +26,6 @@ const QueryWrapper = ({ query, variables, children, dataType }: Props) => {
       {data && cloneElement(children, { ...children.props, data: arrayData })}
     </>
   );
-};
+}
 
 export default QueryWrapper;

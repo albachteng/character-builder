@@ -1,12 +1,15 @@
-import { SpellModByClass, SpellcastingInfo, SpellsOptionsByClassAndLevel } from '../../queries';
-import { AbilityScores, CharacterClass, MappingFunc, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, ZeroToTwenty } from '../../types';
-import SpellSlots from './SpellSlots';
-import dice from '../../utilities/dice';
-import { AbilityScoreName } from '../../types/AbilityScoreName';
 import { ReactNode } from 'react';
-import SpellDetails from './SpellDetails';
-import ToggleList from '../ToggleList';
+
+import { SpellModByClass, SpellcastingInfo, SpellsOptionsByClassAndLevel } from '../../queries';
+import {
+  AbilityScores, CharacterClass, MappingFunc, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, ZeroToTwenty,
+} from '../../types';
+import { AbilityScoreName } from '../../types/AbilityScoreName';
+import dice from '../../utilities/dice';
 import QueryRenderer from '../QueryRenderer';
+import ToggleList from '../ToggleList';
+import SpellDetails from './SpellDetails';
+import SpellSlots from './SpellSlots';
 
 type Props = {
   characterClass: CharacterClass;
@@ -16,22 +19,23 @@ type Props = {
 
 const formatSpellTitle = (spell: Spell) => {
   let title = `${spell?.name} `;
-  if (spell?.level && spell?.level > 0) title += `, Level ${spell?.level}`
-  else title += `, Cantrip`;
+  if (spell?.level && spell?.level > 0) title += `, Level ${spell?.level}`;
+  else title += ', Cantrip';
   return title;
-}
+};
 
-const SpellsDisplay = ({
+function SpellsDisplay({
   characterClass,
   characterLevel,
-  characterStats
-}: Props) => {
-
+  characterStats,
+}: Props) {
   const spellModMapFunc: MappingFunc<ClassSpellcastingSpellcasting_Ability> = (item) => {
     if (item?.name) {
       return (
         <p key={item?.name}>
-          {item?.name}: {dice.mod(characterStats[item?.name as AbilityScoreName])}
+          {item?.name}
+          :
+          {dice.mod(characterStats[item?.name as AbilityScoreName])}
         </p>
       );
     }
@@ -53,13 +57,13 @@ const SpellsDisplay = ({
 
   const buildSpellVariables = (
     characterClass: string,
-    characterLevel: number
+    characterLevel: number,
   ) => {
     const variables: { [key: string]: any } = {
       filter: {
         AND: { classes: { index: characterClass } },
-        OR: []
-      }
+        OR: [],
+      },
     };
     for (let i = 0; i <= characterLevel; i += 1) {
       variables.filter.OR.push({ level: i });
@@ -80,23 +84,25 @@ const SpellsDisplay = ({
         query={SpellModByClass}
         variables={{ filter: { index: characterClass } }}
         dataType={['class', 'spellcasting', 'spellcasting_ability']}
-        mappingFunc={spellModMapFunc} />
+        mappingFunc={spellModMapFunc}
+      />
       <QueryRenderer
         query={SpellcastingInfo}
         variables={{ filter: { index: characterClass } }}
         dataType={['class', 'spellcasting', 'info']}
-        mappingFunc={spellcastingInfoMapFunc} />
+        mappingFunc={spellcastingInfoMapFunc}
+      />
       <h3>Spellbook</h3>
       <ToggleList<Spell>
         query={SpellsOptionsByClassAndLevel}
         variables={buildSpellVariables(characterClass, characterLevel)}
         dataType={['spells']}
         Details={SpellDetails}
-        sortBy={'levelAsc'}
+        sortBy="levelAsc"
         title={formatSpellTitle}
       />
     </>
   );
-};
+}
 
 export default SpellsDisplay;

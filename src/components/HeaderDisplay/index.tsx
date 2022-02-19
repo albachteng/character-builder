@@ -1,14 +1,16 @@
-/* 
-ultimately responsible for displaying character name, character class, race, level, ?alignment, ?experience, ?background 
+/*
+ultimately responsible for displaying character name, character class, race, level, ?alignment, ?experience, ?background
 */
 
 import { PersonalityByBackground } from '../../queries';
-import { AbilityScores, CharacterClass, MappingFunc, Race, ZeroToTwenty } from '../../types';
+import {
+  AbilityScores, CharacterClass, MappingFunc, Race, ZeroToTwenty,
+} from '../../types';
 import { Background } from '../../types/Background';
-import HitPoints from './HitPoints';
 import QueryWrapper from '../QueryWrapper';
 import RenderMap from '../RenderMap';
 import withUseOption from '../withUseOption';
+import HitPoints from './HitPoints';
 
 type Props = {
   characterName: string;
@@ -21,7 +23,7 @@ type Props = {
   background?: Background;
 };
 
-const HeaderDisplay = ({
+function HeaderDisplay({
   characterName,
   characterClass,
   characterStats,
@@ -29,21 +31,26 @@ const HeaderDisplay = ({
   level,
   alignment = 'Neutral',
   experience = 0,
-  background = 'acolyte'
-}: Props) => {
-
+  background = 'acolyte',
+}: Props) {
   const personalityMap: MappingFunc<string> = (trait, index) => {
     if (trait) {
-      return <p key={`${trait}${index}`}>Trait: {trait}</p>;
+      return (
+        <p key={`${trait}${index}`}>
+          Trait:
+          {trait}
+        </p>
+      );
     }
   };
 
   const idealsMap: MappingFunc<any> = (ideal, index) => {
     if (ideal) {
       return (
-        <>
-          <p key={`${ideal}${index}`}>Ideal: {ideal.desc}</p>
-        </>
+        <p key={`${ideal}${index}`}>
+          Ideal:
+          {ideal.desc}
+        </p>
       );
     }
   };
@@ -91,10 +98,10 @@ const HeaderDisplay = ({
               level,
               alignment,
               experience,
-              background
+              background,
             },
             null,
-            2
+            2,
           )}
         </pre>
         <HitPoints
@@ -105,6 +112,6 @@ const HeaderDisplay = ({
       </div>
     </>
   );
-};
+}
 
 export default HeaderDisplay;

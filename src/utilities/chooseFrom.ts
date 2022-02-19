@@ -1,16 +1,17 @@
-import type { Choice } from '../types';
+import { Choice } from "../types";
 
-// takes a single choice and returns an array of selections from that choice
-export const chooseFrom = <T>(choice: Choice<T>) => {
-  const choices: T[] = []; // !
-  const { choose, from } = choice;
-  if (choose && from?.length) {
-    while (choices.length < choose) {
-      const selection = Math.floor(Math.random() * from.length);
-      !choices.includes(from[selection]) &&
-        from[selection] &&
-        choices.push(from[selection]);
+const chooseFrom = <T>({choose, from}: Choice<T>) => {
+    if ( choose <= 0 || from.length === 0 || !Array.isArray(from)) return [];
+    const fromClone = from.slice();
+    const selections: T[] = [];
+    console.log({choose, fromClone});
+    while (selections.length < choose && fromClone.length > 0) {
+        const selectionIndex = Math.floor(Math.random() * fromClone.length);
+        const [selection] = fromClone.splice(selectionIndex, 1);
+        if (selection && !selections.includes(selection)) selections.push(selection);
+        console.log({selections})
     }
-  }
-  return choices;
+    return selections;
 };
+
+export default chooseFrom;

@@ -2,14 +2,10 @@
 ultimately responsible for displaying character name, character class, race, level, ?alignment, ?experience, ?background
 */
 
-import { PersonalityByBackground } from '../../queries';
 import {
-  AbilityScores, CharacterClass, MappingFunc, Race, ZeroToTwenty,
+  AbilityScores, CharacterClass, Race, ZeroToTwenty,
 } from '../../types';
 import { Background } from '../../types/Background';
-import QueryWrapper from '../QueryWrapper';
-import RenderMap from '../RenderMap';
-import withUseOption from '../withUseOption';
 import HitPoints from './HitPoints';
 
 type Props = {
@@ -33,62 +29,8 @@ function HeaderDisplay({
   experience = 0,
   background = 'acolyte',
 }: Props) {
-  const personalityMap: MappingFunc<string> = (trait, index) => {
-    if (trait) {
-      return (
-        <p key={`${trait}${index}`}>
-          Trait:
-          {trait}
-        </p>
-      );
-    }
-  };
-
-  const idealsMap: MappingFunc<any> = (ideal, index) => {
-    if (ideal) {
-      return (
-        <p key={`${ideal}${index}`}>
-          Ideal:
-          {ideal.desc}
-        </p>
-      );
-    }
-  };
-
-  const RenderMapWithOption = withUseOption(RenderMap);
-
   return (
     <>
-      <h2>Header</h2>
-      <div>
-        <QueryWrapper
-          query={PersonalityByBackground}
-          variables={{ filter: { index: background } }}
-          dataType={['background', 'personality_traits']}
-        >
-          <RenderMapWithOption mappingFunc={personalityMap} />
-        </QueryWrapper>
-        <QueryWrapper
-          query={PersonalityByBackground}
-          variables={{ filter: { index: background } }}
-          dataType={['background', 'ideals']}
-        >
-          <RenderMapWithOption mappingFunc={idealsMap} />
-        </QueryWrapper>
-        <QueryWrapper
-          query={PersonalityByBackground}
-          variables={{ filter: { index: background } }}
-          dataType={['background', 'bonds']}
-        >
-          <RenderMapWithOption mappingFunc={personalityMap} />
-        </QueryWrapper>
-        <QueryWrapper
-          query={PersonalityByBackground}
-          variables={{ filter: { index: background } }}
-          dataType={['background', 'flaws']}
-        >
-          <RenderMapWithOption mappingFunc={personalityMap} />
-        </QueryWrapper>
         <pre>
           {JSON.stringify(
             {
@@ -109,8 +51,7 @@ function HeaderDisplay({
           characterLevel={level}
           characterClass={characterClass}
         />
-      </div>
-    </>
+        </>
   );
 }
 

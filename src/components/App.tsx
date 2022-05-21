@@ -1,5 +1,6 @@
-import { Suspense } from 'react';
+import { Suspense, useMemo } from 'react';
 
+import Personality from './Personality';
 import '../assets/css/App.css';
 import useCharacter from '../hooks/useCharacter';
 import { CharacterClass } from '../types';
@@ -37,6 +38,7 @@ function App() {
     return whiteList.includes(characterClass);
   };
 
+  const MyPersonality = useMemo(() => <Personality/>, [characterBackground, characterClass])
   return (
     <div id="App">
       <a target="_" href="https://www.dnd5eapi.co/graphql">
@@ -65,9 +67,10 @@ function App() {
         {state.characterClass}
         , coward!
       </h1>
+      {MyPersonality}
       <Suspense fallback="Suspense Loading...">
         <HeaderDisplay
-          background={characterBackground}
+          // background={characterBackground}
           characterStats={characterStats}
           characterName="nonsense"
           characterClass={characterClass}

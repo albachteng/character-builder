@@ -13,12 +13,12 @@ function SpellSlots({ characterClass, characterLevel }: Props) {
     index: number,
   ) => {
     if (
-      spellSlot.level === characterLevel
-      && spellSlot.spellcasting.spell_slots_level_1
+      spellSlot?.level === characterLevel
+      && spellSlot?.spellcasting?.spell_slots_level_1
     ) {
       return (
-        <pre key={`${spellSlot.__typename}${index}`}>
-          {JSON.stringify(spellSlot.spellcasting, null, 3)}
+        <pre key={`${spellSlot?.__typename}${index}`}>
+          {JSON.stringify(spellSlot?.spellcasting, null, 3)}
         </pre>
       );
     }

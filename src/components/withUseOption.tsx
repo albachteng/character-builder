@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 import useOption from '../hooks/useOption';
-// import { Choice } from '../types';
 
 // TODO type WithUseOptionProps = {
 //     data: Choice[]

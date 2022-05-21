@@ -5,7 +5,7 @@ import { sortByOptions } from '../utilities/sortByOptions';
 import QueryWrapper from './QueryWrapper';
 import RenderMap from './RenderMap';
 
-type QueryRendererProps<T> = {
+export type QueryRendererProps<T> = {
     mappingFunc: MappingFunc<T>
     query: DocumentNode
     variables: JSONValue

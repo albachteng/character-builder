@@ -14,6 +14,7 @@ type ToggleListProps<T> = {
     sortBy?: keyof typeof sortByOptions
     Details: (props: any) => JSX.Element // !
     title?: (item: T) => string
+    initial?: T[]
 }
 
 function ToggleList<T extends {name?: Maybe<string>}>({
@@ -22,11 +23,12 @@ function ToggleList<T extends {name?: Maybe<string>}>({
   dataType,
   Details,
   title,
+  initial = [],
   sortBy = 'default',
 }: ToggleListProps<T>) {
-  const { handleClick, list } = useAddToList<T>();
+  const { handleClick, list } = useAddToList<T>(initial);
 
-  const mappingFunc: MappingFunc<T> = (item, index, arr) => {
+  const mappingFunc: MappingFunc<T> = (item, index, _) => {
     const ToggleHeaderProps: ToggleHeaderProps<T> = {
       type: item,
       title,

@@ -78,7 +78,6 @@ function App() {
           level={characterLevel}
         />
 
-        <ItemStore />
 
         <AbilityScoresDisplay stats={characterStats} />
 
@@ -89,6 +88,10 @@ function App() {
           characterClass={characterClass}
         />
 
+        <ItemStore 
+          characterClass={characterClass}
+          characterBackground={characterBackground}
+          />
         <InventoryDisplay
           characterClass={characterClass}
           characterBackground={characterBackground}

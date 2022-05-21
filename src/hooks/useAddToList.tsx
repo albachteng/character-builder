@@ -1,9 +1,13 @@
 /* */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function useAddToList<T>() {
+function useAddToList<T>(initial: T[] = []) {
 
-  const [list, setList] = useState<T[]>([]);
+  const [list, setList] = useState<T[]>(initial)
+
+  useEffect(() => {
+    setList(initial)
+  }, initial)
 
   function handleClick<U extends T>(toAdd: U) {
     list.includes(toAdd)

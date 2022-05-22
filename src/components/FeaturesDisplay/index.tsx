@@ -25,9 +25,9 @@ function FeaturesDisplay({
   function provideFeaturesFilter() {  
     const featuresFilter: [undefined | string, undefined | string] = [undefined, undefined];
     if (characterRace === 'dragonborn') {
-      const draconicAncestryArray = [ "draconic-ancestry" , "draconic-ancestry-blue" , "draconic-ancestry-red" , "breath-weapon" , "draconic-ancestry-brass" , "draconic-ancestry-black" , "draconic-ancestry-bronze" , "draconic-ancestry-silver" , "draconic-ancestry-white" , "damage-resistance" , "draconic-ancestry-copper" , "draconic-ancestry-gold" , "draconic-ancestry-green"];
+      const draconicAncestryArray: string[] = [ "draconic-ancestry" , "draconic-ancestry-blue" , "draconic-ancestry-red" , "breath-weapon" , "draconic-ancestry-brass" , "draconic-ancestry-black" , "draconic-ancestry-bronze" , "draconic-ancestry-silver" , "draconic-ancestry-white" , "damage-resistance" , "draconic-ancestry-copper" , "draconic-ancestry-gold" , "draconic-ancestry-green"];
       const ancestry = getRandom(draconicAncestryArray);
-      featuresFilter[0] = 'draconic-ancestry';
+      featuresFilter[0] = 'draconic-ancestry-';
       featuresFilter[1] = ancestry;
     }
     if (characterClass === 'fighter') {
@@ -37,9 +37,9 @@ function FeaturesDisplay({
       featuresFilter[1] = fightingStyle;
     }
     if (characterClass === 'warlock') {
-      const invocationsArray = ['invocation'];
+      const invocationsArray = ['eldritch-invocation-gaze-of-two-minds', 'eldritch-invocation-fiendish-vigor', 'eldritch-invocation-misty-visions', 'eldritch-invocation-voice-of-the-chain-master', 'eldritch-invocation-armor-of-shadows', 'eldritch-invocation-beguiling-influence', 'eldritch-invocation-book-of-ancient-secrets', 'eldritch-invocation-eyes-of-the-rune-keeper', 'eldritch-invocation-eldritch-spear', 'eldritch-invocation-repelling-blast', 'eldritch-invocation-beast-speech', 'eldritch-invocation-devils-sight', 'eldritch-invocation-agonizing-blast', 'eldritch-invocation-eldritch-sight', 'eldritch-invocation-mask-of-many-faces', 'eldritch-invocation-thief-of-five-fates'];
       const invocationChoice = getRandom(invocationsArray);
-      featuresFilter[0] = 'invocation';
+      featuresFilter[0] = 'eldritch-invocation-';
       featuresFilter[1] = invocationChoice;
     }
 

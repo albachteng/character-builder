@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import useOnClickDescription from '../../hooks/useOnClickDescription';
 import { Feature as FeatureType } from '../../types';
 
@@ -15,7 +16,6 @@ const originFromTypename: { [k: string]: string } = {
 
 function Feature({ feature, selectionSearchTerm, selectionIndex }: Props) {
   const { description, toggleDescription } = useOnClickDescription<FeatureType>(feature);
-  console.log({selectionIndex, selectionSearchTerm})
 
   // matchesSelectionSearch tells us if this is one of the terms we are looking to potentially filter
   const matchesSelectionSearch = selectionSearchTerm && feature?.index?.includes(selectionSearchTerm)

@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { getRandom } from '../../hooks/useCharacter';
 import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../../queries';
 import type { Feature as FeatureType, ZeroToTwenty } from '../../types';
@@ -22,17 +23,32 @@ function FeaturesDisplay({
 }: Props): JSX.Element {
 
   function provideFeaturesFilter() {  
+    const featuresFilter: [undefined | string, undefined | string] = [undefined, undefined];
     if (characterRace === 'dragonborn') {
       const draconicAncestryArray = [ "draconic-ancestry" , "draconic-ancestry-blue" , "draconic-ancestry-red" , "breath-weapon" , "draconic-ancestry-brass" , "draconic-ancestry-black" , "draconic-ancestry-bronze" , "draconic-ancestry-silver" , "draconic-ancestry-white" , "damage-resistance" , "draconic-ancestry-copper" , "draconic-ancestry-gold" , "draconic-ancestry-green"];
       const ancestry = getRandom(draconicAncestryArray);
-      return ['draconic-ancestry', ancestry];
+      featuresFilter[0] = 'draconic-ancestry';
+      featuresFilter[1] = ancestry;
     }
-    // if (characterClass === 'fighter')
-    else return [undefined, undefined]
+    if (characterClass === 'fighter') {
+      const fightingStyleArray = ['fighter-fighting-style-archery', 'fighter-fighting-style-dueling', 'fighter-fighting-style-defense', 'fighter-fighting-style-two-weapon-fighting', 'fighter-fighting-style-protection', 'fighter-fighting-style-great-weapon-fighting', ] 
+      const fightingStyle = getRandom(fightingStyleArray);
+      featuresFilter[0] = 'fighter-fighting-style-';
+      featuresFilter[1] = fightingStyle;
+    }
+    if (characterClass === 'warlock') {
+      const invocationsArray = ['invocation'];
+      const invocationChoice = getRandom(invocationsArray);
+      featuresFilter[0] = 'invocation';
+      featuresFilter[1] = invocationChoice;
+    }
+
+    return featuresFilter;
   }
 
   const featuresMap: MappingFunc<FeatureType> = (feature, index) => {
-    const [selectionSearchTerm, selectionIndex] = provideFeaturesFilter();
+    // const [selectionSearchTerm, selectionIndex] = provideFeaturesFilter();
+    const [selectionSearchTerm, selectionIndex] = useMemo(() => provideFeaturesFilter(), [characterClass, characterRace]);
     if (feature?.level) {
       return (
         feature?.level <= characterLevel && (

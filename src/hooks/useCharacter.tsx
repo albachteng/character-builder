@@ -43,7 +43,7 @@ const racesIndexArray: Race[] = [
 ];
 const backgroundIndexArray: Background[] = ['acolyte']; // sadly, the only free option
 
-const getRandom = <T extends unknown>(arr: T[]): T =>
+export const getRandom = <T extends unknown>(arr: T[]): T =>
   arr[Math.floor(Math.random() * arr.length)];
 
 const emptyStats: AbilityScores = {

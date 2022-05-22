@@ -26,6 +26,7 @@ function ToggleList<T extends {name?: Maybe<string>}>({
   initial = [],
   sortBy = 'default',
 }: ToggleListProps<T>) {
+
   const { handleClick, list } = useAddToList<T>(initial);
 
   const mappingFunc: MappingFunc<T> = (item, index, _) => {

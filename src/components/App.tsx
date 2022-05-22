@@ -38,7 +38,7 @@ function App() {
     return whiteList.includes(characterClass);
   };
 
-  const MyPersonality = useMemo(() => <Personality/>, [characterBackground, characterClass])
+  const myPersonality = useMemo(() => <Personality/>, [characterBackground, characterClass])
   return (
     <div id="App">
       <a target="_" href="https://www.dnd5eapi.co/graphql">
@@ -67,7 +67,7 @@ function App() {
         {state.characterClass}
         , coward!
       </h1>
-      {MyPersonality}
+      {myPersonality}
       <Suspense fallback="Suspense Loading...">
         <HeaderDisplay
           // background={characterBackground}

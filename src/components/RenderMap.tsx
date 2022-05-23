@@ -1,4 +1,5 @@
 import { JSONValue, MappingFunc } from '../types';
+import { makeUniqueId } from '@apollo/client/utilities';
 import { sortByOptions } from '../utilities/sortByOptions';
 
 type RenderProps = {

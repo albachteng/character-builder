@@ -7,6 +7,7 @@ import CharacterContext from '../CharacterContext';
 import { useContext } from 'react';
 import QueryRenderer from '../QueryRenderer';
 import Feature from './Feature';
+import { makeUniqueId } from '@apollo/client/utilities';
 
 function FeaturesDisplay(): JSX.Element {
 
@@ -43,7 +44,7 @@ function FeaturesDisplay(): JSX.Element {
     if (feature?.level) {
       return (
         feature?.level <= characterLevel && (
-          <Feature key={`Feature-${feature?.index}`} feature={feature} selectionSearchTerm={selectionSearchTerm} selectionIndex={selectionIndex} />
+          <Feature key={`${makeUniqueId('feature')}`} feature={feature} selectionSearchTerm={selectionSearchTerm} selectionIndex={selectionIndex} />
         )
       );
     }

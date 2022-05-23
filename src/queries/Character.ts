@@ -34,33 +34,6 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
             type
           }
           reference
-          subclass {
-            desc
-            index
-            name
-            spells {
-              prerequisites {
-                index
-                name
-                type
-                url
-              }
-              spell {
-                index
-                name
-                url
-              }
-            }
-            subclass_flavor
-            subclass_levels {
-              ability_score_bonuses
-              index
-              level
-              prof_bonus
-              url
-            }
-            url
-          }
           feature_specific {
             subfeature_options {
               choose

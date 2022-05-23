@@ -1,4 +1,5 @@
 /* renders skill proficiencies display and handles query for class skill choices */
+import { makeUniqueId } from '@apollo/client/utilities';
 import { useContext } from 'react';
 import useSkillProficiencies from '../../hooks/useSkillProficiencies';
 import { AllSkills } from '../../queries';
@@ -43,7 +44,7 @@ function SkillsDisplay() {
         stat={characterStats[skill?.ability_score?.name as AbilityScoreName]}
         proficiencyBonus={proficiencyBonus}
         isProficient={proficiency[0]}
-        key={`${skill.name}${index}`}
+        key={`${makeUniqueId('skill')}`}
         proficiencyFrom={proficiency[1]}
       />
     );

@@ -12,17 +12,20 @@ import HitPoints from './HitPoints';
 
 type Props = {
   characterName: string;
+  data: any
   alignment?: string;
   experience?: number;
 };
 
 function HeaderDisplay({
   characterName,
+  data,
   alignment = 'Neutral',
   experience = 0,
 }: Props) {
 
   const {characterClass, characterRace, characterLevel, characterBackground} = useContext(CharacterContext);
+  console.log(data);
   return (
     <>
         <pre>

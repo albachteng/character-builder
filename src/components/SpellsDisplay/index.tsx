@@ -2,7 +2,7 @@ import { ReactNode, useContext } from 'react';
 import CharacterContext from '../CharacterContext';
 import { SpellModByClass, SpellcastingInfo, SpellsOptionsByClassAndLevel } from '../../queries';
 import {
-  AbilityScores, CharacterClass, MappingFunc, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, ZeroToTwenty,
+  MappingFunc, Maybe, Spell, ClassSpellcastingSpellcasting_Ability
 } from '../../types';
 import { AbilityScoreName } from '../../types/AbilityScoreName';
 import dice from '../../utilities/dice';
@@ -10,6 +10,7 @@ import QueryRenderer from '../QueryRenderer';
 import ToggleList from '../ToggleList';
 import SpellDetails from './SpellDetails';
 import SpellSlots from './SpellSlots';
+import { makeUniqueId } from '@apollo/client/utilities';
 
 const formatSpellTitle = (spell: Spell) => {
   let title = `${spell?.name} `;
@@ -22,10 +23,10 @@ function SpellsDisplay() {
 
   const { characterStats, characterClass, characterLevel } = useContext(CharacterContext);
 
-  const spellModMapFunc: MappingFunc<ClassSpellcastingSpellcasting_Ability> = (item) => {
+  const spellModMapFunc: MappingFunc<ClassSpellcastingSpellcasting_Ability> = (item, index, _) => {
     if (item?.name) {
       return (
-        <p key={item?.name}>
+        <p key={`${makeUniqueId('spellmod')}${index}`}>
           {item?.name}
           :
           {dice.mod(characterStats[item?.name as AbilityScoreName])}
@@ -34,15 +35,15 @@ function SpellsDisplay() {
     }
   };
 
-  const spellcastingInfoMapFunc: MappingFunc<Spell> = (spell) => {
+  const spellcastingInfoMapFunc: MappingFunc<Spell> = (spell, spellIndex) => {
     // TODO
     const desc: ReactNode[] = [];
     spell?.desc?.forEach((paragraph: Maybe<string>, index: number) => {
-      desc.push(<p key={`${spell?.name}-paragraph-${index}`}>{paragraph}</p>);
+      desc.push(<p key={`${makeUniqueId(`spellModDesc${spellIndex}`)}-paragraph-${index}`}>{paragraph}</p>);
     });
     return (
-      <div>
-        <h4>{spell.name}</h4>
+      <div key={`${makeUniqueId('spellMod')}${spellIndex}`}>
+        <h4>{spell?.name}</h4>
         {desc}
       </div>
     );

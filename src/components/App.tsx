@@ -1,5 +1,4 @@
 import { Suspense, useMemo } from "react";
-
 import Personality from "./Personality";
 import "../assets/css/App.css";
 import useCharacter from "../hooks/useCharacter";
@@ -13,18 +12,27 @@ import SkillsDisplay from "./SkillsDisplay";
 import SpellsDisplay from "./SpellsDisplay";
 import CharacterContext from "./CharacterContext";
 import { Character } from "../queries/Character";
+import { useQuery } from "@apollo/client";
 
 function App() {
+
   const { state, dispatch } = useCharacter();
+
   const {
-    proficiencyBonus,
+    characterClass, 
+    characterBackground, 
     characterRace,
-    characterBackground,
-    characterClass,
-    characterStats,
-    characterLevel,
+    characterLevel
   } = state;
 
+  const variables = { 
+    class: {index: characterClass},
+    race: {index: characterRace}, 
+    level: characterLevel, 
+    background: { index: characterBackground}
+  };
+
+  const { loading, error, data } = useQuery(Character, {variables})
   // Two fighter and rogue archetypes DO get spellcasting - Eldritch Knight and Arcane Trickster
   const isSpellcaster = (characterClass: CharacterClass) => {
     const whiteList = [
@@ -73,20 +81,16 @@ function App() {
         {myPersonality}
 
         <Suspense fallback="Suspense Loading...">
-          <HeaderDisplay characterName="nonsense" />
+
+          {data && <HeaderDisplay data={data} characterName="nonsense" />}
 
           <AbilityScoresDisplay />
-
           <FeatureDisplay />
-
           <ItemStore />
-
           <InventoryDisplay />
-
           <SkillsDisplay />
-
           {isSpellcaster(characterClass) && <SpellsDisplay />}
-        </Suspense>
+        </Suspense> 
       </div>
     </CharacterContext.Provider>
   );

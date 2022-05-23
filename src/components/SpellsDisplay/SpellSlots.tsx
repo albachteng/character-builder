@@ -1,3 +1,4 @@
+import { makeUniqueId } from '@apollo/client/utilities';
 import { ClassSpellSlots } from '../../queries';
 import { CharacterClass, MappingFunc } from '../../types';
 import QueryRenderer from '../QueryRenderer';
@@ -17,7 +18,7 @@ function SpellSlots({ characterClass, characterLevel }: Props) {
       && spellSlot?.spellcasting?.spell_slots_level_1
     ) {
       return (
-        <pre key={`${spellSlot?.__typename}${index}`}>
+        <pre key={`${makeUniqueId('spellslots')}${index}`}>
           {JSON.stringify(spellSlot?.spellcasting, null, 3)}
         </pre>
       );

@@ -1,31 +1,28 @@
-import { DocumentNode } from 'graphql';
+import { DocumentNode } from "graphql";
 
-import { JSONValue, MappingFunc } from '../types';
-import { sortByOptions } from '../utilities/sortByOptions';
-import QueryWrapper from './QueryWrapper';
-import RenderMap from './RenderMap';
+import { JSONValue, MappingFunc } from "../types";
+import { sortByOptions } from "../utilities/sortByOptions";
+import QueryWrapper from "./QueryWrapper";
+import RenderMap from "./RenderMap";
 
 export type QueryRendererProps<T> = {
-    mappingFunc: MappingFunc<T>
-    query: DocumentNode
-    variables: JSONValue
-    dataType: string[]
-    sortBy?: keyof typeof sortByOptions
-}
+  mappingFunc: MappingFunc<T>;
+  query: DocumentNode;
+  variables: JSONValue;
+  dataType: string[];
+  sortBy?: keyof typeof sortByOptions;
+};
 
-function QueryRenderer<T, >({
-  mappingFunc, query, variables, dataType, sortBy = 'default',
+function QueryRenderer<T>({
+  mappingFunc,
+  query,
+  variables,
+  dataType,
+  sortBy = "default",
 }: QueryRendererProps<T>) {
   return (
-    <QueryWrapper
-      query={query}
-      variables={variables}
-      dataType={dataType}
-    >
-      <RenderMap
-        mappingFunc={mappingFunc}
-        sortBy={sortBy}
-      />
+    <QueryWrapper query={query} variables={variables} dataType={dataType}>
+      <RenderMap mappingFunc={mappingFunc} sortBy={sortBy} />
     </QueryWrapper>
   );
 }

@@ -1,3 +1,4 @@
+import { makeUniqueId } from "@apollo/client/utilities";
 import { useContext } from "react";
 import {
   ClassEquipmentOptions,
@@ -16,7 +17,7 @@ function InventoryDisplay() {
 
   const equipmentMap: MappingFunc<{ [key: string]: any }> = (item, index) =>
     item?.equipment?.name !== null && (
-      <li key={`${item?.equipment?.name}${index}`}>
+      <li key={`${makeUniqueId('equipment')}`}>
         {item?.equipment?.name}:{item?.quantity}
       </li>
     );

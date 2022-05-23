@@ -1,3 +1,4 @@
+import { makeUniqueId } from '@apollo/client/utilities';
 import { DocumentNode } from 'graphql';
 
 import useAddToList from '../../hooks/useAddToList';
@@ -47,7 +48,7 @@ function ToggleList<T extends {name?: Maybe<string>}>({
       <DetailsWithOnClick
         item={item}
         id={`${item.name}-${index}`}
-        key={`${item.name}-${index}`}
+        key={`${item.name}-${index}${makeUniqueId('toggle-list')}`}
       />
     );
   };

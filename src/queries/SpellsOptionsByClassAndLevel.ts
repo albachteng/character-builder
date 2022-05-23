@@ -48,7 +48,6 @@ export const SpellsOptionsByClassAndLevel = gql`
       subclasses {
         name
         index
-        _id
       }
     }
   }

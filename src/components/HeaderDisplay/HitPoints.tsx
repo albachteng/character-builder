@@ -1,12 +1,8 @@
+import { useContext } from 'react';
 import useHP, { Rolls } from '../../hooks/useHP';
 import { CharacterClass, AbilityScores, ZeroToTwenty } from '../../types';
 import dice from '../../utilities/dice';
-
-type Props = {
-  characterStats: AbilityScores;
-  characterLevel: ZeroToTwenty;
-  characterClass: CharacterClass;
-};
+import CharacterContext from '../CharacterContext';
 
 const calculateHP = (
   characterStats: AbilityScores,
@@ -23,11 +19,10 @@ const calculateHP = (
   return total;
 };
 
-function HitPoints({
-  characterStats,
-  characterLevel,
-  characterClass,
-}: Props) {
+function HitPoints() {
+
+  const { characterLevel, characterClass, characterStats } = useContext(CharacterContext);
+
   const { rolls, calculateHitDice } = useHP(characterLevel, characterClass);
 
   return (

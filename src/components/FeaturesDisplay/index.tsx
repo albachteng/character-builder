@@ -1,26 +1,16 @@
 import { useMemo } from 'react';
 import { getRandom } from '../../hooks/useCharacter';
 import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../../queries';
-import type { Feature as FeatureType, ZeroToTwenty } from '../../types';
-import { CharacterClass, Race, MappingFunc } from '../../types';
-import { Background } from '../../types/Background';
+import type { Feature as FeatureType } from '../../types';
+import { MappingFunc } from '../../types';
+import CharacterContext from '../CharacterContext';
+import { useContext } from 'react';
 import QueryRenderer from '../QueryRenderer';
 import Feature from './Feature';
 
-type Props = {
-  characterLevel: ZeroToTwenty;
-  characterClass: CharacterClass;
-  characterRace: Race;
-  characterBackground: Background;
-};
+function FeaturesDisplay(): JSX.Element {
 
-
-function FeaturesDisplay({
-  characterLevel,
-  characterClass,
-  characterRace,
-  characterBackground,
-}: Props): JSX.Element {
+  const {characterRace, characterClass, characterBackground, characterLevel } = useContext(CharacterContext);
 
   function provideFeaturesFilter() {  
     const featuresFilter: [undefined | string, undefined | string] = [undefined, undefined];

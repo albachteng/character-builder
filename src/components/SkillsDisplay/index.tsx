@@ -1,29 +1,20 @@
 /* renders skill proficiencies display and handles query for class skill choices */
+import { useContext } from 'react';
 import useSkillProficiencies from '../../hooks/useSkillProficiencies';
 import { AllSkills } from '../../queries';
 import {
   AbilityScoreName, CharacterClass, MappingFunc, Race, Skill,
 } from '../../types';
 import type { AbilityScores } from '../../types/AbilityScores';
+import CharacterContext from '../CharacterContext';
 import QueryWrapper from '../QueryWrapper';
 import RenderMap from '../RenderMap';
 import SkillProficiency from './SkillProficiency';
 
-type Props = {
-  characterClass: CharacterClass;
-  characterRace: Race;
-  characterStats: AbilityScores;
-  proficiencyBonus: number;
-  characterBackground: string;
-};
+function SkillsDisplay() {
 
-function SkillsDisplay({
-  characterClass,
-  characterStats,
-  proficiencyBonus,
-  characterRace,
-  characterBackground,
-}: Props) {
+  const { characterClass, characterRace, characterBackground, characterStats, proficiencyBonus } = useContext(CharacterContext);
+
   const { proficiencies } = useSkillProficiencies(
     characterClass,
     characterRace,

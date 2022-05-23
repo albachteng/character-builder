@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-
+import { ReactNode, useContext } from 'react';
+import CharacterContext from '../CharacterContext';
 import { SpellModByClass, SpellcastingInfo, SpellsOptionsByClassAndLevel } from '../../queries';
 import {
   AbilityScores, CharacterClass, MappingFunc, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, ZeroToTwenty,
@@ -11,12 +11,6 @@ import ToggleList from '../ToggleList';
 import SpellDetails from './SpellDetails';
 import SpellSlots from './SpellSlots';
 
-type Props = {
-  characterClass: CharacterClass;
-  characterLevel: ZeroToTwenty;
-  characterStats: AbilityScores;
-};
-
 const formatSpellTitle = (spell: Spell) => {
   let title = `${spell?.name} `;
   if (spell?.level && spell?.level > 0) title += `, Level ${spell?.level}`;
@@ -24,11 +18,10 @@ const formatSpellTitle = (spell: Spell) => {
   return title;
 };
 
-function SpellsDisplay({
-  characterClass,
-  characterLevel,
-  characterStats,
-}: Props) {
+function SpellsDisplay() {
+
+  const { characterStats, characterClass, characterLevel } = useContext(CharacterContext);
+
   const spellModMapFunc: MappingFunc<ClassSpellcastingSpellcasting_Ability> = (item) => {
     if (item?.name) {
       return (

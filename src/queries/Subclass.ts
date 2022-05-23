@@ -6,7 +6,6 @@ export const Subclass = gql`
       desc
       index
       name
-      _id
       subclass_flavor
       url
       subclass_levels {

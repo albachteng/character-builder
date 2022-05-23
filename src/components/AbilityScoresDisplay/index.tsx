@@ -1,18 +1,20 @@
-import { ReactNode } from 'react';
-
+import { ReactNode, useContext } from 'react';
+import CharacterContext from '../CharacterContext';
 import { AbilityScores } from '../../types';
 import Stat from './Stat';
+import { Character } from '../../queries/Character';
 
-type Props = {
-  stats: AbilityScores;
-};
+function AbilityScoresDisplay() {
 
-function AbilityScoresDisplay({ stats }: Props) {
+  const { characterStats } = useContext(CharacterContext);
+
   const scores: ReactNode[] = [];
+
   let key: keyof AbilityScores;
-  for (key in stats) {
+
+  for (key in characterStats) {
     scores.push(
-      <Stat name={key} key={`${key}${stats[key]}`} stats={stats[key]} />,
+      <Stat name={key} key={`${key}${characterStats[key]}`} stats={characterStats[key]} />,
     );
   }
 

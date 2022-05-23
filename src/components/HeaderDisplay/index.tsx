@@ -6,29 +6,34 @@ import {
   AbilityScores, CharacterClass, Race, ZeroToTwenty,
 } from '../../types';
 import { Background } from '../../types/Background';
+import CharacterContext from '../CharacterContext';
+import { useContext } from 'react';
 import HitPoints from './HitPoints';
 
 type Props = {
   characterName: string;
-  characterClass: CharacterClass;
-  characterStats: AbilityScores;
-  race: Race;
-  level: ZeroToTwenty;
+  // characterClass: CharacterClass;
+  // characterStats: AbilityScores;
+  // race: Race;
+  // level: ZeroToTwenty;
   alignment?: string;
   experience?: number;
-  background?: Background;
+  // background?: Background;
 };
 
 function HeaderDisplay({
   characterName,
-  characterClass,
-  characterStats,
-  race,
-  level,
+  // characterClass,
+  // characterStats,
+  // race,
+  // level,
   alignment = 'Neutral',
   experience = 0,
-  background = 'acolyte',
+  // background = 'acolyte',
 }: Props) {
+
+  // console.log(useContext(CharacterContext));
+  const {characterClass, characterStats, characterRace, characterLevel, characterBackground} = useContext(CharacterContext);
   return (
     <>
         <pre>
@@ -36,11 +41,11 @@ function HeaderDisplay({
             {
               characterName,
               characterClass,
-              race,
-              level,
+              characterRace,
+              characterLevel,
               alignment,
               experience,
-              background,
+              characterBackground,
             },
             null,
             2,
@@ -48,7 +53,7 @@ function HeaderDisplay({
         </pre>
         <HitPoints
           characterStats={characterStats}
-          characterLevel={level}
+          characterLevel={characterLevel}
           characterClass={characterClass}
         />
         </>

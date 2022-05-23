@@ -18,7 +18,6 @@ describe("----- chooseFrom -----", () => {
         const chooseThree = chooseFrom({choose: 3, from});
         expect(chooseThree.length).toEqual(3);
         const chooseFour = chooseFrom({choose: 4, from});
-        console.log(chooseFour);
         expect(chooseFour.length).toEqual(3);
     });
     test('it returns an empty array if asked to choose from an empty array', () => {
@@ -28,7 +27,6 @@ describe("----- chooseFrom -----", () => {
     });
     test('it returns an empty array if there are no valid choices', () => {
         const chooseUndefined = chooseFrom({choose: 1, from: undefinedFrom});
-        console.log(chooseUndefined);
         expect(chooseUndefined).toEqual([]);
     });
     test('it returns an empty array if passed anything that is not a valid Choice object', () => {

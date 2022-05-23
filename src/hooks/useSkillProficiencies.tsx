@@ -59,7 +59,6 @@ const useSkillProficiencies = (
   useEffect(() => {
     selections &&
       characterProficiencies.data &&
-      // console.log({selections});
       setProficiencies([
         ...selections,
         ...findArray(characterProficiencies.data, [
@@ -71,7 +70,6 @@ const useSkillProficiencies = (
           'proficiencies'
         ])
       ]);
-    // console.log({proficiencies});
   }, [
     selections,
     characterProficiencies.data

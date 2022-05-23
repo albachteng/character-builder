@@ -45,10 +45,11 @@ function FeaturesDisplay({
 
     return featuresFilter;
   }
+    
+  const [selectionSearchTerm, selectionIndex] = useMemo(() => provideFeaturesFilter(), [characterClass, characterRace]);
 
   const featuresMap: MappingFunc<FeatureType> = (feature, index) => {
     // const [selectionSearchTerm, selectionIndex] = provideFeaturesFilter();
-    const [selectionSearchTerm, selectionIndex] = useMemo(() => provideFeaturesFilter(), [characterClass, characterRace]);
     if (feature?.level) {
       return (
         feature?.level <= characterLevel && (

@@ -1,4 +1,4 @@
-import { Suspense, useMemo } from 'react';
+import { Suspense, useContext, useMemo } from 'react';
 
 import Personality from './Personality';
 import '../assets/css/App.css';
@@ -11,6 +11,8 @@ import InventoryDisplay from './InventoryDisplay';
 import ItemStore from './ItemStore';
 import SkillsDisplay from './SkillsDisplay';
 import SpellsDisplay from './SpellsDisplay';
+import CharacterContext from './CharacterContext';
+import { Character } from '../queries/Character';
 
 function App() {
   const { state, dispatch } = useCharacter();
@@ -39,7 +41,10 @@ function App() {
   };
 
   const myPersonality = useMemo(() => <Personality/>, [characterBackground, characterClass])
+
   return (
+    <CharacterContext.Provider value={state}>
+      {console.log(useContext(CharacterContext))}
     <div id="App">
       <a target="_" href="https://www.dnd5eapi.co/graphql">
         GraphQL Playground
@@ -71,11 +76,11 @@ function App() {
       <Suspense fallback="Suspense Loading...">
         <HeaderDisplay
           // background={characterBackground}
-          characterStats={characterStats}
+          // characterStats={characterStats}
           characterName="nonsense"
-          characterClass={characterClass}
-          race={characterRace}
-          level={characterLevel}
+          // // characterClass={characterClass}
+          // race={characterRace}
+          // level={characterLevel}
         />
 
 
@@ -114,6 +119,7 @@ function App() {
         )}
       </Suspense>
     </div>
+    </CharacterContext.Provider>
   );
 }
 

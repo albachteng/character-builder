@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import useOnClickDescription from '../../hooks/useOnClickDescription';
 import { Feature as FeatureType } from '../../types';
 

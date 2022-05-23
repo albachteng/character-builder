@@ -34,8 +34,6 @@ function ItemStore({characterClass, characterBackground}: Props) {
       }
   }, [characterClass, characterBackground, loading, loadingClassEquipment, loadingEquipmentOptions, selections])
 
-  console.log({initialItems, dataEquipmentOptions, selections})
-
   return (
       !loading && !error && data
       && !loadingClassEquipment && !errorClassEquipment && dataClassEquipment

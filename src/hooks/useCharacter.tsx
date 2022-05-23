@@ -63,7 +63,7 @@ const getRandomStats = (): AbilityScores => {
   return newStats as AbilityScores;
 };
 
-const initState: Store = {
+export const initState: Store = {
   characterClass: getRandom(classesIndexArray),
   characterRace: getRandom(racesIndexArray),
   characterBackground: getRandom(backgroundIndexArray),

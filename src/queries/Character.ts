@@ -47,6 +47,11 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
             }
             expertise_options {
               choose
+              from {
+                name
+                index
+                __typename
+              }
               type
             }
           }
@@ -170,6 +175,11 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
       }
       starting_proficiency_options {
         choose
+        from {
+          name
+          index
+          __typename
+        }
         type
       }
       subraces {
@@ -187,6 +197,11 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
         }
         proficiency_choices {
           choose
+          from {
+            name
+            index
+            __typename
+          }
           type
         }
         parent {
@@ -206,6 +221,11 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
           }
           spell_options {
             choose
+            from {
+              name
+              index
+              __typename
+            }
             type
           }
           damage_type {
@@ -265,6 +285,11 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
         choose
         from {
           quantity
+          equipment {
+            name
+            index
+            __typename
+        }
         }
         type
       }

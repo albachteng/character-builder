@@ -25,7 +25,7 @@ type Props = {
 }
 function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Props): JSX.Element {
 
-  const [featureSpecificChoice, setFeatureSpecificChoice] = useState<{[key: string]: string}>({})
+  const [featureSpecificChoice, setFeatureSpecificChoice] = useState<{[key: string]: Maybe<string> | undefined}>({})
 
   useEffect(() => {
     classFeatures.forEach((feature: FeatureType) => {
@@ -35,7 +35,7 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
           ?.subfeature_options as Choice<Maybe<FeatureFeature_SpecificSubfeature_OptionsFrom>>
         )
         const selectionIndices = selections.map(selection => selection?.index)
-        setFeatureSpecificChoice((prev: {[key: string]: any}) => {
+        setFeatureSpecificChoice((prev: {[key: string]: Maybe<string> | undefined }) => {
           return {...prev, [String(feature.index)]: selectionIndices[0]}
         })
         console.log({featureSpecificChoice})
@@ -45,7 +45,7 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
       if (feature?.__typename === 'Trait' && feature?.trait_specific) {
         const selections = chooseFrom(feature?.trait_specific.subtrait_options as Choice<Maybe<TraitTrait_SpecificSubtrait_OptionsFrom>>)
         const selectionIndices = selections.map(selection => selection?.index)
-        setFeatureSpecificChoice((prev: {[key: string]: any}) => {
+        setFeatureSpecificChoice((prev: {[key: string]: Maybe<string> | undefined }) => {
           return {...prev, [String(feature.index)]: selectionIndices[0]}
         })
         console.log({featureSpecificChoice})
@@ -59,7 +59,7 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
       for (let key in featureSpecificChoice) {
         console.log(`checking ${feature?.index} has substring key ${key}`)
         if (feature?.index === 'draconic-ancestry') continue
-        if (feature?.index?.includes(key) && feature?.index !== featureSpecificChoice[key]) {
+        if (feature?.index?.includes(key) && feature?.index !== key && feature?.index !== featureSpecificChoice[key]) {
           hide = true;
           break;
         }

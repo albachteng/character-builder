@@ -1,11 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useOnClickDescription from "../../hooks/useOnClickDescription";
-import { BackgroundFeature, Feature as FeatureType, Trait } from "../../types";
+import {
+  BackgroundFeature,
+  Feature as FeatureType,
+  Trait,
+  Choice,
+  Maybe,
+  FeatureFeature_SpecificSubfeature_OptionsFrom,
+  TraitTrait_SpecificSubtrait_OptionsFrom
+} from "../../types";
 import chooseFrom from "../../utilities/chooseFrom";
 
 type Props = {
   feature: FeatureType | Trait | BackgroundFeature;
-  setFeatureSpecificChoice: Function
+  // featureSpecificChoice: any
+  // setFeatureSpecificChoice: Function
 };
 
 const originFromTypename: { [k: string]: string } = {
@@ -14,20 +23,9 @@ const originFromTypename: { [k: string]: string } = {
   BackgroundFeature: "Background Feature",
 };
 
-function Feature({ feature, setFeatureSpecificChoice}: Props) {
+function Feature({ feature, /* setFeatureSpecificChoice, featureSpecificChoice  */}: Props) {
 
   const { description, toggleDescription } = useOnClickDescription<FeatureType | Trait | BackgroundFeature>(feature);
-
-  useEffect(() => {
-    if (feature?.__typename === 'Feature' && feature?.feature_specific) {
-      console.log('setting: ', feature?.feature_specific)
-      setFeatureSpecificChoice(feature?.feature_specific)
-    }
-    if (feature?.__typename === 'Trait' && feature?.trait_specific) {
-      console.log('setting: ', feature?.trait_specific)
-      setFeatureSpecificChoice(feature?.trait_specific)
-    }
-  }, [feature])
 
   return (
     <>
@@ -39,6 +37,7 @@ function Feature({ feature, setFeatureSpecificChoice}: Props) {
             {feature?.__typename === 'Feature' && `, Level ${feature?.level}`}
             {feature?.__typename &&
               ` | From: ${originFromTypename[feature?.__typename]}`}
+            {/* {feature?.__typename === 'Trait' && feature?.trait_specific && `: ${featureSpecificChoice}`} */}
           </p>
           {description}
         </div>

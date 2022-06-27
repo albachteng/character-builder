@@ -57,9 +57,12 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
     let hide = false;
     if (feature?.__typename === 'Trait' || feature?.__typename === 'Feature') {
       for (let key in featureSpecificChoice) {
-        console.log(`checking ${feature?.index} has substring key ${key}`)
-        if (feature?.index === 'draconic-ancestry') continue
-        if (feature?.index?.includes(key) && feature?.index !== key && feature?.index !== featureSpecificChoice[key]) {
+        let trimmedKey = key;
+        if (key.includes('eldritch-invocations')) trimmedKey = 'eldritch-invocation'; // special case, the key doesn't match
+        if (key.includes('pact-')) trimmedKey = 'pact-of-the'; // special case
+        console.log(`checking ${feature?.index} has substring key ${trimmedKey}`)
+        if (feature?.index === 'draconic-ancestry') continue // special case - perhaps a whitelist
+        if (feature?.index?.includes(trimmedKey) && feature?.index !== key && feature?.index !== featureSpecificChoice[key]) {
           hide = true;
           break;
         }

@@ -25,7 +25,7 @@ function App() {
 
   const variables = {
     class: { index: characterClass },
-    race: { index: characterRace },
+    race: { index: 'dragonborn'/* characterRace  */},
     level: characterLevel,
     background: { index: characterBackground },
   };

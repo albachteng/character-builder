@@ -16,7 +16,10 @@ type Props = {
 }
 function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Props): JSX.Element {
 
-  const [featureSpecificChoice, setFeatureSpecificChoice] = useState<any[]>([]);
+  const [featureSpecificChoice, setFeatureSpecificChoice] = useState<any>();
+  useEffect(() => {
+    console.log('choice', featureSpecificChoice)
+  }, [featureSpecificChoice])
 
   const featuresMap: MappingFunc<FeatureType | Trait | BackgroundFeature> = (feature, index) => {
     return (
@@ -30,7 +33,6 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
 
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
-      <pre>{JSON.stringify(featureSpecificChoice, null, 2)}</pre>
       <h2>Features</h2>
       <RenderMap
         mappingFunc={featuresMap}

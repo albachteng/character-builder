@@ -37,6 +37,12 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
           feature_specific {
             subfeature_options {
               choose
+              from {
+                __typename
+                index
+                name
+                url
+              }
               type
             }
             expertise_options {
@@ -190,6 +196,12 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
         trait_specific {
           subtrait_options {
             choose
+            from {
+              __typename
+              index
+              name
+              url
+            }
             type
           }
           spell_options {

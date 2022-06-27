@@ -1,10 +1,11 @@
+import { useEffect } from "react";
 import useOnClickDescription from "../../hooks/useOnClickDescription";
 import { BackgroundFeature, Feature as FeatureType, Trait } from "../../types";
+import chooseFrom from "../../utilities/chooseFrom";
 
 type Props = {
   feature: FeatureType | Trait | BackgroundFeature;
-  selectionSearchTerm?: string;
-  selectionIndex?: string;
+  setFeatureSpecificChoice: Function
 };
 
 const originFromTypename: { [k: string]: string } = {
@@ -13,18 +14,20 @@ const originFromTypename: { [k: string]: string } = {
   BackgroundFeature: "Background Feature",
 };
 
-function Feature({ feature, selectionSearchTerm, selectionIndex }: Props) {
+function Feature({ feature, setFeatureSpecificChoice}: Props) {
 
-  const { description, toggleDescription } =
-    useOnClickDescription<FeatureType | Trait | BackgroundFeature>(feature);
+  const { description, toggleDescription } = useOnClickDescription<FeatureType | Trait | BackgroundFeature>(feature);
 
-  // // matchesSelectionSearch tells us if this is one of the terms we are looking to potentially filter
-  // const matchesSelectionSearch =
-  //   selectionSearchTerm && feature?.index?.includes(selectionSearchTerm);
-  // // isSelection tells us if this is the selection we've made - we want to render this and not the other matches
-  // const isSelection = selectionIndex && selectionIndex === feature?.index;
-  // // a more concise way to decide
-  // const shouldRender = matchesSelectionSearch ? isSelection : true;
+  useEffect(() => {
+    if (feature?.__typename === 'Feature' && feature?.feature_specific) {
+      console.log('setting: ', feature?.feature_specific)
+      setFeatureSpecificChoice(feature?.feature_specific)
+    }
+    if (feature?.__typename === 'Trait' && feature?.trait_specific) {
+      console.log('setting: ', feature?.trait_specific)
+      setFeatureSpecificChoice(feature?.trait_specific)
+    }
+  }, [feature])
 
   return (
     <>
@@ -33,7 +36,7 @@ function Feature({ feature, selectionSearchTerm, selectionIndex }: Props) {
         <div>
           <p onClick={toggleDescription}>
             {feature?.name}
-            {feature?.level && `, Level ${feature?.level}`}
+            {feature?.__typename === 'Feature' && `, Level ${feature?.level}`}
             {feature?.__typename &&
               ` | From: ${originFromTypename[feature?.__typename]}`}
           </p>

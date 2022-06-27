@@ -64,7 +64,11 @@ function App() {
       {/*   {data && <AbilityScoresDisplay />} */}
       {/* </Suspense> */}
       <Suspense fallback={<Fallback />}>
-        {data && <FeaturesDisplay data={data.class.class_levels}/>}
+        {data && <FeaturesDisplay
+          classFeatures={data.class.class_levels.map((level: any) => level?.features).flat()}
+          racialFeatures={data.race.traits.flat()}
+          backgroundFeatures={data.background.feature}
+          />}
       </Suspense>
       {/* <Suspense fallback={<Fallback />}> */}
       {/*   {data && <ItemStore />}  */}

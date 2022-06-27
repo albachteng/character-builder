@@ -1,8 +1,8 @@
 import useOnClickDescription from "../../hooks/useOnClickDescription";
-import { Feature as FeatureType } from "../../types";
+import { BackgroundFeature, Feature as FeatureType, Trait } from "../../types";
 
 type Props = {
-  feature: FeatureType;
+  feature: FeatureType | Trait | BackgroundFeature;
   selectionSearchTerm?: string;
   selectionIndex?: string;
 };
@@ -14,9 +14,9 @@ const originFromTypename: { [k: string]: string } = {
 };
 
 function Feature({ feature, selectionSearchTerm, selectionIndex }: Props) {
-  console.log({feature})
+
   const { description, toggleDescription } =
-    useOnClickDescription<FeatureType>(feature);
+    useOnClickDescription<FeatureType | Trait | BackgroundFeature>(feature);
 
   // // matchesSelectionSearch tells us if this is one of the terms we are looking to potentially filter
   // const matchesSelectionSearch =

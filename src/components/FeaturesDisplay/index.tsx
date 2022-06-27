@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { getRandom } from '../../hooks/useCharacter';
 import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../../queries';
-import type { Feature as FeatureType } from '../../types';
+import type { BackgroundFeature, Feature as FeatureType, Trait } from '../../types';
 import { MappingFunc } from '../../types';
 import CharacterContext from '../CharacterContext';
 import { useContext } from 'react';
@@ -11,11 +11,15 @@ import { makeUniqueId } from '@apollo/client/utilities';
 import RenderMap from '../RenderMap';
 
 type Props = {
-  data: any
+  classFeatures: FeatureType[]
+  racialFeatures: Trait[]
+  backgroundFeatures: BackgroundFeature
 }
-function FeaturesDisplay({data}: Props): JSX.Element {
+function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Props): JSX.Element {
 
-  const { characterRace, characterClass, characterBackground } = useContext(CharacterContext);
+  console.log({backgroundFeatures})
+
+  // const { characterRace, characterClass, characterBackground } = useContext(CharacterContext);
 
   // function provideFeaturesFilter() {
   //   const featuresFilter: [undefined | string, undefined | string] = [undefined, undefined];
@@ -43,12 +47,11 @@ function FeaturesDisplay({data}: Props): JSX.Element {
 
   // const [selectionSearchTerm, selectionIndex] = useMemo(() => provideFeaturesFilter(), [characterClass, characterRace]);
 
-  const featuresMap: MappingFunc<FeatureType> = (feature, index) => {
-    console.log(feature, 'in mapping func') // why is this an array
+  const featuresMap: MappingFunc<FeatureType | Trait | BackgroundFeature> = (feature, index) => {
     // const [selectionSearchTerm, selectionIndex] = provideFeaturesFilter();
     return (
       <Feature
-        key={`Feature-${feature?.index}`}
+        key={makeUniqueId('feature')}
         feature={feature}
         // selectionIndex={selectionIndex}
         // selectionSearchTerm={selectionSearchTerm}
@@ -59,28 +62,10 @@ function FeaturesDisplay({data}: Props): JSX.Element {
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
       <h2>Features</h2>
-      {/* <QueryRenderer */}
-      {/*   query={ClassFeatures} */}
-      {/*   variables={{ filter: { class: { index: characterClass } } }} */}
-      {/*   dataType={['features']} */}
-      {/*   mappingFunc={featuresMap} */}
-      {/* /> */}
       <RenderMap
         mappingFunc={featuresMap}
-        data={data.map((level: any) => level?.features).flat()}
+        data={[...racialFeatures, backgroundFeatures, ...classFeatures]}
       />
-      {/* <QueryRenderer */}
-      {/*   query={RacialFeatures} */}
-      {/*   variables={{ filter: { races: { index: characterRace } } }} */}
-      {/*   dataType={['features']} */}
-      {/*   mappingFunc={featuresMap} */}
-      {/* /> */}
-      {/* <QueryRenderer */}
-      {/*   query={BackgroundFeatures} */}
-      {/*   variables={{ filter: { index: characterBackground } }} */}
-      {/*   dataType={['background', 'feature']} */}
-      {/*   mappingFunc={featuresMap} */}
-      {/* /> */}
     </div>
   );
 }

@@ -11,8 +11,7 @@ type RenderProps = {
 function RenderMap({ mappingFunc, sortBy, data = [] }: RenderProps) {
   let toRender = data;
 
-  console.log(data)
-  // if (!Array.isArray(data)) toRender = [data];
+  if (!Array.isArray(data)) toRender = [data];
   // ! NTS
   // if (sortBy) {
   //   toRender = toRender

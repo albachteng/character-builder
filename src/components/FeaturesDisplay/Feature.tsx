@@ -14,20 +14,22 @@ const originFromTypename: { [k: string]: string } = {
 };
 
 function Feature({ feature, selectionSearchTerm, selectionIndex }: Props) {
+  console.log({feature})
   const { description, toggleDescription } =
     useOnClickDescription<FeatureType>(feature);
 
-  // matchesSelectionSearch tells us if this is one of the terms we are looking to potentially filter
-  const matchesSelectionSearch =
-    selectionSearchTerm && feature?.index?.includes(selectionSearchTerm);
-  // isSelection tells us if this is the selection we've made - we want to render this and not the other matches
-  const isSelection = selectionIndex && selectionIndex === feature?.index;
-  // a more concise way to decide
-  const shouldRender = matchesSelectionSearch ? isSelection : true;
+  // // matchesSelectionSearch tells us if this is one of the terms we are looking to potentially filter
+  // const matchesSelectionSearch =
+  //   selectionSearchTerm && feature?.index?.includes(selectionSearchTerm);
+  // // isSelection tells us if this is the selection we've made - we want to render this and not the other matches
+  // const isSelection = selectionIndex && selectionIndex === feature?.index;
+  // // a more concise way to decide
+  // const shouldRender = matchesSelectionSearch ? isSelection : true;
 
   return (
     <>
-      {shouldRender && (
+      {
+      true && (
         <div>
           <p onClick={toggleDescription}>
             {feature?.name}

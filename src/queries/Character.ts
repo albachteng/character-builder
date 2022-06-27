@@ -9,7 +9,7 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
           index
           name
         }
-        features {
+        features (sort: LEVEL_ASC){
           choice {
             choose
             type

@@ -13,13 +13,13 @@ function RenderMap({ mappingFunc, sortBy, data = [] }: RenderProps) {
 
   if (!Array.isArray(data)) toRender = [data];
   // ! NTS
-  if (sortBy) {
-    toRender = toRender
-      .slice()
-      .filter((item) => item !== null)
-    // @ts-ignore
-      .sort(sortByOptions[sortBy]);
-  }
+  // if (sortBy) {
+  //   toRender = toRender
+  //     .slice()
+  //     .filter((item) => item !== null)
+  //   // @ts-ignore
+  //     .sort(sortByOptions[sortBy]);
+  // }
 
   return <>{toRender.length > 0 && toRender.map(mappingFunc)}</>;
 }

@@ -1,10 +1,19 @@
+import { useEffect, useState } from "react";
 import useOnClickDescription from "../../hooks/useOnClickDescription";
-import { Feature as FeatureType } from "../../types";
+import {
+  BackgroundFeature,
+  Feature as FeatureType,
+  Trait,
+  Choice,
+  Maybe,
+  FeatureFeature_SpecificSubfeature_OptionsFrom,
+  TraitTrait_SpecificSubtrait_OptionsFrom
+} from "../../types";
+import chooseFrom from "../../utilities/chooseFrom";
 
 type Props = {
-  feature: FeatureType;
-  selectionSearchTerm?: string;
-  selectionIndex?: string;
+  feature: FeatureType | Trait | BackgroundFeature;
+  hide: boolean;
 };
 
 const originFromTypename: { [k: string]: string } = {
@@ -13,27 +22,21 @@ const originFromTypename: { [k: string]: string } = {
   BackgroundFeature: "Background Feature",
 };
 
-function Feature({ feature, selectionSearchTerm, selectionIndex }: Props) {
-  const { description, toggleDescription } =
-    useOnClickDescription<FeatureType>(feature);
+function Feature({ feature, hide }: Props) {
 
-  // matchesSelectionSearch tells us if this is one of the terms we are looking to potentially filter
-  const matchesSelectionSearch =
-    selectionSearchTerm && feature?.index?.includes(selectionSearchTerm);
-  // isSelection tells us if this is the selection we've made - we want to render this and not the other matches
-  const isSelection = selectionIndex && selectionIndex === feature?.index;
-  // a more concise way to decide
-  const shouldRender = matchesSelectionSearch ? isSelection : true;
+  const { description, toggleDescription } = useOnClickDescription<FeatureType | Trait | BackgroundFeature>(feature);
 
   return (
     <>
-      {shouldRender && (
+      {
+      !hide && (
         <div>
           <p onClick={toggleDescription}>
             {feature?.name}
-            {feature?.level && `, Level ${feature?.level}`}
+            {feature?.__typename === 'Feature' && `, Level ${feature?.level}`}
             {feature?.__typename &&
               ` | From: ${originFromTypename[feature?.__typename]}`}
+            {/* {feature?.__typename === 'Trait' && feature?.trait_specific && `: ${featureSpecificChoice}`} */}
           </p>
           {description}
         </div>

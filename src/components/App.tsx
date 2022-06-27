@@ -25,7 +25,7 @@ function App() {
 
   const variables = {
     class: { index: characterClass },
-    race: { index: characterRace },
+    race: { index: 'dragonborn'/* characterRace  */},
     level: characterLevel,
     background: { index: characterBackground },
   };
@@ -55,27 +55,31 @@ function App() {
   return (
     <CharacterContext.Provider value={state}>
       <Controls dispatch={dispatch} />
-      {myPersonality}
+      {/* {myPersonality} */}
 
+      {/* <Suspense fallback={<Fallback />}> */}
+      {/*   {data && <HeaderDisplay data={data} characterName="nonsense" />} */}
+      {/* </Suspense> */}
+      {/* <Suspense fallback={<Fallback />}> */}
+      {/*   {data && <AbilityScoresDisplay />} */}
+      {/* </Suspense> */}
       <Suspense fallback={<Fallback />}>
-        {data && <HeaderDisplay data={data} characterName="nonsense" />}
+        {data && <FeaturesDisplay
+          classFeatures={data.class.class_levels.map((level: any) => level?.features).flat()}
+          racialFeatures={data.race.traits.flat()}
+          backgroundFeatures={data.background.feature}
+          />}
       </Suspense>
-      <Suspense fallback={<Fallback />}>
-        {data && <AbilityScoresDisplay />}
-      </Suspense>
-      <Suspense fallback={<Fallback />}>
-        {data && <FeaturesDisplay />}
-      </Suspense>
-      <Suspense fallback={<Fallback />}>
-        {data && <ItemStore />} 
-      </Suspense>
-      <Suspense fallback={<Fallback />}>
-        {data && <InventoryDisplay />} 
-      </Suspense>
-      <Suspense fallback={<Fallback />}>
-        {data && <SkillsDisplay />}
-        {isSpellcaster(characterClass) && <SpellsDisplay />}
-      </Suspense>
+      {/* <Suspense fallback={<Fallback />}> */}
+      {/*   {data && <ItemStore />}  */}
+      {/* </Suspense> */}
+      {/* <Suspense fallback={<Fallback />}> */}
+      {/*   {data && <InventoryDisplay />}  */}
+      {/* </Suspense> */}
+      {/* <Suspense fallback={<Fallback />}> */}
+      {/*   {data && <SkillsDisplay />} */}
+      {/*   {isSpellcaster(characterClass) && <SpellsDisplay />} */}
+      {/* </Suspense> */}
     </CharacterContext.Provider>
   );
 }

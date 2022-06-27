@@ -9,7 +9,7 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
           index
           name
         }
-        features {
+        features (sort: LEVEL_ASC){
           choice {
             choose
             type
@@ -37,10 +37,21 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
           feature_specific {
             subfeature_options {
               choose
+              from {
+                __typename
+                index
+                name
+                url
+              }
               type
             }
             expertise_options {
               choose
+              from {
+                name
+                index
+                __typename
+              }
               type
             }
           }
@@ -164,6 +175,11 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
       }
       starting_proficiency_options {
         choose
+        from {
+          name
+          index
+          __typename
+        }
         type
       }
       subraces {
@@ -181,6 +197,11 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
         }
         proficiency_choices {
           choose
+          from {
+            name
+            index
+            __typename
+          }
           type
         }
         parent {
@@ -190,10 +211,21 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
         trait_specific {
           subtrait_options {
             choose
+            from {
+              __typename
+              index
+              name
+              url
+            }
             type
           }
           spell_options {
             choose
+            from {
+              name
+              index
+              __typename
+            }
             type
           }
           damage_type {
@@ -253,6 +285,11 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
         choose
         from {
           quantity
+          equipment {
+            name
+            index
+            __typename
+        }
         }
         type
       }

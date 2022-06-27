@@ -34,9 +34,9 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
           ?.feature_specific
           ?.subfeature_options as Choice<Maybe<FeatureFeature_SpecificSubfeature_OptionsFrom>>
         )
-        const selectionIndices = selections.map(selection => selection?.name)
+        const selectionIndices = selections.map(selection => selection?.index)
         setFeatureSpecificChoice((prev: {[key: string]: any}) => {
-          return {...prev, [String(feature.name)]: selectionIndices}
+          return {...prev, [String(feature.index)]: selectionIndices[0]}
         })
         console.log({featureSpecificChoice})
       }
@@ -44,9 +44,9 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
     racialFeatures.forEach((feature: Trait) => {
       if (feature?.__typename === 'Trait' && feature?.trait_specific) {
         const selections = chooseFrom(feature?.trait_specific.subtrait_options as Choice<Maybe<TraitTrait_SpecificSubtrait_OptionsFrom>>)
-        const selectionIndices = selections.map(selection => selection?.name)
+        const selectionIndices = selections.map(selection => selection?.index)
         setFeatureSpecificChoice((prev: {[key: string]: any}) => {
-          return {...prev, [String(feature.name)]: selectionIndices}
+          return {...prev, [String(feature.index)]: selectionIndices[0]}
         })
         console.log({featureSpecificChoice})
       }
@@ -54,8 +54,21 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
   }, [])
 
   const featuresMap: MappingFunc<FeatureType | Trait | BackgroundFeature> = (feature, index) => {
+    let hide = false;
+    if (feature?.__typename === 'Trait' || feature?.__typename === 'Feature') {
+      for (let key in featureSpecificChoice) {
+        console.log(`checking ${feature?.index} has substring key ${key}`)
+        if (feature?.index === 'draconic-ancestry') continue
+        if (feature?.index?.includes(key) && feature?.index !== featureSpecificChoice[key]) {
+          hide = true;
+          break;
+        }
+      }
+    }
+
     return (
       <Feature
+        hide={hide}
         key={makeUniqueId('feature')}
         feature={feature}
         // featureSpecificChoice={featureSpecificChoice}

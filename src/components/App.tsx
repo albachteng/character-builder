@@ -25,7 +25,7 @@ function App() {
 
   const variables = {
     class: { index: characterClass },
-    race: { index: 'dragonborn'/* characterRace  */},
+    race: { index: characterRace },
     level: characterLevel,
     background: { index: characterBackground },
   };
@@ -64,17 +64,17 @@ function App() {
       {/*   {data && <AbilityScoresDisplay />} */}
       {/* </Suspense> */}
       <Suspense fallback={<Fallback />}>
-        {data && <FeaturesDisplay
+        {data && !loading && !error && <FeaturesDisplay
           classFeatures={data.class.class_levels.map((level: any) => level?.features).flat()}
           racialFeatures={data.race.traits.flat()}
           backgroundFeatures={data.background.feature}
           />}
       </Suspense>
       {/* <Suspense fallback={<Fallback />}> */}
-      {/*   {data && <ItemStore />}  */}
+      {/*   {data && <ItemStore />} */}
       {/* </Suspense> */}
       {/* <Suspense fallback={<Fallback />}> */}
-      {/*   {data && <InventoryDisplay />}  */}
+      {/*   {data && <InventoryDisplay />} */}
       {/* </Suspense> */}
       {/* <Suspense fallback={<Fallback />}> */}
       {/*   {data && <SkillsDisplay />} */}

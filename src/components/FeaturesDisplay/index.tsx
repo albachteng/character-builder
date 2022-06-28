@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getRandom } from '../../hooks/useCharacter';
-import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../../queries';
+import useCharacter, { getRandom } from '../../hooks/useCharacter';
 import {
   BackgroundFeature,
   Feature as FeatureType,
@@ -16,77 +15,55 @@ import QueryRenderer from '../QueryRenderer';
 import Feature from './Feature';
 import { makeUniqueId } from '@apollo/client/utilities';
 import RenderMap from '../RenderMap';
-import chooseFrom from '../../utilities/chooseFrom';
+import useFeaturesFilters from './useFeaturesFilters'
 
 type Props = {
   classFeatures: FeatureType[]
   racialFeatures: Trait[]
   backgroundFeatures: BackgroundFeature
 }
+
 function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Props): JSX.Element {
 
-  const [featureSpecificChoice, setFeatureSpecificChoice] = useState<{[key: string]: Maybe<string> | undefined}>({})
+  const { featureSpecificOptions, featureSpecificSelections } = useFeaturesFilters(classFeatures, racialFeatures);
 
-  useEffect(() => {
-    classFeatures.forEach((feature: FeatureType) => {
-      if (feature?.__typename === 'Feature' && feature?.feature_specific) {
-        const selections = chooseFrom(feature
-          ?.feature_specific
-          ?.subfeature_options as Choice<Maybe<FeatureFeature_SpecificSubfeature_OptionsFrom>>
-        )
-        const selectionIndices = selections.map(selection => selection?.index)
-        setFeatureSpecificChoice((prev: {[key: string]: Maybe<string> | undefined }) => {
-          return {...prev, [String(feature.index)]: selectionIndices[0]}
-        })
-        console.log({featureSpecificChoice})
-      }
-    })
-    racialFeatures.forEach((feature: Trait) => {
-      if (feature?.__typename === 'Trait' && feature?.trait_specific) {
-        const selections = chooseFrom(feature?.trait_specific.subtrait_options as Choice<Maybe<TraitTrait_SpecificSubtrait_OptionsFrom>>)
-        const selectionIndices = selections.map(selection => selection?.index)
-        setFeatureSpecificChoice((prev: {[key: string]: Maybe<string> | undefined }) => {
-          return {...prev, [String(feature.index)]: selectionIndices[0]}
-        })
-        console.log({featureSpecificChoice})
-      }
-    })
-  }, [])
+  const whiteList: Array<Maybe<string> | undefined> = [];
+  for (let key in featureSpecificSelections) {
+    if (featureSpecificSelections.hasOwnProperty(key)) whiteList.push(...featureSpecificSelections?.[key] as string) // TODO not super eficient, we should probably get this some other way
+  }
 
-  const featuresMap: MappingFunc<FeatureType | Trait | BackgroundFeature> = (feature, index) => {
-    let hide = false;
-    if (feature?.__typename === 'Trait' || feature?.__typename === 'Feature') {
-      for (let key in featureSpecificChoice) {
-        let trimmedKey = key;
-        if (key.includes('eldritch-invocations')) trimmedKey = 'eldritch-invocation'; // special case, the key doesn't match
-        if (key.includes('pact-')) trimmedKey = 'pact-of-the'; // special case
-        console.log(`checking ${feature?.index} has substring key ${trimmedKey}`)
-        if (feature?.index === 'draconic-ancestry') continue // special case - perhaps a whitelist
-        if (feature?.index?.includes(trimmedKey) && feature?.index !== key && feature?.index !== featureSpecificChoice[key]) {
-          hide = true;
-          break;
+  function featuresFilter(features: Array<FeatureType | Trait>) {
+    return features.filter((feature) => {
+      // if it's in options but not the whitelist, it should be filtered
+      for (let key in featureSpecificSelections) {
+        if (featureSpecificOptions?.[key]?.includes(feature?.index) && !whiteList?.includes(feature?.index)) {
+          return false;
         }
       }
-    }
+        return true;
+      })
+  }
 
+
+  const featuresMap: MappingFunc<FeatureType | Trait | BackgroundFeature> = (feature, index) => {
     return (
       <Feature
-        hide={hide}
+        // show={show}
         key={makeUniqueId('feature')}
         feature={feature}
-        // featureSpecificChoice={featureSpecificChoice}
-        // setFeatureSpecificChoice={setFeatureSpecificChoice}
+        // featureSpecificSelections={featureSpecificSelections}
       />
     );
   };
 
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
-      <pre>{JSON.stringify(featureSpecificChoice)}</pre>
+      {/* <pre>{JSON.stringify(featureSpecificSelections, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(featureSpecificOptions, null, 2)}</pre> */}
       <h2>Features</h2>
       <RenderMap
         mappingFunc={featuresMap}
-        data={[...racialFeatures, backgroundFeatures, ...classFeatures]}
+        data={[backgroundFeatures, ...featuresFilter([...racialFeatures, ...classFeatures])]}
       />
     </div>
   );

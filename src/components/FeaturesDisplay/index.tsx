@@ -27,26 +27,28 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
 
   const { featureSpecificOptions, featureSpecificSelections } = useFeaturesFilters(classFeatures, racialFeatures);
 
-  const whiteList: string[] = [];
+  const whiteList: Array<Maybe<string> | undefined> = [];
   for (let key in featureSpecificSelections) {
     if (featureSpecificSelections.hasOwnProperty(key)) whiteList.push(...featureSpecificSelections?.[key] as string) // TODO not super eficient, we should probably get this some other way
   }
 
-  const featuresMap: MappingFunc<FeatureType | Trait | BackgroundFeature> = (feature, index) => {
-    let show = true;
-    if (feature?.__typename === 'Trait' || feature?.__typename === 'Feature') {
-      // if it's in options but not the whitelist, show = false
+  function featuresFilter(features: Array<FeatureType | Trait>) {
+    return features.filter((feature) => {
+      // if it's in options but not the whitelist, it should be filtered
       for (let key in featureSpecificSelections) {
-        if (featureSpecificOptions?.[key]?.includes(feature?.index) && !whiteList?.includes(feature?.index as string)) {
-          show = false;
-          break; // no reason to keep going, this one is meant to not be shown
+        if (featureSpecificOptions?.[key]?.includes(feature?.index) && !whiteList?.includes(feature?.index)) {
+          return false;
         }
       }
-    }
+        return true;
+      })
+  }
 
+
+  const featuresMap: MappingFunc<FeatureType | Trait | BackgroundFeature> = (feature, index) => {
     return (
       <Feature
-        show={show}
+        // show={show}
         key={makeUniqueId('feature')}
         feature={feature}
         // featureSpecificSelections={featureSpecificSelections}
@@ -56,12 +58,12 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
 
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
-      <pre>{JSON.stringify(featureSpecificSelections, null, 2)}</pre>
-      <pre>{JSON.stringify(featureSpecificOptions, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(featureSpecificSelections, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(featureSpecificOptions, null, 2)}</pre> */}
       <h2>Features</h2>
       <RenderMap
         mappingFunc={featuresMap}
-        data={[...racialFeatures, backgroundFeatures, ...classFeatures]}
+        data={[backgroundFeatures, ...featuresFilter([...racialFeatures, ...classFeatures])]}
       />
     </div>
   );

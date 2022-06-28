@@ -12,8 +12,9 @@ import {
 import chooseFrom from "../../utilities/chooseFrom";
 
 type Props = {
-  feature: FeatureType | Trait | BackgroundFeature;
-  hide: boolean;
+  feature: FeatureType | Trait | BackgroundFeature
+  show?: boolean
+  featureSpecificSelections: any
 };
 
 const originFromTypename: { [k: string]: string } = {
@@ -22,21 +23,24 @@ const originFromTypename: { [k: string]: string } = {
   BackgroundFeature: "Background Feature",
 };
 
-function Feature({ feature, hide }: Props) {
+function Feature({ feature, featureSpecificSelections, show = true}: Props) {
 
   const { description, toggleDescription } = useOnClickDescription<FeatureType | Trait | BackgroundFeature>(feature);
 
   return (
     <>
       {
-      !hide && (
+      show && (
         <div>
           <p onClick={toggleDescription}>
             {feature?.name}
             {feature?.__typename === 'Feature' && `, Level ${feature?.level}`}
             {feature?.__typename &&
               ` | From: ${originFromTypename[feature?.__typename]}`}
-            {/* {feature?.__typename === 'Trait' && feature?.trait_specific && `: ${featureSpecificChoice}`} */}
+            {/* {feature?.__typename === 'Feature' && feature?.feature_specific && */}
+            {/*   ` - ${featureSpecificSelections[feature?.index as string]?.replaceAll('-', ' ')}`} */}
+            {/* {feature?.__typename === 'Trait' && feature?.trait_specific && */}
+            {/*   ` - ${featureSpecificSelections[feature?.index as string]?.replaceAll('-', ' ')}`} */}
           </p>
           {description}
         </div>

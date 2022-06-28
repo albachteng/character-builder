@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getRandom } from '../../hooks/useCharacter';
-import { ClassFeatures, RacialFeatures, BackgroundFeatures } from '../../queries';
+import useCharacter, { getRandom } from '../../hooks/useCharacter';
 import {
   BackgroundFeature,
   Feature as FeatureType,
@@ -25,7 +24,8 @@ type Props = {
 }
 function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Props): JSX.Element {
 
-  const [featureSpecificChoice, setFeatureSpecificChoice] = useState<{[key: string]: Maybe<string> | undefined}>({})
+  const [featureSpecificSelections, setfeatureSpecificSelections] = useState<object>({})
+  const [featureSpecificOptions, setfeatureSpecificOptions] = useState<object>({});
 
   useEffect(() => {
     classFeatures.forEach((feature: FeatureType) => {
@@ -34,55 +34,83 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
           ?.feature_specific
           ?.subfeature_options as Choice<Maybe<FeatureFeature_SpecificSubfeature_OptionsFrom>>
         )
-        const selectionIndices = selections.map(selection => selection?.index)
-        setFeatureSpecificChoice((prev: {[key: string]: Maybe<string> | undefined }) => {
-          return {...prev, [String(feature.index)]: selectionIndices[0]}
+        const selectionIndices = selections.map(selection => selection?.index);
+        const addTofeatureSpecificOptions = feature
+          ?.feature_specific
+          ?.subfeature_options
+          ?.from
+          ?.filter((option: any) => option?.index !== selectionIndices)
+          ?.map((obj: any) => obj.index) || []
+        setfeatureSpecificOptions((prev: {[key: string]: any}) => {
+          return {...prev, [String(feature.index)]: addTofeatureSpecificOptions};
+        });
+        setfeatureSpecificSelections((prev:{[key: string]: any}) => {
+          return {...prev, [String(feature.index)]: selectionIndices}
         })
-        console.log({featureSpecificChoice})
       }
     })
+  }, []);
+
+  useEffect(() => {
     racialFeatures.forEach((feature: Trait) => {
       if (feature?.__typename === 'Trait' && feature?.trait_specific) {
-        const selections = chooseFrom(feature?.trait_specific.subtrait_options as Choice<Maybe<TraitTrait_SpecificSubtrait_OptionsFrom>>)
+        const selections = chooseFrom(feature
+          ?.trait_specific
+          ?.subtrait_options as Choice<Maybe<TraitTrait_SpecificSubtrait_OptionsFrom>>)
         const selectionIndices = selections.map(selection => selection?.index)
-        setFeatureSpecificChoice((prev: {[key: string]: Maybe<string> | undefined }) => {
-          return {...prev, [String(feature.index)]: selectionIndices[0]}
-        })
-        console.log({featureSpecificChoice})
+        const addTofeatureSpecificOptions: any[] = feature
+          ?.trait_specific
+          ?.subtrait_options
+          ?.from
+          ?.map((obj: any) => obj?.index) || [];
+        setfeatureSpecificOptions((prev: {[key: string]: any}) => {
+          return {...prev, [String(feature.index)]: addTofeatureSpecificOptions};
+        });
+        setfeatureSpecificSelections((prev: {[key: string]: any}) => {
+          return {...prev, [String(feature.index)]: selectionIndices}
+        });
       }
     })
-  }, [])
+  }, []);
 
+  // const featureSpecificOptions = ['eldritch-invocation', 'pact-of-the', 'draconic-ancestry', 'draconic-ancestor', 'fighting-style', 'hunters-prey']
   const featuresMap: MappingFunc<FeatureType | Trait | BackgroundFeature> = (feature, index) => {
-    let hide = false;
+    const featSpec = feature?.feature_specific?.subfeature_options;
+    const traitSpec = feature?.trait_specific?.subtrait_options;
+    console.log({featSpec, traitSpec})
+    let show = true;
     if (feature?.__typename === 'Trait' || feature?.__typename === 'Feature') {
-      for (let key in featureSpecificChoice) {
-        let trimmedKey = key;
-        if (key.includes('eldritch-invocations')) trimmedKey = 'eldritch-invocation'; // special case, the key doesn't match
-        if (key.includes('pact-')) trimmedKey = 'pact-of-the'; // special case
-        console.log(`checking ${feature?.index} has substring key ${trimmedKey}`)
-        if (feature?.index === 'draconic-ancestry') continue // special case - perhaps a whitelist
-        if (feature?.index?.includes(trimmedKey) && feature?.index !== key && feature?.index !== featureSpecificChoice[key]) {
-          hide = true;
-          break;
-        }
+      // if it's in options but not selections, show = false
+      for (let key in featureSpecificSelections) {
+
+        if (featureSpecificOptions[key].includes(feature?.index) && !featureSpecificSelections[key].includes(feature?.index)) show = false
+        // let trimmedKey = key;
+        //
+        // if (key.includes('eldritch-invocations')) trimmedKey = 'eldritch-invocation'; // special case, the key doesn't match
+        // if (key.includes('pact-')) trimmedKey = 'pact-of-the'; // special case
+        // if (feature?.index === 'draconic-ancestry') continue // special case - perhaps a whitelist/featureSpecificOptions
+        //
+        // if (feature?.index?.includes(trimmedKey) && feature?.index !== key && feature?.index !== featureSpecificSelections[key]) {
+        //   show = false;
+        //   break;
+        // }
       }
     }
 
     return (
       <Feature
-        hide={hide}
+        show={show}
         key={makeUniqueId('feature')}
         feature={feature}
-        // featureSpecificChoice={featureSpecificChoice}
-        // setFeatureSpecificChoice={setFeatureSpecificChoice}
+        featureSpecificSelections={featureSpecificSelections}
       />
     );
   };
 
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
-      <pre>{JSON.stringify(featureSpecificChoice)}</pre>
+      <pre>{JSON.stringify(featureSpecificSelections, null, 2)}</pre>
+      <pre>{JSON.stringify(featureSpecificOptions, null, 2)}</pre>
       <h2>Features</h2>
       <RenderMap
         mappingFunc={featuresMap}

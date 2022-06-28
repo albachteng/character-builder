@@ -28,72 +28,54 @@ function FeaturesDisplay({classFeatures, racialFeatures, backgroundFeatures}: Pr
   const [featureSpecificOptions, setfeatureSpecificOptions] = useState<object>({});
 
   useEffect(() => {
-    classFeatures.forEach((feature: FeatureType) => {
-      if (feature?.__typename === 'Feature' && feature?.feature_specific) {
+    [...classFeatures, ...racialFeatures].forEach((feature: FeatureType | Trait) => {
+      let specifierKey, optionsKey;
+      if (feature?.__typename === 'Feature') {
+        specifierKey = 'feature_specific';
+        optionsKey = 'subfeature_options';
+      } else {
+        specifierKey = 'trait_specific';
+        optionsKey = 'subtrait_options';
+      }
+      if (feature?.[specifierKey]) {
         const selections = chooseFrom(feature
-          ?.feature_specific
-          ?.subfeature_options as Choice<Maybe<FeatureFeature_SpecificSubfeature_OptionsFrom>>
+          ?.[specifierKey]
+          ?.[optionsKey] as Choice<Maybe<
+            FeatureFeature_SpecificSubfeature_OptionsFrom
+          | TraitTrait_SpecificSubtrait_OptionsFrom >>
         )
         const selectionIndices = selections.map(selection => selection?.index);
         const addTofeatureSpecificOptions = feature
-          ?.feature_specific
-          ?.subfeature_options
+          ?.[specifierKey]
+          ?.[optionsKey]
           ?.from
-          ?.filter((option: any) => option?.index !== selectionIndices)
           ?.map((obj: any) => obj.index) || []
         setfeatureSpecificOptions((prev: {[key: string]: any}) => {
-          return {...prev, [String(feature.index)]: addTofeatureSpecificOptions};
+          return {...prev, [String(feature?.index)]: addTofeatureSpecificOptions};
         });
         setfeatureSpecificSelections((prev:{[key: string]: any}) => {
-          return {...prev, [String(feature.index)]: selectionIndices}
+          return {...prev, [String(feature?.index)]: selectionIndices}
         })
       }
     })
   }, []);
 
-  useEffect(() => {
-    racialFeatures.forEach((feature: Trait) => {
-      if (feature?.__typename === 'Trait' && feature?.trait_specific) {
-        const selections = chooseFrom(feature
-          ?.trait_specific
-          ?.subtrait_options as Choice<Maybe<TraitTrait_SpecificSubtrait_OptionsFrom>>)
-        const selectionIndices = selections.map(selection => selection?.index)
-        const addTofeatureSpecificOptions: any[] = feature
-          ?.trait_specific
-          ?.subtrait_options
-          ?.from
-          ?.map((obj: any) => obj?.index) || [];
-        setfeatureSpecificOptions((prev: {[key: string]: any}) => {
-          return {...prev, [String(feature.index)]: addTofeatureSpecificOptions};
-        });
-        setfeatureSpecificSelections((prev: {[key: string]: any}) => {
-          return {...prev, [String(feature.index)]: selectionIndices}
-        });
-      }
-    })
-  }, []);
-
-  // const featureSpecificOptions = ['eldritch-invocation', 'pact-of-the', 'draconic-ancestry', 'draconic-ancestor', 'fighting-style', 'hunters-prey']
   const featuresMap: MappingFunc<FeatureType | Trait | BackgroundFeature> = (feature, index) => {
     const featSpec = feature?.feature_specific?.subfeature_options;
     const traitSpec = feature?.trait_specific?.subtrait_options;
-    console.log({featSpec, traitSpec})
+    const whiteList = [];
+    for (let key in featureSpecificSelections) {
+      whiteList.push(...featureSpecificSelections[key]) // TODO this is super ineficient, we should probably get this some other way
+    }
+    console.log({whiteList})
     let show = true;
     if (feature?.__typename === 'Trait' || feature?.__typename === 'Feature') {
-      // if it's in options but not selections, show = false
+      // if it's in options but not the whitelist, show = false
       for (let key in featureSpecificSelections) {
 
-        if (featureSpecificOptions[key].includes(feature?.index) && !featureSpecificSelections[key].includes(feature?.index)) show = false
-        // let trimmedKey = key;
-        //
-        // if (key.includes('eldritch-invocations')) trimmedKey = 'eldritch-invocation'; // special case, the key doesn't match
-        // if (key.includes('pact-')) trimmedKey = 'pact-of-the'; // special case
-        // if (feature?.index === 'draconic-ancestry') continue // special case - perhaps a whitelist/featureSpecificOptions
-        //
-        // if (feature?.index?.includes(trimmedKey) && feature?.index !== key && feature?.index !== featureSpecificSelections[key]) {
-        //   show = false;
-        //   break;
-        // }
+        if (featureSpecificOptions[key].includes(feature?.index) && !whiteList.includes(feature?.index)) {
+          show = false;
+        }
       }
     }
 

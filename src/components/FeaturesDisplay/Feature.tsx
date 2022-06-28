@@ -14,7 +14,7 @@ import chooseFrom from "../../utilities/chooseFrom";
 type Props = {
   feature: FeatureType | Trait | BackgroundFeature
   show?: boolean
-  featureSpecificSelections: any
+  // featureSpecificSelections: any
 };
 
 const originFromTypename: { [k: string]: string } = {
@@ -23,7 +23,7 @@ const originFromTypename: { [k: string]: string } = {
   BackgroundFeature: "Background Feature",
 };
 
-function Feature({ feature, featureSpecificSelections, show = true}: Props) {
+function Feature({ feature, show = true}: Props) {
 
   const { description, toggleDescription } = useOnClickDescription<FeatureType | Trait | BackgroundFeature>(feature);
 

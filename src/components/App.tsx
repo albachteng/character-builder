@@ -1,3 +1,4 @@
+import type {PreloadedQuery} from 'react-relay';
 import { Suspense, useMemo, lazy } from "react";
 import Fallback from "./Fallback";
 import "../assets/css/App.css";
@@ -5,7 +6,15 @@ import useCharacter from "../hooks/useCharacter";
 import { CharacterClass } from "../types";
 import CharacterContext from "./CharacterContext";
 import { Character } from "../queries/Character";
+import type { CharacterQuery } from "../queries/__generated__/CharacterQuery.graphql";
 import { useQuery } from "@apollo/client";
+import {
+  RelayEnvironmentProvider,
+  loadQuery,
+  usePreloadedQuery,
+} from 'react-relay/hooks';
+import RelayEnvironment from '../RelayEnvironment';
+import graphql from 'babel-plugin-relay/macro'
 
 const Controls = lazy(() => import("./Controls"));
 const Personality = lazy(() => import("./Personality"));
@@ -17,7 +26,11 @@ const ItemStore = lazy(() => import("./ItemStore"));
 const SkillsDisplay = lazy(() => import("./SkillsDisplay"));
 const SpellsDisplay = lazy(() => import("./SpellsDisplay"));
 
-function App() {
+type Props = {
+  preloadedQuery: PreloadedQuery<CharacterQuery>
+}
+
+function App({preloadedQuery}: Props) {
   const { state, dispatch } = useCharacter();
 
   const { characterClass, characterBackground, characterRace, characterLevel } =
@@ -30,7 +43,6 @@ function App() {
     background: { index: characterBackground },
   };
 
-  const { loading, error, data } = useQuery(Character, { variables });
 
   // Two fighter and rogue archetypes DO get spellcasting - Eldritch Knight and Arcane Trickster
   const isSpellcaster = (characterClass: CharacterClass) => {
@@ -52,6 +64,9 @@ function App() {
     [characterBackground, characterClass]
   );
 
+  const data = usePreloadedQuery(Character, preloadedQuery);
+  console.log({data})
+
   return (
     <CharacterContext.Provider value={state}>
       <Controls dispatch={dispatch} />
@@ -64,10 +79,10 @@ function App() {
       {/*   {data && <AbilityScoresDisplay />} */}
       {/* </Suspense> */}
       <Suspense fallback={<Fallback />}>
-        {data && !loading && !error && <FeaturesDisplay
-          classFeatures={data.class.class_levels.map((level: any) => level?.features).flat()}
-          racialFeatures={data.race.traits.flat()}
-          backgroundFeatures={data.background.feature}
+        {data && <FeaturesDisplay
+          classFeatures={data?.class?.class_levels?.map((level: any) => level?.features).flat()}
+          racialFeatures={data?.race?.traits?.flat()}
+          backgroundFeatures={data?.background?.feature}
           />}
       </Suspense>
       {/* <Suspense fallback={<Fallback />}> */}

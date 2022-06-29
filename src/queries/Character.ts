@@ -1,6 +1,7 @@
-import { gql } from '@apollo/client';
+// import { gql } from '@apollo/client';
+import {graphql} from 'babel-plugin-relay/macro';
 
-export const Character = gql`query Character ($class: FilterFindOneClassInput, $race: FilterFindOneRaceInput, $level: Int, $background: FilterFindOneBackgroundInput) {
+export const Character = graphql`query CharacterQuery ($class: FilterFindOneClassInput, $race: FilterFindOneRaceInput, $level: Int, $background: FilterFindOneBackgroundInput) {
     class (filter: $class) {
       class_levels (sort: LEVEL_ASC, limit: $level) {
         level
@@ -33,7 +34,7 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
             level
             type
           }
-          reference
+          # references
           feature_specific {
             subfeature_options {
               choose
@@ -83,12 +84,12 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
       proficiencies {
         index
         name
-        reference {
-          index
-          name
-          type
-          url
-        }
+        # reference {
+        #   index
+        #   name
+        #   type
+        #   url
+        # }
         type
         url
       }
@@ -259,11 +260,11 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
       starting_proficiencies {
         index
         name
-        reference {
-          index
-          name
-          type
-        }
+        # references {
+        #   index
+        #   name
+        #   type
+        # }
         type
       }
       language_options {

@@ -9,7 +9,6 @@ import {
   FeatureFeature_SpecificSubfeature_OptionsFrom,
   TraitTrait_SpecificSubtrait_OptionsFrom
 } from "../../types";
-import chooseFrom from "../../utilities/chooseFrom";
 
 type Props = {
   feature: FeatureType | Trait | BackgroundFeature

@@ -4,11 +4,16 @@
       "macros"
   ],
   presets: [
-  "@babel/preset-env",
-  ["@babel/preset-react", {
-    "runtime": "automatic"
-  }],
-  "@babel/preset-typescript"],
+    "@babel/env",
+    "@babel/preset-env",
+    "@babel/"
+    [
+      "@babel/preset-react", {
+        "runtime": "automatic"
+      }
+    ],
+    "@babel/preset-typescript"
+  ]
 }
 
 

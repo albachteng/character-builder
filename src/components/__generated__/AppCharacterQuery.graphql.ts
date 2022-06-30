@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b945b53c4ff19bf33e97f32585a2ed49>>
+ * @generated SignedSource<<31f9d9ec8d02f74b8ea46b734c1cf2d6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,6 +9,7 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
+import { FragmentRefs } from "relay-runtime";
 export type FilterFindOneClassInput = {
   AND?: ReadonlyArray<FilterFindOneClassInput> | null;
   OR?: ReadonlyArray<FilterFindOneClassInput> | null;
@@ -1019,130 +1020,7 @@ export type AppCharacterQuery$data = {
     }>;
   } | null;
   readonly class: {
-    readonly class_levels: ReadonlyArray<{
-      readonly ability_score_bonuses: number | null;
-      readonly class: {
-        readonly index: string | null;
-        readonly name: string | null;
-      } | null;
-      readonly features: ReadonlyArray<{
-        readonly choice: {
-          readonly choose: number | null;
-          readonly type: string | null;
-        } | null;
-        readonly class: {
-          readonly hit_die: number | null;
-          readonly index: string | null;
-          readonly name: string | null;
-          readonly url: string | null;
-        } | null;
-        readonly desc: ReadonlyArray<string | null> | null;
-        readonly feature_specific: {
-          readonly expertise_options: {
-            readonly choose: number | null;
-            readonly from: ReadonlyArray<{
-              readonly __typename: "FeatureFeature_specificExpertise_optionsFrom";
-              readonly index: string | null;
-              readonly name: string | null;
-            } | null> | null;
-            readonly type: string | null;
-          } | null;
-          readonly subfeature_options: {
-            readonly choose: number | null;
-            readonly from: ReadonlyArray<{
-              readonly __typename: "FeatureFeature_specificSubfeature_optionsFrom";
-              readonly index: string | null;
-              readonly name: string | null;
-              readonly url: string | null;
-            } | null> | null;
-            readonly type: string | null;
-          } | null;
-        } | null;
-        readonly index: string | null;
-        readonly level: number | null;
-        readonly name: string | null;
-        readonly parent: {
-          readonly index: string | null;
-          readonly name: string | null;
-          readonly url: string | null;
-        } | null;
-        readonly prerequisites: ReadonlyArray<{
-          readonly level: number | null;
-          readonly type: string | null;
-        } | null> | null;
-        readonly url: string | null;
-      }>;
-      readonly index: string | null;
-      readonly level: number | null;
-      readonly prof_bonus: number | null;
-      readonly spellcasting: {
-        readonly cantrips_known: number | null;
-        readonly spell_slots_level_1: number | null;
-        readonly spell_slots_level_2: number | null;
-        readonly spell_slots_level_3: number | null;
-        readonly spell_slots_level_4: number | null;
-        readonly spell_slots_level_5: number | null;
-        readonly spell_slots_level_6: number | null;
-        readonly spell_slots_level_7: number | null;
-        readonly spell_slots_level_8: number | null;
-        readonly spell_slots_level_9: number | null;
-        readonly spells_known: number | null;
-      } | null;
-      readonly subclass: {
-        readonly index: string | null;
-        readonly name: string | null;
-      } | null;
-    }>;
-    readonly hit_die: number | null;
-    readonly index: string | null;
-    readonly name: string | null;
-    readonly proficiencies: ReadonlyArray<{
-      readonly index: string | null;
-      readonly name: string | null;
-      readonly type: string | null;
-      readonly url: string | null;
-    }>;
-    readonly proficiency_choices: ReadonlyArray<{
-      readonly choose: number | null;
-      readonly from: ReadonlyArray<{
-        readonly index: string | null;
-        readonly name: string | null;
-      } | null> | null;
-      readonly type: string | null;
-    } | null> | null;
-    readonly saving_throws: ReadonlyArray<{
-      readonly index: string | null;
-      readonly name: string | null;
-    } | null> | null;
-    readonly spellcasting: {
-      readonly info: ReadonlyArray<{
-        readonly desc: ReadonlyArray<string | null> | null;
-        readonly name: string | null;
-      } | null> | null;
-      readonly level: number | null;
-      readonly spellcasting_ability: {
-        readonly index: string | null;
-        readonly name: string | null;
-      } | null;
-    } | null;
-    readonly starting_equipment: ReadonlyArray<{
-      readonly equipment: {
-        readonly index: string | null;
-        readonly name: string | null;
-      } | null;
-      readonly quantity: number | null;
-    } | null> | null;
-    readonly starting_equipment_options: ReadonlyArray<{
-      readonly choose: number | null;
-      readonly from: ReadonlyArray<{
-        readonly quantity: number | null;
-      } | null> | null;
-      readonly type: string | null;
-    } | null> | null;
-    readonly subclasses: ReadonlyArray<{
-      readonly index: string | null;
-      readonly name: string | null;
-    } | null> | null;
+    readonly " $fragmentSpreads": FragmentRefs<"FeaturesDisplayFragment_class">;
   } | null;
   readonly race: {
     readonly ability_bonus_options: {
@@ -1290,64 +1168,64 @@ v3 = {
   "kind": "LocalArgument",
   "name": "race"
 },
-v4 = {
-  "kind": "Literal",
-  "name": "sort",
-  "value": "LEVEL_ASC"
-},
-v5 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "level",
-  "storageKey": null
-},
-v6 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "index",
-  "storageKey": null
-},
-v7 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "name",
-  "storageKey": null
-},
-v8 = [
-  (v6/*: any*/),
-  (v7/*: any*/)
+v4 = [
+  {
+    "kind": "Variable",
+    "name": "filter",
+    "variableName": "class"
+  }
 ],
-v9 = {
+v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "choose",
   "storageKey": null
 },
-v10 = {
+v6 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "bonus",
+  "storageKey": null
+},
+v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "type",
   "storageKey": null
 },
+v8 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "index",
+  "storageKey": null
+},
+v9 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
+  "storageKey": null
+},
+v10 = [
+  (v8/*: any*/),
+  (v9/*: any*/)
+],
 v11 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "hit_die",
+  "name": "__typename",
   "storageKey": null
 },
-v12 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "url",
-  "storageKey": null
-},
+v12 = [
+  (v9/*: any*/),
+  (v8/*: any*/),
+  (v11/*: any*/)
+],
 v13 = {
   "alias": null,
   "args": null,
@@ -1355,45 +1233,419 @@ v13 = {
   "name": "desc",
   "storageKey": null
 },
-v14 = {
+v14 = [
+  (v8/*: any*/),
+  (v9/*: any*/),
+  (v7/*: any*/)
+],
+v15 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "__typename",
+  "name": "url",
   "storageKey": null
 },
-v15 = [
-  (v14/*: any*/),
-  (v6/*: any*/),
-  (v7/*: any*/),
-  (v12/*: any*/)
-],
 v16 = [
-  (v7/*: any*/),
-  (v6/*: any*/),
-  (v14/*: any*/)
+  (v11/*: any*/),
+  (v8/*: any*/),
+  (v9/*: any*/),
+  (v15/*: any*/)
 ],
 v17 = {
   "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "quantity",
+  "args": [
+    {
+      "kind": "Variable",
+      "name": "filter",
+      "variableName": "race"
+    }
+  ],
+  "concreteType": "Race",
+  "kind": "LinkedField",
+  "name": "race",
+  "plural": false,
+  "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "RaceAbility_bonus_options",
+      "kind": "LinkedField",
+      "name": "ability_bonus_options",
+      "plural": false,
+      "selections": [
+        (v5/*: any*/),
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "RaceAbility_bonus_optionsFrom",
+          "kind": "LinkedField",
+          "name": "from",
+          "plural": true,
+          "selections": [
+            (v6/*: any*/)
+          ],
+          "storageKey": null
+        },
+        (v7/*: any*/)
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "RaceAbility_bonuses",
+      "kind": "LinkedField",
+      "name": "ability_bonuses",
+      "plural": true,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "RaceAbility_bonusesAbility_score",
+          "kind": "LinkedField",
+          "name": "ability_score",
+          "plural": false,
+          "selections": (v10/*: any*/),
+          "storageKey": null
+        },
+        (v6/*: any*/)
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "age",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "alignment",
+      "storageKey": null
+    },
+    (v8/*: any*/),
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "language_desc",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "RaceLanguage_options",
+      "kind": "LinkedField",
+      "name": "language_options",
+      "plural": false,
+      "selections": [
+        (v5/*: any*/),
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "RaceLanguage_optionsFrom",
+          "kind": "LinkedField",
+          "name": "from",
+          "plural": true,
+          "selections": (v10/*: any*/),
+          "storageKey": null
+        },
+        (v7/*: any*/)
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "RaceLanguages",
+      "kind": "LinkedField",
+      "name": "languages",
+      "plural": true,
+      "selections": (v10/*: any*/),
+      "storageKey": null
+    },
+    (v9/*: any*/),
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "size",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "size_description",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "speed",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "RaceStarting_proficiencies",
+      "kind": "LinkedField",
+      "name": "starting_proficiencies",
+      "plural": true,
+      "selections": (v10/*: any*/),
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "RaceStarting_proficiency_options",
+      "kind": "LinkedField",
+      "name": "starting_proficiency_options",
+      "plural": false,
+      "selections": [
+        (v5/*: any*/),
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "RaceStarting_proficiency_optionsFrom",
+          "kind": "LinkedField",
+          "name": "from",
+          "plural": true,
+          "selections": (v12/*: any*/),
+          "storageKey": null
+        },
+        (v7/*: any*/)
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "RaceSubraces",
+      "kind": "LinkedField",
+      "name": "subraces",
+      "plural": true,
+      "selections": (v10/*: any*/),
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "Trait",
+      "kind": "LinkedField",
+      "name": "traits",
+      "plural": true,
+      "selections": [
+        (v13/*: any*/),
+        (v8/*: any*/),
+        (v9/*: any*/),
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "Proficiency",
+          "kind": "LinkedField",
+          "name": "proficiencies",
+          "plural": true,
+          "selections": (v14/*: any*/),
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "TraitProficiency_choices",
+          "kind": "LinkedField",
+          "name": "proficiency_choices",
+          "plural": false,
+          "selections": [
+            (v5/*: any*/),
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "TraitProficiency_choicesFrom",
+              "kind": "LinkedField",
+              "name": "from",
+              "plural": true,
+              "selections": (v12/*: any*/),
+              "storageKey": null
+            },
+            (v7/*: any*/)
+          ],
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "TraitParent",
+          "kind": "LinkedField",
+          "name": "parent",
+          "plural": false,
+          "selections": (v10/*: any*/),
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "TraitTrait_specific",
+          "kind": "LinkedField",
+          "name": "trait_specific",
+          "plural": false,
+          "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "TraitTrait_specificSubtrait_options",
+              "kind": "LinkedField",
+              "name": "subtrait_options",
+              "plural": false,
+              "selections": [
+                (v5/*: any*/),
+                {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "TraitTrait_specificSubtrait_optionsFrom",
+                  "kind": "LinkedField",
+                  "name": "from",
+                  "plural": true,
+                  "selections": (v16/*: any*/),
+                  "storageKey": null
+                },
+                (v7/*: any*/)
+              ],
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "TraitTrait_specificSpell_options",
+              "kind": "LinkedField",
+              "name": "spell_options",
+              "plural": false,
+              "selections": [
+                (v5/*: any*/),
+                {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "TraitTrait_specificSpell_optionsFrom",
+                  "kind": "LinkedField",
+                  "name": "from",
+                  "plural": true,
+                  "selections": (v12/*: any*/),
+                  "storageKey": null
+                },
+                (v7/*: any*/)
+              ],
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "TraitTrait_specificDamage_type",
+              "kind": "LinkedField",
+              "name": "damage_type",
+              "plural": false,
+              "selections": (v10/*: any*/),
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "TraitTrait_specificBreath_weapon",
+              "kind": "LinkedField",
+              "name": "breath_weapon",
+              "plural": false,
+              "selections": [
+                (v9/*: any*/),
+                (v13/*: any*/),
+                {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "TraitTrait_specificBreath_weaponUsage",
+                  "kind": "LinkedField",
+                  "name": "usage",
+                  "plural": false,
+                  "selections": [
+                    (v7/*: any*/),
+                    {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "times",
+                      "storageKey": null
+                    }
+                  ],
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "TraitTrait_specificBreath_weaponDc",
+                  "kind": "LinkedField",
+                  "name": "dc",
+                  "plural": false,
+                  "selections": [
+                    {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "TraitTrait_specificBreath_weaponDcDc_type",
+                      "kind": "LinkedField",
+                      "name": "dc_type",
+                      "plural": false,
+                      "selections": (v10/*: any*/),
+                      "storageKey": null
+                    },
+                    {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "success_type",
+                      "storageKey": null
+                    }
+                  ],
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "TraitTrait_specificBreath_weaponDamage",
+                  "kind": "LinkedField",
+                  "name": "damage",
+                  "plural": true,
+                  "selections": [
+                    {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "damage_at_character_level",
+                      "storageKey": null
+                    }
+                  ],
+                  "storageKey": null
+                }
+              ],
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
+    }
+  ],
   "storageKey": null
 },
 v18 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "bonus",
+  "name": "quantity",
   "storageKey": null
 },
 v19 = [
-  (v6/*: any*/),
-  (v7/*: any*/),
-  (v10/*: any*/)
-],
-v20 = [
-  (v9/*: any*/),
+  (v5/*: any*/),
   {
     "alias": null,
     "args": null,
@@ -1401,1015 +1653,214 @@ v20 = [
     "name": "from",
     "storageKey": null
   },
-  (v10/*: any*/)
+  (v7/*: any*/)
 ],
-v21 = [
-  {
-    "alias": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "filter",
-        "variableName": "class"
-      }
-    ],
-    "concreteType": "Class",
-    "kind": "LinkedField",
-    "name": "class",
-    "plural": false,
-    "selections": [
-      {
-        "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "limit",
-            "variableName": "level"
-          },
-          (v4/*: any*/)
-        ],
-        "concreteType": "Level",
-        "kind": "LinkedField",
-        "name": "class_levels",
-        "plural": true,
-        "selections": [
-          (v5/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "ability_score_bonuses",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "LevelClass",
-            "kind": "LinkedField",
-            "name": "class",
-            "plural": false,
-            "selections": (v8/*: any*/),
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": [
-              (v4/*: any*/)
-            ],
-            "concreteType": "Feature",
-            "kind": "LinkedField",
-            "name": "features",
-            "plural": true,
-            "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "FeatureChoice",
-                "kind": "LinkedField",
-                "name": "choice",
-                "plural": false,
-                "selections": [
-                  (v9/*: any*/),
-                  (v10/*: any*/)
-                ],
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "Class",
-                "kind": "LinkedField",
-                "name": "class",
-                "plural": false,
-                "selections": [
-                  (v11/*: any*/),
-                  (v6/*: any*/),
-                  (v7/*: any*/),
-                  (v12/*: any*/)
-                ],
-                "storageKey": null
-              },
-              (v13/*: any*/),
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "FeatureParent",
-                "kind": "LinkedField",
-                "name": "parent",
-                "plural": false,
-                "selections": [
-                  (v6/*: any*/),
-                  (v7/*: any*/),
-                  (v12/*: any*/)
-                ],
-                "storageKey": null
-              },
-              (v6/*: any*/),
-              (v5/*: any*/),
-              (v7/*: any*/),
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "FeaturePrerequisites",
-                "kind": "LinkedField",
-                "name": "prerequisites",
-                "plural": true,
-                "selections": [
-                  (v5/*: any*/),
-                  (v10/*: any*/)
-                ],
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "FeatureFeature_specific",
-                "kind": "LinkedField",
-                "name": "feature_specific",
-                "plural": false,
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "FeatureFeature_specificSubfeature_options",
-                    "kind": "LinkedField",
-                    "name": "subfeature_options",
-                    "plural": false,
-                    "selections": [
-                      (v9/*: any*/),
-                      {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "FeatureFeature_specificSubfeature_optionsFrom",
-                        "kind": "LinkedField",
-                        "name": "from",
-                        "plural": true,
-                        "selections": (v15/*: any*/),
-                        "storageKey": null
-                      },
-                      (v10/*: any*/)
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "FeatureFeature_specificExpertise_options",
-                    "kind": "LinkedField",
-                    "name": "expertise_options",
-                    "plural": false,
-                    "selections": [
-                      (v9/*: any*/),
-                      {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "FeatureFeature_specificExpertise_optionsFrom",
-                        "kind": "LinkedField",
-                        "name": "from",
-                        "plural": true,
-                        "selections": (v16/*: any*/),
-                        "storageKey": null
-                      },
-                      (v10/*: any*/)
-                    ],
-                    "storageKey": null
-                  }
-                ],
-                "storageKey": null
-              },
-              (v12/*: any*/)
-            ],
-            "storageKey": "features(sort:\"LEVEL_ASC\")"
-          },
-          (v6/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "prof_bonus",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "LevelSpellcasting",
-            "kind": "LinkedField",
-            "name": "spellcasting",
-            "plural": false,
-            "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "cantrips_known",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "spell_slots_level_1",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "spell_slots_level_2",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "spell_slots_level_3",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "spell_slots_level_4",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "spell_slots_level_5",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "spell_slots_level_6",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "spell_slots_level_7",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "spell_slots_level_8",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "spell_slots_level_9",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "spells_known",
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "LevelSubclass",
-            "kind": "LinkedField",
-            "name": "subclass",
-            "plural": false,
-            "selections": (v8/*: any*/),
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      },
-      (v11/*: any*/),
-      (v6/*: any*/),
-      (v7/*: any*/),
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "Proficiency",
-        "kind": "LinkedField",
-        "name": "proficiencies",
-        "plural": true,
-        "selections": [
-          (v6/*: any*/),
-          (v7/*: any*/),
-          (v10/*: any*/),
-          (v12/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "ClassProficiency_choices",
-        "kind": "LinkedField",
-        "name": "proficiency_choices",
-        "plural": true,
-        "selections": [
-          (v9/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "ClassProficiency_choicesFrom",
-            "kind": "LinkedField",
-            "name": "from",
-            "plural": true,
-            "selections": (v8/*: any*/),
-            "storageKey": null
-          },
-          (v10/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "ClassSaving_throws",
-        "kind": "LinkedField",
-        "name": "saving_throws",
-        "plural": true,
-        "selections": (v8/*: any*/),
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "ClassSpellcasting",
-        "kind": "LinkedField",
-        "name": "spellcasting",
-        "plural": false,
-        "selections": [
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "ClassSpellcastingInfo",
-            "kind": "LinkedField",
-            "name": "info",
-            "plural": true,
-            "selections": [
-              (v13/*: any*/),
-              (v7/*: any*/)
-            ],
-            "storageKey": null
-          },
-          (v5/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "ClassSpellcastingSpellcasting_ability",
-            "kind": "LinkedField",
-            "name": "spellcasting_ability",
-            "plural": false,
-            "selections": (v8/*: any*/),
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "ClassStarting_equipment",
-        "kind": "LinkedField",
-        "name": "starting_equipment",
-        "plural": true,
-        "selections": [
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "ClassStarting_equipmentEquipment",
-            "kind": "LinkedField",
-            "name": "equipment",
-            "plural": false,
-            "selections": (v8/*: any*/),
-            "storageKey": null
-          },
-          (v17/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "ClassStarting_equipment_options",
-        "kind": "LinkedField",
-        "name": "starting_equipment_options",
-        "plural": true,
-        "selections": [
-          (v9/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "ClassStarting_equipment_optionsFrom",
-            "kind": "LinkedField",
-            "name": "from",
-            "plural": true,
-            "selections": [
-              (v17/*: any*/)
-            ],
-            "storageKey": null
-          },
-          (v10/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "ClassSubclasses",
-        "kind": "LinkedField",
-        "name": "subclasses",
-        "plural": true,
-        "selections": (v8/*: any*/),
-        "storageKey": null
-      }
-    ],
-    "storageKey": null
-  },
-  {
-    "alias": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "filter",
-        "variableName": "race"
-      }
-    ],
-    "concreteType": "Race",
-    "kind": "LinkedField",
-    "name": "race",
-    "plural": false,
-    "selections": [
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "RaceAbility_bonus_options",
-        "kind": "LinkedField",
-        "name": "ability_bonus_options",
-        "plural": false,
-        "selections": [
-          (v9/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "RaceAbility_bonus_optionsFrom",
-            "kind": "LinkedField",
-            "name": "from",
-            "plural": true,
-            "selections": [
-              (v18/*: any*/)
-            ],
-            "storageKey": null
-          },
-          (v10/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "RaceAbility_bonuses",
-        "kind": "LinkedField",
-        "name": "ability_bonuses",
-        "plural": true,
-        "selections": [
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "RaceAbility_bonusesAbility_score",
-            "kind": "LinkedField",
-            "name": "ability_score",
-            "plural": false,
-            "selections": (v8/*: any*/),
-            "storageKey": null
-          },
-          (v18/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "age",
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "alignment",
-        "storageKey": null
-      },
-      (v6/*: any*/),
-      {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "language_desc",
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "RaceLanguage_options",
-        "kind": "LinkedField",
-        "name": "language_options",
-        "plural": false,
-        "selections": [
-          (v9/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "RaceLanguage_optionsFrom",
-            "kind": "LinkedField",
-            "name": "from",
-            "plural": true,
-            "selections": (v8/*: any*/),
-            "storageKey": null
-          },
-          (v10/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "RaceLanguages",
-        "kind": "LinkedField",
-        "name": "languages",
-        "plural": true,
-        "selections": (v8/*: any*/),
-        "storageKey": null
-      },
-      (v7/*: any*/),
-      {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "size",
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "size_description",
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "speed",
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "RaceStarting_proficiencies",
-        "kind": "LinkedField",
-        "name": "starting_proficiencies",
-        "plural": true,
-        "selections": (v8/*: any*/),
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "RaceStarting_proficiency_options",
-        "kind": "LinkedField",
-        "name": "starting_proficiency_options",
-        "plural": false,
-        "selections": [
-          (v9/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "RaceStarting_proficiency_optionsFrom",
-            "kind": "LinkedField",
-            "name": "from",
-            "plural": true,
-            "selections": (v16/*: any*/),
-            "storageKey": null
-          },
-          (v10/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "RaceSubraces",
-        "kind": "LinkedField",
-        "name": "subraces",
-        "plural": true,
-        "selections": (v8/*: any*/),
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "Trait",
-        "kind": "LinkedField",
-        "name": "traits",
-        "plural": true,
-        "selections": [
-          (v13/*: any*/),
-          (v6/*: any*/),
-          (v7/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "Proficiency",
-            "kind": "LinkedField",
-            "name": "proficiencies",
-            "plural": true,
-            "selections": (v19/*: any*/),
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "TraitProficiency_choices",
-            "kind": "LinkedField",
-            "name": "proficiency_choices",
-            "plural": false,
-            "selections": [
-              (v9/*: any*/),
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "TraitProficiency_choicesFrom",
-                "kind": "LinkedField",
-                "name": "from",
-                "plural": true,
-                "selections": (v16/*: any*/),
-                "storageKey": null
-              },
-              (v10/*: any*/)
-            ],
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "TraitParent",
-            "kind": "LinkedField",
-            "name": "parent",
-            "plural": false,
-            "selections": (v8/*: any*/),
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "TraitTrait_specific",
-            "kind": "LinkedField",
-            "name": "trait_specific",
-            "plural": false,
-            "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "TraitTrait_specificSubtrait_options",
-                "kind": "LinkedField",
-                "name": "subtrait_options",
-                "plural": false,
-                "selections": [
-                  (v9/*: any*/),
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "TraitTrait_specificSubtrait_optionsFrom",
-                    "kind": "LinkedField",
-                    "name": "from",
-                    "plural": true,
-                    "selections": (v15/*: any*/),
-                    "storageKey": null
-                  },
-                  (v10/*: any*/)
-                ],
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "TraitTrait_specificSpell_options",
-                "kind": "LinkedField",
-                "name": "spell_options",
-                "plural": false,
-                "selections": [
-                  (v9/*: any*/),
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "TraitTrait_specificSpell_optionsFrom",
-                    "kind": "LinkedField",
-                    "name": "from",
-                    "plural": true,
-                    "selections": (v16/*: any*/),
-                    "storageKey": null
-                  },
-                  (v10/*: any*/)
-                ],
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "TraitTrait_specificDamage_type",
-                "kind": "LinkedField",
-                "name": "damage_type",
-                "plural": false,
-                "selections": (v8/*: any*/),
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "TraitTrait_specificBreath_weapon",
-                "kind": "LinkedField",
-                "name": "breath_weapon",
-                "plural": false,
-                "selections": [
-                  (v7/*: any*/),
-                  (v13/*: any*/),
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "TraitTrait_specificBreath_weaponUsage",
-                    "kind": "LinkedField",
-                    "name": "usage",
-                    "plural": false,
-                    "selections": [
-                      (v10/*: any*/),
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "times",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "TraitTrait_specificBreath_weaponDc",
-                    "kind": "LinkedField",
-                    "name": "dc",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "TraitTrait_specificBreath_weaponDcDc_type",
-                        "kind": "LinkedField",
-                        "name": "dc_type",
-                        "plural": false,
-                        "selections": (v8/*: any*/),
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "success_type",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "TraitTrait_specificBreath_weaponDamage",
-                    "kind": "LinkedField",
-                    "name": "damage",
-                    "plural": true,
-                    "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "damage_at_character_level",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  }
-                ],
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      }
-    ],
-    "storageKey": null
-  },
-  {
-    "alias": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "filter",
-        "variableName": "background"
-      }
-    ],
-    "concreteType": "Background",
-    "kind": "LinkedField",
-    "name": "background",
-    "plural": false,
-    "selections": [
-      (v6/*: any*/),
-      (v7/*: any*/),
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "Proficiency",
-        "kind": "LinkedField",
-        "name": "starting_proficiencies",
-        "plural": true,
-        "selections": (v19/*: any*/),
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "BackgroundLanguage_options",
-        "kind": "LinkedField",
-        "name": "language_options",
-        "plural": false,
-        "selections": [
-          (v9/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "BackgroundLanguage_optionsFrom",
-            "kind": "LinkedField",
-            "name": "from",
-            "plural": true,
-            "selections": (v8/*: any*/),
-            "storageKey": null
-          },
-          (v10/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "BackgroundStarting_equipment",
-        "kind": "LinkedField",
-        "name": "starting_equipment",
-        "plural": true,
-        "selections": [
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "BackgroundStarting_equipmentEquipment",
-            "kind": "LinkedField",
-            "name": "equipment",
-            "plural": false,
-            "selections": (v8/*: any*/),
-            "storageKey": null
-          },
-          (v17/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "BackgroundStarting_equipment_options",
-        "kind": "LinkedField",
-        "name": "starting_equipment_options",
-        "plural": true,
-        "selections": [
-          (v9/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "BackgroundStarting_equipment_optionsFrom",
-            "kind": "LinkedField",
-            "name": "from",
-            "plural": true,
-            "selections": [
-              (v17/*: any*/),
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "BackgroundStarting_equipment_optionsFromEquipment",
-                "kind": "LinkedField",
-                "name": "equipment",
-                "plural": false,
-                "selections": (v16/*: any*/),
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          },
-          (v10/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "BackgroundFeature",
-        "kind": "LinkedField",
-        "name": "feature",
-        "plural": false,
-        "selections": [
-          (v7/*: any*/),
-          (v13/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "BackgroundPersonality_traits",
-        "kind": "LinkedField",
-        "name": "personality_traits",
-        "plural": false,
-        "selections": (v20/*: any*/),
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "BackgroundIdeals",
-        "kind": "LinkedField",
-        "name": "ideals",
-        "plural": false,
-        "selections": [
-          (v9/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "BackgroundIdealsFrom",
-            "kind": "LinkedField",
-            "name": "from",
-            "plural": true,
-            "selections": [
-              (v13/*: any*/),
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "BackgroundIdealsFromAlignments",
-                "kind": "LinkedField",
-                "name": "alignments",
-                "plural": true,
-                "selections": (v8/*: any*/),
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          },
-          (v10/*: any*/)
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "BackgroundBonds",
-        "kind": "LinkedField",
-        "name": "bonds",
-        "plural": false,
-        "selections": (v20/*: any*/),
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "BackgroundFlaws",
-        "kind": "LinkedField",
-        "name": "flaws",
-        "plural": false,
-        "selections": (v20/*: any*/),
-        "storageKey": null
-      }
-    ],
-    "storageKey": null
-  }
-];
+v20 = {
+  "alias": null,
+  "args": [
+    {
+      "kind": "Variable",
+      "name": "filter",
+      "variableName": "background"
+    }
+  ],
+  "concreteType": "Background",
+  "kind": "LinkedField",
+  "name": "background",
+  "plural": false,
+  "selections": [
+    (v8/*: any*/),
+    (v9/*: any*/),
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "Proficiency",
+      "kind": "LinkedField",
+      "name": "starting_proficiencies",
+      "plural": true,
+      "selections": (v14/*: any*/),
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "BackgroundLanguage_options",
+      "kind": "LinkedField",
+      "name": "language_options",
+      "plural": false,
+      "selections": [
+        (v5/*: any*/),
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "BackgroundLanguage_optionsFrom",
+          "kind": "LinkedField",
+          "name": "from",
+          "plural": true,
+          "selections": (v10/*: any*/),
+          "storageKey": null
+        },
+        (v7/*: any*/)
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "BackgroundStarting_equipment",
+      "kind": "LinkedField",
+      "name": "starting_equipment",
+      "plural": true,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "BackgroundStarting_equipmentEquipment",
+          "kind": "LinkedField",
+          "name": "equipment",
+          "plural": false,
+          "selections": (v10/*: any*/),
+          "storageKey": null
+        },
+        (v18/*: any*/)
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "BackgroundStarting_equipment_options",
+      "kind": "LinkedField",
+      "name": "starting_equipment_options",
+      "plural": true,
+      "selections": [
+        (v5/*: any*/),
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "BackgroundStarting_equipment_optionsFrom",
+          "kind": "LinkedField",
+          "name": "from",
+          "plural": true,
+          "selections": [
+            (v18/*: any*/),
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "BackgroundStarting_equipment_optionsFromEquipment",
+              "kind": "LinkedField",
+              "name": "equipment",
+              "plural": false,
+              "selections": (v12/*: any*/),
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
+        },
+        (v7/*: any*/)
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "BackgroundFeature",
+      "kind": "LinkedField",
+      "name": "feature",
+      "plural": false,
+      "selections": [
+        (v9/*: any*/),
+        (v13/*: any*/)
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "BackgroundPersonality_traits",
+      "kind": "LinkedField",
+      "name": "personality_traits",
+      "plural": false,
+      "selections": (v19/*: any*/),
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "BackgroundIdeals",
+      "kind": "LinkedField",
+      "name": "ideals",
+      "plural": false,
+      "selections": [
+        (v5/*: any*/),
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "BackgroundIdealsFrom",
+          "kind": "LinkedField",
+          "name": "from",
+          "plural": true,
+          "selections": [
+            (v13/*: any*/),
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "BackgroundIdealsFromAlignments",
+              "kind": "LinkedField",
+              "name": "alignments",
+              "plural": true,
+              "selections": (v10/*: any*/),
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
+        },
+        (v7/*: any*/)
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "BackgroundBonds",
+      "kind": "LinkedField",
+      "name": "bonds",
+      "plural": false,
+      "selections": (v19/*: any*/),
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "BackgroundFlaws",
+      "kind": "LinkedField",
+      "name": "flaws",
+      "plural": false,
+      "selections": (v19/*: any*/),
+      "storageKey": null
+    }
+  ],
+  "storageKey": null
+},
+v21 = {
+  "kind": "Literal",
+  "name": "sort",
+  "value": "LEVEL_ASC"
+},
+v22 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "level",
+  "storageKey": null
+},
+v23 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "hit_die",
+  "storageKey": null
+};
 return {
   "fragment": {
     "argumentDefinitions": [
@@ -2421,7 +1872,26 @@ return {
     "kind": "Fragment",
     "metadata": null,
     "name": "AppCharacterQuery",
-    "selections": (v21/*: any*/),
+    "selections": [
+      {
+        "alias": null,
+        "args": (v4/*: any*/),
+        "concreteType": "Class",
+        "kind": "LinkedField",
+        "name": "class",
+        "plural": false,
+        "selections": [
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "FeaturesDisplayFragment_class"
+          }
+        ],
+        "storageKey": null
+      },
+      (v17/*: any*/),
+      (v20/*: any*/)
+    ],
     "type": "Query",
     "abstractKey": null
   },
@@ -2435,19 +1905,448 @@ return {
     ],
     "kind": "Operation",
     "name": "AppCharacterQuery",
-    "selections": (v21/*: any*/)
+    "selections": [
+      {
+        "alias": null,
+        "args": (v4/*: any*/),
+        "concreteType": "Class",
+        "kind": "LinkedField",
+        "name": "class",
+        "plural": false,
+        "selections": [
+          {
+            "alias": null,
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "limit",
+                "variableName": "level"
+              },
+              (v21/*: any*/)
+            ],
+            "concreteType": "Level",
+            "kind": "LinkedField",
+            "name": "class_levels",
+            "plural": true,
+            "selections": [
+              (v22/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "ability_score_bonuses",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "LevelClass",
+                "kind": "LinkedField",
+                "name": "class",
+                "plural": false,
+                "selections": (v10/*: any*/),
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": [
+                  (v21/*: any*/)
+                ],
+                "concreteType": "Feature",
+                "kind": "LinkedField",
+                "name": "features",
+                "plural": true,
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "FeatureChoice",
+                    "kind": "LinkedField",
+                    "name": "choice",
+                    "plural": false,
+                    "selections": [
+                      (v5/*: any*/),
+                      (v7/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Class",
+                    "kind": "LinkedField",
+                    "name": "class",
+                    "plural": false,
+                    "selections": [
+                      (v23/*: any*/),
+                      (v8/*: any*/),
+                      (v9/*: any*/),
+                      (v15/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  (v13/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "FeatureParent",
+                    "kind": "LinkedField",
+                    "name": "parent",
+                    "plural": false,
+                    "selections": [
+                      (v8/*: any*/),
+                      (v9/*: any*/),
+                      (v15/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  (v8/*: any*/),
+                  (v22/*: any*/),
+                  (v9/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "FeaturePrerequisites",
+                    "kind": "LinkedField",
+                    "name": "prerequisites",
+                    "plural": true,
+                    "selections": [
+                      (v22/*: any*/),
+                      (v7/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "FeatureFeature_specific",
+                    "kind": "LinkedField",
+                    "name": "feature_specific",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "FeatureFeature_specificSubfeature_options",
+                        "kind": "LinkedField",
+                        "name": "subfeature_options",
+                        "plural": false,
+                        "selections": [
+                          (v5/*: any*/),
+                          {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "FeatureFeature_specificSubfeature_optionsFrom",
+                            "kind": "LinkedField",
+                            "name": "from",
+                            "plural": true,
+                            "selections": (v16/*: any*/),
+                            "storageKey": null
+                          },
+                          (v7/*: any*/)
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "FeatureFeature_specificExpertise_options",
+                        "kind": "LinkedField",
+                        "name": "expertise_options",
+                        "plural": false,
+                        "selections": [
+                          (v5/*: any*/),
+                          {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "FeatureFeature_specificExpertise_optionsFrom",
+                            "kind": "LinkedField",
+                            "name": "from",
+                            "plural": true,
+                            "selections": (v12/*: any*/),
+                            "storageKey": null
+                          },
+                          (v7/*: any*/)
+                        ],
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  },
+                  (v15/*: any*/)
+                ],
+                "storageKey": "features(sort:\"LEVEL_ASC\")"
+              },
+              (v8/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "prof_bonus",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "LevelSpellcasting",
+                "kind": "LinkedField",
+                "name": "spellcasting",
+                "plural": false,
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "cantrips_known",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "spell_slots_level_1",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "spell_slots_level_2",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "spell_slots_level_3",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "spell_slots_level_4",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "spell_slots_level_5",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "spell_slots_level_6",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "spell_slots_level_7",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "spell_slots_level_8",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "spell_slots_level_9",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "spells_known",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "LevelSubclass",
+                "kind": "LinkedField",
+                "name": "subclass",
+                "plural": false,
+                "selections": (v10/*: any*/),
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
+          (v23/*: any*/),
+          (v8/*: any*/),
+          (v9/*: any*/),
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "Proficiency",
+            "kind": "LinkedField",
+            "name": "proficiencies",
+            "plural": true,
+            "selections": [
+              (v8/*: any*/),
+              (v9/*: any*/),
+              (v7/*: any*/),
+              (v15/*: any*/)
+            ],
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "ClassProficiency_choices",
+            "kind": "LinkedField",
+            "name": "proficiency_choices",
+            "plural": true,
+            "selections": [
+              (v5/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "ClassProficiency_choicesFrom",
+                "kind": "LinkedField",
+                "name": "from",
+                "plural": true,
+                "selections": (v10/*: any*/),
+                "storageKey": null
+              },
+              (v7/*: any*/)
+            ],
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "ClassSaving_throws",
+            "kind": "LinkedField",
+            "name": "saving_throws",
+            "plural": true,
+            "selections": (v10/*: any*/),
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "ClassSpellcasting",
+            "kind": "LinkedField",
+            "name": "spellcasting",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "ClassSpellcastingInfo",
+                "kind": "LinkedField",
+                "name": "info",
+                "plural": true,
+                "selections": [
+                  (v13/*: any*/),
+                  (v9/*: any*/)
+                ],
+                "storageKey": null
+              },
+              (v22/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "ClassSpellcastingSpellcasting_ability",
+                "kind": "LinkedField",
+                "name": "spellcasting_ability",
+                "plural": false,
+                "selections": (v10/*: any*/),
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "ClassStarting_equipment",
+            "kind": "LinkedField",
+            "name": "starting_equipment",
+            "plural": true,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "ClassStarting_equipmentEquipment",
+                "kind": "LinkedField",
+                "name": "equipment",
+                "plural": false,
+                "selections": (v10/*: any*/),
+                "storageKey": null
+              },
+              (v18/*: any*/)
+            ],
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "ClassStarting_equipment_options",
+            "kind": "LinkedField",
+            "name": "starting_equipment_options",
+            "plural": true,
+            "selections": [
+              (v5/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "ClassStarting_equipment_optionsFrom",
+                "kind": "LinkedField",
+                "name": "from",
+                "plural": true,
+                "selections": [
+                  (v18/*: any*/)
+                ],
+                "storageKey": null
+              },
+              (v7/*: any*/)
+            ],
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "ClassSubclasses",
+            "kind": "LinkedField",
+            "name": "subclasses",
+            "plural": true,
+            "selections": (v10/*: any*/),
+            "storageKey": null
+          }
+        ],
+        "storageKey": null
+      },
+      (v17/*: any*/),
+      (v20/*: any*/)
+    ]
   },
   "params": {
-    "cacheID": "1c2cf8cd9367657c53d5e9e0717e6168",
+    "cacheID": "afe9d7b3272d05cfdf620c7e960bac09",
     "id": null,
     "metadata": {},
     "name": "AppCharacterQuery",
     "operationKind": "query",
-    "text": "query AppCharacterQuery(\n  $class: FilterFindOneClassInput\n  $race: FilterFindOneRaceInput\n  $level: Int\n  $background: FilterFindOneBackgroundInput\n) {\n  class(filter: $class) {\n    class_levels(sort: LEVEL_ASC, limit: $level) {\n      level\n      ability_score_bonuses\n      class {\n        index\n        name\n      }\n      features(sort: LEVEL_ASC) {\n        choice {\n          choose\n          type\n        }\n        class {\n          hit_die\n          index\n          name\n          url\n        }\n        desc\n        parent {\n          index\n          name\n          url\n        }\n        index\n        level\n        name\n        prerequisites {\n          level\n          type\n        }\n        feature_specific {\n          subfeature_options {\n            choose\n            from {\n              __typename\n              index\n              name\n              url\n            }\n            type\n          }\n          expertise_options {\n            choose\n            from {\n              name\n              index\n              __typename\n            }\n            type\n          }\n        }\n        url\n      }\n      index\n      prof_bonus\n      spellcasting {\n        cantrips_known\n        spell_slots_level_1\n        spell_slots_level_2\n        spell_slots_level_3\n        spell_slots_level_4\n        spell_slots_level_5\n        spell_slots_level_6\n        spell_slots_level_7\n        spell_slots_level_8\n        spell_slots_level_9\n        spells_known\n      }\n      subclass {\n        index\n        name\n      }\n    }\n    hit_die\n    index\n    name\n    proficiencies {\n      index\n      name\n      type\n      url\n    }\n    proficiency_choices {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    saving_throws {\n      index\n      name\n    }\n    spellcasting {\n      info {\n        desc\n        name\n      }\n      level\n      spellcasting_ability {\n        index\n        name\n      }\n    }\n    starting_equipment {\n      equipment {\n        index\n        name\n      }\n      quantity\n    }\n    starting_equipment_options {\n      choose\n      from {\n        quantity\n      }\n      type\n    }\n    subclasses {\n      index\n      name\n    }\n  }\n  race(filter: $race) {\n    ability_bonus_options {\n      choose\n      from {\n        bonus\n      }\n      type\n    }\n    ability_bonuses {\n      ability_score {\n        index\n        name\n      }\n      bonus\n    }\n    age\n    alignment\n    index\n    language_desc\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    languages {\n      index\n      name\n    }\n    name\n    size\n    size_description\n    speed\n    starting_proficiencies {\n      index\n      name\n    }\n    starting_proficiency_options {\n      choose\n      from {\n        name\n        index\n        __typename\n      }\n      type\n    }\n    subraces {\n      index\n      name\n    }\n    traits {\n      desc\n      index\n      name\n      proficiencies {\n        index\n        name\n        type\n      }\n      proficiency_choices {\n        choose\n        from {\n          name\n          index\n          __typename\n        }\n        type\n      }\n      parent {\n        index\n        name\n      }\n      trait_specific {\n        subtrait_options {\n          choose\n          from {\n            __typename\n            index\n            name\n            url\n          }\n          type\n        }\n        spell_options {\n          choose\n          from {\n            name\n            index\n            __typename\n          }\n          type\n        }\n        damage_type {\n          index\n          name\n        }\n        breath_weapon {\n          name\n          desc\n          usage {\n            type\n            times\n          }\n          dc {\n            dc_type {\n              index\n              name\n            }\n            success_type\n          }\n          damage {\n            damage_at_character_level\n          }\n        }\n      }\n    }\n  }\n  background(filter: $background) {\n    index\n    name\n    starting_proficiencies {\n      index\n      name\n      type\n    }\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    starting_equipment {\n      equipment {\n        index\n        name\n      }\n      quantity\n    }\n    starting_equipment_options {\n      choose\n      from {\n        quantity\n        equipment {\n          name\n          index\n          __typename\n        }\n      }\n      type\n    }\n    feature {\n      name\n      desc\n    }\n    personality_traits {\n      choose\n      from\n      type\n    }\n    ideals {\n      choose\n      from {\n        desc\n        alignments {\n          index\n          name\n        }\n      }\n      type\n    }\n    bonds {\n      choose\n      from\n      type\n    }\n    flaws {\n      choose\n      from\n      type\n    }\n  }\n}\n"
+    "text": "query AppCharacterQuery(\n  $class: FilterFindOneClassInput\n  $race: FilterFindOneRaceInput\n  $level: Int\n  $background: FilterFindOneBackgroundInput\n) {\n  class(filter: $class) {\n    ...FeaturesDisplayFragment_class\n  }\n  race(filter: $race) {\n    ability_bonus_options {\n      choose\n      from {\n        bonus\n      }\n      type\n    }\n    ability_bonuses {\n      ability_score {\n        index\n        name\n      }\n      bonus\n    }\n    age\n    alignment\n    index\n    language_desc\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    languages {\n      index\n      name\n    }\n    name\n    size\n    size_description\n    speed\n    starting_proficiencies {\n      index\n      name\n    }\n    starting_proficiency_options {\n      choose\n      from {\n        name\n        index\n        __typename\n      }\n      type\n    }\n    subraces {\n      index\n      name\n    }\n    traits {\n      desc\n      index\n      name\n      proficiencies {\n        index\n        name\n        type\n      }\n      proficiency_choices {\n        choose\n        from {\n          name\n          index\n          __typename\n        }\n        type\n      }\n      parent {\n        index\n        name\n      }\n      trait_specific {\n        subtrait_options {\n          choose\n          from {\n            __typename\n            index\n            name\n            url\n          }\n          type\n        }\n        spell_options {\n          choose\n          from {\n            name\n            index\n            __typename\n          }\n          type\n        }\n        damage_type {\n          index\n          name\n        }\n        breath_weapon {\n          name\n          desc\n          usage {\n            type\n            times\n          }\n          dc {\n            dc_type {\n              index\n              name\n            }\n            success_type\n          }\n          damage {\n            damage_at_character_level\n          }\n        }\n      }\n    }\n  }\n  background(filter: $background) {\n    index\n    name\n    starting_proficiencies {\n      index\n      name\n      type\n    }\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    starting_equipment {\n      equipment {\n        index\n        name\n      }\n      quantity\n    }\n    starting_equipment_options {\n      choose\n      from {\n        quantity\n        equipment {\n          name\n          index\n          __typename\n        }\n      }\n      type\n    }\n    feature {\n      name\n      desc\n    }\n    personality_traits {\n      choose\n      from\n      type\n    }\n    ideals {\n      choose\n      from {\n        desc\n        alignments {\n          index\n          name\n        }\n      }\n      type\n    }\n    bonds {\n      choose\n      from\n      type\n    }\n    flaws {\n      choose\n      from\n      type\n    }\n  }\n}\n\nfragment FeaturesDisplayFragment_class on Class {\n  class_levels(sort: LEVEL_ASC, limit: $level) {\n    level\n    ability_score_bonuses\n    class {\n      index\n      name\n    }\n    features(sort: LEVEL_ASC) {\n      choice {\n        choose\n        type\n      }\n      class {\n        hit_die\n        index\n        name\n        url\n      }\n      desc\n      parent {\n        index\n        name\n        url\n      }\n      index\n      level\n      name\n      prerequisites {\n        level\n        type\n      }\n      feature_specific {\n        subfeature_options {\n          choose\n          from {\n            __typename\n            index\n            name\n            url\n          }\n          type\n        }\n        expertise_options {\n          choose\n          from {\n            name\n            index\n            __typename\n          }\n          type\n        }\n      }\n      url\n    }\n    index\n    prof_bonus\n    spellcasting {\n      cantrips_known\n      spell_slots_level_1\n      spell_slots_level_2\n      spell_slots_level_3\n      spell_slots_level_4\n      spell_slots_level_5\n      spell_slots_level_6\n      spell_slots_level_7\n      spell_slots_level_8\n      spell_slots_level_9\n      spells_known\n    }\n    subclass {\n      index\n      name\n    }\n  }\n  hit_die\n  index\n  name\n  proficiencies {\n    index\n    name\n    type\n    url\n  }\n  proficiency_choices {\n    choose\n    from {\n      index\n      name\n    }\n    type\n  }\n  saving_throws {\n    index\n    name\n  }\n  spellcasting {\n    info {\n      desc\n      name\n    }\n    level\n    spellcasting_ability {\n      index\n      name\n    }\n  }\n  starting_equipment {\n    equipment {\n      index\n      name\n    }\n    quantity\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n    }\n    type\n  }\n  subclasses {\n    index\n    name\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "9ba4e115e5abcbbdf13ed3bfa0613910";
+(node as any).hash = "fe015c73c63c24e36bd83675d724b26d";
 
 export default node;

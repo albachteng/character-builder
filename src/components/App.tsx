@@ -69,138 +69,9 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       $level: Int,
       $background: FilterFindOneBackgroundInput) {
         class (filter: $class) {
-          class_levels (sort: LEVEL_ASC, limit: $level) {
-            level
-            ability_score_bonuses
-            class {
-              index
-              name
-            }
-            features (sort: LEVEL_ASC){
-              choice {
-                choose
-                type
-              }
-              class {
-                hit_die
-                index
-                name
-                url
-              }
-              desc
-              parent {
-                index
-                name
-                url
-              }
-              index
-              level
-              name
-              prerequisites {
-                level
-                type
-              }
-              # references
-              feature_specific {
-                subfeature_options {
-                  choose
-                  from {
-                    __typename
-                    index
-                    name
-                    url
-                  }
-                  type
-                }
-                expertise_options {
-                  choose
-                  from {
-                    name
-                    index
-                    __typename
-                  }
-                  type
-                }
-              }
-              url
-            }
-            index
-            prof_bonus
-            spellcasting {
-              cantrips_known
-              spell_slots_level_1
-              spell_slots_level_2
-              spell_slots_level_3
-              spell_slots_level_4
-              spell_slots_level_5
-              spell_slots_level_6
-              spell_slots_level_7
-              spell_slots_level_8
-              spell_slots_level_9
-              spells_known
-            }
-            subclass {
-              index
-              name
-            }
-          }
-          hit_die
-          index
-          name
-          proficiencies {
-            index
-            name
-            # reference {
-            #   index
-            #   name
-            #   type
-            #   url
-            # }
-            type
-            url
-          }
-          proficiency_choices {
-            choose
-            from {
-              index
-              name
-            }
-            type
-          }
-          saving_throws {
-            index
-            name
-          }
-          spellcasting {
-            info {
-              desc
-              name
-            }
-            level
-            spellcasting_ability {
-              index
-              name
-            }
-          }
-          starting_equipment {
-            equipment {
-              index
-              name
-            }
-            quantity
-          }
-          starting_equipment_options {
-            choose
-            from {
-              quantity
-            }
-            type
-          }
-          subclasses {
-            index
-            name
-          }
+          ...FeaturesDisplayFragment_class
         }
+
         race (filter: $race) {
           ability_bonus_options {
             choose
@@ -410,9 +281,10 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       {/* </Suspense> */}
       <Suspense fallback={<Fallback />}>
         {<FeaturesDisplay
-          classFeatures={data?.class?.class_levels?.map((level: any) => level?.features).flat()}
-          racialFeatures={data?.race?.traits?.flat()}
-          backgroundFeatures={data?.background?.feature}
+          classRef={data?.class}
+          // classFeatures={data?.class?.class_levels?.map((level: any) => level?.features).flat()}
+          // racialFeatures={data?.race?.traits?.flat()}
+          // backgroundFeatures={data?.background?.feature}
           />}
       </Suspense>
       {/* <Suspense fallback={<Fallback />}> */}

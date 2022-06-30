@@ -11,21 +11,25 @@ import { useContext } from 'react';
 import HitPoints from './HitPoints';
 
 type Props = {
-  characterName: string;
+  characterName: string
   data: any
-  alignment?: string;
-  experience?: number;
+  alignment?: string
+  experience?: number
+  characterClass: CharacterClass
+  characterBackground: Background
+  characterRace: Race
 };
 
 function HeaderDisplay({
+  characterClass,
+  characterBackground,
+  characterRace,
   characterName,
   data,
   alignment = 'Neutral',
   experience = 0,
 }: Props) {
 
-  const {characterClass, characterRace, characterLevel, characterBackground} = useContext(CharacterContext);
-  console.log(data);
   return (
     <>
         <pre>

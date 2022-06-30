@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import useCharacter, { getRandom } from '../../hooks/useCharacter';
 import {
   BackgroundFeature,
   Feature as FeatureType,

@@ -2,7 +2,7 @@ import { ReactNode, useContext } from 'react';
 import CharacterContext from '../CharacterContext';
 import { AbilityScores } from '../../types';
 import Stat from './Stat';
-import { Character } from '../../queries/Character';
+// import { CharacterQuery } from '../../queries/Character';
 
 function AbilityScoresDisplay() {
 

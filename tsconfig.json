@@ -7,6 +7,7 @@
     "jsx": "react-jsx",
     "outDir": "./build",
     // "rootDir": "./src",
+    "types": ["react/next", "react-dom/next"],
     "removeComments": true,
     "noEmit": true,
     "pretty": true,

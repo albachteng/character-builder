@@ -124,72 +124,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             index
             name
           }
-          traits {
-            desc
-            index
-            name
-            proficiencies {
-              index
-              name
-              type
-            }
-            proficiency_choices {
-              choose
-              from {
-                name
-                index
-                __typename
-              }
-              type
-            }
-            parent {
-              index
-              name
-            }
-            trait_specific {
-              subtrait_options {
-                choose
-                from {
-                  __typename
-                  index
-                  name
-                  url
-                }
-                type
-              }
-              spell_options {
-                choose
-                from {
-                  name
-                  index
-                  __typename
-                }
-                type
-              }
-              damage_type {
-                index
-                name
-              }
-              breath_weapon {
-                name
-                desc
-                usage {
-                  type
-                  times
-                }
-                dc {
-                  dc_type {
-                    index
-                    name
-                  }
-                  success_type
-                }
-                damage {
-                  damage_at_character_level
-                }
-              }
-            }
-          }
+          ...FeaturesDisplayFragment_race
         }
         background(filter: $background) {
           index
@@ -279,9 +214,12 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       {/* <Suspense fallback={<Fallback />}> */}
       {/*   {data && <AbilityScoresDisplay />} */}
       {/* </Suspense> */}
+
       <Suspense fallback={<Fallback />}>
         {<FeaturesDisplay
-          classRef={data?.class}
+          classRef={data?.class!}
+          characterClass={characterClass}
+          raceRef={data?.race!}
           // classFeatures={data?.class?.class_levels?.map((level: any) => level?.features).flat()}
           // racialFeatures={data?.race?.traits?.flat()}
           // backgroundFeatures={data?.background?.feature}

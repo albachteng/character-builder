@@ -17,8 +17,8 @@ function Controls({refetch, characterRace, characterClass, dispatch}: Props) {
           GraphQL Playground
         </a>
         <button onClick={() =>  {
-          // dispatch({ type: "newCharacter" })
-          refetch()
+          dispatch({ type: "newCharacter" })
+          // refetch()
         }}> This one is weak, bring me another </button>
         <button onClick={() =>  refetch() }>REFETCH</button>
         <button onClick={() => dispatch({ type: "levelUp" })}>

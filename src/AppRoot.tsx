@@ -3,7 +3,7 @@ import  {loadQuery, useQueryLoader} from 'react-relay/hooks';
 import type {PreloadedQuery} from 'react-relay';
 import type { AppCharacterQuery as AppCharacterQueryType } from "./components/__generated__/AppCharacterQuery.graphql";
 import type {} from 'react/next';
-import { Suspense, useCallback, useContext, useTransition } from "react";
+import { Suspense, useCallback, useContext, useEffect, useTransition } from "react";
 import useCharacter from "./hooks/useCharacter";
 import CharacterContext from "./components/CharacterContext";
 
@@ -13,25 +13,32 @@ function AppRoot() {
 
   const [isRefetching, startTransition] = useTransition();
   const { state, dispatch} = useCharacter();
-  const { characterClass, characterLevel, characterRace, characterBackground } = state;
-  const variables = {
-    class: { index: characterClass},
-    race: { index: characterRace },
-    level: characterLevel,
-    background: { index: characterBackground},
-  }
   const [queryRef, loadQuery] = useQueryLoader<AppCharacterQueryType>(AppCharacterQuery, /* initialRef */)
+
 
   const refetch = useCallback(() => {
     startTransition(() => {
-      loadQuery(variables)
-      dispatch({type: 'newCharacter'})
+      loadQuery({
+        class: { index: state.characterClass},
+        race: { index: state.characterRace },
+        level: state.characterLevel,
+        background: { index: state.characterBackground},
+      })
     })
-  }, [characterClass, characterRace, characterBackground, characterLevel])
+  }, [state])
+
+  useEffect(() => {
+    refetch()
+  }, [state])
 
   if (queryRef == null) {
     return (
-      <button onClick={() => loadQuery(variables)}>
+      <button onClick={() => loadQuery({
+        class: { index: state.characterClass},
+        race: { index: state.characterRace },
+        level: state.characterLevel,
+        background: { index: state.characterBackground},
+      })}>
         Click to start!
       </button>
     )

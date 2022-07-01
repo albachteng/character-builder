@@ -1,42 +1,18 @@
 import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom';
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { createRoot } from 'react-dom/client';
+import { render } from 'react-dom';
 import './assets/css/index.css';
-import App from './components/App';
+import { RelayEnvironmentProvider } from 'react-relay';
+import RelayEnvironment from './RelayEnvironment';
+import AppRoot from './AppRoot';
 
-const client = new ApolloClient({
-  uri: 'https://www.dnd5eapi.co/graphql',
-  cache: new InMemoryCache({
-    typePolicies: {
-      // most of this API uses unique 'index' strings rather than id or _id
-      Class: {
-        keyFields: ['index']
-        // merge: true
-      },
-      Race: { keyFields: ['index'] },
-      Background: { keyFields: ['index'] },
-      ClassSpellcasting: {
-        keyFields: [], // class spellcasting data is unique per class
-        fields: {
-          info: {
-            // and therefore so is the info
-            merge(existing, incoming) {
-              return { ...existing, ...incoming };
-            }
-          }
-        }
-      }
-    }
-  })
-});
 
-ReactDOM.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
+    <RelayEnvironmentProvider environment={RelayEnvironment}>
       <Suspense fallback={'Loading...'}>
-        <App />
+        <AppRoot />
       </Suspense>
-    </ApolloProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    </RelayEnvironmentProvider>
 );

@@ -65,7 +65,7 @@ const getRandomStats = (): AbilityScores => {
 
 export const initState: Store = {
   characterClass: getRandom(classesIndexArray),
-  characterRace: 'dragonborn'/* getRandom(racesIndexArray) */,
+  characterRace: getRandom(racesIndexArray),
   characterBackground: getRandom(backgroundIndexArray),
   characterStats: getRandomStats(),
   characterLevel: 1,
@@ -84,7 +84,7 @@ const reducer = (state: Store, action: Action<never>): Store => {
     case 'newCharacter':
       return {
         characterClass: getRandom(classesIndexArray),
-        characterRace: 'dragonborn'/*  getRandom(racesIndexArray) */,
+        characterRace:  getRandom(racesIndexArray),
         characterBackground: getRandom(backgroundIndexArray),
         characterStats: getRandomStats(),
         characterLevel: 1,

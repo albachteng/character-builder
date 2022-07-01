@@ -17,7 +17,7 @@ function ItemStore() {
   const {loading: loadingClassEquipment, error: errorClassEquipment, data: dataClassEquipment} = useQuery(ClassStartingEquipment,  {variables: { filter: { index: characterClass }}} );
   const {loading: loadingEquipmentOptions, error: errorEquipmentOptions, data: dataEquipmentOptions} = useQuery(ClassEquipmentOptions, {variables: { filter: { index: characterClass }}});
 
-  const { selections }: {selections: Equipment[]} = useOption(dataEquipmentOptions?.class?.starting_equipment_options); 
+  const { selections }: {selections: Equipment[]} = useOption(dataEquipmentOptions?.class?.starting_equipment_options);
 
   const [ initialItems, setInitialItems] = useState<Equipment[]>([])
 

@@ -2,11 +2,13 @@ import { ReactNode, useContext } from 'react';
 import CharacterContext from '../CharacterContext';
 import { AbilityScores } from '../../types';
 import Stat from './Stat';
-import { Character } from '../../queries/Character';
+// import { CharacterQuery } from '../../queries/Character';
 
-function AbilityScoresDisplay() {
+type Props = {
+  characterStats: AbilityScores
+}
 
-  const { characterStats } = useContext(CharacterContext);
+function AbilityScoresDisplay({characterStats}: Props) {
 
   const scores: ReactNode[] = [];
 

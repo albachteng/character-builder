@@ -1,8 +1,19 @@
 {
-  "presets": [
-    "@babel/preset-env", 
-    ["@babel/preset-react", {
-      "runtime": "automatic"
-    }], 
-    "@babel/preset-typescript"]
+  plugins: [
+      "relay",
+      "macros"
+  ],
+  presets: [
+    "@babel/env",
+    "@babel/preset-env",
+    "@babel/"
+    [
+      "@babel/preset-react", {
+        "runtime": "automatic"
+      }
+    ],
+    "@babel/preset-typescript"
+  ]
 }
+
+

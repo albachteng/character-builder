@@ -33,7 +33,7 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
             level
             type
           }
-          reference
+          # reference
           feature_specific {
             subfeature_options {
               choose
@@ -83,12 +83,12 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
       proficiencies {
         index
         name
-        reference {
-          index
-          name
-          type
-          url
-        }
+        # reference {
+        #   index
+        #   name
+        #   type
+        #   url
+        # }
         type
         url
       }
@@ -114,20 +114,6 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
           index
           name
         }
-      }
-      starting_equipment {
-        equipment {
-          index
-          name
-        }
-        quantity
-      }
-      starting_equipment_options {
-        choose
-        from {
-          quantity
-        }
-        type
       }
       subclasses {
         index
@@ -259,11 +245,11 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
       starting_proficiencies {
         index
         name
-        reference {
-          index
-          name
-          type
-        }
+        # reference {
+        #   index
+        #   name
+        #   type
+        # }
         type
       }
       language_options {

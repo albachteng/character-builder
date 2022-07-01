@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  Race,
   BackgroundFeature,
   Feature as FeatureType,
   Trait,
@@ -13,7 +14,7 @@ import { MappingFunc } from '../../types';
 import CharacterContext from '../CharacterContext';
 import QueryRenderer from '../QueryRenderer';
 import Feature from './Feature';
-import { makeUniqueId } from '@apollo/client/utilities';
+import { useId } from 'react';
 import RenderMap from '../RenderMap';
 import useFeaturesFilters from './useFeaturesFilters'
 import useTraitsFilters from './useTraitsFilters';
@@ -100,8 +101,7 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Pro
       }
     }`, classRef);
 
-  console.log({raceRef})
-  const traits = useFragment(
+  const {traits} = useFragment(
     graphql`fragment FeaturesDisplayFragment_race on Race {
       traits {
         desc
@@ -175,8 +175,6 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Pro
 
   const { featureSpecificOptions, featureSpecificSelections } = useFeaturesFilters(classFeatures, characterClass);
   const { traitSpecificOptions, traitSpecificSelections } = useTraitsFilters(traits, characterRace)
-  console.log({traits})
-  console.log({featureSpecificOptions, featureSpecificSelections})
 
   const whiteList: Array<any> = [];
   for (let key in featureSpecificSelections) {
@@ -188,9 +186,8 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Pro
     // TODO not super eficient, we should probably get this some other way
   }
 
-  console.log({featureSpecificOptions, traitSpecificOptions, whiteList})
 
-  function featuresFilter(features: typeof classFeatures) {
+  function featuresFilter(features: typeof classFeatures = []) {
     return features.filter((feature) => {
       // if it's in options but not the whitelist, it should be filtered
       for (let key in featureSpecificSelections) {
@@ -202,8 +199,9 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Pro
       })
   }
 
-  function traitFilter(traits: typeof traits) {
-    return traits.filter((trait) => {
+  function traitFilter(input: typeof traits) {
+    const traits = input;
+    return traits?.filter((trait) => {
       // if it's in options but not the whitelist, it should be filtered
       for (let key in traitSpecificSelections) {
         if (featureSpecificOptions?.[key]?.includes(trait?.index) && !whiteList?.includes(trait?.index)) {
@@ -217,20 +215,15 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Pro
   const featuresMap: MappingFunc<typeof traits | typeof classFeatures> = (feature, index) => {
     return (
       <Feature
-        // show={show}
-        key={makeUniqueId('feature')}
+        key={useId()}
         feature={feature}
-        // featureSpecificSelections={featureSpecificSelections}
       />
     );
   };
 
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
-      {/* <pre>{JSON.stringify(featureSpecificSelections, null, 2)}</pre> */}
-      {/* <pre>{JSON.stringify(featureSpecificOptions, null, 2)}</pre> */}
       <h2>Features</h2>
-      {/* <pre>{JSON.stringify(class_levels, null, 2)}</pre> */}
       <RenderMap
         mappingFunc={featuresMap}
         data={featuresFilter(classFeatures)}

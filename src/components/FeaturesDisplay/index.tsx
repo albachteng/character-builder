@@ -8,7 +8,8 @@ import {
   Maybe,
   FeatureFeature_SpecificSubfeature_OptionsFrom,
   TraitTrait_SpecificSubtrait_OptionsFrom,
-  CharacterClass
+  CharacterClass,
+  Background
 } from "../../types";
 import { MappingFunc } from '../../types';
 import CharacterContext from '../CharacterContext';
@@ -20,6 +21,7 @@ import useFeaturesFilters from './useFeaturesFilters'
 import useTraitsFilters from './useTraitsFilters';
 import type { FeaturesDisplayFragment_class$key } from './__generated__/FeaturesDisplayFragment_class.graphql'
 import type { FeaturesDisplayFragment_race$key } from './__generated__/FeaturesDisplayFragment_race.graphql'
+import type { FeaturesDisplayFragment_background$key } from './__generated__/FeaturesDisplayFragment_background.graphql'
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
@@ -28,12 +30,14 @@ type Props = {
   raceRef: FeaturesDisplayFragment_race$key
   characterClass: CharacterClass
   characterRace: Race
+  characterBackground: Background
+  backgroundRef: FeaturesDisplayFragment_background$key
   // classFeatures: FeatureType[]
   // racialFeatures: Trait[]
   // backgroundFeatures: BackgroundFeature
 }
 
-function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Props): JSX.Element {
+function FeaturesDisplay({classRef, raceRef, characterClass, characterRace, characterBackground, backgroundRef}: Props): JSX.Element {
 
   const {class_levels} = useFragment(
     graphql`fragment FeaturesDisplayFragment_class on Class {
@@ -171,6 +175,15 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Pro
       }
   }`, raceRef)
 
+  const {backgroundFeature} = useFragment(
+    graphql`fragment FeaturesDisplayFragment_background on Background {
+      feature {
+        __typename
+        name
+        desc
+      }
+    }`, backgroundRef)
+
   const classFeatures = class_levels.map((level) => level.features).flat();
 
   const { featureSpecificOptions, featureSpecificSelections } = useFeaturesFilters(classFeatures, characterClass);
@@ -231,6 +244,10 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Pro
       <RenderMap
         mappingFunc={featuresMap}
         data={traitFilter(traits)}
+      />
+      <Feature
+        key={useId()}
+        feature={backgroundFeature}
       />
     </div>
   );

@@ -57,10 +57,6 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
     return whiteList.includes(characterClass);
   };
 
-  const myPersonality = useMemo(
-    () => <Personality />,
-    [characterBackground, characterClass]
-  );
 
   const data = usePreloadedQuery<AppCharacterQueryType>(
     graphql`query AppCharacterQuery (
@@ -166,47 +162,23 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             }
             type
           }
-          feature {
-            name
-            desc
-          }
-          personality_traits {
-            choose
-            from
-            type
-          }
-          ideals {
-            choose
-            from {
-              desc
-              alignments {
-                index
-                name
-              }
-            }
-            type
-          }
-          bonds {
-            choose
-            from
-            type
-          }
-          flaws {
-            choose
-            from
-            type
-          }
+          ...FeaturesDisplayFragment_background
+          ...PersonalityFragment_background
         }
     }`,
     queryRef)
 
+  const myPersonality = useMemo(
+    () => <Personality characterBackground={characterBackground} backgroundRef={data?.background!}/>,
+    [characterBackground, characterClass]
+  );
   return (
     <div>
-        <h1>
-          Play a fucking {characterRace} {characterClass}, coward!
-        </h1>
+      <h1>
+        Play a fucking {characterRace} {characterClass}, coward!
+      </h1>
       <Controls refetch={refetch} characterClass={characterClass} characterRace={characterRace} dispatch={dispatch}/>
-      {/* {myPersonality} */}
+      {myPersonality}
 
       {/* <Suspense fallback={<Fallback />}> */}
       {/*   {data && <HeaderDisplay data={data} characterName="nonsense" />} */}
@@ -221,6 +193,8 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           characterClass={characterClass}
           raceRef={data?.race!}
           characterRace={characterRace}
+          backgroundRef={data?.background!}
+          characterBackground={characterBackground}
           // classFeatures={data?.class?.class_levels?.map((level: any) => level?.features).flat()}
           // racialFeatures={data?.race?.traits?.flat()}
           // backgroundFeatures={data?.background?.feature}

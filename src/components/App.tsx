@@ -2,7 +2,7 @@ import type {PreloadedQuery} from 'react-relay';
 import { Suspense, useMemo, lazy, useContext } from "react";
 import Fallback from "./Fallback";
 import "../assets/css/App.css";
-import { Background, CharacterClass, Level, Race, ZeroToTwenty } from "../types";
+import { AbilityScores, Background, CharacterClass, Level, Race, ZeroToTwenty } from "../types";
 import type { AppCharacterQuery as AppCharacterQueryType, AppCharacterQuery$variables } from "./__generated__/AppCharacterQuery.graphql";
 import { useQuery } from "@apollo/client";
 import {
@@ -35,13 +35,14 @@ type Props = {
     characterRace: Race,
     characterClass: CharacterClass,
     characterLevel: ZeroToTwenty,
+    characterStats: AbilityScores,
     characterBackground: Background,
   }
 }
 
 function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
 
-  const { characterClass, characterRace, characterBackground, characterLevel } = state;
+  const { characterClass, characterRace, characterBackground, characterLevel, characterStats } = state;
   // Two fighter and rogue archetypes DO get spellcasting - Eldritch Knight and Arcane Trickster
   const isSpellcaster = (characterClass: CharacterClass) => {
     const whiteList = [
@@ -66,6 +67,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       $background: FilterFindOneBackgroundInput) {
         class (filter: $class) {
           ...FeaturesDisplayFragment_class
+          ...InventoryDisplayFragment_class
         }
 
         race (filter: $race) {
@@ -143,25 +145,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             }
             type
           }
-          starting_equipment {
-            equipment {
-              index
-              name
-            }
-            quantity
-          }
-          starting_equipment_options {
-            choose
-            from {
-              quantity
-              equipment {
-                name
-                index
-                __typename
-            }
-            }
-            type
-          }
+          ...InventoryDisplayFragment_background
           ...FeaturesDisplayFragment_background
           ...PersonalityFragment_background
         }
@@ -180,12 +164,16 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       <Controls refetch={refetch} characterClass={characterClass} characterRace={characterRace} dispatch={dispatch}/>
       {myPersonality}
 
-      {/* <Suspense fallback={<Fallback />}> */}
-      {/*   {data && <HeaderDisplay data={data} characterName="nonsense" />} */}
-      {/* </Suspense> */}
-      {/* <Suspense fallback={<Fallback />}> */}
-      {/*   {data && <AbilityScoresDisplay />} */}
-      {/* </Suspense> */}
+      <Suspense fallback={<Fallback />}>
+        {data && <HeaderDisplay
+          characterStats={characterStats}
+          characterClass={characterClass}
+          characterLevel={characterLevel}
+          characterName="nonsense" />}
+      </Suspense>
+      <Suspense fallback={<Fallback />}>
+        <AbilityScoresDisplay characterStats={characterStats} />
+      </Suspense>
 
       <Suspense fallback={<Fallback />}>
         {<FeaturesDisplay
@@ -203,9 +191,12 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       {/* <Suspense fallback={<Fallback />}> */}
       {/*   {data && <ItemStore />} */}
       {/* </Suspense> */}
-      {/* <Suspense fallback={<Fallback />}> */}
-      {/*   {data && <InventoryDisplay />} */}
-      {/* </Suspense> */}
+      <Suspense fallback={<Fallback />}>
+        {data && <InventoryDisplay
+          backgroundRef={data?.background!}
+          classRef={data?.class!}
+        />}
+      </Suspense>
       {/* <Suspense fallback={<Fallback />}> */}
       {/*   {data && <SkillsDisplay />} */}
       {/*   {isSpellcaster(characterClass) && <SpellsDisplay />} */}

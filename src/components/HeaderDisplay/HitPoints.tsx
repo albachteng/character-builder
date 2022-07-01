@@ -19,9 +19,13 @@ const calculateHP = (
   return total;
 };
 
-function HitPoints() {
+type Props = {
+  characterLevel: ZeroToTwenty
+  characterClass: CharacterClass
+  characterStats: AbilityScores
+}
 
-  const { characterLevel, characterClass, characterStats } = useContext(CharacterContext);
+function HitPoints({characterLevel, characterClass, characterStats}: Props) {
 
   const { rolls, calculateHitDice } = useHP(characterLevel, characterClass);
 

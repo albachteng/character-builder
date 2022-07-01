@@ -19,11 +19,11 @@ import type { InventoryDisplayFragment_class$key } from './__generated__/Invento
 type Props = {
   characterClass: CharacterClass
   characterBackground: Background
-  backgroundRef: FragmentInventoryDisplay_background$key
-  classRef: FragmentInventoryDisplay_class$key
+  backgroundRef: InventoryDisplayFragment_background$key
+  classRef: InventoryDisplayFragment_class$key
 }
 
-function InventoryDisplay({ characterClass, characterBackground, classRef, backgroundRef }) {
+function InventoryDisplay({ characterClass, characterBackground, classRef, backgroundRef }: Props) {
 
   const equipmentMap: MappingFunc<{ [key: string]: any }> = (item, index) =>
     item?.equipment?.name !== null && (

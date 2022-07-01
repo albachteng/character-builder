@@ -58,7 +58,6 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
     return whiteList.includes(characterClass);
   };
 
-
   const data = usePreloadedQuery<AppCharacterQueryType>(
     graphql`query AppCharacterQuery (
       $class: FilterFindOneClassInput,
@@ -68,8 +67,8 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
         class (filter: $class) {
           ...FeaturesDisplayFragment_class
           ...InventoryDisplayFragment_class
+          ...SkillsDisplayFragment_class
         }
-
         race (filter: $race) {
           ability_bonus_options {
             choose
@@ -105,19 +104,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           size
           size_description
           speed
-          starting_proficiencies {
-            index
-            name
-          }
-          starting_proficiency_options {
-            choose
-            from {
-              name
-              index
-              __typename
-            }
-            type
-          }
+          ...SkillsDisplayFragment_race
           subraces {
             index
             name
@@ -127,16 +114,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
         background(filter: $background) {
           index
           name
-          starting_proficiencies {
-            index
-            name
-            # references {
-            #   index
-            #   name
-            #   type
-            # }
-            type
-          }
+          ...SkillsDisplayFragment_background
           language_options {
             choose
             from {
@@ -168,6 +146,8 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
         {data && <HeaderDisplay
           characterStats={characterStats}
           characterClass={characterClass}
+          characterBackground={characterBackground}
+          characterRace={characterRace}
           characterLevel={characterLevel}
           characterName="nonsense" />}
       </Suspense>
@@ -193,14 +173,25 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       {/* </Suspense> */}
       <Suspense fallback={<Fallback />}>
         {data && <InventoryDisplay
+          characterClass={characterClass}
+          characterBackground={characterBackground}
           backgroundRef={data?.background!}
           classRef={data?.class!}
         />}
       </Suspense>
-      {/* <Suspense fallback={<Fallback />}> */}
-      {/*   {data && <SkillsDisplay />} */}
+      <Suspense fallback={<Fallback />}>
+        {data && <SkillsDisplay
+          characterLevel={characterLevel}
+          characterStats={characterStats}
+          characterClass={characterClass}
+          characterRace={characterRace}
+          characterBackground={characterBackground}
+          raceRef={data?.race!}
+          backgroundRef={data?.background!}
+          classRef={data?.class!}
+        />}
       {/*   {isSpellcaster(characterClass) && <SpellsDisplay />} */}
-      {/* </Suspense> */}
+      </Suspense>
   </div>
   );
 }

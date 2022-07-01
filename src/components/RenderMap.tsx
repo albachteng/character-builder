@@ -4,7 +4,7 @@ import { sortByOptions } from '../utilities/sortByOptions';
 
 type RenderProps = {
   mappingFunc: MappingFunc<any>;
-  data?: JSONValue[];
+  data?: JSONValue[] | null;
   sortBy?: keyof typeof sortByOptions;
 };
 
@@ -20,8 +20,8 @@ function RenderMap({ mappingFunc, sortBy, data = [] }: RenderProps) {
   //   // @ts-ignore
   //     .sort(sortByOptions[sortBy]);
   // }
-
-  return <>{toRender.length > 0 && toRender.map(mappingFunc)}</>;
+  if (toRender) return <>{toRender?.length > 0 && toRender?.map(mappingFunc)}</>;
+  return <></>
 }
 
 export default RenderMap;

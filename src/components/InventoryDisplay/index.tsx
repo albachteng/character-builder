@@ -13,16 +13,17 @@ import QueryRenderer from "../QueryRenderer";
 import QueryWrapper from "../QueryWrapper";
 import RenderMap from "../RenderMap";
 import withUseOption from "../withUseOption";
-import type { FragmentInventoryDisplay_background$key } from './__generated__/InventoryDisplay_background.graphql';
-import type { FragmentInventoryDisplay_class$key } from './__generated__/InventoryDisplay_class.graphql';
+import type { InventoryDisplayFragment_background$key } from './__generated__/InventoryDisplayFragment_background.graphql';
+import type { InventoryDisplayFragment_class$key } from './__generated__/InventoryDisplayFragment_class.graphql';
 
 type Props = {
   characterClass: CharacterClass
   characterBackground: Background
   backgroundRef: FragmentInventoryDisplay_background$key
+  classRef: FragmentInventoryDisplay_class$key
 }
 
-function InventoryDisplay({ characterClass, characterBackground }) {
+function InventoryDisplay({ characterClass, characterBackground, classRef, backgroundRef }) {
 
   const equipmentMap: MappingFunc<{ [key: string]: any }> = (item, index) =>
     item?.equipment?.name !== null && (
@@ -35,7 +36,7 @@ function InventoryDisplay({ characterClass, characterBackground }) {
     starting_equipment: class_starting_equipment,
     starting_equipment_options: class_starting_equipment_options
   } = useFragment(
-    graphql`fragment FragmentInventoryDisplay_class on Class {
+    graphql`fragment InventoryDisplayFragment_class on Class {
       starting_equipment {
         equipment {
           index
@@ -56,7 +57,7 @@ function InventoryDisplay({ characterClass, characterBackground }) {
     starting_equipment,
     starting_equipment_options
   } = useFragment(
-    graphql`fragment InventoryDisplay_background on Background {
+    graphql`fragment InventoryDisplayFragment_background on Background {
       starting_equipment {
         equipment {
           index
@@ -83,24 +84,21 @@ function InventoryDisplay({ characterClass, characterBackground }) {
     <div>
       <h2>Inventory:</h2>
       <ul>
-        <QueryRenderer
-          query={ClassStartingEquipment}
-          variables={{ filter: { index: characterClass } }}
-          dataType={["class", "starting_equipment"]}
+        <RenderMap
           mappingFunc={equipmentMap}
+          data={class_starting_equipment}
         />
-        <QueryWrapper
-          query={ClassEquipmentOptions}
-          variables={{ filter: { index: characterClass } }}
-          dataType={["class", "starting_equipment_options"]}
-        >
-          <RenderMapWithUseOption mappingFunc={equipmentMap} />
-        </QueryWrapper>
-        <QueryRenderer
-          query={BackgroundEquipment}
-          variables={{ filter: { index: characterBackground } }}
-          dataType={["background", "starting_equipment"]}
+        <RenderMapWithUseOption
           mappingFunc={equipmentMap}
+          data={class_starting_equipment_options}
+        />
+        <RenderMap
+          mappingFunc={equipmentMap}
+          data={starting_equipment}
+        />
+        <RenderMapWithUseOption
+          mappingFunc={equipmentMap}
+          data={starting_equipment_options}
         />
       </ul>
     </div>

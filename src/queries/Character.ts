@@ -115,20 +115,6 @@ export const Character = gql`query Character ($class: FilterFindOneClassInput, $
           name
         }
       }
-      starting_equipment {
-        equipment {
-          index
-          name
-        }
-        quantity
-      }
-      starting_equipment_options {
-        choose
-        from {
-          quantity
-        }
-        type
-      }
       subclasses {
         index
         name

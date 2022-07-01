@@ -220,7 +220,10 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           classRef={data?.class!}
           characterClass={characterClass}
           raceRef={data?.race!}
+<<<<<<< HEAD
           characterRace={characterRace}
+=======
+>>>>>>> 76981fef3fb4a058ad78d8019604a21ac44733c6
           // classFeatures={data?.class?.class_levels?.map((level: any) => level?.features).flat()}
           // racialFeatures={data?.race?.traits?.flat()}
           // backgroundFeatures={data?.background?.feature}

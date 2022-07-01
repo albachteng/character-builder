@@ -100,7 +100,8 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Pro
       }
     }`, classRef);
 
-  const {traits} = useFragment(
+  console.log({raceRef})
+  const traits = useFragment(
     graphql`fragment FeaturesDisplayFragment_race on Race {
       traits {
         desc
@@ -174,6 +175,8 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Pro
 
   const { featureSpecificOptions, featureSpecificSelections } = useFeaturesFilters(classFeatures, characterClass);
   const { traitSpecificOptions, traitSpecificSelections } = useTraitsFilters(traits, characterRace)
+  console.log({traits})
+  console.log({featureSpecificOptions, featureSpecificSelections})
 
   const whiteList: Array<any> = [];
   for (let key in featureSpecificSelections) {
@@ -186,6 +189,7 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Pro
   }
 
   console.log({featureSpecificOptions, traitSpecificOptions, whiteList})
+
   function featuresFilter(features: typeof classFeatures) {
     return features.filter((feature) => {
       // if it's in options but not the whitelist, it should be filtered
@@ -210,8 +214,7 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace}: Pro
       })
   }
 
-
-  const featuresMap: MappingFunc<any> = (feature, index) => {
+  const featuresMap: MappingFunc<typeof traits | typeof classFeatures> = (feature, index) => {
     return (
       <Feature
         // show={show}

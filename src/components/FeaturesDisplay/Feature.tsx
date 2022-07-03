@@ -18,6 +18,8 @@ function Feature({ featureRef }: Props) {
       desc
     }`, featureRef);
 
+  const { name, level } = feature;
+
   const { description, toggleDescription } = useOnClickDescription(feature);
 
   return (
@@ -25,10 +27,9 @@ function Feature({ featureRef }: Props) {
       {(
         <div>
           <p onClick={toggleDescription}>
-            {feature?.name}
-            {`, Level ${feature?.level}`}
-            {feature?.__typename &&
-              ` | From: Class Features`}
+            {name}
+            {`, Level ${level}`}
+            {" | From: Class Features"}
           </p>
           {description}
         </div>

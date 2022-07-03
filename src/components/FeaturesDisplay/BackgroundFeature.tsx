@@ -1,22 +1,21 @@
 import { graphql } from "babel-plugin-relay/macro";
 import { useFragment } from "react-relay";
 import useOnClickDescription from "../../hooks/useOnClickDescription";
-import type { FeatureFragment_feature$key } from './__generated__/FeatureFragment_feature_feature.graphql';
+import type { FeatureFragment_background_feature$key } from './__generated__/FeatureFragment_background_feature.graphql';
 
 type Props = {
-  featureRef: FeatureFragment_feature$key
+  backgroundFeatureRef: FeatureFragment_background_feature$key
 };
 
-function Feature({ featureRef }: Props) {
+function BackgroundFeature({ backgroundFeatureRef}: Props) {
 
-  const feature = useFragment(
-    graphql`fragment FeatureFragment_feature on Feature {
+  const { feature }= useFragment(
+    graphql`fragment BackgroundFeatureFragment_feature on BackgroundFeature {
       name
-      index
+      # index
       __typename
-      level
       desc
-    }`, featureRef);
+    }`, backgroundFeatureRef);
 
   const { description, toggleDescription } = useOnClickDescription(feature);
 
@@ -28,7 +27,7 @@ function Feature({ featureRef }: Props) {
             {feature?.name}
             {`, Level ${feature?.level}`}
             {feature?.__typename &&
-              ` | From: Class Features`}
+              ` | From: Background`}
           </p>
           {description}
         </div>

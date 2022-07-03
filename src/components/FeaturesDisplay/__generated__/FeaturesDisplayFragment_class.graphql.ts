@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<31cc6f172a2f83b55b770c2ffd4d2b56>>
+ * @generated SignedSource<<0c06dec36cb54f851d7742fab35ddf82>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -24,7 +24,6 @@ export type FeaturesDisplayFragment_class$data = {
         readonly name: string | null;
         readonly url: string | null;
       } | null;
-      readonly desc: ReadonlyArray<string | null> | null;
       readonly feature_specific: {
         readonly expertise_options: {
           readonly choose: number | null;
@@ -46,9 +45,6 @@ export type FeaturesDisplayFragment_class$data = {
           readonly type: string | null;
         } | null;
       } | null;
-      readonly index: string | null;
-      readonly level: number | null;
-      readonly name: string | null;
       readonly parent: {
         readonly index: string | null;
         readonly name: string | null;
@@ -59,6 +55,7 @@ export type FeaturesDisplayFragment_class$data = {
         readonly type: string | null;
       } | null> | null;
       readonly url: string | null;
+      readonly " $fragmentSpreads": FragmentRefs<"FeatureFragment_feature">;
     }>;
     readonly index: string | null;
     readonly level: number | null;
@@ -175,6 +172,11 @@ return {
           "plural": true,
           "selections": [
             {
+              "args": null,
+              "kind": "FragmentSpread",
+              "name": "FeatureFragment_feature"
+            },
+            {
               "alias": null,
               "args": null,
               "concreteType": "FeatureChoice",
@@ -211,13 +213,6 @@ return {
             {
               "alias": null,
               "args": null,
-              "kind": "ScalarField",
-              "name": "desc",
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
               "concreteType": "FeatureParent",
               "kind": "LinkedField",
               "name": "parent",
@@ -229,9 +224,6 @@ return {
               ],
               "storageKey": null
             },
-            (v4/*: any*/),
-            (v1/*: any*/),
-            (v5/*: any*/),
             {
               "alias": null,
               "args": null,
@@ -345,6 +337,6 @@ return {
 };
 })();
 
-(node as any).hash = "cdc1ccb8b27dcc6535f09f2ce0bccc5a";
+(node as any).hash = "8ebcae0d7ebe66ecf7deb3c1670b145b";
 
 export default node;

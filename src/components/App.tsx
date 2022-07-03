@@ -109,7 +109,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             index
             name
           }
-          ...FeaturesDisplayFragment_race
+          ...TraitsDisplayFragment_race
         }
         background(filter: $background) {
           index
@@ -124,7 +124,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             type
           }
           ...InventoryDisplayFragment_background
-          ...FeaturesDisplayFragment_background
+          ...BackgroundFeaturesDisplayFragment_background
           ...PersonalityFragment_background
         }
     }`,

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<f01ba5a043488cdb275abd9f9bebadee>>
+ * @generated SignedSource<<f610d7872a7906c8988386df9205829d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -964,7 +964,7 @@ export type AppCharacterQuery$data = {
       readonly type: string | null;
     } | null;
     readonly name: string | null;
-    readonly " $fragmentSpreads": FragmentRefs<"FeaturesDisplayFragment_background" | "InventoryDisplayFragment_background" | "PersonalityFragment_background" | "SkillsDisplayFragment_background">;
+    readonly " $fragmentSpreads": FragmentRefs<"BackgroundFeaturesDisplayFragment_background" | "InventoryDisplayFragment_background" | "PersonalityFragment_background" | "SkillsDisplayFragment_background">;
   } | null;
   readonly class: {
     readonly " $fragmentSpreads": FragmentRefs<"FeaturesDisplayFragment_class" | "InventoryDisplayFragment_class" | "SkillsDisplayFragment_class">;
@@ -1008,7 +1008,7 @@ export type AppCharacterQuery$data = {
       readonly index: string | null;
       readonly name: string | null;
     } | null> | null;
-    readonly " $fragmentSpreads": FragmentRefs<"FeaturesDisplayFragment_race" | "SkillsDisplayFragment_race">;
+    readonly " $fragmentSpreads": FragmentRefs<"SkillsDisplayFragment_race" | "TraitsDisplayFragment_race">;
   } | null;
 };
 export type AppCharacterQuery = {
@@ -1268,7 +1268,7 @@ v27 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "url",
+  "name": "__typename",
   "storageKey": null
 },
 v28 = {
@@ -1282,19 +1282,19 @@ v29 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "__typename",
+  "name": "url",
   "storageKey": null
 },
 v30 = [
-  (v29/*: any*/),
+  (v27/*: any*/),
   (v10/*: any*/),
   (v11/*: any*/),
-  (v27/*: any*/)
+  (v29/*: any*/)
 ],
 v31 = [
   (v11/*: any*/),
   (v10/*: any*/),
-  (v29/*: any*/)
+  (v27/*: any*/)
 ],
 v32 = {
   "alias": null,
@@ -1305,9 +1305,9 @@ v32 = {
 },
 v33 = [
   (v11/*: any*/),
-  (v29/*: any*/),
+  (v27/*: any*/),
   (v10/*: any*/),
-  (v27/*: any*/)
+  (v29/*: any*/)
 ],
 v34 = {
   "alias": null,
@@ -1387,7 +1387,7 @@ return {
           {
             "args": null,
             "kind": "FragmentSpread",
-            "name": "FeaturesDisplayFragment_race"
+            "name": "TraitsDisplayFragment_race"
           }
         ],
         "storageKey": null
@@ -1416,7 +1416,7 @@ return {
           {
             "args": null,
             "kind": "FragmentSpread",
-            "name": "FeaturesDisplayFragment_background"
+            "name": "BackgroundFeaturesDisplayFragment_background"
           },
           {
             "args": null,
@@ -1482,6 +1482,11 @@ return {
                 "name": "features",
                 "plural": true,
                 "selections": [
+                  (v11/*: any*/),
+                  (v10/*: any*/),
+                  (v27/*: any*/),
+                  (v26/*: any*/),
+                  (v28/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -1512,11 +1517,10 @@ return {
                       },
                       (v10/*: any*/),
                       (v11/*: any*/),
-                      (v27/*: any*/)
+                      (v29/*: any*/)
                     ],
                     "storageKey": null
                   },
-                  (v28/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -1527,13 +1531,10 @@ return {
                     "selections": [
                       (v10/*: any*/),
                       (v11/*: any*/),
-                      (v27/*: any*/)
+                      (v29/*: any*/)
                     ],
                     "storageKey": null
                   },
-                  (v10/*: any*/),
-                  (v26/*: any*/),
-                  (v11/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -1604,7 +1605,7 @@ return {
                     ],
                     "storageKey": null
                   },
-                  (v27/*: any*/)
+                  (v29/*: any*/)
                 ],
                 "storageKey": "features(sort:\"LEVEL_ASC\")"
               },
@@ -1696,7 +1697,7 @@ return {
             "plural": true,
             "selections": [
               (v6/*: any*/),
-              (v29/*: any*/),
+              (v27/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -1733,7 +1734,7 @@ return {
           (v19/*: any*/),
           (v20/*: any*/),
           (v21/*: any*/),
-          (v29/*: any*/),
+          (v27/*: any*/),
           {
             "alias": "proficiencies",
             "args": null,
@@ -1753,7 +1754,7 @@ return {
             "plural": false,
             "selections": [
               (v6/*: any*/),
-              (v29/*: any*/),
+              (v27/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -1776,9 +1777,10 @@ return {
             "name": "traits",
             "plural": true,
             "selections": [
-              (v28/*: any*/),
-              (v10/*: any*/),
               (v11/*: any*/),
+              (v10/*: any*/),
+              (v27/*: any*/),
+              (v28/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -1987,7 +1989,7 @@ return {
         "selections": [
           (v10/*: any*/),
           (v11/*: any*/),
-          (v29/*: any*/),
+          (v27/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -1998,8 +2000,8 @@ return {
             "selections": [
               (v11/*: any*/),
               (v10/*: any*/),
-              (v27/*: any*/),
-              (v29/*: any*/)
+              (v29/*: any*/),
+              (v27/*: any*/)
             ],
             "storageKey": null
           },
@@ -2069,8 +2071,8 @@ return {
             "name": "feature",
             "plural": false,
             "selections": [
-              (v29/*: any*/),
               (v11/*: any*/),
+              (v27/*: any*/),
               (v28/*: any*/)
             ],
             "storageKey": null
@@ -2083,7 +2085,7 @@ return {
             "name": "personality_traits",
             "plural": false,
             "selections": [
-              (v29/*: any*/),
+              (v27/*: any*/),
               (v6/*: any*/),
               (v34/*: any*/)
             ],
@@ -2151,16 +2153,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "9af8012c12413fae9c39996fdb3f06d8",
+    "cacheID": "718d3af393a28d38860ebafd6b4cd37a",
     "id": null,
     "metadata": {},
     "name": "AppCharacterQuery",
     "operationKind": "query",
-    "text": "query AppCharacterQuery(\n  $class: FilterFindOneClassInput\n  $race: FilterFindOneRaceInput\n  $level: Int\n  $background: FilterFindOneBackgroundInput\n) {\n  class(filter: $class) {\n    ...FeaturesDisplayFragment_class\n    ...InventoryDisplayFragment_class\n    ...SkillsDisplayFragment_class\n  }\n  race(filter: $race) {\n    ability_bonus_options {\n      choose\n      from {\n        bonus\n      }\n      type\n    }\n    ability_bonuses {\n      ability_score {\n        index\n        name\n      }\n      bonus\n    }\n    age\n    alignment\n    index\n    language_desc\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    languages {\n      index\n      name\n    }\n    name\n    size\n    size_description\n    speed\n    ...SkillsDisplayFragment_race\n    subraces {\n      index\n      name\n    }\n    ...FeaturesDisplayFragment_race\n  }\n  background(filter: $background) {\n    index\n    name\n    ...SkillsDisplayFragment_background\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    ...InventoryDisplayFragment_background\n    ...FeaturesDisplayFragment_background\n    ...PersonalityFragment_background\n  }\n}\n\nfragment FeaturesDisplayFragment_background on Background {\n  feature {\n    __typename\n    name\n    desc\n  }\n}\n\nfragment FeaturesDisplayFragment_class on Class {\n  class_levels(sort: LEVEL_ASC, limit: $level) {\n    level\n    ability_score_bonuses\n    features(sort: LEVEL_ASC) {\n      choice {\n        choose\n        type\n      }\n      class {\n        hit_die\n        index\n        name\n        url\n      }\n      desc\n      parent {\n        index\n        name\n        url\n      }\n      index\n      level\n      name\n      prerequisites {\n        level\n        type\n      }\n      feature_specific {\n        subfeature_options {\n          choose\n          from {\n            __typename\n            index\n            name\n            url\n          }\n          type\n        }\n        expertise_options {\n          choose\n          from {\n            name\n            index\n            __typename\n          }\n          type\n        }\n      }\n      url\n    }\n    index\n    prof_bonus\n    subclass {\n      index\n      name\n    }\n  }\n}\n\nfragment FeaturesDisplayFragment_race on Race {\n  traits {\n    desc\n    index\n    name\n    proficiencies {\n      index\n      name\n      type\n    }\n    proficiency_choices {\n      choose\n      from {\n        name\n        index\n        __typename\n      }\n      type\n    }\n    parent {\n      index\n      name\n    }\n    trait_specific {\n      subtrait_options {\n        choose\n        from {\n          __typename\n          index\n          name\n          url\n        }\n        type\n      }\n      spell_options {\n        choose\n        from {\n          name\n          index\n          __typename\n        }\n        type\n      }\n      damage_type {\n        index\n        name\n      }\n      breath_weapon {\n        name\n        desc\n        usage {\n          type\n          times\n        }\n        dc {\n          dc_type {\n            index\n            name\n          }\n          success_type\n        }\n        damage {\n          damage_at_character_level\n        }\n      }\n    }\n  }\n}\n\nfragment InventoryDisplayFragment_background on Background {\n  starting_equipment {\n    equipment {\n      index\n      name\n    }\n    quantity\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n      equipment {\n        name\n        index\n        __typename\n      }\n    }\n    type\n  }\n}\n\nfragment InventoryDisplayFragment_class on Class {\n  starting_equipment {\n    equipment {\n      index\n      name\n    }\n    quantity\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n    }\n    type\n  }\n}\n\nfragment PersonalityFragment_background on Background {\n  personality_traits {\n    __typename\n    choose\n    from\n  }\n  ideals {\n    choose\n    from {\n      desc\n      alignments {\n        name\n      }\n    }\n  }\n  bonds {\n    choose\n    from\n  }\n  flaws {\n    choose\n    from\n  }\n}\n\nfragment SkillsDisplayFragment_background on Background {\n  __typename\n  starting_proficiencies {\n    name\n    index\n    url\n    __typename\n  }\n}\n\nfragment SkillsDisplayFragment_class on Class {\n  index\n  proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n\nfragment SkillsDisplayFragment_race on Race {\n  index\n  __typename\n  proficiencies: starting_proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices: starting_proficiency_options {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n"
+    "text": "query AppCharacterQuery(\n  $class: FilterFindOneClassInput\n  $race: FilterFindOneRaceInput\n  $level: Int\n  $background: FilterFindOneBackgroundInput\n) {\n  class(filter: $class) {\n    ...FeaturesDisplayFragment_class\n    ...InventoryDisplayFragment_class\n    ...SkillsDisplayFragment_class\n  }\n  race(filter: $race) {\n    ability_bonus_options {\n      choose\n      from {\n        bonus\n      }\n      type\n    }\n    ability_bonuses {\n      ability_score {\n        index\n        name\n      }\n      bonus\n    }\n    age\n    alignment\n    index\n    language_desc\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    languages {\n      index\n      name\n    }\n    name\n    size\n    size_description\n    speed\n    ...SkillsDisplayFragment_race\n    subraces {\n      index\n      name\n    }\n    ...TraitsDisplayFragment_race\n  }\n  background(filter: $background) {\n    index\n    name\n    ...SkillsDisplayFragment_background\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    ...InventoryDisplayFragment_background\n    ...BackgroundFeaturesDisplayFragment_background\n    ...PersonalityFragment_background\n  }\n}\n\nfragment BackgroundFeatureFragment_feature on BackgroundFeature {\n  name\n  __typename\n  desc\n}\n\nfragment BackgroundFeaturesDisplayFragment_background on Background {\n  feature {\n    ...BackgroundFeatureFragment_feature\n  }\n}\n\nfragment FeatureFragment_feature on Feature {\n  name\n  index\n  __typename\n  level\n  desc\n}\n\nfragment FeaturesDisplayFragment_class on Class {\n  class_levels(sort: LEVEL_ASC, limit: $level) {\n    level\n    ability_score_bonuses\n    features(sort: LEVEL_ASC) {\n      ...FeatureFragment_feature\n      choice {\n        choose\n        type\n      }\n      class {\n        hit_die\n        index\n        name\n        url\n      }\n      parent {\n        index\n        name\n        url\n      }\n      prerequisites {\n        level\n        type\n      }\n      feature_specific {\n        subfeature_options {\n          choose\n          from {\n            __typename\n            index\n            name\n            url\n          }\n          type\n        }\n        expertise_options {\n          choose\n          from {\n            name\n            index\n            __typename\n          }\n          type\n        }\n      }\n      url\n    }\n    index\n    prof_bonus\n    subclass {\n      index\n      name\n    }\n  }\n}\n\nfragment InventoryDisplayFragment_background on Background {\n  starting_equipment {\n    equipment {\n      index\n      name\n    }\n    quantity\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n      equipment {\n        name\n        index\n        __typename\n      }\n    }\n    type\n  }\n}\n\nfragment InventoryDisplayFragment_class on Class {\n  starting_equipment {\n    equipment {\n      index\n      name\n    }\n    quantity\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n    }\n    type\n  }\n}\n\nfragment PersonalityFragment_background on Background {\n  personality_traits {\n    __typename\n    choose\n    from\n  }\n  ideals {\n    choose\n    from {\n      desc\n      alignments {\n        name\n      }\n    }\n  }\n  bonds {\n    choose\n    from\n  }\n  flaws {\n    choose\n    from\n  }\n}\n\nfragment SkillsDisplayFragment_background on Background {\n  __typename\n  starting_proficiencies {\n    name\n    index\n    url\n    __typename\n  }\n}\n\nfragment SkillsDisplayFragment_class on Class {\n  index\n  proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n\nfragment SkillsDisplayFragment_race on Race {\n  index\n  __typename\n  proficiencies: starting_proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices: starting_proficiency_options {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n\nfragment TraitFragment_trait on Trait {\n  name\n  index\n  __typename\n  desc\n}\n\nfragment TraitsDisplayFragment_race on Race {\n  traits {\n    ...TraitFragment_trait\n    proficiencies {\n      index\n      name\n      type\n    }\n    proficiency_choices {\n      choose\n      from {\n        name\n        index\n        __typename\n      }\n      type\n    }\n    parent {\n      index\n      name\n    }\n    trait_specific {\n      subtrait_options {\n        choose\n        from {\n          __typename\n          index\n          name\n          url\n        }\n        type\n      }\n      spell_options {\n        choose\n        from {\n          name\n          index\n          __typename\n        }\n        type\n      }\n      damage_type {\n        index\n        name\n      }\n      breath_weapon {\n        name\n        desc\n        usage {\n          type\n          times\n        }\n        dc {\n          dc_type {\n            index\n            name\n          }\n          success_type\n        }\n        damage {\n          damage_at_character_level\n        }\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "70fb03774e93fc7af605f9f1a49043f2";
+(node as any).hash = "e22b48a6b04303b84167f8635819c92d";
 
 export default node;

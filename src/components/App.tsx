@@ -14,6 +14,7 @@ import RelayEnvironment from '../RelayEnvironment';
 import graphql from 'babel-plugin-relay/macro'
 import { OperationType } from 'relay-runtime';
 import CharacterContext from './CharacterContext';
+import BackgroundFeaturesDisplay from './FeaturesDisplay/BackgroundFeaturesDisplay';
 
 const Controls = lazy(() => import("./Controls"));
 const Personality = lazy(() => import("./Personality"));
@@ -68,6 +69,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           ...FeaturesDisplayFragment_class
           ...InventoryDisplayFragment_class
           ...SkillsDisplayFragment_class
+          ...ItemStoreFragment_class
         }
         race (filter: $race) {
           ability_bonus_options {
@@ -115,6 +117,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           index
           name
           ...SkillsDisplayFragment_background
+          ...ItemStoreFragment_background
           language_options {
             choose
             from {
@@ -151,22 +154,24 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           characterLevel={characterLevel}
           characterName="nonsense" />}
       </Suspense>
+
       <Suspense fallback={<Fallback />}>
         <AbilityScoresDisplay characterStats={characterStats} />
       </Suspense>
 
       <Suspense fallback={<Fallback />}>
-        {<FeaturesDisplay
+        <FeaturesDisplay
           classRef={data?.class!}
           characterClass={characterClass}
+        />
+        <TraitsDisplay
           raceRef={data?.race!}
           characterRace={characterRace}
+        />
+        <BackgroundFeaturesDisplay
           backgroundRef={data?.background!}
           characterBackground={characterBackground}
-          // classFeatures={data?.class?.class_levels?.map((level: any) => level?.features).flat()}
-          // racialFeatures={data?.race?.traits?.flat()}
-          // backgroundFeatures={data?.background?.feature}
-          />}
+        />
       </Suspense>
       {/* <Suspense fallback={<Fallback />}> */}
       {/*   {data && <ItemStore />} */}

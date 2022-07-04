@@ -1,29 +1,16 @@
-import { makeUniqueId } from "@apollo/client/utilities";
-import { graphql } from "babel-plugin-relay/macro";
-import { useContext, useId } from "react";
+import { useId } from "react";
 import { useFragment } from "react-relay";
-import {
-  ClassEquipmentOptions,
-  ClassStartingEquipment,
-  BackgroundEquipment,
-} from "../../queries";
 import { Background, CharacterClass, MappingFunc } from "../../types";
-import CharacterContext from "../CharacterContext";
-import QueryRenderer from "../QueryRenderer";
-import QueryWrapper from "../QueryWrapper";
 import RenderMap from "../RenderMap";
 import withUseOption from "../withUseOption";
 import type { InventoryDisplayFragment_background$key } from './__generated__/InventoryDisplayFragment_background.graphql';
-import type { InventoryDisplayFragment_class$key } from './__generated__/InventoryDisplayFragment_class.graphql';
 
 type Props = {
-  characterClass: CharacterClass
   characterBackground: Background
   backgroundRef: InventoryDisplayFragment_background$key
-  classRef: InventoryDisplayFragment_class$key
 }
 
-function InventoryDisplay({ characterClass, characterBackground, classRef, backgroundRef }: Props) {
+function BackgroundEquipment({ characterBackground, backgroundRef }: Props) {
 
   const equipmentMap: MappingFunc<{ [key: string]: any }> = (item, index) =>
     item?.equipment?.name !== null && (
@@ -31,32 +18,6 @@ function InventoryDisplay({ characterClass, characterBackground, classRef, backg
         {item?.equipment?.name}:{item?.quantity}
       </li>
     );
-
-  const {
-    starting_equipment: class_starting_equipment,
-    starting_equipment_options: class_starting_equipment_options
-  } = useFragment(
-    graphql`fragment InventoryDisplayFragment_class on Class {
-      starting_equipment {
-        quantity
-        equipment {
-          name
-          index
-          __typename
-        }
-      }
-      starting_equipment_options {
-        choose
-        from {
-          quantity
-          equipment {
-            name
-            index
-            __typename
-          }
-        }
-      }
-  }`, classRef);
 
   const {
     starting_equipment,
@@ -89,14 +50,6 @@ function InventoryDisplay({ characterClass, characterBackground, classRef, backg
     <div>
       <h2>Inventory:</h2>
       <ul>
-        <RenderMap
-          mappingFunc={equipmentMap}
-          data={class_starting_equipment}
-        />
-        <RenderMapWithUseOption
-          mappingFunc={equipmentMap}
-          data={class_starting_equipment_options}
-        />
         <RenderMap
           mappingFunc={equipmentMap}
           data={starting_equipment}

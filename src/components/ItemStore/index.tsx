@@ -23,7 +23,7 @@ type Props = {
 
 function ItemStore({characterBackground, backgroundRef, characterClass, classRef}: Props) {
 
-  const backgroundEquipment = useFragment(
+  const {starting_equipment: backgroundEquipment } = useFragment(
     graphql`fragment ItemStoreFragment_background on Background {
         starting_equipment {
         __typename
@@ -31,7 +31,7 @@ function ItemStore({characterBackground, backgroundRef, characterClass, classRef
         equipment {
           name
           index
-          url
+          __typename
         }
       }
     }`, backgroundRef)
@@ -44,23 +44,27 @@ function ItemStore({characterBackground, backgroundRef, characterClass, classRef
         quantity
         equipment {
           name
-          __typename
           index
+          __typename
         }
       }
       starting_equipment_options {
         choose
         from {
+          __typename
           quantity
           equipment {
             index
             name
+            __typename
           }
         }
       }
     }`, classRef);
 
   const { selections }: {selections: Equipment[]} = useOption(starting_equipment_options);
+
+  const items = [...selections, ...starting_equipment, ...backgroundEquipment];
 
   return (
       <ToggleList<Equipment>
@@ -69,7 +73,7 @@ function ItemStore({characterBackground, backgroundRef, characterClass, classRef
         dataType={['equipments']}
         sortBy="nameAsc"
         Details={EquipmentDetails}
-        initial={initialItems}
+        initial={items}
       />
   );
 }

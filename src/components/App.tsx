@@ -64,7 +64,8 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       $class: FilterFindOneClassInput,
       $race: FilterFindOneRaceInput,
       $level: Int,
-      $background: FilterFindOneBackgroundInput) {
+      $background: FilterFindOneBackgroundInput,
+      $spells:  FilterFindManySpellInput) {
         class (filter: $class) {
           ...FeaturesDisplayFragment_class
           ...InventoryDisplayFragment_class
@@ -118,6 +119,9 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           name
           ...SkillsDisplayFragment_background
           ...ItemStoreFragment_background
+          ...InventoryDisplayFragment_background
+          ...BackgroundFeaturesDisplayFragment_background
+          ...PersonalityFragment_background
           language_options {
             choose
             from {
@@ -126,12 +130,57 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             }
             type
           }
-          ...InventoryDisplayFragment_background
-          ...BackgroundFeaturesDisplayFragment_background
-          ...PersonalityFragment_background
         }
-    }`,
-    queryRef)
+        spells(filter: $spells, sort: INDEX_ASC) {
+          area_of_effect {
+            size
+            type
+          }
+          attack_type
+          casting_time
+          classes {
+            index
+            name
+          }
+          components
+          concentration
+          damage {
+            damage_at_slot_level
+            damage_at_character_level
+            damage_type {
+              index
+              name
+            }
+          }
+          dc {
+            dc_success
+            dc_type {
+              index
+              name
+            }
+            desc
+          }
+          desc
+          duration
+          heal_at_slot_level
+          higher_level
+          index
+          level
+          material
+          name
+          range
+          ritual
+          school {
+            desc
+            index
+            name
+          }
+          subclasses {
+            index
+            name
+          }
+        }
+      }`, queryRef);
 
   const myPersonality = useMemo(
     () => <Personality characterBackground={characterBackground} backgroundRef={data?.background!}/>,

@@ -1,16 +1,13 @@
-import { ReactNode, useContext } from 'react';
-import CharacterContext from '../CharacterContext';
+import { ReactNode, useId } from 'react';
 import { SpellModByClass, SpellcastingInfo, SpellsOptionsByClassAndLevel } from '../../queries';
 import {
-  MappingFunc, Maybe, Spell, ClassSpellcastingSpellcasting_Ability
+  MappingFunc, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, AbilityScores, ZeroToTwenty, CharacterClass
 } from '../../types';
 import { AbilityScoreName } from '../../types/AbilityScoreName';
 import dice from '../../utilities/dice';
-import QueryRenderer from '../QueryRenderer';
 import ToggleList from '../ToggleList';
 import SpellDetails from './SpellDetails';
 import SpellSlots from './SpellSlots';
-import { makeUniqueId } from '@apollo/client/utilities';
 
 const formatSpellTitle = (spell: Spell) => {
   let title = `${spell?.name} `;
@@ -19,9 +16,17 @@ const formatSpellTitle = (spell: Spell) => {
   return title;
 };
 
-function SpellsDisplay() {
+type Props = {
+  characterStats: AbilityScores
+  characterLevel: ZeroToTwenty
+  characterClass: CharacterClass
+}
 
-  const { characterStats, characterClass, characterLevel } = useContext(CharacterContext);
+function SpellsDisplay({
+  characterStats,
+  characterClass,
+  characterLevel
+}: Props) {
 
   const spellModMapFunc: MappingFunc<ClassSpellcastingSpellcasting_Ability> = (item, index, _) => {
     if (item?.name) {
@@ -47,22 +52,6 @@ function SpellsDisplay() {
         {desc}
       </div>
     );
-  };
-
-  const buildSpellVariables = (
-    characterClass: string,
-    characterLevel: number,
-  ) => {
-    const variables: { [key: string]: any } = {
-      filter: {
-        AND: { classes: { index: characterClass } },
-        OR: [],
-      },
-    };
-    for (let i = 0; i <= characterLevel; i += 1) {
-      variables.filter.OR.push({ level: i });
-    }
-    return variables;
   };
 
   return (

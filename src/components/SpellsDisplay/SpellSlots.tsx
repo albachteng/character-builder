@@ -2,13 +2,16 @@ import { makeUniqueId } from '@apollo/client/utilities';
 import { ClassSpellSlots } from '../../queries';
 import { CharacterClass, MappingFunc } from '../../types';
 import QueryRenderer from '../QueryRenderer';
+import type { SpellSlotsFragment_class$key } from './__generated/SpellSlotsFragment_class.graphql';
 
 type Props = {
   characterClass: CharacterClass;
   characterLevel: number;
+  classRef: SpellSlotsFragment_class$key
 };
 
 function SpellSlots({ characterClass, characterLevel }: Props) {
+
   const mappingFunc: MappingFunc<{ [key: string]: any }> = (
     spellSlot: any,
     index: number,
@@ -26,11 +29,9 @@ function SpellSlots({ characterClass, characterLevel }: Props) {
   };
 
   return (
-    <QueryRenderer
-      query={ClassSpellSlots}
-      variables={{ filter: { index: characterClass } }}
-      dataType={['class', 'class_levels']}
+    <RenderMap
       mappingFunc={mappingFunc}
+      data={}
     />
   );
 }

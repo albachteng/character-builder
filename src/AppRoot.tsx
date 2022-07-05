@@ -40,7 +40,7 @@ function AppRoot() {
         race: { index: state.characterRace },
         level: state.characterLevel,
         background: { index: state.characterBackground},
-        spells: ...spellVariables
+        spells: spellVariables
       })
     })
   }, [state])

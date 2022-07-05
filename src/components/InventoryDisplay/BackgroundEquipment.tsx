@@ -3,27 +3,21 @@ import { useFragment } from "react-relay";
 import { Background, CharacterClass, MappingFunc } from "../../types";
 import RenderMap from "../RenderMap";
 import withUseOption from "../withUseOption";
-import type { InventoryDisplayFragment_background$key } from './__generated__/InventoryDisplayFragment_background.graphql';
+import type { BackgroundEquipmentFragment_background$key } from './__generated__/BackgroundEquipmentFragment_background.graphql';
+import { equipmentMap } from 'InventoryDisplay';
 
 type Props = {
   characterBackground: Background
-  backgroundRef: InventoryDisplayFragment_background$key
+  backgroundRef: BackgroundEquipmentFragment_background$key
 }
 
 function BackgroundEquipment({ characterBackground, backgroundRef }: Props) {
-
-  const equipmentMap: MappingFunc<{ [key: string]: any }> = (item, index) =>
-    item?.equipment?.name !== null && (
-      <li key={useId()}>
-        {item?.equipment?.name}:{item?.quantity}
-      </li>
-    );
 
   const {
     starting_equipment,
     starting_equipment_options
   } = useFragment(
-    graphql`fragment InventoryDisplayFragment_background on Background {
+    graphql`fragment BackgroundEquipmentFragment_background on Background {
       starting_equipment {
         quantity
         equipment {

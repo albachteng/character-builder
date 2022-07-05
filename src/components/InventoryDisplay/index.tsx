@@ -16,6 +16,13 @@ import withUseOption from "../withUseOption";
 import type { InventoryDisplayFragment_background$key } from './__generated__/InventoryDisplayFragment_background.graphql';
 import type { InventoryDisplayFragment_class$key } from './__generated__/InventoryDisplayFragment_class.graphql';
 
+export const equipmentMap: MappingFunc<{ [key: string]: any }> = (item, index) =>
+  item?.equipment?.name !== null && (
+    <li key={useId()}>
+      {item?.equipment?.name}:{item?.quantity}
+    </li>
+  );
+
 type Props = {
   characterClass: CharacterClass
   characterBackground: Background
@@ -25,86 +32,14 @@ type Props = {
 
 function InventoryDisplay({ characterClass, characterBackground, classRef, backgroundRef }: Props) {
 
-  const equipmentMap: MappingFunc<{ [key: string]: any }> = (item, index) =>
-    item?.equipment?.name !== null && (
-      <li key={useId()}>
-        {item?.equipment?.name}:{item?.quantity}
-      </li>
-    );
-
-  const {
-    starting_equipment: class_starting_equipment,
-    starting_equipment_options: class_starting_equipment_options
-  } = useFragment(
-    graphql`fragment InventoryDisplayFragment_class on Class {
-      starting_equipment {
-        quantity
-        equipment {
-          name
-          index
-          __typename
-        }
-      }
-      starting_equipment_options {
-        choose
-        from {
-          quantity
-          equipment {
-            name
-            index
-            __typename
-          }
-        }
-      }
-  }`, classRef);
-
-  const {
-    starting_equipment,
-    starting_equipment_options
-  } = useFragment(
-    graphql`fragment InventoryDisplayFragment_background on Background {
-      starting_equipment {
-        quantity
-        equipment {
-          name
-          index
-          __typename
-        }
-      }
-      starting_equipment_options {
-        choose
-        from {
-          quantity
-          equipment {
-            name
-            index
-            __typename
-        }
-      }
-    }}`, backgroundRef)
-
   const RenderMapWithUseOption = withUseOption(RenderMap);
 
   return (
     <div>
       <h2>Inventory:</h2>
       <ul>
-        <RenderMap
-          mappingFunc={equipmentMap}
-          data={class_starting_equipment}
-        />
-        <RenderMapWithUseOption
-          mappingFunc={equipmentMap}
-          data={class_starting_equipment_options}
-        />
-        <RenderMap
-          mappingFunc={equipmentMap}
-          data={starting_equipment}
-        />
-        <RenderMapWithUseOption
-          mappingFunc={equipmentMap}
-          data={starting_equipment_options}
-        />
+        <BackgroundEquipment characterClass={characterClass} classRef={classRef}/>
+        <ClassEquipment characterBackground={characterBackground} backgroundRef={backgroundRef}/>
       </ul>
     </div>
   );

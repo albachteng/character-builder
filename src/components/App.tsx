@@ -4,7 +4,6 @@ import Fallback from "./Fallback";
 import "../assets/css/App.css";
 import { AbilityScores, Background, CharacterClass, Level, Race, ZeroToTwenty } from "../types";
 import type { AppCharacterQuery as AppCharacterQueryType, AppCharacterQuery$variables } from "./__generated__/AppCharacterQuery.graphql";
-import { useQuery } from "@apollo/client";
 import {
   RelayEnvironmentProvider,
   loadQuery,
@@ -68,9 +67,12 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       $spells:  FilterFindManySpellInput) {
         class (filter: $class) {
           ...FeaturesDisplayFragment_class
-          ...InventoryDisplayFragment_class
+          ...ClassEquipmentFragment_class
           ...SkillsDisplayFragment_class
           ...ItemStoreFragment_class
+          spellcasting {
+            ...SpellModFragment_spellcasting
+          }
         }
         race (filter: $race) {
           ability_bonus_options {
@@ -119,7 +121,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           name
           ...SkillsDisplayFragment_background
           ...ItemStoreFragment_background
-          ...InventoryDisplayFragment_background
+          ...BackgroundEquipmentFragment_background
           ...BackgroundFeaturesDisplayFragment_background
           ...PersonalityFragment_background
           language_options {
@@ -131,54 +133,8 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             type
           }
         }
-        spells(filter: $spells, sort: INDEX_ASC) {
-          area_of_effect {
-            size
-            type
-          }
-          attack_type
-          casting_time
-          classes {
-            index
-            name
-          }
-          components
-          concentration
-          damage {
-            damage_at_slot_level
-            damage_at_character_level
-            damage_type {
-              index
-              name
-            }
-          }
-          dc {
-            dc_success
-            dc_type {
-              index
-              name
-            }
-            desc
-          }
-          desc
-          duration
-          heal_at_slot_level
-          higher_level
-          index
-          level
-          material
-          name
-          range
-          ritual
-          school {
-            desc
-            index
-            name
-          }
-          subclasses {
-            index
-            name
-          }
+        spells(filter: $spells, sort: SCHOOL__INDEX_ASC) {
+          ...SpellsDisplayFragment_spells
         }
       }`, queryRef);
 
@@ -244,7 +200,13 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           backgroundRef={data?.background!}
           classRef={data?.class!}
         />}
-      {/*   {isSpellcaster(characterClass) && <SpellsDisplay />} */}
+        {isSpellcaster(characterClass) && <SpellsDisplay
+          characterClass={characterClass}
+          characterLevel={characterLevel}
+          characterStats={characterStats}
+          spellsRef={data?.spells!}
+          classRef={data?.class!}
+        />}
       </Suspense>
   </div>
   );

@@ -1,4 +1,6 @@
+import { graphql } from 'babel-plugin-relay/macro';
 import { ReactNode, useId } from 'react';
+import { useFragment } from 'react-relay';
 import { SpellModByClass, SpellcastingInfo, SpellsOptionsByClassAndLevel } from '../../queries';
 import {
   MappingFunc, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, AbilityScores, ZeroToTwenty, CharacterClass
@@ -8,6 +10,7 @@ import dice from '../../utilities/dice';
 import ToggleList from '../ToggleList';
 import SpellDetails from './SpellDetails';
 import SpellSlots from './SpellSlots';
+import type { SpellsDisplayFragment_spells$key } from './__generated__/SpellsDisplayFragment_spells.graphql';
 
 const formatSpellTitle = (spell: Spell) => {
   let title = `${spell?.name} `;
@@ -20,6 +23,7 @@ type Props = {
   characterStats: AbilityScores
   characterLevel: ZeroToTwenty
   characterClass: CharacterClass
+  spellsRef: SpellsDisplayFragment_spells$key
 }
 
 function SpellsDisplay({
@@ -28,6 +32,54 @@ function SpellsDisplay({
   characterLevel
 }: Props) {
 
+  const { spells } = useFragment(graphql`
+    fragment SpellsDisplayFragment_spells on Spell {
+        area_of_effect {
+          size
+          type
+        }
+        attack_type
+        casting_time
+        components
+        concentration
+        damage {
+          damage_at_slot_level
+          damage_at_character_level
+          damage_type {
+            index
+            name
+          }
+        }
+        dc {
+          dc_success
+          dc_type {
+            index
+            name
+          }
+          desc
+        }
+        desc
+        duration
+        heal_at_slot_level
+        higher_level
+        index
+        level
+        material
+        name
+        range
+        ritual
+        school {
+          desc
+          index
+          name
+        }
+        subclasses {
+          index
+          name
+        }
+      }`, spellsRef);
+
+  console.log({spells})
   const spellModMapFunc: MappingFunc<ClassSpellcastingSpellcasting_Ability> = (item, index, _) => {
     if (item?.name) {
       return (

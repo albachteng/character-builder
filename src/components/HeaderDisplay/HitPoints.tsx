@@ -27,7 +27,7 @@ type Props = {
 
 function HitPoints({characterLevel, characterClass, characterStats}: Props) {
 
-  const { rolls, calculateHitDice } = useHP(characterLevel, characterClass);
+  const { rolls, getHitDice } = useHP(characterLevel, characterClass);
 
   return (
     <>
@@ -40,7 +40,7 @@ function HitPoints({characterLevel, characterClass, characterStats}: Props) {
         {' '}
         {characterLevel}
         d
-        {calculateHitDice(characterClass)}
+        {getHitDice(characterClass)}
       </h1>
     </>
   );

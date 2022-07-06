@@ -204,7 +204,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           backgroundRef={data?.background!}
           classRef={data?.class!}
         />}
-        {// isSpellcaster(characterClass) &&
+        {isSpellcaster(characterClass) &&
           <SpellsDisplay
             characterClass={characterClass}
             characterLevel={characterLevel}

@@ -77,10 +77,10 @@ function SpellsDisplay({
       {/*   spelllcastingRef={spellcastingRef} */}
       {/* /> */}
       <h3>Spell Mod</h3>
-      <SpellMod
+      {spells && <SpellMod
         spellcastingRef={spellcastingRef}
         characterStats={characterStats}
-      />
+      />}
       {/* <QueryRenderer */}
       {/*   query={SpellcastingInfo} */}
       {/*   variables={{ filter: { index: characterClass } }} */}

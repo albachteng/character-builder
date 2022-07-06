@@ -1,6 +1,6 @@
 import { MappingFunc } from '../../types';
 import Feature from './Feature';
-import { useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 import RenderMap from '../RenderMap';
 import useFeaturesFilters from './useFeaturesFilters'
 import type { FeaturesDisplayFragment_class$key } from './__generated__/FeaturesDisplayFragment_class.graphql'
@@ -13,6 +13,8 @@ type Props = {
 }
 
 function FeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
+
+  const [ classFeatures, setClassFeatures ] = useState([])
 
   const { class_levels } = useFragment(
     graphql`fragment FeaturesDisplayFragment_class on Class {
@@ -77,15 +79,18 @@ function FeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
       }
     }`, classRef);
 
-  const classFeatures = class_levels.map((level) => level.features).flat();
+  useEffect(() => {
+    const class_features = class_levels.map((level) => level.features).flat()
+    setClassFeatures(class_features);
+  }, [class_levels]);
 
-  const { featureSpecificOptions, featureSpecificSelections } = useFeaturesFilters(classFeatures, characterClass);
+  // const { featureSpecificOptions, featureSpecificSelections } = useFeaturesFilters(classFeatures, characterClass);
 
-  const whiteList: Array<any> = [];
-  for (let key in featureSpecificSelections) {
-    if (featureSpecificSelections.hasOwnProperty(key)) whiteList.push(...featureSpecificSelections?.[key])
-    // TODO not super eficient, we should probably get this some other way
-  }
+  // const whiteList: Array<any> = [];
+  // for (let key in featureSpecificSelections) {
+  //   if (featureSpecificSelections.hasOwnProperty(key)) whiteList.push(...featureSpecificSelections?.[key])
+  //   // TODO not super eficient, we should probably get this some other way
+  // }
 
   // function featuresFilter(features: typeof classFeatures = []) {
   //   return features.filter((feature) => {
@@ -124,8 +129,8 @@ function FeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
       <h2>Class Features</h2>
-      {classFeatures.map((feature) => {
-        return <Feature key={useId()} featureRef={feature}/>
+      {classFeatures.map((feature, i) => {
+        return <Feature key={`${feature?.index}-${i}`} featureRef={classFeatures[i]}/>
       })}
       {/* <RenderMap */}
       {/*   mappingFunc={featuresMap} */}

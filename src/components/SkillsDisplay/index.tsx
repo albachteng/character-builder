@@ -1,5 +1,4 @@
 /* renders skill proficiencies display and handles query for class skill choices */
-import { makeUniqueId } from '@apollo/client/utilities';
 import { graphql } from 'babel-plugin-relay/macro';
 import { useContext, useId } from 'react';
 import { useFragment, useLazyLoadQuery } from 'react-relay';
@@ -145,14 +144,17 @@ function SkillsDisplay({
         stat={characterStats[skill?.ability_score?.name as AbilityScoreName]}
         proficiencyBonus={proficiencyBonus}
         isProficient={proficiency[0]}
-        key={useId()}
+        key={skill?.index}
         proficiencyFrom={proficiency[1]}
       />
     );
   };
 
   return (
-    <RenderMap data={skills} mappingFunc={makeProficienciesArray} />
+    <RenderMap
+      data={skills}
+      mappingFunc={makeProficienciesArray}
+    />
   );
 }
 

@@ -13,8 +13,8 @@ import SpellHeader from './SpellHeader';
 import SpellMod from './SpellMod';
 import SpellSlots from './SpellSlots';
 import type { SpellModFragment_spellcasting$key } from './__generated__/SpellModFragment_spellcasting.graphql';
-// import type { SpellsDisplayFragment_spells$key } from './__generated__/SpellsDisplayFragment_spells.graphql';
 import type { SpellsDisplayFragment_query$key} from './__generated__/SpellHeaderFragment_query.graphql';
+import type { SpellSlotsFragment_class$key } from './__generated__/SpellSlotsFragment_.graphql';
 
 const formatSpellTitle = (spell: Spell) => {
   let title = `${spell?.name} `;
@@ -29,6 +29,8 @@ type Props = {
   characterClass: CharacterClass
   queryRef: SpellsDisplayFragment_query$key
   spellcastingRef: SpellModFragment_spellcasting$key
+  spellslotsRef: SpellSlotsFragment_spellcasting$key
+  classRef: SpellSlotsFragment_class$key
 }
 
 function SpellsDisplay({
@@ -36,12 +38,15 @@ function SpellsDisplay({
   characterClass,
   characterLevel,
   queryRef,
-  spellcastingRef
+  spellcastingRef,
+  classRef,
+  spellslotsRef
 }: Props) {
 
   const { spells } = useFragment(graphql`
     fragment SpellsDisplayFragment_query on Query {
       spells (filter: $spells) {
+        index
         ...SpellHeaderFragment_spell
         ...SpellDetailsFragment_spell
         subclasses {
@@ -67,45 +72,34 @@ function SpellsDisplay({
     );
   };
 
-  return (
-    <>
-      <h2>Spells Display</h2>
-      <h3>Spell Slots</h3>
-      {/* <SpellSlots */}
-      {/*   characterClass={characterClass} */}
-      {/*   characterLevel={characterLevel} */}
-      {/*   spelllcastingRef={spellcastingRef} */}
-      {/* /> */}
-      <h3>Spell Mod</h3>
-      {spells && <SpellMod
-        spellcastingRef={spellcastingRef}
-        characterStats={characterStats}
-      />}
-      {/* <QueryRenderer */}
-      {/*   query={SpellcastingInfo} */}
-      {/*   variables={{ filter: { index: characterClass } }} */}
-      {/*   dataType={['class', 'spellcasting', 'info']} */}
-      {/*   mappingFunc={spellcastingInfoMapFunc} */}
-      {/* /> */}
-      <h3>Spellbook</h3>
-      {spells.map((spell, index) => {
-        return (
-          <div key={useId()}>
-            <SpellHeader key={useId()} spellRef={spells?.[index]!}/>
-            <SpellDetails key={useId()} spellRef={spells?.[index]!}/>
-          </div>
-        )
-      })}
-      {/* <ToggleList<Spell> */}
-      {/*   query={SpellsOptionsByClassAndLevel} */}
-      {/*   variables={buildSpellVariables(characterClass, characterLevel)} */}
-      {/*   dataType={['spells']} */}
-      {/*   Details={SpellDetails} */}
-      {/*   sortBy="levelAsc" */}
-      {/*   title={formatSpellTitle} */}
-      {/* /> */}
-    </>
-  );
+  if (spells) {
+    return (
+      <>
+          <h2>Spells Display</h2>
+          <h3>Spell Slots</h3>
+          <SpellSlots
+            characterClass={characterClass}
+            characterLevel={characterLevel}
+            classRef={classRef}
+          />
+          <h3>Spell Mod</h3>
+          <SpellMod
+            spellcastingRef={spellcastingRef}
+            characterStats={characterStats}
+          />
+          <h3>Spellbook</h3>
+          {spells?.map((_ , i, spells) => {
+            return (
+              <div key={spells[i].__id}>
+                <SpellHeader spellRef={spells?.[i]!}/>
+                <SpellDetails spellRef={spells?.[i]!}/>
+              </div>
+            )
+          })}
+      </>
+    );
+  }
+  return null
 }
 
 export default SpellsDisplay;

@@ -13,9 +13,9 @@ import type { ClassEquipmentFragment_class$key } from './__generated__/ClassEqui
 import BackgroundEquipment from './BackgroundEquipment';
 import ClassEquipment from './ClassEquipment';
 
-export const equipmentMap: MappingFunc<{ [key: string]: any }> = (item, index) =>
-  item?.equipment?.name !== null && (
-    <li key={useId()}>
+export const equipmentMap: MappingFunc<{ [key: string]: any }> = (item, i) =>
+  item?.equipment?.index !== null && (
+    <li key={item?.equipment?.index}>
       {item?.equipment?.name}:{item?.quantity}
     </li>
   );

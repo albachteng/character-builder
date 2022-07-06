@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3e123722b7b9000c88e477d99c809227>>
+ * @generated SignedSource<<c35b66c316d66d1a9359e66a466add16>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -1089,15 +1089,10 @@ export type AppCharacterQuery$data = {
     readonly " $fragmentSpreads": FragmentRefs<"BackgroundEquipmentFragment_background" | "BackgroundFeaturesDisplayFragment_background" | "ItemStoreFragment_background" | "PersonalityFragment_background" | "SkillsDisplayFragment_background">;
   } | null;
   readonly class: {
-    readonly class_levels: ReadonlyArray<{
-      readonly spellcasting: {
-        readonly " $fragmentSpreads": FragmentRefs<"SpellSlotsFragment_spellcasting">;
-      } | null;
-    }>;
     readonly spellcasting: {
       readonly " $fragmentSpreads": FragmentRefs<"SpellModFragment_spellcasting">;
     } | null;
-    readonly " $fragmentSpreads": FragmentRefs<"ClassEquipmentFragment_class" | "FeaturesDisplayFragment_class" | "ItemStoreFragment_class" | "SkillsDisplayFragment_class">;
+    readonly " $fragmentSpreads": FragmentRefs<"ClassEquipmentFragment_class" | "FeaturesDisplayFragment_class" | "ItemStoreFragment_class" | "SkillsDisplayFragment_class" | "SpellSlotsFragment_class">;
   } | null;
   readonly race: {
     readonly ability_bonus_options: {
@@ -1180,53 +1175,35 @@ v5 = [
     "variableName": "class"
   }
 ],
-v6 = {
-  "kind": "Literal",
-  "name": "sort",
-  "value": "LEVEL_ASC"
-},
-v7 = [
-  {
-    "kind": "Literal",
-    "name": "limit",
-    "value": 1
-  },
-  {
-    "kind": "Variable",
-    "name": "skip",
-    "variableName": "level"
-  },
-  (v6/*: any*/)
-],
-v8 = [
+v6 = [
   {
     "kind": "Variable",
     "name": "filter",
     "variableName": "race"
   }
 ],
-v9 = {
+v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "choose",
   "storageKey": null
 },
-v10 = {
+v8 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "bonus",
   "storageKey": null
 },
-v11 = {
+v9 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "type",
   "storageKey": null
 },
-v12 = {
+v10 = {
   "alias": null,
   "args": null,
   "concreteType": "RaceAbility_bonus_options",
@@ -1234,7 +1211,7 @@ v12 = {
   "name": "ability_bonus_options",
   "plural": false,
   "selections": [
-    (v9/*: any*/),
+    (v7/*: any*/),
     {
       "alias": null,
       "args": null,
@@ -1243,33 +1220,33 @@ v12 = {
       "name": "from",
       "plural": true,
       "selections": [
-        (v10/*: any*/)
+        (v8/*: any*/)
       ],
       "storageKey": null
     },
-    (v11/*: any*/)
+    (v9/*: any*/)
   ],
   "storageKey": null
 },
-v13 = {
+v11 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "index",
   "storageKey": null
 },
-v14 = {
+v12 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
 },
-v15 = [
-  (v13/*: any*/),
-  (v14/*: any*/)
+v13 = [
+  (v11/*: any*/),
+  (v12/*: any*/)
 ],
-v16 = {
+v14 = {
   "alias": null,
   "args": null,
   "concreteType": "RaceAbility_bonuses",
@@ -1284,35 +1261,35 @@ v16 = {
       "kind": "LinkedField",
       "name": "ability_score",
       "plural": false,
-      "selections": (v15/*: any*/),
+      "selections": (v13/*: any*/),
       "storageKey": null
     },
-    (v10/*: any*/)
+    (v8/*: any*/)
   ],
   "storageKey": null
 },
-v17 = {
+v15 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "age",
   "storageKey": null
 },
-v18 = {
+v16 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "alignment",
   "storageKey": null
 },
-v19 = {
+v17 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "language_desc",
   "storageKey": null
 },
-v20 = {
+v18 = {
   "alias": null,
   "args": null,
   "concreteType": "RaceLanguage_options",
@@ -1320,7 +1297,7 @@ v20 = {
   "name": "language_options",
   "plural": false,
   "selections": [
-    (v9/*: any*/),
+    (v7/*: any*/),
     {
       "alias": null,
       "args": null,
@@ -1328,62 +1305,62 @@ v20 = {
       "kind": "LinkedField",
       "name": "from",
       "plural": true,
-      "selections": (v15/*: any*/),
+      "selections": (v13/*: any*/),
       "storageKey": null
     },
-    (v11/*: any*/)
+    (v9/*: any*/)
   ],
   "storageKey": null
 },
-v21 = {
+v19 = {
   "alias": null,
   "args": null,
   "concreteType": "RaceLanguages",
   "kind": "LinkedField",
   "name": "languages",
   "plural": true,
-  "selections": (v15/*: any*/),
+  "selections": (v13/*: any*/),
   "storageKey": null
 },
-v22 = {
+v20 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "size",
   "storageKey": null
 },
-v23 = {
+v21 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "size_description",
   "storageKey": null
 },
-v24 = {
+v22 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "speed",
   "storageKey": null
 },
-v25 = {
+v23 = {
   "alias": null,
   "args": null,
   "concreteType": "RaceSubraces",
   "kind": "LinkedField",
   "name": "subraces",
   "plural": true,
-  "selections": (v15/*: any*/),
+  "selections": (v13/*: any*/),
   "storageKey": null
 },
-v26 = [
+v24 = [
   {
     "kind": "Variable",
     "name": "filter",
     "variableName": "background"
   }
 ],
-v27 = {
+v25 = {
   "alias": null,
   "args": null,
   "concreteType": "BackgroundLanguage_options",
@@ -1391,7 +1368,7 @@ v27 = {
   "name": "language_options",
   "plural": false,
   "selections": [
-    (v9/*: any*/),
+    (v7/*: any*/),
     {
       "alias": null,
       "args": null,
@@ -1399,87 +1376,92 @@ v27 = {
       "kind": "LinkedField",
       "name": "from",
       "plural": true,
-      "selections": (v15/*: any*/),
+      "selections": (v13/*: any*/),
       "storageKey": null
     },
-    (v11/*: any*/)
+    (v9/*: any*/)
   ],
   "storageKey": null
 },
-v28 = {
+v26 = {
+  "kind": "Literal",
+  "name": "sort",
+  "value": "LEVEL_ASC"
+},
+v27 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "level",
   "storageKey": null
 },
-v29 = {
+v28 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "__typename",
   "storageKey": null
 },
-v30 = {
+v29 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "desc",
   "storageKey": null
 },
-v31 = {
+v30 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "url",
   "storageKey": null
 },
+v31 = [
+  (v11/*: any*/),
+  (v12/*: any*/),
+  (v30/*: any*/)
+],
 v32 = [
-  (v13/*: any*/),
-  (v14/*: any*/),
-  (v31/*: any*/)
+  (v28/*: any*/),
+  (v11/*: any*/),
+  (v12/*: any*/),
+  (v30/*: any*/)
 ],
 v33 = [
-  (v29/*: any*/),
-  (v13/*: any*/),
-  (v14/*: any*/),
-  (v31/*: any*/)
+  (v12/*: any*/),
+  (v11/*: any*/),
+  (v28/*: any*/)
 ],
-v34 = [
-  (v14/*: any*/),
-  (v13/*: any*/),
-  (v29/*: any*/)
-],
-v35 = {
+v34 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "quantity",
   "storageKey": null
 },
-v36 = [
-  (v14/*: any*/),
-  (v29/*: any*/),
-  (v13/*: any*/),
-  (v31/*: any*/)
+v35 = [
+  (v12/*: any*/),
+  (v28/*: any*/),
+  (v11/*: any*/),
+  (v30/*: any*/)
 ],
-v37 = {
+v36 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "damage_at_character_level",
   "storageKey": null
 },
-v38 = {
+v37 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "from",
   "storageKey": null
 },
-v39 = [
-  (v9/*: any*/),
-  (v38/*: any*/)
+v38 = [
+  (v7/*: any*/),
+  (v37/*: any*/)
 ];
 return {
   "fragment": {
@@ -1523,31 +1505,9 @@ return {
             "name": "ItemStoreFragment_class"
           },
           {
-            "alias": null,
-            "args": (v7/*: any*/),
-            "concreteType": "Level",
-            "kind": "LinkedField",
-            "name": "class_levels",
-            "plural": true,
-            "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "LevelSpellcasting",
-                "kind": "LinkedField",
-                "name": "spellcasting",
-                "plural": false,
-                "selections": [
-                  {
-                    "args": null,
-                    "kind": "FragmentSpread",
-                    "name": "SpellSlotsFragment_spellcasting"
-                  }
-                ],
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "SpellSlotsFragment_class"
           },
           {
             "alias": null,
@@ -1570,30 +1530,30 @@ return {
       },
       {
         "alias": null,
-        "args": (v8/*: any*/),
+        "args": (v6/*: any*/),
         "concreteType": "Race",
         "kind": "LinkedField",
         "name": "race",
         "plural": false,
         "selections": [
-          (v12/*: any*/),
+          (v10/*: any*/),
+          (v14/*: any*/),
+          (v15/*: any*/),
           (v16/*: any*/),
+          (v11/*: any*/),
           (v17/*: any*/),
           (v18/*: any*/),
-          (v13/*: any*/),
           (v19/*: any*/),
+          (v12/*: any*/),
           (v20/*: any*/),
           (v21/*: any*/),
-          (v14/*: any*/),
           (v22/*: any*/),
-          (v23/*: any*/),
-          (v24/*: any*/),
           {
             "args": null,
             "kind": "FragmentSpread",
             "name": "SkillsDisplayFragment_race"
           },
-          (v25/*: any*/),
+          (v23/*: any*/),
           {
             "args": null,
             "kind": "FragmentSpread",
@@ -1604,14 +1564,14 @@ return {
       },
       {
         "alias": null,
-        "args": (v26/*: any*/),
+        "args": (v24/*: any*/),
         "concreteType": "Background",
         "kind": "LinkedField",
         "name": "background",
         "plural": false,
         "selections": [
-          (v13/*: any*/),
-          (v14/*: any*/),
+          (v11/*: any*/),
+          (v12/*: any*/),
           {
             "args": null,
             "kind": "FragmentSpread",
@@ -1637,7 +1597,7 @@ return {
             "kind": "FragmentSpread",
             "name": "PersonalityFragment_background"
           },
-          (v27/*: any*/)
+          (v25/*: any*/)
         ],
         "storageKey": null
       },
@@ -1672,13 +1632,25 @@ return {
         "selections": [
           {
             "alias": null,
-            "args": (v7/*: any*/),
+            "args": [
+              {
+                "kind": "Literal",
+                "name": "limit",
+                "value": 1
+              },
+              {
+                "kind": "Variable",
+                "name": "skip",
+                "variableName": "level"
+              },
+              (v26/*: any*/)
+            ],
             "concreteType": "Level",
             "kind": "LinkedField",
             "name": "class_levels",
             "plural": true,
             "selections": [
-              (v28/*: any*/),
+              (v27/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -1689,18 +1661,18 @@ return {
               {
                 "alias": null,
                 "args": [
-                  (v6/*: any*/)
+                  (v26/*: any*/)
                 ],
                 "concreteType": "Feature",
                 "kind": "LinkedField",
                 "name": "features",
                 "plural": true,
                 "selections": [
-                  (v14/*: any*/),
-                  (v13/*: any*/),
-                  (v29/*: any*/),
+                  (v12/*: any*/),
+                  (v11/*: any*/),
                   (v28/*: any*/),
-                  (v30/*: any*/),
+                  (v27/*: any*/),
+                  (v29/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -1709,8 +1681,8 @@ return {
                     "name": "choice",
                     "plural": false,
                     "selections": [
-                      (v9/*: any*/),
-                      (v11/*: any*/)
+                      (v7/*: any*/),
+                      (v9/*: any*/)
                     ],
                     "storageKey": null
                   },
@@ -1729,9 +1701,9 @@ return {
                         "name": "hit_die",
                         "storageKey": null
                       },
-                      (v13/*: any*/),
-                      (v14/*: any*/),
-                      (v31/*: any*/)
+                      (v11/*: any*/),
+                      (v12/*: any*/),
+                      (v30/*: any*/)
                     ],
                     "storageKey": null
                   },
@@ -1742,7 +1714,7 @@ return {
                     "kind": "LinkedField",
                     "name": "parent",
                     "plural": false,
-                    "selections": (v32/*: any*/),
+                    "selections": (v31/*: any*/),
                     "storageKey": null
                   },
                   {
@@ -1753,8 +1725,8 @@ return {
                     "name": "prerequisites",
                     "plural": true,
                     "selections": [
-                      (v28/*: any*/),
-                      (v11/*: any*/)
+                      (v27/*: any*/),
+                      (v9/*: any*/)
                     ],
                     "storageKey": null
                   },
@@ -1774,7 +1746,7 @@ return {
                         "name": "subfeature_options",
                         "plural": false,
                         "selections": [
-                          (v9/*: any*/),
+                          (v7/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -1782,10 +1754,10 @@ return {
                             "kind": "LinkedField",
                             "name": "from",
                             "plural": true,
-                            "selections": (v33/*: any*/),
+                            "selections": (v32/*: any*/),
                             "storageKey": null
                           },
-                          (v11/*: any*/)
+                          (v9/*: any*/)
                         ],
                         "storageKey": null
                       },
@@ -1797,7 +1769,7 @@ return {
                         "name": "expertise_options",
                         "plural": false,
                         "selections": [
-                          (v9/*: any*/),
+                          (v7/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -1805,21 +1777,21 @@ return {
                             "kind": "LinkedField",
                             "name": "from",
                             "plural": true,
-                            "selections": (v34/*: any*/),
+                            "selections": (v33/*: any*/),
                             "storageKey": null
                           },
-                          (v11/*: any*/)
+                          (v9/*: any*/)
                         ],
                         "storageKey": null
                       }
                     ],
                     "storageKey": null
                   },
-                  (v31/*: any*/)
+                  (v30/*: any*/)
                 ],
                 "storageKey": "features(sort:\"LEVEL_ASC\")"
               },
-              (v13/*: any*/),
+              (v11/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -1834,7 +1806,7 @@ return {
                 "kind": "LinkedField",
                 "name": "subclass",
                 "plural": false,
-                "selections": (v15/*: any*/),
+                "selections": (v13/*: any*/),
                 "storageKey": null
               },
               {
@@ -1936,7 +1908,7 @@ return {
             "name": "starting_equipment",
             "plural": true,
             "selections": [
-              (v35/*: any*/),
+              (v34/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -1944,10 +1916,10 @@ return {
                 "kind": "LinkedField",
                 "name": "equipment",
                 "plural": false,
-                "selections": (v34/*: any*/),
+                "selections": (v33/*: any*/),
                 "storageKey": null
               },
-              (v29/*: any*/)
+              (v28/*: any*/)
             ],
             "storageKey": null
           },
@@ -1959,7 +1931,7 @@ return {
             "name": "starting_equipment_options",
             "plural": true,
             "selections": [
-              (v9/*: any*/),
+              (v7/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -1968,7 +1940,7 @@ return {
                 "name": "from",
                 "plural": true,
                 "selections": [
-                  (v35/*: any*/),
+                  (v34/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -1976,17 +1948,17 @@ return {
                     "kind": "LinkedField",
                     "name": "equipment",
                     "plural": false,
-                    "selections": (v34/*: any*/),
+                    "selections": (v33/*: any*/),
                     "storageKey": null
                   },
-                  (v29/*: any*/)
+                  (v28/*: any*/)
                 ],
                 "storageKey": null
               }
             ],
             "storageKey": null
           },
-          (v13/*: any*/),
+          (v11/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -1994,7 +1966,7 @@ return {
             "kind": "LinkedField",
             "name": "proficiencies",
             "plural": true,
-            "selections": (v36/*: any*/),
+            "selections": (v35/*: any*/),
             "storageKey": null
           },
           {
@@ -2005,8 +1977,8 @@ return {
             "name": "proficiency_choices",
             "plural": true,
             "selections": [
-              (v9/*: any*/),
-              (v29/*: any*/),
+              (v7/*: any*/),
+              (v28/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2014,7 +1986,7 @@ return {
                 "kind": "LinkedField",
                 "name": "from",
                 "plural": true,
-                "selections": (v36/*: any*/),
+                "selections": (v35/*: any*/),
                 "storageKey": null
               }
             ],
@@ -2035,10 +2007,10 @@ return {
                 "kind": "LinkedField",
                 "name": "spellcasting_ability",
                 "plural": false,
-                "selections": (v32/*: any*/),
+                "selections": (v31/*: any*/),
                 "storageKey": null
               },
-              (v28/*: any*/),
+              (v27/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2047,8 +2019,8 @@ return {
                 "name": "info",
                 "plural": true,
                 "selections": [
-                  (v30/*: any*/),
-                  (v14/*: any*/)
+                  (v29/*: any*/),
+                  (v12/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -2060,25 +2032,25 @@ return {
       },
       {
         "alias": null,
-        "args": (v8/*: any*/),
+        "args": (v6/*: any*/),
         "concreteType": "Race",
         "kind": "LinkedField",
         "name": "race",
         "plural": false,
         "selections": [
-          (v12/*: any*/),
+          (v10/*: any*/),
+          (v14/*: any*/),
+          (v15/*: any*/),
           (v16/*: any*/),
+          (v11/*: any*/),
           (v17/*: any*/),
           (v18/*: any*/),
-          (v13/*: any*/),
           (v19/*: any*/),
+          (v12/*: any*/),
           (v20/*: any*/),
           (v21/*: any*/),
-          (v14/*: any*/),
           (v22/*: any*/),
-          (v23/*: any*/),
-          (v24/*: any*/),
-          (v29/*: any*/),
+          (v28/*: any*/),
           {
             "alias": "proficiencies",
             "args": null,
@@ -2086,7 +2058,7 @@ return {
             "kind": "LinkedField",
             "name": "starting_proficiencies",
             "plural": true,
-            "selections": (v36/*: any*/),
+            "selections": (v35/*: any*/),
             "storageKey": null
           },
           {
@@ -2097,8 +2069,8 @@ return {
             "name": "starting_proficiency_options",
             "plural": false,
             "selections": [
-              (v9/*: any*/),
-              (v29/*: any*/),
+              (v7/*: any*/),
+              (v28/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2106,13 +2078,13 @@ return {
                 "kind": "LinkedField",
                 "name": "from",
                 "plural": true,
-                "selections": (v36/*: any*/),
+                "selections": (v35/*: any*/),
                 "storageKey": null
               }
             ],
             "storageKey": null
           },
-          (v25/*: any*/),
+          (v23/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -2121,10 +2093,10 @@ return {
             "name": "traits",
             "plural": true,
             "selections": [
-              (v14/*: any*/),
-              (v13/*: any*/),
+              (v12/*: any*/),
+              (v11/*: any*/),
+              (v28/*: any*/),
               (v29/*: any*/),
-              (v30/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2133,9 +2105,9 @@ return {
                 "name": "proficiencies",
                 "plural": true,
                 "selections": [
-                  (v13/*: any*/),
-                  (v14/*: any*/),
-                  (v11/*: any*/)
+                  (v11/*: any*/),
+                  (v12/*: any*/),
+                  (v9/*: any*/)
                 ],
                 "storageKey": null
               },
@@ -2147,7 +2119,7 @@ return {
                 "name": "proficiency_choices",
                 "plural": false,
                 "selections": [
-                  (v9/*: any*/),
+                  (v7/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -2155,10 +2127,10 @@ return {
                     "kind": "LinkedField",
                     "name": "from",
                     "plural": true,
-                    "selections": (v34/*: any*/),
+                    "selections": (v33/*: any*/),
                     "storageKey": null
                   },
-                  (v11/*: any*/)
+                  (v9/*: any*/)
                 ],
                 "storageKey": null
               },
@@ -2169,7 +2141,7 @@ return {
                 "kind": "LinkedField",
                 "name": "parent",
                 "plural": false,
-                "selections": (v15/*: any*/),
+                "selections": (v13/*: any*/),
                 "storageKey": null
               },
               {
@@ -2188,7 +2160,7 @@ return {
                     "name": "subtrait_options",
                     "plural": false,
                     "selections": [
-                      (v9/*: any*/),
+                      (v7/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -2196,10 +2168,10 @@ return {
                         "kind": "LinkedField",
                         "name": "from",
                         "plural": true,
-                        "selections": (v33/*: any*/),
+                        "selections": (v32/*: any*/),
                         "storageKey": null
                       },
-                      (v11/*: any*/)
+                      (v9/*: any*/)
                     ],
                     "storageKey": null
                   },
@@ -2211,7 +2183,7 @@ return {
                     "name": "spell_options",
                     "plural": false,
                     "selections": [
-                      (v9/*: any*/),
+                      (v7/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -2219,10 +2191,10 @@ return {
                         "kind": "LinkedField",
                         "name": "from",
                         "plural": true,
-                        "selections": (v34/*: any*/),
+                        "selections": (v33/*: any*/),
                         "storageKey": null
                       },
-                      (v11/*: any*/)
+                      (v9/*: any*/)
                     ],
                     "storageKey": null
                   },
@@ -2233,7 +2205,7 @@ return {
                     "kind": "LinkedField",
                     "name": "damage_type",
                     "plural": false,
-                    "selections": (v15/*: any*/),
+                    "selections": (v13/*: any*/),
                     "storageKey": null
                   },
                   {
@@ -2244,8 +2216,8 @@ return {
                     "name": "breath_weapon",
                     "plural": false,
                     "selections": [
-                      (v14/*: any*/),
-                      (v30/*: any*/),
+                      (v12/*: any*/),
+                      (v29/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -2254,7 +2226,7 @@ return {
                         "name": "usage",
                         "plural": false,
                         "selections": [
-                          (v11/*: any*/),
+                          (v9/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -2280,7 +2252,7 @@ return {
                             "kind": "LinkedField",
                             "name": "dc_type",
                             "plural": false,
-                            "selections": (v15/*: any*/),
+                            "selections": (v13/*: any*/),
                             "storageKey": null
                           },
                           {
@@ -2301,7 +2273,7 @@ return {
                         "name": "damage",
                         "plural": true,
                         "selections": [
-                          (v37/*: any*/)
+                          (v36/*: any*/)
                         ],
                         "storageKey": null
                       }
@@ -2319,15 +2291,15 @@ return {
       },
       {
         "alias": null,
-        "args": (v26/*: any*/),
+        "args": (v24/*: any*/),
         "concreteType": "Background",
         "kind": "LinkedField",
         "name": "background",
         "plural": false,
         "selections": [
-          (v13/*: any*/),
-          (v14/*: any*/),
-          (v29/*: any*/),
+          (v11/*: any*/),
+          (v12/*: any*/),
+          (v28/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -2336,10 +2308,10 @@ return {
             "name": "starting_proficiencies",
             "plural": true,
             "selections": [
-              (v14/*: any*/),
-              (v13/*: any*/),
-              (v31/*: any*/),
-              (v29/*: any*/)
+              (v12/*: any*/),
+              (v11/*: any*/),
+              (v30/*: any*/),
+              (v28/*: any*/)
             ],
             "storageKey": null
           },
@@ -2351,8 +2323,8 @@ return {
             "name": "starting_equipment",
             "plural": true,
             "selections": [
-              (v29/*: any*/),
-              (v35/*: any*/),
+              (v28/*: any*/),
+              (v34/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2360,7 +2332,7 @@ return {
                 "kind": "LinkedField",
                 "name": "equipment",
                 "plural": false,
-                "selections": (v34/*: any*/),
+                "selections": (v33/*: any*/),
                 "storageKey": null
               }
             ],
@@ -2374,7 +2346,7 @@ return {
             "name": "starting_equipment_options",
             "plural": true,
             "selections": [
-              (v9/*: any*/),
+              (v7/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2383,7 +2355,7 @@ return {
                 "name": "from",
                 "plural": true,
                 "selections": [
-                  (v35/*: any*/),
+                  (v34/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -2391,7 +2363,7 @@ return {
                     "kind": "LinkedField",
                     "name": "equipment",
                     "plural": false,
-                    "selections": (v34/*: any*/),
+                    "selections": (v33/*: any*/),
                     "storageKey": null
                   }
                 ],
@@ -2408,9 +2380,9 @@ return {
             "name": "feature",
             "plural": false,
             "selections": [
-              (v14/*: any*/),
-              (v29/*: any*/),
-              (v30/*: any*/)
+              (v12/*: any*/),
+              (v28/*: any*/),
+              (v29/*: any*/)
             ],
             "storageKey": null
           },
@@ -2422,9 +2394,9 @@ return {
             "name": "personality_traits",
             "plural": false,
             "selections": [
-              (v29/*: any*/),
-              (v9/*: any*/),
-              (v38/*: any*/)
+              (v28/*: any*/),
+              (v7/*: any*/),
+              (v37/*: any*/)
             ],
             "storageKey": null
           },
@@ -2436,7 +2408,7 @@ return {
             "name": "ideals",
             "plural": false,
             "selections": [
-              (v9/*: any*/),
+              (v7/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2445,7 +2417,7 @@ return {
                 "name": "from",
                 "plural": true,
                 "selections": [
-                  (v30/*: any*/),
+                  (v29/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -2454,7 +2426,7 @@ return {
                     "name": "alignments",
                     "plural": true,
                     "selections": [
-                      (v14/*: any*/)
+                      (v12/*: any*/)
                     ],
                     "storageKey": null
                   }
@@ -2471,7 +2443,7 @@ return {
             "kind": "LinkedField",
             "name": "bonds",
             "plural": false,
-            "selections": (v39/*: any*/),
+            "selections": (v38/*: any*/),
             "storageKey": null
           },
           {
@@ -2481,10 +2453,10 @@ return {
             "kind": "LinkedField",
             "name": "flaws",
             "plural": false,
-            "selections": (v39/*: any*/),
+            "selections": (v38/*: any*/),
             "storageKey": null
           },
-          (v27/*: any*/)
+          (v25/*: any*/)
         ],
         "storageKey": null
       },
@@ -2502,8 +2474,9 @@ return {
         "name": "spells",
         "plural": true,
         "selections": [
-          (v14/*: any*/),
-          (v28/*: any*/),
+          (v11/*: any*/),
+          (v12/*: any*/),
+          (v27/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -2512,8 +2485,8 @@ return {
             "name": "area_of_effect",
             "plural": false,
             "selections": [
-              (v22/*: any*/),
-              (v11/*: any*/)
+              (v20/*: any*/),
+              (v9/*: any*/)
             ],
             "storageKey": null
           },
@@ -2560,7 +2533,7 @@ return {
                 "name": "damage_at_slot_level",
                 "storageKey": null
               },
-              (v37/*: any*/),
+              (v36/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2568,7 +2541,7 @@ return {
                 "kind": "LinkedField",
                 "name": "damage_type",
                 "plural": false,
-                "selections": (v15/*: any*/),
+                "selections": (v13/*: any*/),
                 "storageKey": null
               }
             ],
@@ -2596,14 +2569,14 @@ return {
                 "kind": "LinkedField",
                 "name": "dc_type",
                 "plural": false,
-                "selections": (v15/*: any*/),
+                "selections": (v13/*: any*/),
                 "storageKey": null
               },
-              (v30/*: any*/)
+              (v29/*: any*/)
             ],
             "storageKey": null
           },
-          (v30/*: any*/),
+          (v29/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -2625,7 +2598,6 @@ return {
             "name": "higher_level",
             "storageKey": null
           },
-          (v13/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -2655,9 +2627,9 @@ return {
             "name": "school",
             "plural": false,
             "selections": [
-              (v30/*: any*/),
-              (v13/*: any*/),
-              (v14/*: any*/)
+              (v29/*: any*/),
+              (v11/*: any*/),
+              (v12/*: any*/)
             ],
             "storageKey": null
           },
@@ -2668,7 +2640,7 @@ return {
             "kind": "LinkedField",
             "name": "subclasses",
             "plural": true,
-            "selections": (v15/*: any*/),
+            "selections": (v13/*: any*/),
             "storageKey": null
           }
         ],
@@ -2677,16 +2649,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "64238e52913b2262904e7f81796693fd",
+    "cacheID": "684a0eabbe2262a48e962d5048693da7",
     "id": null,
     "metadata": {},
     "name": "AppCharacterQuery",
     "operationKind": "query",
-    "text": "query AppCharacterQuery(\n  $class: FilterFindOneClassInput\n  $race: FilterFindOneRaceInput\n  $level: Int\n  $background: FilterFindOneBackgroundInput\n  $spells: FilterFindManySpellInput\n) {\n  class(filter: $class) {\n    ...FeaturesDisplayFragment_class\n    ...ClassEquipmentFragment_class\n    ...SkillsDisplayFragment_class\n    ...ItemStoreFragment_class\n    class_levels(limit: 1, skip: $level, sort: LEVEL_ASC) {\n      spellcasting {\n        ...SpellSlotsFragment_spellcasting\n      }\n    }\n    spellcasting {\n      ...SpellModFragment_spellcasting\n    }\n  }\n  race(filter: $race) {\n    ability_bonus_options {\n      choose\n      from {\n        bonus\n      }\n      type\n    }\n    ability_bonuses {\n      ability_score {\n        index\n        name\n      }\n      bonus\n    }\n    age\n    alignment\n    index\n    language_desc\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    languages {\n      index\n      name\n    }\n    name\n    size\n    size_description\n    speed\n    ...SkillsDisplayFragment_race\n    subraces {\n      index\n      name\n    }\n    ...TraitsDisplayFragment_race\n  }\n  background(filter: $background) {\n    index\n    name\n    ...SkillsDisplayFragment_background\n    ...ItemStoreFragment_background\n    ...BackgroundEquipmentFragment_background\n    ...BackgroundFeaturesDisplayFragment_background\n    ...PersonalityFragment_background\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n  }\n  ...SpellsDisplayFragment_query\n}\n\nfragment BackgroundEquipmentFragment_background on Background {\n  starting_equipment {\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n      equipment {\n        name\n        index\n        __typename\n      }\n    }\n  }\n}\n\nfragment BackgroundFeatureFragment_feature on BackgroundFeature {\n  name\n  __typename\n  desc\n}\n\nfragment BackgroundFeaturesDisplayFragment_background on Background {\n  feature {\n    ...BackgroundFeatureFragment_feature\n  }\n}\n\nfragment ClassEquipmentFragment_class on Class {\n  starting_equipment {\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n      equipment {\n        name\n        index\n        __typename\n      }\n    }\n  }\n}\n\nfragment FeatureFragment_feature on Feature {\n  name\n  index\n  __typename\n  level\n  desc\n}\n\nfragment FeaturesDisplayFragment_class on Class {\n  class_levels(limit: 1, skip: $level, sort: LEVEL_ASC) {\n    level\n    ability_score_bonuses\n    features(sort: LEVEL_ASC) {\n      ...FeatureFragment_feature\n      choice {\n        choose\n        type\n      }\n      class {\n        hit_die\n        index\n        name\n        url\n      }\n      parent {\n        index\n        name\n        url\n      }\n      prerequisites {\n        level\n        type\n      }\n      feature_specific {\n        subfeature_options {\n          choose\n          from {\n            __typename\n            index\n            name\n            url\n          }\n          type\n        }\n        expertise_options {\n          choose\n          from {\n            name\n            index\n            __typename\n          }\n          type\n        }\n      }\n      url\n    }\n    index\n    prof_bonus\n    subclass {\n      index\n      name\n    }\n  }\n}\n\nfragment ItemStoreFragment_background on Background {\n  starting_equipment {\n    __typename\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n}\n\nfragment ItemStoreFragment_class on Class {\n  starting_equipment {\n    __typename\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      __typename\n      quantity\n      equipment {\n        index\n        name\n        __typename\n      }\n    }\n  }\n}\n\nfragment PersonalityFragment_background on Background {\n  personality_traits {\n    __typename\n    choose\n    from\n  }\n  ideals {\n    choose\n    from {\n      desc\n      alignments {\n        name\n      }\n    }\n  }\n  bonds {\n    choose\n    from\n  }\n  flaws {\n    choose\n    from\n  }\n}\n\nfragment SkillsDisplayFragment_background on Background {\n  __typename\n  starting_proficiencies {\n    name\n    index\n    url\n    __typename\n  }\n}\n\nfragment SkillsDisplayFragment_class on Class {\n  index\n  proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n\nfragment SkillsDisplayFragment_race on Race {\n  index\n  __typename\n  proficiencies: starting_proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices: starting_proficiency_options {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n\nfragment SpellDetailsFragment_spell on Spell {\n  area_of_effect {\n    size\n    type\n  }\n  attack_type\n  casting_time\n  components\n  concentration\n  damage {\n    damage_at_slot_level\n    damage_at_character_level\n    damage_type {\n      index\n      name\n    }\n  }\n  dc {\n    dc_success\n    dc_type {\n      index\n      name\n    }\n    desc\n  }\n  desc\n  duration\n  heal_at_slot_level\n  higher_level\n  index\n  material\n  range\n  ritual\n  school {\n    desc\n    index\n    name\n  }\n}\n\nfragment SpellHeaderFragment_spell on Spell {\n  name\n  level\n}\n\nfragment SpellModFragment_spellcasting on ClassSpellcasting {\n  spellcasting_ability {\n    index\n    name\n    url\n  }\n  level\n  info {\n    desc\n    name\n  }\n}\n\nfragment SpellSlotsFragment_spellcasting on LevelSpellcasting {\n  cantrips_known\n  spell_slots_level_1\n  spell_slots_level_2\n  spell_slots_level_3\n  spell_slots_level_4\n  spell_slots_level_5\n  spell_slots_level_6\n  spell_slots_level_7\n  spell_slots_level_8\n  spell_slots_level_9\n  spells_known\n}\n\nfragment SpellsDisplayFragment_query on Query {\n  spells(filter: $spells) {\n    ...SpellHeaderFragment_spell\n    ...SpellDetailsFragment_spell\n    subclasses {\n      index\n      name\n    }\n  }\n}\n\nfragment TraitFragment_trait on Trait {\n  name\n  index\n  __typename\n  desc\n}\n\nfragment TraitsDisplayFragment_race on Race {\n  traits {\n    ...TraitFragment_trait\n    proficiencies {\n      index\n      name\n      type\n    }\n    proficiency_choices {\n      choose\n      from {\n        name\n        index\n        __typename\n      }\n      type\n    }\n    parent {\n      index\n      name\n    }\n    trait_specific {\n      subtrait_options {\n        choose\n        from {\n          __typename\n          index\n          name\n          url\n        }\n        type\n      }\n      spell_options {\n        choose\n        from {\n          name\n          index\n          __typename\n        }\n        type\n      }\n      damage_type {\n        index\n        name\n      }\n      breath_weapon {\n        name\n        desc\n        usage {\n          type\n          times\n        }\n        dc {\n          dc_type {\n            index\n            name\n          }\n          success_type\n        }\n        damage {\n          damage_at_character_level\n        }\n      }\n    }\n  }\n}\n"
+    "text": "query AppCharacterQuery(\n  $class: FilterFindOneClassInput\n  $race: FilterFindOneRaceInput\n  $level: Int\n  $background: FilterFindOneBackgroundInput\n  $spells: FilterFindManySpellInput\n) {\n  class(filter: $class) {\n    ...FeaturesDisplayFragment_class\n    ...ClassEquipmentFragment_class\n    ...SkillsDisplayFragment_class\n    ...ItemStoreFragment_class\n    ...SpellSlotsFragment_class\n    spellcasting {\n      ...SpellModFragment_spellcasting\n    }\n  }\n  race(filter: $race) {\n    ability_bonus_options {\n      choose\n      from {\n        bonus\n      }\n      type\n    }\n    ability_bonuses {\n      ability_score {\n        index\n        name\n      }\n      bonus\n    }\n    age\n    alignment\n    index\n    language_desc\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    languages {\n      index\n      name\n    }\n    name\n    size\n    size_description\n    speed\n    ...SkillsDisplayFragment_race\n    subraces {\n      index\n      name\n    }\n    ...TraitsDisplayFragment_race\n  }\n  background(filter: $background) {\n    index\n    name\n    ...SkillsDisplayFragment_background\n    ...ItemStoreFragment_background\n    ...BackgroundEquipmentFragment_background\n    ...BackgroundFeaturesDisplayFragment_background\n    ...PersonalityFragment_background\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n  }\n  ...SpellsDisplayFragment_query\n}\n\nfragment BackgroundEquipmentFragment_background on Background {\n  starting_equipment {\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n      equipment {\n        name\n        index\n        __typename\n      }\n    }\n  }\n}\n\nfragment BackgroundFeatureFragment_feature on BackgroundFeature {\n  name\n  __typename\n  desc\n}\n\nfragment BackgroundFeaturesDisplayFragment_background on Background {\n  feature {\n    ...BackgroundFeatureFragment_feature\n  }\n}\n\nfragment ClassEquipmentFragment_class on Class {\n  starting_equipment {\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n      equipment {\n        name\n        index\n        __typename\n      }\n    }\n  }\n}\n\nfragment FeatureFragment_feature on Feature {\n  name\n  index\n  __typename\n  level\n  desc\n}\n\nfragment FeaturesDisplayFragment_class on Class {\n  class_levels(limit: 1, skip: $level, sort: LEVEL_ASC) {\n    level\n    ability_score_bonuses\n    features(sort: LEVEL_ASC) {\n      ...FeatureFragment_feature\n      choice {\n        choose\n        type\n      }\n      class {\n        hit_die\n        index\n        name\n        url\n      }\n      parent {\n        index\n        name\n        url\n      }\n      prerequisites {\n        level\n        type\n      }\n      feature_specific {\n        subfeature_options {\n          choose\n          from {\n            __typename\n            index\n            name\n            url\n          }\n          type\n        }\n        expertise_options {\n          choose\n          from {\n            name\n            index\n            __typename\n          }\n          type\n        }\n      }\n      url\n    }\n    index\n    prof_bonus\n    subclass {\n      index\n      name\n    }\n  }\n}\n\nfragment ItemStoreFragment_background on Background {\n  starting_equipment {\n    __typename\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n}\n\nfragment ItemStoreFragment_class on Class {\n  starting_equipment {\n    __typename\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      __typename\n      quantity\n      equipment {\n        index\n        name\n        __typename\n      }\n    }\n  }\n}\n\nfragment PersonalityFragment_background on Background {\n  personality_traits {\n    __typename\n    choose\n    from\n  }\n  ideals {\n    choose\n    from {\n      desc\n      alignments {\n        name\n      }\n    }\n  }\n  bonds {\n    choose\n    from\n  }\n  flaws {\n    choose\n    from\n  }\n}\n\nfragment SkillsDisplayFragment_background on Background {\n  __typename\n  starting_proficiencies {\n    name\n    index\n    url\n    __typename\n  }\n}\n\nfragment SkillsDisplayFragment_class on Class {\n  index\n  proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n\nfragment SkillsDisplayFragment_race on Race {\n  index\n  __typename\n  proficiencies: starting_proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices: starting_proficiency_options {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n\nfragment SpellDetailsFragment_spell on Spell {\n  area_of_effect {\n    size\n    type\n  }\n  attack_type\n  casting_time\n  components\n  concentration\n  damage {\n    damage_at_slot_level\n    damage_at_character_level\n    damage_type {\n      index\n      name\n    }\n  }\n  dc {\n    dc_success\n    dc_type {\n      index\n      name\n    }\n    desc\n  }\n  desc\n  duration\n  heal_at_slot_level\n  higher_level\n  index\n  material\n  range\n  ritual\n  school {\n    desc\n    index\n    name\n  }\n}\n\nfragment SpellHeaderFragment_spell on Spell {\n  name\n  level\n}\n\nfragment SpellModFragment_spellcasting on ClassSpellcasting {\n  spellcasting_ability {\n    index\n    name\n    url\n  }\n  level\n  info {\n    desc\n    name\n  }\n}\n\nfragment SpellSlotsFragment_class on Class {\n  class_levels(limit: 1, skip: $level, sort: LEVEL_ASC) {\n    spellcasting {\n      cantrips_known\n      spell_slots_level_1\n      spell_slots_level_2\n      spell_slots_level_3\n      spell_slots_level_4\n      spell_slots_level_5\n      spell_slots_level_6\n      spell_slots_level_7\n      spell_slots_level_8\n      spell_slots_level_9\n      spells_known\n    }\n  }\n}\n\nfragment SpellsDisplayFragment_query on Query {\n  spells(filter: $spells) {\n    index\n    ...SpellHeaderFragment_spell\n    ...SpellDetailsFragment_spell\n    subclasses {\n      index\n      name\n    }\n  }\n}\n\nfragment TraitFragment_trait on Trait {\n  name\n  index\n  __typename\n  desc\n}\n\nfragment TraitsDisplayFragment_race on Race {\n  traits {\n    ...TraitFragment_trait\n    proficiencies {\n      index\n      name\n      type\n    }\n    proficiency_choices {\n      choose\n      from {\n        name\n        index\n        __typename\n      }\n      type\n    }\n    parent {\n      index\n      name\n    }\n    trait_specific {\n      subtrait_options {\n        choose\n        from {\n          __typename\n          index\n          name\n          url\n        }\n        type\n      }\n      spell_options {\n        choose\n        from {\n          name\n          index\n          __typename\n        }\n        type\n      }\n      damage_type {\n        index\n        name\n      }\n      breath_weapon {\n        name\n        desc\n        usage {\n          type\n          times\n        }\n        dc {\n          dc_type {\n            index\n            name\n          }\n          success_type\n        }\n        damage {\n          damage_at_character_level\n        }\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "d13aff3b3375ca8bbceca7838ff5fdf1";
+(node as any).hash = "cd4103c79d94132018f79530da309fdd";
 
 export default node;

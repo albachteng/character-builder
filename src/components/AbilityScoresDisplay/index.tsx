@@ -16,7 +16,7 @@ function AbilityScoresDisplay({characterStats}: Props) {
 
   for (key in characterStats) {
     scores.push(
-      <Stat name={key} key={`${key}${characterStats[key]}`} stats={characterStats[key]} />,
+      <Stat name={key} key={key} stats={characterStats[key]} />,
     );
   }
 

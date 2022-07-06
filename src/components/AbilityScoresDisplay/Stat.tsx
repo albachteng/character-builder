@@ -3,7 +3,7 @@ import dice from '../../utilities/dice';
 
 type Props = {
   name: string;
-  stats: any; // TODO
+  stats: number; // TODO
 };
 
 // export interface AbilityScore {

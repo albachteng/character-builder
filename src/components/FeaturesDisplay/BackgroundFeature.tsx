@@ -19,14 +19,16 @@ function BackgroundFeature({ backgroundFeatureRef}: Props) {
 
   const { description, toggleDescription } = useOnClickDescription(feature);
 
+  const {name, __typename, level} = feature
+
   return (
     <>
       {(
         <div>
           <p onClick={toggleDescription}>
-            {feature?.name}
-            {`, Level ${feature?.level}`}
-            {feature?.__typename &&
+            {name}
+            {`, Level ${level}`}
+            {__typename &&
               ` | From: Background`}
           </p>
           {description}

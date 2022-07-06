@@ -15,7 +15,8 @@ type Props = {
 function BackgroundEquipment({ characterBackground, backgroundRef }: Props) {
 
   const {
-    starting_equipment_options
+    starting_equipment_options,
+    starting_equipment
   } = useFragment(
     graphql`fragment BackgroundEquipmentFragment_background on Background {
       starting_equipment {

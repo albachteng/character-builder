@@ -6,7 +6,7 @@ import CharacterContext from '../CharacterContext';
 
 const calculateHP = (
   characterStats: AbilityScores,
-  characterLevel: number,
+  characterLevel: ZeroToTwenty,
   rolls: Rolls,
 ) => {
   let total = 0;

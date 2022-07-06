@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0624332a6406ada859dc160e530c24c8>>
+ * @generated SignedSource<<766acc01df4bb9a5332d8a05349e26a6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,6 +12,7 @@ import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type SpellsDisplayFragment_query$data = {
   readonly spells: ReadonlyArray<{
+    readonly index: string | null;
     readonly subclasses: ReadonlyArray<{
       readonly index: string | null;
       readonly name: string | null;
@@ -25,7 +26,15 @@ export type SpellsDisplayFragment_query$key = {
   readonly " $fragmentSpreads": FragmentRefs<"SpellsDisplayFragment_query">;
 };
 
-const node: ReaderFragment = {
+const node: ReaderFragment = (function(){
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "index",
+  "storageKey": null
+};
+return {
   "argumentDefinitions": [
     {
       "kind": "RootArgument",
@@ -50,6 +59,7 @@ const node: ReaderFragment = {
       "name": "spells",
       "plural": true,
       "selections": [
+        (v0/*: any*/),
         {
           "args": null,
           "kind": "FragmentSpread",
@@ -68,13 +78,7 @@ const node: ReaderFragment = {
           "name": "subclasses",
           "plural": true,
           "selections": [
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "index",
-              "storageKey": null
-            },
+            (v0/*: any*/),
             {
               "alias": null,
               "args": null,
@@ -92,7 +96,8 @@ const node: ReaderFragment = {
   "type": "Query",
   "abstractKey": null
 };
+})();
 
-(node as any).hash = "b985ea36e805a9793a318b78551c1917";
+(node as any).hash = "22c1f66d297469d540f6bf260df10b4e";
 
 export default node;

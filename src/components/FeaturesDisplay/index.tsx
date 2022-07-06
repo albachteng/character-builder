@@ -1,7 +1,5 @@
-import { MappingFunc } from '../../types';
 import Feature from './Feature';
-import { useEffect, useId, useState } from 'react';
-import RenderMap from '../RenderMap';
+import { useEffect, useState } from 'react';
 import useFeaturesFilters from './useFeaturesFilters'
 import type { FeaturesDisplayFragment_class$key } from './__generated__/FeaturesDisplayFragment_class.graphql'
 import { useFragment } from 'react-relay';
@@ -14,7 +12,7 @@ type Props = {
 
 function FeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
 
-  const [ classFeatures, setClassFeatures ] = useState([])
+  const [ classFeatures, setClassFeatures ] = useState<any>([])
 
   const { class_levels } = useFragment(
     graphql`fragment FeaturesDisplayFragment_class on Class {
@@ -84,58 +82,20 @@ function FeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
     setClassFeatures(class_features);
   }, [class_levels]);
 
-  // const { featureSpecificOptions, featureSpecificSelections } = useFeaturesFilters(classFeatures, characterClass);
+  const { featureSpecificOptions, featureSpecificSelections } = useFeaturesFilters(classFeatures, characterClass);
 
-  // const whiteList: Array<any> = [];
-  // for (let key in featureSpecificSelections) {
-  //   if (featureSpecificSelections.hasOwnProperty(key)) whiteList.push(...featureSpecificSelections?.[key])
-  //   // TODO not super eficient, we should probably get this some other way
-  // }
+  const whiteList: Array<any> = [];
+  for (let key in featureSpecificSelections) {
+    if (featureSpecificSelections.hasOwnProperty(key)) whiteList.push(...featureSpecificSelections?.[key])
+    // TODO not super eficient, we should probably get this some other way
+  }
 
-  // function featuresFilter(features: typeof classFeatures = []) {
-  //   return features.filter((feature) => {
-  //     // if it's in options but not the whitelist, it should be filtered
-  //     for (let key in featureSpecificSelections) {
-  //       if (featureSpecificOptions?.[key]?.includes(feature?.index) && !whiteList?.includes(feature?.index)) {
-  //         return false;
-  //       }
-  //     }
-  //       return true;
-  //     })
-  // }
-  //
-  // function traitFilter(input: typeof traits) {
-  //   const traits = input;
-  //   return traits?.filter((trait) => {
-  //     // if it's in options but not the whitelist, it should be filtered
-  //     for (let key in traitSpecificSelections) {
-  //       if (featureSpecificOptions?.[key]?.includes(trait?.index) && !whiteList?.includes(trait?.index)) {
-  //         return false;
-  //       }
-  //     }
-  //       return true;
-  //     })
-  // }
-
-  // const featuresMap: MappingFunc<typeof classFeatures> = (feature) => {
-  //   return (
-  //     <Feature
-  //       key={useId()}
-  //       featureRef={feature}
-  //     />
-  //   );
-  // };
-  //
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
       <h2>Class Features</h2>
-      {classFeatures.map((feature, i) => {
-        return <Feature key={`${feature?.index}-${i}`} featureRef={classFeatures[i]}/>
+      {classFeatures.map((_, i, features) => {
+        return <Feature key={features?.[i]?.__id} featureRef={features?.[i]}/>
       })}
-      {/* <RenderMap */}
-      {/*   mappingFunc={featuresMap} */}
-      {/*   data={/* featuresFilter classFeatures} */}
-      {/* /> */}
     </div>
   );
 }

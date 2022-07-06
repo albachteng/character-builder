@@ -4,6 +4,8 @@ will need character stats and the name of the skill to render
 will also need proficiency bonus which is based on level
 */
 
+import { graphql } from 'babel-plugin-relay/macro';
+import { useFragment } from 'react-relay';
 import useOnClickDescription from '../../hooks/useOnClickDescription';
 import { ZeroToTwenty, Skill } from '../../types';
 import dice from '../../utilities/dice';
@@ -23,6 +25,7 @@ function SkillProficiency({
   isProficient,
   proficiencyFrom,
 }: Props) {
+
   const originMap = (origin: string | undefined) => {
     switch (origin) {
       case 'ClassProficiency_choicesFrom':
@@ -37,6 +40,13 @@ function SkillProficiency({
         return '';
     }
   };
+
+  // const skill = useFragment(graphql`
+  //   fragment SkillProficiencyFragment_skill on Skill {
+  //     name
+  //     index
+  //     desc
+  //   }`, skillRef)
 
   const { description, toggleDescription } = useOnClickDescription(skill);
 

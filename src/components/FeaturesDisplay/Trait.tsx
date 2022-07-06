@@ -1,4 +1,3 @@
-
 import { graphql } from "babel-plugin-relay/macro";
 import { useFragment } from "react-relay";
 import useOnClickDescription from "../../hooks/useOnClickDescription";
@@ -10,7 +9,7 @@ type Props = {
 
 function Trait({ traitRef }: Props) {
 
-  const { trait }= useFragment(
+  const trait = useFragment(
     graphql`fragment TraitFragment_trait on Trait {
       name
       index

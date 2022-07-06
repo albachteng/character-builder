@@ -71,11 +71,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           ...ClassEquipmentFragment_class
           ...SkillsDisplayFragment_class
           ...ItemStoreFragment_class
-          class_levels (limit: 1, skip: $level,  sort: LEVEL_ASC){
-            spellcasting {
-              ...SpellSlotsFragment_spellcasting
-            }
-          }
+          ...SpellSlotsFragment_class
           spellcasting {
             ...SpellModFragment_spellcasting
           }
@@ -211,6 +207,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             characterStats={characterStats}
             queryRef={data!}
             spellcastingRef={data?.class?.spellcasting!}
+            spellslotsRef={data?.class?.class_levels?.[characterLevel]?.spellcasting!}
             classRef={data?.class!}
         />
         })

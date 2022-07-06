@@ -11,7 +11,7 @@ type Props = {
   characterBackground: Background
 }
 
-function BackgroundFeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
+function BackgroundFeaturesDisplay({backgroundRef, characterBackground}: Props): JSX.Element {
 
   const {backgroundFeature} = useFragment(
     graphql`fragment BackgroundFeaturesDisplayFragment_background on Background {

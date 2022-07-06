@@ -14,6 +14,7 @@ import graphql from 'babel-plugin-relay/macro'
 import { OperationType } from 'relay-runtime';
 import CharacterContext from './CharacterContext';
 import BackgroundFeaturesDisplay from './FeaturesDisplay/BackgroundFeaturesDisplay';
+import TraitsDisplay from './FeaturesDisplay/TraitsDisplay';
 
 const Controls = lazy(() => import("./Controls"));
 const Personality = lazy(() => import("./Personality"));
@@ -70,6 +71,11 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           ...ClassEquipmentFragment_class
           ...SkillsDisplayFragment_class
           ...ItemStoreFragment_class
+          class_levels (limit: 1, skip: $level,  sort: LEVEL_ASC){
+            spellcasting {
+              ...SpellSlotsFragment_spellcasting
+            }
+          }
           spellcasting {
             ...SpellModFragment_spellcasting
           }
@@ -133,9 +139,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             type
           }
         }
-        spells(filter: $spells, sort: SCHOOL__INDEX_ASC) {
-          ...SpellsDisplayFragment_spells
-        }
+        ...SpellsDisplayFragment_query
       }`, queryRef);
 
   const myPersonality = useMemo(
@@ -181,14 +185,14 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       {/* <Suspense fallback={<Fallback />}> */}
       {/*   {data && <ItemStore />} */}
       {/* </Suspense> */}
-      <Suspense fallback={<Fallback />}>
-        {data && <InventoryDisplay
-          characterClass={characterClass}
-          characterBackground={characterBackground}
-          backgroundRef={data?.background!}
-          classRef={data?.class!}
-        />}
-      </Suspense>
+      {/* <Suspense fallback={<Fallback />}> */}
+      {/*   {data && <InventoryDisplay */}
+      {/*     characterClass={characterClass} */}
+      {/*     characterBackground={characterBackground} */}
+      {/*     backgroundRef={data?.background!} */}
+      {/*     classRef={data?.class!} */}
+      {/*   />} */}
+      {/* </Suspense> */}
       <Suspense fallback={<Fallback />}>
         {data && <SkillsDisplay
           characterLevel={characterLevel}
@@ -200,13 +204,16 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           backgroundRef={data?.background!}
           classRef={data?.class!}
         />}
-        {isSpellcaster(characterClass) && <SpellsDisplay
-          characterClass={characterClass}
-          characterLevel={characterLevel}
-          characterStats={characterStats}
-          spellsRef={data?.spells!}
-          classRef={data?.class!}
-        />}
+        {// isSpellcaster(characterClass) &&
+          <SpellsDisplay
+            characterClass={characterClass}
+            characterLevel={characterLevel}
+            characterStats={characterStats}
+            queryRef={data!}
+            spellcastingRef={data?.class?.spellcasting!}
+            classRef={data?.class!}
+        />
+        })
       </Suspense>
   </div>
   );

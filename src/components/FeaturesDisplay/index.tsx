@@ -16,7 +16,7 @@ function FeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
 
   const { class_levels } = useFragment(
     graphql`fragment FeaturesDisplayFragment_class on Class {
-      class_levels (sort: LEVEL_ASC, limit: $level) {
+      class_levels (limit: 1, skip: $level,  sort: LEVEL_ASC){
         level
         ability_score_bonuses
         # class {

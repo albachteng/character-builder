@@ -15,13 +15,11 @@ const buildSpellVariables = (
   characterLevel: ZeroToTwenty,
 ) => {
   const variables: { [key: string]: any } = {
-    filter: {
-      AND: { classes: { index: characterClass } },
-      OR: [],
-    },
+    AND: { classes: { index: characterClass } },
+    OR: [],
   };
   for (let i = 0; i <= characterLevel; i += 1) {
-    variables.filter.OR.push({ level: i });
+    variables.OR.push({ level: i });
   }
   return variables;
 };

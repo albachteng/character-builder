@@ -3,15 +3,16 @@ import { useId } from "react";
 import { useFragment } from "react-relay";
 import RenderMap from "../RenderMap";
 import withUseOption from "../withUseOption";
-import type { InventoryDisplayFragment_class$key } from './__generated__/InventoryDisplayFragment_class.graphql';
-import { equipmentMap } from 'InventoryDisplay'
+import type { ClassEquipmentFragment_class$key } from './__generated__/ClassEquipmentFragment_class.graphql';
+import { equipmentMap } from './index';
+import { graphql } from "babel-plugin-relay/macro";
 
 type Props = {
   characterClass: CharacterClass
-  classRef: InventoryDisplayFragment_class$key
+  classRef: ClassEquipmentFragment_class$key
 }
 
-function InventoryDisplay({ characterClass, classRef }: Props) {
+function ClassEquipment({ characterClass, classRef }: Props) {
 
   const {
     starting_equipment,
@@ -58,4 +59,4 @@ function InventoryDisplay({ characterClass, classRef }: Props) {
   );
 }
 
-export default InventoryDisplay;
+export default ClassEquipment;

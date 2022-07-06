@@ -3,20 +3,18 @@ import { graphql } from 'babel-plugin-relay/macro';
 import { useFragment } from 'react-relay';
 import { ClassSpellSlots } from '../../queries';
 import { CharacterClass, MappingFunc } from '../../types';
-import QueryRenderer from '../QueryRenderer';
-import type { SpellSlotsFragment_class$key } from './__generated/SpellSlotsFragment_class.graphql';
+import RenderMap from '../RenderMap';
+import type { SpellSlotsFragment_class_level$key } from './__generated/SpellSlotsFragment_class.graphql';
 
 type Props = {
   characterClass: CharacterClass;
   characterLevel: number;
-  classRef: SpellSlotsFragment_class$key
 };
 
-function SpellSlots({ characterClass, characterLevel }: Props) {
+function SpellSlots({ characterClass, characterLevel, spellcastingRef}: Props) {
 
-  const { spellcasting } = useFragment(graphql`
-    fragment SpellSlotsFragment_class on Level {
-      spellcasting (limit: 3, skip: ($level - 1),  sort: LEVEL_ASC){
+  const spellcasting = useFragment(graphql`
+    fragment SpellSlotsFragment_spellcasting on LevelSpellcasting {
         cantrips_known
         spell_slots_level_1
         spell_slots_level_2
@@ -28,9 +26,9 @@ function SpellSlots({ characterClass, characterLevel }: Props) {
         spell_slots_level_8
         spell_slots_level_9
         spells_known
-      }
-      level
-    }`, classLevelRef);
+    }`, spellcastingRef);
+
+  console.log({spellcasting})
 
   const mappingFunc: MappingFunc<{ [key: string]: any }> = (
     spellSlot: any,
@@ -51,7 +49,7 @@ function SpellSlots({ characterClass, characterLevel }: Props) {
   return (
     <RenderMap
       mappingFunc={mappingFunc}
-      data={spellslots}
+      data={spellcasting}
     />
   );
 }

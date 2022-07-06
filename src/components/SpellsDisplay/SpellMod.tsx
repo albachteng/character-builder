@@ -1,11 +1,17 @@
 import { graphql } from "babel-plugin-relay/macro";
 import { useFragment } from "react-relay";
 import useOnClickDescription from "../../hooks/useOnClickDescription";
+import dice from "../../utilities/dice";
 import type { SpellModFragment_spellcasting$key } from './__generated__/SpellModFragment_spellcasting'
 
-function SpellMod({ spellcastingRef, }) {
+type Props = {
+  spellcastingRef: SpellModFragment_spellcasting$key
+  characterStats: AbilityScores
+}
 
-  const { spellcasting, info, level } = useFragment(graphql`
+function SpellMod({ spellcastingRef, characterStats}) {
+
+  const { spellcasting_ability, info, level } = useFragment(graphql`
     fragment SpellModFragment_spellcasting on ClassSpellcasting {
         spellcasting_ability {
           index
@@ -23,20 +29,15 @@ function SpellMod({ spellcastingRef, }) {
   const { description, toggleDescription } = useOnClickDescription(info)
 
   return (
-      return (
-      <>
-        <p onClick={toggleDescription}>
-          {info?.name}
-          :
-          {dice.mod(characterStats[item?.name as AbilityScoreName])}
-        </p>
-        {description}
-      </>
-      );
-    }
-  )
-
-  };
+    <>
+      <p onClick={toggleDescription}>
+        {info?.name}
+        :
+        {dice.mod(characterStats[spellcasting_ability?.name as AbilityScoreName])}
+      </p>
+      {description}
+    </>
+  );
 }
 
 export default SpellMod;

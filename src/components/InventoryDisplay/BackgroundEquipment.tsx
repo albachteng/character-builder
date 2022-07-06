@@ -4,7 +4,8 @@ import { Background, CharacterClass, MappingFunc } from "../../types";
 import RenderMap from "../RenderMap";
 import withUseOption from "../withUseOption";
 import type { BackgroundEquipmentFragment_background$key } from './__generated__/BackgroundEquipmentFragment_background.graphql';
-import { equipmentMap } from 'InventoryDisplay';
+import { equipmentMap } from './index';
+import { graphql } from "babel-plugin-relay/macro";
 
 type Props = {
   characterBackground: Background
@@ -14,7 +15,6 @@ type Props = {
 function BackgroundEquipment({ characterBackground, backgroundRef }: Props) {
 
   const {
-    starting_equipment,
     starting_equipment_options
   } = useFragment(
     graphql`fragment BackgroundEquipmentFragment_background on Background {
@@ -57,4 +57,4 @@ function BackgroundEquipment({ characterBackground, backgroundRef }: Props) {
   );
 }
 
-export default InventoryDisplay;
+export default BackgroundEquipment;

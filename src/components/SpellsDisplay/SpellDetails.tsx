@@ -1,7 +1,10 @@
+import { graphql } from 'babel-plugin-relay/macro';
+import { useFragment } from 'react-relay';
 import { AbilityScores, Maybe, Spell } from '../../types';
+import type { SpellDetailsFragment_spell$key } from './__generated__/SpellDetailsFragment_spell.graphql';
 
 type Props = {
-  item: Spell;
+  spellRef: SpellDetailsFragment_spell$key
 };
 
 const handleStringArray = (arr: Maybe<string>[], type: string) => {
@@ -23,112 +26,169 @@ const handleStringArray = (arr: Maybe<string>[], type: string) => {
   } else return [];
 };
 
-function SpellDetails({ item }: Props) {
-  const spell = item;
+function SpellDetails({ spellRef }: Props) {
+
+const {
+  area_of_effect,
+  attack_type,
+  casting_time,
+  components,
+  concentration,
+  damage,
+  dc,
+  desc,
+  duration,
+  heal_at_slot_level,
+  higher_level,
+  index,
+  material,
+  range,
+  ritual,
+  school
+  } = useFragment(graphql`
+    fragment SpellDetailsFragment_spell on Spell {
+      area_of_effect {
+        size
+        type
+      }
+      attack_type
+      casting_time
+      components
+      concentration
+      damage {
+        damage_at_slot_level
+        damage_at_character_level
+        damage_type {
+          index
+          name
+        }
+      }
+      dc {
+        dc_success
+        dc_type {
+          index
+          name
+        }
+        desc
+      }
+      desc
+      duration
+      heal_at_slot_level
+      higher_level
+      index
+      material
+      range
+      ritual
+      school {
+        desc
+        index
+        name
+      }
+    }`, spellRef);
 
   return (
     <div>
-      {spell?.desc && handleStringArray(spell?.desc, 'p')}
+      {desc && handleStringArray(desc, 'p')}
       <div>
-        {spell?.casting_time && (
+        {casting_time && (
         <p>
           Casting Time:
-          {spell?.casting_time}
+          {casting_time}
         </p>
         )}
-        {spell?.range && (
+        {range && (
         <p>
           Range:
-          {spell?.range}
+          {range}
         </p>
         )}
-        {spell?.components && (
+        {components && (
           <p>
             Components:
-            {handleStringArray(spell?.components, 'span')}
+            {handleStringArray(components, 'span')}
           </p>
         )}
-        {spell?.material && (
+        {material && (
         <p>
           Materials:
-          {spell?.material}
+          {material}
         </p>
         )}
-        {spell?.duration && (
+        {duration && (
         <p>
           Duration:
-          {spell?.duration}
+          {duration}
         </p>
         )}
-        {spell?.classes && (
-          <p>
-            Classes:
-            {' '}
-            {handleStringArray(
-              spell?.classes?.map((namedClassIndex) => namedClassIndex?.index || ''),
-              'span',
-            )}
-          </p>
-        )}
+        {/* {classes && ( */}
+        {/*   <p> */}
+        {/*     Classes: */}
+        {/*     {' '} */}
+        {/*     {handleStringArray( */}
+        {/*       classes?.map((namedClassIndex) => namedClassIndex?.index || ''), */}
+        {/*       'span', */}
+        {/*     )} */}
+        {/*   </p> */}
+        {/* )} */}
       </div>
-      {spell?.area_of_effect && (
+      {area_of_effect && (
         <p>
           Area of Effect:
           {' '}
-          {spell?.area_of_effect?.size}
+          {area_of_effect?.size}
           ft.
           {' '}
-          {spell?.area_of_effect.type}
+          {area_of_effect.type}
         </p>
       )}
-      {spell?.attack_type && (
+      {attack_type && (
       <p>
         Attack Type:
-        {spell?.attack_type}
+        {attack_type}
       </p>
       )}
-      {spell?.concentration && <p>Concentration</p>}
-      {spell?.ritual && <p>Ritual</p>}
-      {spell?.damage && JSON.stringify(spell?.damage)}
-      {spell?.dc && spell?.dc?.dc_success && (
+      {concentration && <p>Concentration</p>}
+      {ritual && <p>Ritual</p>}
+      {damage && JSON.stringify(damage)}
+      {dc && dc?.dc_success && (
         <p>
           DC:
           {' '}
-          {spell?.dc?.dc_success}
+          {dc?.dc_success}
           {' '}
-          {spell?.dc?.dc_type?.name}
+          {dc?.dc_type?.name}
           {' '}
           save
         </p>
       )}
-      {spell?.dc && spell?.dc?.desc && handleStringArray([spell?.dc?.desc], 'p')}
-      {spell?.heal_at_slot_level && (
+      {dc && dc?.desc && handleStringArray([dc?.desc], 'p')}
+      {heal_at_slot_level && (
         <p>
           Healing:
-          {JSON.stringify(spell?.heal_at_slot_level)}
+          {JSON.stringify(heal_at_slot_level)}
         </p>
       )}
-      {spell?.higher_level && <h5>At Higher Levels: </h5>}
-      {spell?.higher_level && handleStringArray(spell?.higher_level, 'p')}
+      {higher_level && <h5>At Higher Levels: </h5>}
+      {higher_level && handleStringArray(higher_level, 'p')}
       {
-        spell?.school && (
+        school && (
           <p>
             School:
-            {spell?.school.name}
+            {school.name}
           </p>
         ) /* name, index, desc, typename */
       }
-      {spell?.school && spell?.school?.desc && <span>{spell?.school?.desc}</span>}
-      {spell?.subclasses && (
-        <p>
-          Subclasses:
-          {' '}
-          {handleStringArray(
-            spell?.subclasses.map((subclass) => subclass?.name || ''),
-            'span',
-          )}
-        </p>
-      )}
+      {school && school?.desc && <span>{school?.desc}</span>}
+      {/* {subclasses && ( */}
+      {/*   <p> */}
+      {/*     Subclasses: */}
+      {/*     {' '} */}
+      {/*     {handleStringArray( */}
+      {/*       subclasses.map((subclass) => subclass?.name || ''), */}
+      {/*       'span', */}
+      {/*     )} */}
+      {/*   </p> */}
+      {/* )} */}
     </div>
   );
 }

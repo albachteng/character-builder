@@ -9,7 +9,7 @@ type Props = {
 
 function BackgroundFeature({ backgroundFeatureRef}: Props) {
 
-  const { feature }= useFragment(
+  const feature = useFragment(
     graphql`fragment BackgroundFeatureFragment_feature on BackgroundFeature {
       name
       # index

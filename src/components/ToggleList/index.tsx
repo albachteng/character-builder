@@ -28,14 +28,14 @@ function ToggleList<T extends {name?: Maybe<string>}>({
   sortBy = 'default',
 }: ToggleListProps<T>) {
 
-  const { handleClick, list } = useAddToList<T>(initial);
+  const { addOrRemoveToList, list } = useAddToList<T>(initial);
 
   const mappingFunc: MappingFunc<T> = (item, index, _) => {
     const ToggleHeaderProps: ToggleHeaderProps<T> = {
       type: item,
       title,
       index,
-      handleClick,
+      addOrRemoveToList,
       list,
     };
 

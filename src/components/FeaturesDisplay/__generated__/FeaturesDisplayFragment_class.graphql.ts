@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0c06dec36cb54f851d7742fab35ddf82>>
+ * @generated SignedSource<<0b4fdda45ee6ec232764222bc305b9c1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -142,8 +142,13 @@ return {
       "alias": null,
       "args": [
         {
-          "kind": "Variable",
+          "kind": "Literal",
           "name": "limit",
+          "value": 1
+        },
+        {
+          "kind": "Variable",
+          "name": "skip",
           "variableName": "level"
         },
         (v0/*: any*/)
@@ -337,6 +342,6 @@ return {
 };
 })();
 
-(node as any).hash = "8ebcae0d7ebe66ecf7deb3c1670b145b";
+(node as any).hash = "e5c3cba8d9eb1de6962a9908aa73bb99";
 
 export default node;

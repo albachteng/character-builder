@@ -10,7 +10,7 @@ export const useHP = (
   characterLevel: number,
   characterClass: CharacterClass
 ) => {
-  const calculateHitDice = (characterClass: string): number => {
+  const getHitDice = (characterClass: string): number => {
     switch (characterClass) {
       case 'barbarian':
         return 12;
@@ -46,7 +46,7 @@ export const useHP = (
   // add another dice roll to rolls when the level increases
   useEffect(() => {
     if (characterLevel >= 2) {
-      let toAdd = dice.rollDice(calculateHitDice(characterClass));
+      let toAdd = dice.rollDice(getHitDice(characterClass));
       setRolls((prev) => {
         return {
           ...prev,
@@ -59,12 +59,12 @@ export const useHP = (
   // if the level is reset to 1 we must reset all rolls
   useEffect(() => {
     if (characterLevel === 1) {
-      const levelOne = calculateHitDice(characterClass);
+      const levelOne = getHitDice(characterClass);
       setRolls({ 1: levelOne });
     }
   }, [characterLevel, characterClass]);
 
-  return { calculateHitDice, rolls };
+  return { getHitDice, rolls };
 };
 
 export default useHP;

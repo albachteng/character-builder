@@ -5,14 +5,14 @@ function useAddToList<T>(initial: T[] = []) {
 
   const [list, setList] = useState<T[]>(initial)
 
-  function handleClick<U extends T>(toAdd: U) {
+  function addOrRemoveToList<U extends T>(toAdd: U) {
     list.includes(toAdd)
       ? setList(list.slice().filter((item) => item !== toAdd))
       : setList((prev) => [...prev, toAdd]);
   }
 
   return {
-    handleClick,
+    addOrRemoveToList,
     list
   };
 }

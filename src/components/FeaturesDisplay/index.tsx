@@ -1,47 +1,22 @@
-import { useEffect, useState } from 'react';
-import {
-  Race,
-  BackgroundFeature,
-  Feature as FeatureType,
-  Trait,
-  Choice,
-  Maybe,
-  FeatureFeature_SpecificSubfeature_OptionsFrom,
-  TraitTrait_SpecificSubtrait_OptionsFrom,
-  CharacterClass,
-  Background
-} from "../../types";
-import { MappingFunc } from '../../types';
-import CharacterContext from '../CharacterContext';
-import QueryRenderer from '../QueryRenderer';
 import Feature from './Feature';
-import { useId } from 'react';
-import RenderMap from '../RenderMap';
+import { useEffect, useState } from 'react';
 import useFeaturesFilters from './useFeaturesFilters'
-import useTraitsFilters from './useTraitsFilters';
 import type { FeaturesDisplayFragment_class$key } from './__generated__/FeaturesDisplayFragment_class.graphql'
-import type { FeaturesDisplayFragment_race$key } from './__generated__/FeaturesDisplayFragment_race.graphql'
-import type { FeaturesDisplayFragment_background$key } from './__generated__/FeaturesDisplayFragment_background.graphql'
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 type Props = {
   classRef: FeaturesDisplayFragment_class$key
-  raceRef: FeaturesDisplayFragment_race$key
   characterClass: CharacterClass
-  characterRace: Race
-  characterBackground: Background
-  backgroundRef: FeaturesDisplayFragment_background$key
-  // classFeatures: FeatureType[]
-  // racialFeatures: Trait[]
-  // backgroundFeatures: BackgroundFeature
 }
 
-function FeaturesDisplay({classRef, raceRef, characterClass, characterRace, characterBackground, backgroundRef}: Props): JSX.Element {
+function FeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
 
-  const {class_levels} = useFragment(
+  const [ classFeatures, setClassFeatures ] = useState<any>([])
+
+  const { class_levels } = useFragment(
     graphql`fragment FeaturesDisplayFragment_class on Class {
-      class_levels (sort: LEVEL_ASC, limit: $level) {
+      class_levels (limit: 1, skip: $level,  sort: LEVEL_ASC){
         level
         ability_score_bonuses
         # class {
@@ -49,6 +24,7 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace, char
         #   name
         # }
         features (sort: LEVEL_ASC){
+          ...FeatureFragment_feature
           choice {
             choose
             type
@@ -59,15 +35,11 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace, char
             name
             url
           }
-          desc
           parent {
             index
             name
             url
           }
-          index
-          level
-          name
           prerequisites {
             level
             type
@@ -105,150 +77,25 @@ function FeaturesDisplay({classRef, raceRef, characterClass, characterRace, char
       }
     }`, classRef);
 
-  const {traits} = useFragment(
-    graphql`fragment FeaturesDisplayFragment_race on Race {
-      traits {
-        desc
-        index
-        name
-        proficiencies {
-          index
-          name
-          type
-        }
-        proficiency_choices {
-          choose
-          from {
-            name
-            index
-            __typename
-          }
-          type
-        }
-        parent {
-          index
-          name
-        }
-        trait_specific {
-          subtrait_options {
-            choose
-            from {
-              __typename
-              index
-              name
-              url
-            }
-            type
-          }
-          spell_options {
-            choose
-            from {
-              name
-              index
-              __typename
-            }
-            type
-          }
-          damage_type {
-            index
-            name
-          }
-          breath_weapon {
-            name
-            desc
-            usage {
-              type
-              times
-            }
-            dc {
-              dc_type {
-                index
-                name
-              }
-              success_type
-            }
-            damage {
-              damage_at_character_level
-            }
-          }
-        }
-      }
-  }`, raceRef)
-
-  const {backgroundFeature} = useFragment(
-    graphql`fragment FeaturesDisplayFragment_background on Background {
-      feature {
-        __typename
-        name
-        desc
-      }
-    }`, backgroundRef)
-
-  const classFeatures = class_levels.map((level) => level.features).flat();
+  useEffect(() => {
+    const class_features = class_levels.map((level) => level.features).flat()
+    setClassFeatures(class_features);
+  }, [class_levels]);
 
   const { featureSpecificOptions, featureSpecificSelections } = useFeaturesFilters(classFeatures, characterClass);
-  const { traitSpecificOptions, traitSpecificSelections } = useTraitsFilters(traits, characterRace)
 
   const whiteList: Array<any> = [];
   for (let key in featureSpecificSelections) {
     if (featureSpecificSelections.hasOwnProperty(key)) whiteList.push(...featureSpecificSelections?.[key])
     // TODO not super eficient, we should probably get this some other way
   }
-  for (let key in traitSpecificSelections) {
-    if (traitSpecificSelections.hasOwnProperty(key)) whiteList.push(...traitSpecificSelections?.[key])
-    // TODO not super eficient, we should probably get this some other way
-  }
-
-
-  function featuresFilter(features: typeof classFeatures = []) {
-    return features.filter((feature) => {
-      // if it's in options but not the whitelist, it should be filtered
-      for (let key in featureSpecificSelections) {
-        if (featureSpecificOptions?.[key]?.includes(feature?.index) && !whiteList?.includes(feature?.index)) {
-          return false;
-        }
-      }
-        return true;
-      })
-  }
-
-  function traitFilter(input: typeof traits) {
-    const traits = input;
-    return traits?.filter((trait) => {
-      // if it's in options but not the whitelist, it should be filtered
-      for (let key in traitSpecificSelections) {
-        if (featureSpecificOptions?.[key]?.includes(trait?.index) && !whiteList?.includes(trait?.index)) {
-          return false;
-        }
-      }
-        return true;
-      })
-  }
-
-  const featuresMap: MappingFunc<typeof traits | typeof classFeatures> = (feature, index) => {
-    return (
-      <Feature
-        key={useId()}
-        feature={feature}
-      />
-    );
-  };
 
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
-      <h2>Features</h2>
-      <RenderMap
-        mappingFunc={featuresMap}
-        data={featuresFilter(classFeatures)}
-      />
-      <RenderMap
-        mappingFunc={featuresMap}
-        data={traitFilter(traits)}
-      />
-      <Feature
-        key={useId()}
-        feature={backgroundFeature}
-      />
+      <h2>Class Features</h2>
+      {classFeatures.map((_, i, features) => {
+        return <Feature key={features?.[i]?.__id} featureRef={features?.[i]}/>
+      })}
     </div>
   );
 }

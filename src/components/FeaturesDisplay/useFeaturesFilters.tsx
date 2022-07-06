@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import chooseFrom from '../../utilities/chooseFrom';
+import type { FeaturesDisplayFragment_class$data } from './__generated__/FeaturesDisplayFragment_class.graphql';
 
 type ClassFeatures = {
   readonly features: ReadonlyArray<{

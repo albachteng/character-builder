@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import chooseFrom from '../../utilities/chooseFrom';
+import type { TraitsDisplayFragment_race } from './__generated__/TraitsDisplayFragment_trait.graphql';
 
 type Traits = ReadonlyArray<{
   readonly desc: ReadonlyArray<string | null> | null;

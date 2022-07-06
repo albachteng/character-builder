@@ -1,24 +1,34 @@
+import { graphql } from 'babel-plugin-relay/macro';
+import { useId } from 'react';
+import { useFragment } from 'react-relay';
 import { Spell } from '../../types';
+import type { SpellHeaderFragment_spell$key } from './__generated__/SpellHeaderFragment_spell.graphql';
 
 type Props = {
-  spell: Spell;
-  index: number;
-  handleClick: (spell: Spell) => void;
-  list: Spell[];
+  spellRef: SpellHeaderFragment_spell$key
+  // handleClick: (spell: Spell) => void;
+  // list: Spell[];
 };
 
 function SpellHeader({
-  spell, index, handleClick, list,
+  spellRef, /* index, handleClick, list */
 }: Props) {
+
+  const { name, level } = useFragment(graphql`
+    fragment SpellHeaderFragment_spell on Spell {
+      name
+      level
+    }`, spellRef);
+
   return (
     <div>
-      <p key={`${spell?.name}${index}`}>
-        {spell?.name}
-        {spell?.level ? `, Level ${spell?.level}` : ', Cantrip'}
+      <p key={useId()}>
+        {name}
+        {level ? `, Level ${level}` : ', Cantrip'}
       </p>
-      <button onClick={() => handleClick(spell)}>
-        {list?.includes(spell) ? 'Remove' : 'Add'}
-      </button>
+      {/* <button onClick={() => handleClick(spell)}> */}
+      {/*   {list?.includes(spell) ? 'Remove' : 'Add'} */}
+      {/* </button> */}
     </div>
   );
 }

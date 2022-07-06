@@ -1,6 +1,6 @@
 import { ClassEquipmentOptions, Items } from '../../queries';
 import { ClassStartingEquipment } from '../../queries';
-import { Equipment } from '../../types';
+import { Background, Equipment } from '../../types';
 import CharacterContext from '../CharacterContext';
 import { useContext } from 'react';
 import ToggleList from '../ToggleList';
@@ -9,41 +9,71 @@ import EquipmentDetails from './EquipmentDetails';
 import { useQuery } from '@apollo/client';
 import useOption from '../../hooks/useOption';
 import { useEffect, useState } from 'react';
+import { useFragment } from 'react-relay';
+import { graphql } from 'babel-plugin-relay/macro';
+import type { ItemStoreFragment_background$key } from './__generated__/ItemStoreFragment_background.graphql';
+import type { ItemStoreFragment_class$key } from './__generated__/ItemStoreFragment_class.graphql';
 
-function ItemStore() {
-  const { characterBackground, characterClass } = useContext(CharacterContext);
+type Props = {
+  characterBackground: Background
+  backgroundRef: ItemStoreFragment_background$key
+  characterClass: CharacterClass
+  classRef: ItemStoreFragment_class$key
+}
 
-  const {loading, error, data} = useQuery(BackgroundEquipment, {variables: {filter: {index: characterBackground}}});
-  const {loading: loadingClassEquipment, error: errorClassEquipment, data: dataClassEquipment} = useQuery(ClassStartingEquipment,  {variables: { filter: { index: characterClass }}} );
-  const {loading: loadingEquipmentOptions, error: errorEquipmentOptions, data: dataEquipmentOptions} = useQuery(ClassEquipmentOptions, {variables: { filter: { index: characterClass }}});
+function ItemStore({characterBackground, backgroundRef, characterClass, classRef}: Props) {
 
-  const { selections }: {selections: Equipment[]} = useOption(dataEquipmentOptions?.class?.starting_equipment_options);
-
-  const [ initialItems, setInitialItems] = useState<Equipment[]>([])
-
-  useEffect(() => {
-    if (!loading && !error && data
-      && !loadingClassEquipment && !errorClassEquipment && dataClassEquipment
-      && !loadingEquipmentOptions && !errorEquipmentOptions && selections) {
-        const toSet: Equipment[] = [];
-        toSet.push(...data?.background?.starting_equipment);
-        toSet.push(...dataClassEquipment?.class?.starting_equipment);
-        toSet.push(...selections)
-        setInitialItems(toSet);
+  const {starting_equipment: backgroundEquipment } = useFragment(
+    graphql`fragment ItemStoreFragment_background on Background {
+        starting_equipment {
+        __typename
+        quantity
+        equipment {
+          name
+          index
+          __typename
+        }
       }
-  }, [characterClass, characterBackground, loading, loadingClassEquipment, loadingEquipmentOptions, selections])
+    }`, backgroundRef)
+
+
+  const {starting_equipment, starting_equipment_options} = useFragment(
+    graphql`fragment ItemStoreFragment_class on Class {
+      starting_equipment {
+        __typename
+        quantity
+        equipment {
+          name
+          index
+          __typename
+        }
+      }
+      starting_equipment_options {
+        choose
+        from {
+          __typename
+          quantity
+          equipment {
+            index
+            name
+            __typename
+          }
+        }
+      }
+    }`, classRef);
+
+  const { selections }: {selections: Equipment[]} = useOption(starting_equipment_options);
+
+  const items = [...selections, ...starting_equipment, ...backgroundEquipment];
 
   return (
-      !loading && !error && data
-      && !loadingClassEquipment && !errorClassEquipment && dataClassEquipment
-      && !loadingEquipmentOptions && !errorEquipmentOptions && dataEquipmentOptions && selections?.length &&
       <ToggleList<Equipment>
         query={Items}
         variables={{}}
         dataType={['equipments']}
         sortBy="nameAsc"
         Details={EquipmentDetails}
-        initial={initialItems}
+        initial={items}
       />
   );
 }

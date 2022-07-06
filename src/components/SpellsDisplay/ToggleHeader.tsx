@@ -4,19 +4,19 @@ export type ToggleHeaderProps<T> = {
     type: T
     title?: (item: T) => string
     index: number
-    handleClick: <U extends T>(toAdd: U) => void
+    addOrRemoveToList: <U extends T>(toAdd: U) => void
     list: T[]
 }
 
 function ToggleHeader<T extends {name?: Maybe<string>}>({
-  type, title, index, handleClick, list,
+  type, title, index, addOrRemoveToList, list,
 }: ToggleHeaderProps<T>) {
   return (
     <div>
       <p key={`${type?.name}${index}`}>
         {title ? `${title(type)}` : type?.name}
       </p>
-      <button onClick={() => handleClick(type)}>
+      <button onClick={() => addOrRemoveToList(type)}>
         {list?.includes(type) ? 'Remove' : 'Add'}
       </button>
     </div>

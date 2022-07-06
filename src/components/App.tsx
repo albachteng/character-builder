@@ -4,7 +4,6 @@ import Fallback from "./Fallback";
 import "../assets/css/App.css";
 import { AbilityScores, Background, CharacterClass, Level, Race, ZeroToTwenty } from "../types";
 import type { AppCharacterQuery as AppCharacterQueryType, AppCharacterQuery$variables } from "./__generated__/AppCharacterQuery.graphql";
-import { useQuery } from "@apollo/client";
 import {
   RelayEnvironmentProvider,
   loadQuery,
@@ -14,6 +13,8 @@ import RelayEnvironment from '../RelayEnvironment';
 import graphql from 'babel-plugin-relay/macro'
 import { OperationType } from 'relay-runtime';
 import CharacterContext from './CharacterContext';
+import BackgroundFeaturesDisplay from './FeaturesDisplay/BackgroundFeaturesDisplay';
+import TraitsDisplay from './FeaturesDisplay/TraitsDisplay';
 
 const Controls = lazy(() => import("./Controls"));
 const Personality = lazy(() => import("./Personality"));
@@ -63,11 +64,17 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       $class: FilterFindOneClassInput,
       $race: FilterFindOneRaceInput,
       $level: Int,
-      $background: FilterFindOneBackgroundInput) {
+      $background: FilterFindOneBackgroundInput,
+      $spells:  FilterFindManySpellInput) {
         class (filter: $class) {
           ...FeaturesDisplayFragment_class
-          ...InventoryDisplayFragment_class
+          ...ClassEquipmentFragment_class
           ...SkillsDisplayFragment_class
+          ...ItemStoreFragment_class
+          ...SpellSlotsFragment_class
+          spellcasting {
+            ...SpellModFragment_spellcasting
+          }
         }
         race (filter: $race) {
           ability_bonus_options {
@@ -109,12 +116,16 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             index
             name
           }
-          ...FeaturesDisplayFragment_race
+          ...TraitsDisplayFragment_race
         }
         background(filter: $background) {
           index
           name
           ...SkillsDisplayFragment_background
+          ...ItemStoreFragment_background
+          ...BackgroundEquipmentFragment_background
+          ...BackgroundFeaturesDisplayFragment_background
+          ...PersonalityFragment_background
           language_options {
             choose
             from {
@@ -123,12 +134,9 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             }
             type
           }
-          ...InventoryDisplayFragment_background
-          ...FeaturesDisplayFragment_background
-          ...PersonalityFragment_background
         }
-    }`,
-    queryRef)
+        ...SpellsDisplayFragment_query
+      }`, queryRef);
 
   const myPersonality = useMemo(
     () => <Personality characterBackground={characterBackground} backgroundRef={data?.background!}/>,
@@ -151,34 +159,36 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           characterLevel={characterLevel}
           characterName="nonsense" />}
       </Suspense>
+
       <Suspense fallback={<Fallback />}>
         <AbilityScoresDisplay characterStats={characterStats} />
       </Suspense>
 
       <Suspense fallback={<Fallback />}>
-        {<FeaturesDisplay
+        <FeaturesDisplay
           classRef={data?.class!}
           characterClass={characterClass}
+        />
+        <TraitsDisplay
           raceRef={data?.race!}
           characterRace={characterRace}
+        />
+        <BackgroundFeaturesDisplay
           backgroundRef={data?.background!}
           characterBackground={characterBackground}
-          // classFeatures={data?.class?.class_levels?.map((level: any) => level?.features).flat()}
-          // racialFeatures={data?.race?.traits?.flat()}
-          // backgroundFeatures={data?.background?.feature}
-          />}
+        />
       </Suspense>
       {/* <Suspense fallback={<Fallback />}> */}
       {/*   {data && <ItemStore />} */}
       {/* </Suspense> */}
-      <Suspense fallback={<Fallback />}>
-        {data && <InventoryDisplay
-          characterClass={characterClass}
-          characterBackground={characterBackground}
-          backgroundRef={data?.background!}
-          classRef={data?.class!}
-        />}
-      </Suspense>
+      {/* <Suspense fallback={<Fallback />}> */}
+      {/*   {data && <InventoryDisplay */}
+      {/*     characterClass={characterClass} */}
+      {/*     characterBackground={characterBackground} */}
+      {/*     backgroundRef={data?.background!} */}
+      {/*     classRef={data?.class!} */}
+      {/*   />} */}
+      {/* </Suspense> */}
       <Suspense fallback={<Fallback />}>
         {data && <SkillsDisplay
           characterLevel={characterLevel}
@@ -190,7 +200,17 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           backgroundRef={data?.background!}
           classRef={data?.class!}
         />}
-      {/*   {isSpellcaster(characterClass) && <SpellsDisplay />} */}
+        {isSpellcaster(characterClass) &&
+          <SpellsDisplay
+            characterClass={characterClass}
+            characterLevel={characterLevel}
+            characterStats={characterStats}
+            queryRef={data!}
+            spellcastingRef={data?.class?.spellcasting!}
+            spellslotsRef={data?.class?.class_levels?.[characterLevel]?.spellcasting!}
+            classRef={data?.class!}
+        />
+        })
       </Suspense>
   </div>
   );

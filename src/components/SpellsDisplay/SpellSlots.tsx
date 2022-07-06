@@ -30,16 +30,14 @@ function SpellSlots({ characterClass, characterLevel, classRef}: Props) {
           spell_slots_level_9
           spells_known
         }
-          level
       }
     }`, classRef);
 
-  const { level, spellcasting } = class_levels[0];
-  console.log({class_levels})
+  const { spellcasting } = class_levels[0];
 
   return (
     <>
-      <pre>{JSON.stringify(spellcasting, null, 2)}</pre>
+      <pre>{JSON.stringify(spellcasting)}</pre>
     </>
   );
 }

@@ -31,8 +31,8 @@ function SpellMod({ spellcastingRef, characterStats}) {
   return (
     <>
       <p onClick={toggleDescription}>
-        {info?.name}
-        :
+        {spellcasting_ability?.name}
+        :{' '}
         {dice.mod(characterStats[spellcasting_ability?.name as AbilityScoreName])}
       </p>
       {description}

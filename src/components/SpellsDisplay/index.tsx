@@ -82,11 +82,14 @@ function SpellsDisplay({
             characterLevel={characterLevel}
             classRef={classRef}
           />
-          <h3>Spell Mod</h3>
-          <SpellMod
-            spellcastingRef={spellcastingRef}
-            characterStats={characterStats}
-          />
+          {spells?.length && (
+          <>
+            <h3>Spell Mod</h3>
+            <SpellMod
+              spellcastingRef={spellcastingRef}
+              characterStats={characterStats}
+            />
+          </>)}
           <h3>Spellbook</h3>
           {spells?.map((_ , i, spells) => {
             return (

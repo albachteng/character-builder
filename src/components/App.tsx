@@ -155,6 +155,10 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       {myPersonality}
 
       <Suspense fallback={<Fallback />}>
+        <AbilityScoresDisplay characterStats={characterStats} />
+      </Suspense>
+
+      <Suspense fallback={<Fallback />}>
         {data && <HeaderDisplay
           characterStats={characterStats}
           characterClass={characterClass}
@@ -162,10 +166,6 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           characterRace={characterRace}
           characterLevel={characterLevel}
           characterName="nonsense" />}
-      </Suspense>
-
-      <Suspense fallback={<Fallback />}>
-        <AbilityScoresDisplay characterStats={characterStats} />
       </Suspense>
 
       <Suspense fallback={<Fallback />}>
@@ -182,17 +182,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           characterBackground={characterBackground}
         />
       </Suspense>
-      {/* <Suspense fallback={<Fallback />}> */}
-      {/*   {data && <ItemStore />} */}
-      {/* </Suspense> */}
-      {/* <Suspense fallback={<Fallback />}> */}
-      {/*   {data && <InventoryDisplay */}
-      {/*     characterClass={characterClass} */}
-      {/*     characterBackground={characterBackground} */}
-      {/*     backgroundRef={data?.background!} */}
-      {/*     classRef={data?.class!} */}
-      {/*   />} */}
-      {/* </Suspense> */}
+
       <Suspense fallback={<Fallback />}>
         {data && <SkillsDisplay
           characterLevel={characterLevel}
@@ -213,6 +203,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
         />
         })
       </Suspense>
+
   </main>
   );
 }

@@ -31,22 +31,22 @@ function HeaderDisplay({
 
   return (
     <section>
-        <pre>
-          {JSON.stringify(
-            {
-              characterName,
-              characterClass,
-              characterRace,
-              characterLevel,
-              alignment,
-              experience,
-              characterBackground,
-            },
-            null,
-            2,
-          )}
-        </pre>
-        <HitPoints characterClass={characterClass} characterStats={characterStats} characterLevel={characterLevel}/>
+      <pre>
+        {JSON.stringify(
+          {
+            characterName,
+            characterClass,
+            characterRace,
+            characterLevel,
+            alignment,
+            experience,
+            characterBackground,
+          },
+          null,
+          2,
+        )}
+      </pre>
+      <HitPoints characterClass={characterClass} characterStats={characterStats} characterLevel={characterLevel}/>
     </section>
   );
 }

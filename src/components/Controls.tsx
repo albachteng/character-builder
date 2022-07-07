@@ -2,6 +2,7 @@ import type { Action, CharacterClass, Race } from '../types';
 import { useContext } from 'react';
 import CharacterContext from './CharacterContext';
 import React from "react";
+import { Button } from '@mantine/core'
 
 type Props = {
   refetch: () => void
@@ -12,21 +13,35 @@ type Props = {
 
 function Controls({refetch, characterRace, characterClass, dispatch}: Props) {
     return (
-      <section>
-        <a target="_" href="https://www.dnd5eapi.co/graphql">
-          GraphQL Playground
-        </a>
-        <button onClick={() =>  {
-          dispatch({ type: "newCharacter" })
-          // refetch()
-        }}> This one is weak, bring me another </button>
-        <button onClick={() =>  refetch() }>REFETCH</button>
-        <button onClick={() => dispatch({ type: "levelUp" })}>
+      <section className="wide controls">
+
+        <a className="grid-item" target="_" href="https://www.dnd5eapi.co/graphql">GraphQL Playground</a>
+
+        <Button
+          className="grid-item"
+          variant="default"
+          onClick={() =>  {
+            dispatch({ type: "newCharacter" })
+        }}>
+          This one is weak, bring me another!
+        </Button>
+
+        <Button
+          className="grid-item"
+          variant="default"
+          onClick={() => dispatch({ type: "levelUp" })}
+        >
           Increase this one's power...
-        </button>
-        <button onClick={() => dispatch({ type: "reroll" })}>
+        </Button>
+
+        <Button
+          className="grid-item"
+          variant="default"
+          onClick={() => dispatch({ type: "reroll" })}
+        >
           These stats are bullshit, roll again!
-        </button>
+        </Button>
+
     </section>
     )
 };

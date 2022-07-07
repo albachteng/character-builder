@@ -123,7 +123,7 @@ function FeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
   const classTitle = characterClass[0].toUpperCase() + characterClass.slice(1)
 
   return (
-    <div style={{ height: '50%', overflow: 'scroll' }}>
+    <section>
       <h2>{`Class Features: ${classTitle}`}</h2>
       {classFeatures.map((feature, i, features) => {
         const shouldRender = () => {
@@ -138,7 +138,7 @@ function FeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
         }
         return <Feature key={features?.[i]?.__id} featureRef={features?.[i]} shouldRender={shouldRender()}/>
       })}
-    </div>
+    </section>
   );
 }
 

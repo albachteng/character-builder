@@ -143,10 +143,14 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
     [characterBackground, characterClass]
   );
   return (
-    <div>
-      <h1>
-        Play a fucking {characterRace} {characterClass}, coward!
-      </h1>
+    <main id="main">
+
+      <section className={"wide"}>
+        <h1>
+          Play a fucking {characterRace} {characterClass}, coward!
+        </h1>
+      </section>
+
       <Controls refetch={refetch} characterClass={characterClass} characterRace={characterRace} dispatch={dispatch}/>
       {myPersonality}
 
@@ -209,7 +213,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
         />
         })
       </Suspense>
-  </div>
+  </main>
   );
 }
 

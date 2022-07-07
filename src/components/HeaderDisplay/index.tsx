@@ -30,7 +30,7 @@ function HeaderDisplay({
 }: Props) {
 
   return (
-    <>
+    <section>
         <pre>
           {JSON.stringify(
             {
@@ -47,7 +47,7 @@ function HeaderDisplay({
           )}
         </pre>
         <HitPoints characterClass={characterClass} characterStats={characterStats} characterLevel={characterLevel}/>
-        </>
+    </section>
   );
 }
 

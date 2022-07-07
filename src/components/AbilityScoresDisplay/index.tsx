@@ -19,9 +19,9 @@ function AbilityScoresDisplay({characterStats}: Props) {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+    <section style={{ display: 'flex', justifyContent: 'space-around' }}>
       {scores}
-    </div>
+    </section>
   );
 }
 

@@ -21,13 +21,11 @@ type Props = {
 function InventoryDisplay({ classRef, backgroundRef }: Props) {
 
   return (
-    <div>
+    <section>
       <h2>Inventory:</h2>
-      <ul>
         <BackgroundEquipment classRef={classRef}/>
         <ClassEquipment backgroundRef={backgroundRef}/>
-      </ul>
-    </div>
+    </section>
   );
 }
 

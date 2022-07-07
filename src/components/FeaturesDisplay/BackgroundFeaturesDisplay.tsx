@@ -21,12 +21,12 @@ function BackgroundFeaturesDisplay({backgroundRef, characterBackground}: Props):
   const backgroundTitle = characterBackground[0].toUpperCase() + characterBackground.slice(1)
 
   return (
-    <div style={{ height: '50%', overflow: 'scroll' }}>
+    <section>
       <h2>Background Feature: {backgroundTitle}</h2>
       <BackgroundFeature
         backgroundFeatureRef={backgroundFeature}
       />
-    </div>
+    </section>
   );
 }
 

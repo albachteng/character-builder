@@ -143,9 +143,9 @@ function SkillsDisplay({
   });
 
   return (
-    <>
+    <section>
       {mappedSkills}
-    </>
+    </section>
   );
 }
 

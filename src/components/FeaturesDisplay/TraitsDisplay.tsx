@@ -125,7 +125,7 @@ function TraitsDisplay({ raceRef, characterRace }: Props): JSX.Element {
   const raceTitle = characterRace[0].toUpperCase() + characterRace.slice(1)
 
   return (
-    <div style={{ height: '50%', overflow: 'scroll' }}>
+    <section>
       <h2>{`Racial Traits: ${raceTitle}`}</h2>
       {traits.map((trait, i, traits) => {
         const shouldRender = () => {
@@ -146,7 +146,7 @@ function TraitsDisplay({ raceRef, characterRace }: Props): JSX.Element {
           shouldRender={shouldRender()}
         />)
       })}
-    </div>
+    </section>
   );
 }
 

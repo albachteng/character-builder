@@ -8,6 +8,23 @@ body {
   justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
+  margin: 0 auto;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+section {
+  grid-column-start: span 6;
+  padding: 20px;
+  margin: 20px;
+  border: 20px solid white;
+}
+
+.wide {
+  grid-column-start: span 12;
 }
 
 .card {
@@ -47,3 +64,4 @@ body {
 .hidden {
   display: none
 }
+

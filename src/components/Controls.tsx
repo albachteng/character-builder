@@ -12,7 +12,7 @@ type Props = {
 
 function Controls({refetch, characterRace, characterClass, dispatch}: Props) {
     return (
-      <div id="App">
+      <section>
         <a target="_" href="https://www.dnd5eapi.co/graphql">
           GraphQL Playground
         </a>
@@ -27,7 +27,7 @@ function Controls({refetch, characterRace, characterClass, dispatch}: Props) {
         <button onClick={() => dispatch({ type: "reroll" })}>
           These stats are bullshit, roll again!
         </button>
-    </div>
+    </section>
     )
 };
 

@@ -3,15 +3,12 @@ ultimately responsible for displaying character name, character class, race, lev
 */
 
 import {
-  AbilityScores, CharacterClass, Race, ZeroToTwenty,
+  AbilityScores, CharacterClass, Race, ZeroToTwenty, Background
 } from '../../types';
-import { Background } from '../../types/Background';
-import CharacterContext from '../CharacterContext';
-import { useContext } from 'react';
 import HitPoints from './HitPoints';
 
 type Props = {
-  characterName: string
+  characterName?: string
   alignment?: string
   experience?: number
   characterClass: CharacterClass

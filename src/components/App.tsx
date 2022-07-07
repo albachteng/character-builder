@@ -2,7 +2,7 @@ import type {PreloadedQuery} from 'react-relay';
 import { Suspense, useMemo, lazy, useContext } from "react";
 import Fallback from "./Fallback";
 import "../assets/css/App.css";
-import { AbilityScores, Background, CharacterClass, Level, Race, ZeroToTwenty } from "../types";
+import { AbilityScores, Background, CharacterClass, Race, ZeroToTwenty } from "../types";
 import type { AppCharacterQuery as AppCharacterQueryType, AppCharacterQuery$variables } from "./__generated__/AppCharacterQuery.graphql";
 import {
   RelayEnvironmentProvider,
@@ -193,9 +193,6 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
         {data && <SkillsDisplay
           characterLevel={characterLevel}
           characterStats={characterStats}
-          characterClass={characterClass}
-          characterRace={characterRace}
-          characterBackground={characterBackground}
           raceRef={data?.race!}
           backgroundRef={data?.background!}
           classRef={data?.class!}

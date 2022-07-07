@@ -1,16 +1,15 @@
-/* 
-    responsible for taking a 'withDescription' object type (a type that has, 
-    at minimum, a desc property which is an array of strings and an name 
-    which is a string) and returning the functionality to hide or show that 
+/*
+    responsible for taking a 'withDescription' object type (a type that has,
+    at minimum, a desc property which is an array of strings and an name
+    which is a string) and returning the functionality to hide or show that
     information on a click
 */
-import { Maybe, Scalars } from '../types';
 
 type WithDescription = {
-  [key: string]: any;
-  [key: number]: any;
-  desc?: Maybe<Array<Maybe<Scalars['String']>>>;
-  name?: Maybe<string> | undefined 
+  [key: string]: any
+  [key: number]: any
+  desc?: string[]
+  name?: string
 };
 
 const useOnClickDescription = <T extends WithDescription>(

@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.5.8",
     "@types/relay-runtime": "^13.0.3",
     "get-graphql-schema": "^2.1.2",
     "react": "^18.2.0",
@@ -52,7 +51,6 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "@types/react-relay": "^13.0.2",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
     "babel-plugin-relay": "^14.0.0",
     "enzyme": "^3.11.0",
     "graphql": "^16.5.0",

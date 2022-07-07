@@ -5,7 +5,6 @@ import type { AppCharacterQuery as AppCharacterQueryType } from "./components/__
 import type {} from 'react/next';
 import { Suspense, useCallback, useContext, useEffect, useTransition } from "react";
 import useCharacter from "./hooks/useCharacter";
-import CharacterContext from "./components/CharacterContext";
 import { CharacterClass, ZeroToTwenty } from "./types";
 
 const AppCharacterQuery = require('./components/__generated__/AppCharacterQuery.graphql');

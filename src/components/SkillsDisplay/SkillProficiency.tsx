@@ -7,23 +7,22 @@ will also need proficiency bonus which is based on level
 import { graphql } from 'babel-plugin-relay/macro';
 import { useFragment } from 'react-relay';
 import useOnClickDescription from '../../hooks/useOnClickDescription';
-import { ZeroToTwenty, Skill } from '../../types';
+import { ZeroToTwenty, Skill, AbilityScores } from '../../types';
 import dice from '../../utilities/dice';
+import type { SkillProficiencyFragment_skill$key } from './__generated__/SkillProficiencyFragment_skill.graphql';
 
 type Props = {
-  stat: ZeroToTwenty;
-  skill: Skill;
-  proficiencyBonus?: number;
-  isProficient: boolean;
-  proficiencyFrom?: string;
+  skillRef: SkillProficiencyFragment_skill$key
+  characterLevel: ZeroToTwenty
+  characterStats: AbilityScores
+  proficiencies: string[]
 };
 
 function SkillProficiency({
-  stat,
-  skill,
-  proficiencyBonus = 2,
-  isProficient,
-  proficiencyFrom,
+  skillRef,
+  characterLevel,
+  characterStats,
+  proficiencies,
 }: Props) {
 
   const originMap = (origin: string | undefined) => {
@@ -41,29 +40,36 @@ function SkillProficiency({
     }
   };
 
-  // const skill = useFragment(graphql`
-  //   fragment SkillProficiencyFragment_skill on Skill {
-  //     name
-  //     index
-  //     desc
-  //   }`, skillRef)
+  const skill = useFragment(graphql`
+    fragment SkillProficiencyFragment_skill on Skill {
+        name
+        __typename
+        index
+        desc
+        ability_score {
+          name
+          index
+          __typename
+        }
+    }`, skillRef)
+
+  const isProficient = proficiencies.includes(skill?.index)
+  const proficiencyBonus = Math.floor((7 + characterLevel) / 4);
+  const modifier = skill?.ability_score?.name
+  const totalBonus = dice.mod(characterStats[modifier]) + (isProficient ? proficiencyBonus : 0);
 
   const { description, toggleDescription } = useOnClickDescription(skill);
-
-  const bonus = dice.mod(stat) + (isProficient ? proficiencyBonus : 0);
 
   return (
     <div>
       <li onClick={toggleDescription}>
-        {bonus >= 0 && '+'}
-        {bonus}
-        :
+        {totalBonus >= 0 && '+'}
+        {totalBonus}
+        :{' '}
         {`${skill?.name} `}
-        <span>
-          {`${
-            isProficient ? `| Proficient from ${originMap(proficiencyFrom)}` : ''
-          }`}
-        </span>
+        {/* <span> */}
+        {/*   {`${isProficient ? `| Proficient from ${originMap(proficiencyFrom)}` : ''}`} */}
+        {/* </span> */}
       </li>
       {description}
     </div>

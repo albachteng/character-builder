@@ -1,16 +1,9 @@
 import dice from '../../utilities/dice';
-// import { AbilityScore } from '../types';
 
 type Props = {
   name: string;
   stats: number; // TODO
 };
-
-// export interface AbilityScore {
-//     name: string,
-//     acronym: string,
-//     total: number
-// };
 
 function Stat({ name, stats }: Props): JSX.Element {
   return (

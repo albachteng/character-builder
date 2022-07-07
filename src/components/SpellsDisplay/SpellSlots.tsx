@@ -1,7 +1,5 @@
-import { makeUniqueId } from '@apollo/client/utilities';
 import { graphql } from 'babel-plugin-relay/macro';
 import { useFragment } from 'react-relay';
-import { ClassSpellSlots } from '../../queries';
 import { CharacterClass, MappingFunc } from '../../types';
 import RenderMap from '../RenderMap';
 import type { SpellSlotsFragment_class$key } from './__generated__/SpellSlotsFragment_class.graphql';
@@ -16,7 +14,7 @@ function SpellSlots({ characterClass, characterLevel, classRef}: Props) {
 
   const { class_levels } = useFragment(graphql`
     fragment SpellSlotsFragment_class on Class {
-      class_levels (limit: 1, skip: $level, sort: LEVEL_ASC) {
+      class_levels (limit: $level, sort: LEVEL_ASC) {
         spellcasting {
           cantrips_known
           spell_slots_level_1

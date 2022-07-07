@@ -25,8 +25,7 @@ function Trait({ traitRef }: Props) {
         <div>
           <p onClick={toggleDescription}>
             {trait?.name}
-            {trait?.__typename &&
-              ` | From Racial Traits`}
+            {` | From Racial Traits`}
           </p>
           {description}
         </div>

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0b4fdda45ee6ec232764222bc305b9c1>>
+ * @generated SignedSource<<c3a15650417ee99c068eeda3bc70db34>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -45,6 +45,7 @@ export type FeaturesDisplayFragment_class$data = {
           readonly type: string | null;
         } | null;
       } | null;
+      readonly index: string | null;
       readonly parent: {
         readonly index: string | null;
         readonly name: string | null;
@@ -89,42 +90,42 @@ v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "choose",
+  "name": "index",
   "storageKey": null
 },
 v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "type",
+  "name": "choose",
   "storageKey": null
 },
 v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "index",
+  "name": "type",
   "storageKey": null
 },
 v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "name",
+  "name": "__typename",
   "storageKey": null
 },
 v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "url",
+  "name": "name",
   "storageKey": null
 },
 v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "__typename",
+  "name": "url",
   "storageKey": null
 };
 return {
@@ -142,13 +143,8 @@ return {
       "alias": null,
       "args": [
         {
-          "kind": "Literal",
-          "name": "limit",
-          "value": 1
-        },
-        {
           "kind": "Variable",
-          "name": "skip",
+          "name": "limit",
           "variableName": "level"
         },
         (v0/*: any*/)
@@ -181,6 +177,7 @@ return {
               "kind": "FragmentSpread",
               "name": "FeatureFragment_feature"
             },
+            (v2/*: any*/),
             {
               "alias": null,
               "args": null,
@@ -189,56 +186,8 @@ return {
               "name": "choice",
               "plural": false,
               "selections": [
-                (v2/*: any*/),
-                (v3/*: any*/)
-              ],
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "concreteType": "Class",
-              "kind": "LinkedField",
-              "name": "class",
-              "plural": false,
-              "selections": [
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "hit_die",
-                  "storageKey": null
-                },
-                (v4/*: any*/),
-                (v5/*: any*/),
-                (v6/*: any*/)
-              ],
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "concreteType": "FeatureParent",
-              "kind": "LinkedField",
-              "name": "parent",
-              "plural": false,
-              "selections": [
-                (v4/*: any*/),
-                (v5/*: any*/),
-                (v6/*: any*/)
-              ],
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "concreteType": "FeaturePrerequisites",
-              "kind": "LinkedField",
-              "name": "prerequisites",
-              "plural": true,
-              "selections": [
-                (v1/*: any*/),
-                (v3/*: any*/)
+                (v3/*: any*/),
+                (v4/*: any*/)
               ],
               "storageKey": null
             },
@@ -258,7 +207,7 @@ return {
                   "name": "subfeature_options",
                   "plural": false,
                   "selections": [
-                    (v2/*: any*/),
+                    (v3/*: any*/),
                     {
                       "alias": null,
                       "args": null,
@@ -267,14 +216,14 @@ return {
                       "name": "from",
                       "plural": true,
                       "selections": [
-                        (v7/*: any*/),
-                        (v4/*: any*/),
                         (v5/*: any*/),
-                        (v6/*: any*/)
+                        (v2/*: any*/),
+                        (v6/*: any*/),
+                        (v7/*: any*/)
                       ],
                       "storageKey": null
                     },
-                    (v3/*: any*/)
+                    (v4/*: any*/)
                   ],
                   "storageKey": null
                 },
@@ -286,7 +235,7 @@ return {
                   "name": "expertise_options",
                   "plural": false,
                   "selections": [
-                    (v2/*: any*/),
+                    (v3/*: any*/),
                     {
                       "alias": null,
                       "args": null,
@@ -295,24 +244,72 @@ return {
                       "name": "from",
                       "plural": true,
                       "selections": [
-                        (v5/*: any*/),
-                        (v4/*: any*/),
-                        (v7/*: any*/)
+                        (v6/*: any*/),
+                        (v2/*: any*/),
+                        (v5/*: any*/)
                       ],
                       "storageKey": null
                     },
-                    (v3/*: any*/)
+                    (v4/*: any*/)
                   ],
                   "storageKey": null
                 }
               ],
               "storageKey": null
             },
-            (v6/*: any*/)
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "Class",
+              "kind": "LinkedField",
+              "name": "class",
+              "plural": false,
+              "selections": [
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "hit_die",
+                  "storageKey": null
+                },
+                (v2/*: any*/),
+                (v6/*: any*/),
+                (v7/*: any*/)
+              ],
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "FeatureParent",
+              "kind": "LinkedField",
+              "name": "parent",
+              "plural": false,
+              "selections": [
+                (v2/*: any*/),
+                (v6/*: any*/),
+                (v7/*: any*/)
+              ],
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "FeaturePrerequisites",
+              "kind": "LinkedField",
+              "name": "prerequisites",
+              "plural": true,
+              "selections": [
+                (v1/*: any*/),
+                (v4/*: any*/)
+              ],
+              "storageKey": null
+            },
+            (v7/*: any*/)
           ],
           "storageKey": "features(sort:\"LEVEL_ASC\")"
         },
-        (v4/*: any*/),
+        (v2/*: any*/),
         {
           "alias": null,
           "args": null,
@@ -328,8 +325,8 @@ return {
           "name": "subclass",
           "plural": false,
           "selections": [
-            (v4/*: any*/),
-            (v5/*: any*/)
+            (v2/*: any*/),
+            (v6/*: any*/)
           ],
           "storageKey": null
         }
@@ -342,6 +339,6 @@ return {
 };
 })();
 
-(node as any).hash = "e5c3cba8d9eb1de6962a9908aa73bb99";
+(node as any).hash = "0879d64b202fdac39210a9ecb8cb180a";
 
 export default node;

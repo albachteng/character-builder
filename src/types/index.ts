@@ -1,5 +1,3 @@
-export * from './generated-types';
-
 export type { AbilityScores } from './AbilityScores';
 export type { Action } from './Action';
 export type {
@@ -9,10 +7,8 @@ export type {
 export type { Background } from './Background';
 export type { CharacterClass } from './CharacterClass';
 export type { Choice } from './choice';
-export type { CoreSkills } from './CoreSkills';
 export type { JSONValue } from './JSONValue';
 export type { MappingFunc } from './MappingFunc';
-export type { NamedIndex } from './NamedIndex';
 export type { Race } from './Race';
 export type { SkillIndex } from './SkillIndex';
 export type { SkillName } from './SkillName';

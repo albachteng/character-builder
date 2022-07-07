@@ -1,9 +1,8 @@
 import { graphql } from 'babel-plugin-relay/macro';
 import { ReactNode, useId } from 'react';
 import { useFragment } from 'react-relay';
-import { SpellModByClass, SpellcastingInfo, SpellsOptionsByClassAndLevel } from '../../queries';
 import {
-  MappingFunc, Maybe, Spell, ClassSpellcastingSpellcasting_Ability, AbilityScores, ZeroToTwenty, CharacterClass
+  MappingFunc, ClassSpellcastingSpellcasting_Ability, AbilityScores, ZeroToTwenty, CharacterClass
 } from '../../types';
 import { AbilityScoreName } from '../../types/AbilityScoreName';
 import dice from '../../utilities/dice';

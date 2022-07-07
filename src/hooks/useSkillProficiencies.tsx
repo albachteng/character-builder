@@ -1,11 +1,7 @@
-import { useQuery } from '@apollo/client';
 import { useState, useEffect } from 'react';
-import {
-  CharacterProficiencies
-} from '../queries';
-import { CharacterClass, Choice, Race, Skill } from '../types';
-import { findArray } from '../utilities/findArray';
+import { CharacterClass, Choice, Race } from '../types';
 import useOption from './useOption';
+import type { SkillProficiencyFragment_skill$data as Skill } from '../components/SkillsDisplay/__generated__/SkillProficiencyFragment_skill.graphql';
 
 const useSkillProficiencies = (
     backgroundProficiencies: Skill[],
@@ -28,49 +24,6 @@ const useSkillProficiencies = (
   const [choicesArray, setChoicesArray] = useState<Choice<Skill>[]>([...choices]);
   const { selections } = useOption(choicesArray);
   const [proficiencies, setProficiencies] = useState<Skill[]>([...startingProfs, ...selections]);
-
-  // // when we have the choice arrays, combine them so that useOption can update selections
-  // useEffect(() => {
-  //   if (
-  //     !characterProficiencies.loading
-  //     && characterProficiencies.data !== null
-  //   ) {
-  //     const classArray =
-  //       findArray(characterProficiencies.data, [
-  //         'class',
-  //         'proficiency_choices'
-  //       ]) || [];
-  //     const raceArray =
-  //       [
-  //         findArray(characterProficiencies.data, ['race', 'proficiency_choices'])
-  //       ] || [];
-  //     setChoicesArray([...classArray, ...raceArray]);
-  //   }
-  // }, [
-  //   characterProficiencies.data,
-  //   characterClass,
-  //   characterRace
-  // ]);
-
-  // // when we have selections, combine them with racial starting proficiencies and background proficiencies
-  // useEffect(() => {
-  //   selections &&
-  //     characterProficiencies.data &&
-  //     setProficiencies([
-  //       ...selections,
-  //       ...findArray(characterProficiencies.data, [
-  //         'race',
-  //         'proficiencies'
-  //       ]),
-  //       ...findArray(characterProficiencies.data, [
-  //         'background',
-  //         'proficiencies'
-  //       ])
-  //     ]);
-  // }, [
-  //   selections,
-  //   characterProficiencies.data
-  // ]);
 
   return {
     proficiencies

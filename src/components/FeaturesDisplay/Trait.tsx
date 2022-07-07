@@ -17,6 +17,7 @@ function Trait({ traitRef }: Props) {
       desc
     }`, traitRef);
 
+  console.log({trait})
   const { description, toggleDescription } = useOnClickDescription(trait);
 
   return (
@@ -25,8 +26,7 @@ function Trait({ traitRef }: Props) {
         <div>
           <p onClick={toggleDescription}>
             {trait?.name}
-            {trait?.__typename &&
-              ` | From Racial Traits`}
+            {` | From Racial Traits`}
           </p>
           {description}
         </div>

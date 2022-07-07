@@ -1,13 +1,13 @@
 import { graphql } from 'babel-plugin-relay/macro';
 import { useFragment } from 'react-relay';
-import { AbilityScores, Maybe, Spell } from '../../types';
+import { AbilityScores } from '../../types';
 import type { SpellDetailsFragment_spell$key } from './__generated__/SpellDetailsFragment_spell.graphql';
 
 type Props = {
   spellRef: SpellDetailsFragment_spell$key
 };
 
-const handleStringArray = (arr: Maybe<string>[], type: string) => {
+const handleStringArray = (arr: (string | null)[], type: string) => {
   if (Array.isArray(arr)) {
     if (type === 'li') {
       return arr.map((str: string | null, index) => <li key={`${str}${index}`}>{str}</li>);

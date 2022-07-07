@@ -1,16 +1,11 @@
 /* renders skill proficiencies display and handles query for class skill choices */
 import { graphql } from 'babel-plugin-relay/macro';
-import { useContext, useId } from 'react';
 import { useFragment, useLazyLoadQuery } from 'react-relay';
 import useSkillProficiencies from '../../hooks/useSkillProficiencies';
-import { AllSkills } from '../../queries';
 import {
-  AbilityScoreName, Background, CharacterClass, Choice, MappingFunc, Race, Skill, ZeroToTwenty,
+  AbilityScoreName, MappingFunc, ZeroToTwenty,
 } from '../../types';
 import type { AbilityScores } from '../../types/AbilityScores';
-import CharacterContext from '../CharacterContext';
-import QueryWrapper from '../QueryWrapper';
-import RenderMap from '../RenderMap';
 import SkillProficiency from './SkillProficiency';
 import type { SkillsDisplayFragment_race$key } from './__generated__/SkillsDisplayFragment_race.graphql';
 import type { SkillsDisplayFragment_background$key } from './__generated__/SkillsDisplayFragment_background.graphql';
@@ -18,9 +13,6 @@ import type { SkillsDisplayFragment_class$key } from './__generated__/SkillsDisp
 import type { SkillsDisplayQuery } from './__generated__/SkillsDisplayQuery.graphql';
 
 type Props = {
-  characterClass: CharacterClass
-  characterRace: Race
-  characterBackground: Background
   characterLevel: ZeroToTwenty
   characterStats: AbilityScores
   classRef: SkillsDisplayFragment_class$key
@@ -29,9 +21,6 @@ type Props = {
 }
 
 function SkillsDisplay({
-  characterClass,
-  characterRace,
-  characterBackground,
   characterStats,
   characterLevel,
   classRef,
@@ -98,27 +87,17 @@ function SkillsDisplay({
   const { skills } = useLazyLoadQuery<SkillsDisplayQuery>(
     graphql`query SkillsDisplayQuery {
       skills {
-        name
-        __typename
-        index
-        url
-        desc
-        ability_score {
-          name
-          index
-          __typename
-          url
-        }
+        ...SkillProficiencyFragment_skill
       }
     }`);
 
 
   const { proficiencies } = useSkillProficiencies(
-    backgroundProficiencies as any,
-    racialProficiencies as any,
-    classProficiencies as any,
-    racialProficiencyChoices as any,
-    classProficienciesChoices as any
+    backgroundProficiencies,
+    racialProficiencies,
+    classProficiencies,
+    racialProficiencyChoices,
+    classProficienciesChoices
   );
 
 
@@ -150,11 +129,23 @@ function SkillsDisplay({
     );
   };
 
+  const mappedSkills = skills.map((skill, i, allSkills) => {
+    const proficiencyIndices = proficiencies.map((prof) => prof?.index?.slice(6))
+    const [bool, from] = isProficient(proficiencies, skill);
+    return (
+      <SkillProficiency
+        key={allSkills?.[i]?.index}
+        skillRef={allSkills[i]}
+        characterStats={characterStats}
+        characterLevel={characterLevel}
+        proficiencies={proficiencies.map((prof) => prof.index?.slice(6))}
+      />)
+  });
+
   return (
-    <RenderMap
-      data={skills}
-      mappingFunc={makeProficienciesArray}
-    />
+    <>
+      {mappedSkills}
+    </>
   );
 }
 

@@ -90,9 +90,11 @@ function FeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
     // TODO not super eficient, we should probably get this some other way
   }
 
+  const classTitle = characterClass[0].toUpperCase() + characterClass.slice(1)
+
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
-      <h2>Class Features</h2>
+      <h2>{`Class Features: ${classTitle}`}</h2>
       {classFeatures.map((_, i, features) => {
         return <Feature key={features?.[i]?.__id} featureRef={features?.[i]}/>
       })}

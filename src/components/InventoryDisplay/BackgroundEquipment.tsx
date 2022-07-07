@@ -1,6 +1,5 @@
-import { useId } from "react";
 import { useFragment } from "react-relay";
-import { Background, CharacterClass, MappingFunc } from "../../types";
+import { Background } from "../../types";
 import RenderMap from "../RenderMap";
 import withUseOption from "../withUseOption";
 import type { BackgroundEquipmentFragment_background$key } from './__generated__/BackgroundEquipmentFragment_background.graphql';
@@ -8,11 +7,10 @@ import { equipmentMap } from './index';
 import { graphql } from "babel-plugin-relay/macro";
 
 type Props = {
-  characterBackground: Background
   backgroundRef: BackgroundEquipmentFragment_background$key
 }
 
-function BackgroundEquipment({ characterBackground, backgroundRef }: Props) {
+function BackgroundEquipment({ backgroundRef }: Props) {
 
   const {
     starting_equipment_options,

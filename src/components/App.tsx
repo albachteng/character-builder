@@ -193,9 +193,6 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
         {data && <SkillsDisplay
           characterLevel={characterLevel}
           characterStats={characterStats}
-          characterClass={characterClass}
-          characterRace={characterRace}
-          characterBackground={characterBackground}
           raceRef={data?.race!}
           backgroundRef={data?.background!}
           classRef={data?.class!}

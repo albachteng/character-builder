@@ -1,5 +1,4 @@
 
-import { useId } from "react";
 import { useFragment } from "react-relay";
 import RenderMap from "../RenderMap";
 import withUseOption from "../withUseOption";
@@ -8,11 +7,10 @@ import { equipmentMap } from './index';
 import { graphql } from "babel-plugin-relay/macro";
 
 type Props = {
-  characterClass: CharacterClass
   classRef: ClassEquipmentFragment_class$key
 }
 
-function ClassEquipment({ characterClass, classRef }: Props) {
+function ClassEquipment({ classRef }: Props) {
 
   const {
     starting_equipment,

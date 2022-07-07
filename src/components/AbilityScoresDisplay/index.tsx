@@ -1,8 +1,6 @@
-import { ReactNode, useContext } from 'react';
-import CharacterContext from '../CharacterContext';
+import { ReactNode } from 'react';
 import { AbilityScores } from '../../types';
 import Stat from './Stat';
-// import { CharacterQuery } from '../../queries/Character';
 
 type Props = {
   characterStats: AbilityScores

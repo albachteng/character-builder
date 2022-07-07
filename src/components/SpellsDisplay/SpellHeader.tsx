@@ -1,7 +1,6 @@
 import { graphql } from 'babel-plugin-relay/macro';
 import { useId } from 'react';
 import { useFragment } from 'react-relay';
-import { Spell } from '../../types';
 import type { SpellHeaderFragment_spell$key } from './__generated__/SpellHeaderFragment_spell.graphql';
 
 type Props = {

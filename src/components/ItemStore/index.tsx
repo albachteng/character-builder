@@ -36,7 +36,6 @@ function ItemStore({characterBackground, backgroundRef, characterClass, classRef
       }
     }`, backgroundRef)
 
-
   const {starting_equipment, starting_equipment_options} = useFragment(
     graphql`fragment ItemStoreFragment_class on Class {
       starting_equipment {

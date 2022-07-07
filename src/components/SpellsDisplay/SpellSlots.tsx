@@ -1,7 +1,5 @@
-import { makeUniqueId } from '@apollo/client/utilities';
 import { graphql } from 'babel-plugin-relay/macro';
 import { useFragment } from 'react-relay';
-import { ClassSpellSlots } from '../../queries';
 import { CharacterClass, MappingFunc } from '../../types';
 import RenderMap from '../RenderMap';
 import type { SpellSlotsFragment_class$key } from './__generated__/SpellSlotsFragment_class.graphql';

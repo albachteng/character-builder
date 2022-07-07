@@ -1,7 +1,4 @@
-import { MappingFunc } from '../../types';
 import Trait from './Trait';
-import {v4 as UUIDv4} from 'UUID' ;
-import RenderMap from '../RenderMap';
 import useTraitsFilters from './useTraitsFilters';
 import type { TraitsDisplayFragment_race$key } from './__generated__/TraitsDisplayFragment_race.graphql'
 import { useFragment } from 'react-relay';
@@ -18,6 +15,7 @@ function TraitsDisplay({ raceRef, characterRace }: Props): JSX.Element {
     graphql`fragment TraitsDisplayFragment_race on Race {
       traits {
         ...TraitFragment_trait
+        index
         proficiencies {
           index
           name
@@ -82,13 +80,13 @@ function TraitsDisplay({ raceRef, characterRace }: Props): JSX.Element {
       }
   }`, raceRef)
 
-  const { traitSpecificOptions, traitSpecificSelections } = useTraitsFilters(traits, characterRace)
+  // const { traitSpecificOptions, traitSpecificSelections } = useTraitsFilters(traits, characterRace)
 
-  const whiteList: Array<any> = [];
-  for (let key in traitSpecificSelections) {
-    if (traitSpecificSelections.hasOwnProperty(key)) whiteList.push(...traitSpecificSelections?.[key])
-    // TODO not super eficient, we should probably get this some other way
-  }
+  // const whiteList: Array<any> = [];
+  // for (let key in traitSpecificSelections) {
+  //   if (traitSpecificSelections.hasOwnProperty(key)) whiteList.push(...traitSpecificSelections?.[key])
+  //   // TODO not super eficient, we should probably get this some other way
+  // }
   //
   // function traitFilter(input: typeof traits) {
   //   const traits = input;
@@ -102,15 +100,16 @@ function TraitsDisplay({ raceRef, characterRace }: Props): JSX.Element {
   //       return true;
   //     })
   // }
+const raceTitle = characterRace[0].toUpperCase() + characterRace.slice(1)
 
   return (
     <div style={{ height: '50%', overflow: 'scroll' }}>
-      <h2>Traits</h2>
-      {traits.map((trait, i, traits) => {
-        <Trait
+      <h2>{`Racial Traits: ${raceTitle}`}</h2>
+      {traits.map((_, i, traits) => {
+        return (<Trait
           key={traits?.[i]?.index}
           traitRef={traits?.[i]}
-        />
+        />)
       })}
     </div>
   );

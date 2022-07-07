@@ -1,4 +1,3 @@
-import { Maybe } from '../../types';
 
 export type ToggleHeaderProps<T> = {
     type: T
@@ -8,7 +7,7 @@ export type ToggleHeaderProps<T> = {
     list: T[]
 }
 
-function ToggleHeader<T extends {name?: Maybe<string>}>({
+function ToggleHeader<T extends {name?: string}>({
   type, title, index, addOrRemoveToList, list,
 }: ToggleHeaderProps<T>) {
   return (

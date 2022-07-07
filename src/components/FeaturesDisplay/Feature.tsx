@@ -19,7 +19,6 @@ function Feature({ featureRef }: Props) {
     }`, featureRef);
 
   const { name, level } = feature;
-
   const { description, toggleDescription } = useOnClickDescription(feature);
 
   return (

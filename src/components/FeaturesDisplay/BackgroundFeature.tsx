@@ -4,15 +4,15 @@ import useOnClickDescription from "../../hooks/useOnClickDescription";
 import type { FeatureFragment_background_feature$key } from './__generated__/FeatureFragment_background_feature.graphql';
 
 type Props = {
-  backgroundFeatureRef: FeatureFragment_background_feature$key
+  backgroundFeatureRef: BackgroundFeatureFragment_feature$key
 };
 
 function BackgroundFeature({ backgroundFeatureRef}: Props) {
 
+  console.log({backgroundFeatureRef})
   const feature = useFragment(
     graphql`fragment BackgroundFeatureFragment_feature on BackgroundFeature {
       name
-      # index
       __typename
       desc
     }`, backgroundFeatureRef);
@@ -27,7 +27,6 @@ function BackgroundFeature({ backgroundFeatureRef}: Props) {
         <div>
           <p onClick={toggleDescription}>
             {name}
-            {`, Level ${level}`}
             {__typename &&
               ` | From: Background`}
           </p>

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<84507d9b3ed75b18bbaf0fea2242a17a>>
+ * @generated SignedSource<<846af38d8438c86120cfa1cdb3970136>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,6 +12,7 @@ import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type TraitsDisplayFragment_race$data = {
   readonly traits: ReadonlyArray<{
+    readonly index: string | null;
     readonly parent: {
       readonly index: string | null;
       readonly name: string | null;
@@ -146,6 +147,7 @@ return {
           "kind": "FragmentSpread",
           "name": "TraitFragment_trait"
         },
+        (v0/*: any*/),
         {
           "alias": null,
           "args": null,
@@ -364,6 +366,6 @@ return {
 };
 })();
 
-(node as any).hash = "fa5e6ed8a42e53bfeaabc4c1be3b607c";
+(node as any).hash = "a0d7467cb40022858ae2d9703a1c038d";
 
 export default node;

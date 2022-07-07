@@ -1,8 +1,6 @@
-import { useContext } from 'react';
 import useHP, { Rolls } from '../../hooks/useHP';
 import { CharacterClass, AbilityScores, ZeroToTwenty } from '../../types';
 import dice from '../../utilities/dice';
-import CharacterContext from '../CharacterContext';
 
 const calculateHP = (
   characterStats: AbilityScores,
@@ -13,7 +11,7 @@ const calculateHP = (
   for (let i = 1; i <= characterLevel; i += 1) {
     const toAdd = rolls[i] + dice.mod(characterStats.CON);
     if (toAdd >= 1) total += toAdd;
-    // minimum + 1 HP per level, regardless of roll and mod
+    // minimum + 1 HP per level
     else total += 1;
   }
   return total;

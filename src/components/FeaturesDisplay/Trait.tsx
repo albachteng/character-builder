@@ -17,7 +17,6 @@ function Trait({ traitRef }: Props) {
       desc
     }`, traitRef);
 
-  console.log({trait})
   const { description, toggleDescription } = useOnClickDescription(trait);
 
   return (

@@ -14,7 +14,7 @@ function SpellSlots({ characterClass, characterLevel, classRef}: Props) {
 
   const { class_levels } = useFragment(graphql`
     fragment SpellSlotsFragment_class on Class {
-      class_levels (limit: 1, skip: $level, sort: LEVEL_ASC) {
+      class_levels (limit: $level, sort: LEVEL_ASC) {
         spellcasting {
           cantrips_known
           spell_slots_level_1

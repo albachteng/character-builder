@@ -7,7 +7,7 @@ type Props = {
   featureRef: FeatureFragment_feature$key
 };
 
-function Feature({ featureRef }: Props) {
+function Feature({ featureRef, shouldRender}: Props) {
 
   const feature = useFragment(
     graphql`fragment FeatureFragment_feature on Feature {
@@ -24,7 +24,7 @@ function Feature({ featureRef }: Props) {
   return (
     <>
       {(
-        <div>
+        <div className={shouldRender ? '' : 'hidden'}>
           <p onClick={toggleDescription}>
             {name}
             {`, Level ${level}`}

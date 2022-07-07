@@ -2,7 +2,7 @@ import type {PreloadedQuery} from 'react-relay';
 import { Suspense, useMemo, lazy, useContext } from "react";
 import Fallback from "./Fallback";
 import "../assets/css/App.css";
-import { AbilityScores, Background, CharacterClass, Level, Race, ZeroToTwenty } from "../types";
+import { AbilityScores, Background, CharacterClass, Race, ZeroToTwenty } from "../types";
 import type { AppCharacterQuery as AppCharacterQueryType, AppCharacterQuery$variables } from "./__generated__/AppCharacterQuery.graphql";
 import {
   RelayEnvironmentProvider,

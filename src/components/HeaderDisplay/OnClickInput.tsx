@@ -14,17 +14,13 @@ function OnClickInput({children}: Props) {
     opened ?
       <TextInput
         classNames="text-input"
-        variant="headless"
+        variant="unstyled"
         onBlur={() => handlers.close()}
         onKeyDown={(e: React.KeyboardEvent) => {
-          e.preventDefault();
           if (e.keyCode === 13) handlers.close();
         }}
         value={stringValue}
-        onChange={(e: React.BaseSyntheticEvent) => {
-          e.preventDefault()
-          setStringValue(e.currentTarget.value)
-        }}
+        onChange={setStringValue}
       />
       : <h3
           onClick={() => handlers.open()}

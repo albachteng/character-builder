@@ -39,7 +39,7 @@ function HitPoints({characterLevel, characterClass, characterStats}: Props) {
       </Tooltip>
 
       <h1>
-        Hit dice: {characterLevel} d{getHitDice(characterClass)}
+        Hit dice: {characterLevel}d{getHitDice(characterClass)}
       </h1>
     </section>
   );

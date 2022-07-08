@@ -56,10 +56,9 @@ function SpellsDisplay({
     }`, queryRef);
 
   const spellcastingInfoMapFunc: MappingFunc<Spell> = (spell, spellIndex) => {
-    // TODO
     const description: ReactNode[] = [];
     spell?.desc?.forEach((paragraph: Maybe<string>, index: number) => {
-      description.push(<p key={useId()}>{paragraph}</p>);
+      description.push(<p key={paragraph}>{paragraph}</p>);
     });
     return (
       <div key={useId()}>

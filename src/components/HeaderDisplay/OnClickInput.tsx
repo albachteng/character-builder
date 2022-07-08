@@ -1,4 +1,4 @@
-import { useDisclosure, useInputState } from '@mantine/hooks';
+import { useDisclosure, useInputState, useClickOutside} from '@mantine/hooks';
 import { TextInput } from '@mantine/core';
 import { useEffect } from 'react';
 
@@ -12,6 +12,8 @@ function OnClickInput({initialValue, label}: Props) {
   const [ stringValue, setStringValue ] = useInputState(initialValue)
   const [ opened, handlers ] = useDisclosure(false)
 
+  const ref = useClickOutside(() => handlers.close());
+
   const capitalize = (str: string) => String(str)[0].toUpperCase() + String(str).slice(1);
 
   useEffect(() => {
@@ -21,8 +23,9 @@ function OnClickInput({initialValue, label}: Props) {
   return (
     opened ?
       <TextInput
+        ref={ref}
         classNames="text-input"
-        variant="unstyled"
+        // variant="unstyled"
         onBlur={() => handlers.close()}
         onKeyDown={(e: React.KeyboardEvent) => {
           if (e.keyCode === 13) handlers.close();

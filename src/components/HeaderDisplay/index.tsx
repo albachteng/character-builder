@@ -23,21 +23,19 @@ function HeaderDisplay({
   characterBackground,
   characterRace,
   characterLevel,
-  characterName,
+  characterName = "Give this one a name",
   alignment = 'Neutral',
   experience = 0,
 }: Props) {
 
-  const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1);
-
   return (
     <section>
-      <OnClickInput>{characterName}</OnClickInput>
-      <OnClickInput>{capitalize(characterClass)}</OnClickInput>
-      <OnClickInput>{capitalize(characterRace)}</OnClickInput>
-      <OnClickInput>{characterLevel}</OnClickInput>
-      <OnClickInput>{capitalize(alignment)}</OnClickInput>
-      <OnClickInput>{experience}</OnClickInput>
+      <OnClickInput label={"Name"} initialValue={characterName}/>
+      <OnClickInput label={"Class"} initialValue={characterClass}/>
+      <OnClickInput label={"Race"} initialValue={characterRace}/>
+      <OnClickInput label={"Level"} initialValue={characterLevel}/>
+      <OnClickInput label={"Alignment"} initialValue={alignment}/>
+      <OnClickInput label={"Experience"} initialValue={experience}/>
     </section>
   );
 }

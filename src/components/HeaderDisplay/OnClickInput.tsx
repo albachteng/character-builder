@@ -1,14 +1,22 @@
 import { useDisclosure, useInputState } from '@mantine/hooks';
 import { TextInput } from '@mantine/core';
+import { useEffect } from 'react';
 
 type Props = {
-  children: string
+  initialValue: string
+  label: string
 }
 
-function OnClickInput({children}: Props) {
+function OnClickInput({initialValue, label}: Props) {
 
-  const [ stringValue, setStringValue ] = useInputState(children)
+  const [ stringValue, setStringValue ] = useInputState(initialValue)
   const [ opened, handlers ] = useDisclosure(false)
+
+  const capitalize = (str: string) => String(str)[0].toUpperCase() + String(str).slice(1);
+
+  useEffect(() => {
+    setStringValue(initialValue)
+  }, [initialValue])
 
   return (
     opened ?
@@ -25,7 +33,7 @@ function OnClickInput({children}: Props) {
       : <h3
           onClick={() => handlers.open()}
         >
-          {stringValue}
+          {label}: {capitalize(stringValue)}
         </h3>
   )
 }

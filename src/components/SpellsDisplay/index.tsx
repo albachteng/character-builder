@@ -55,8 +55,6 @@ function SpellsDisplay({
       }
     }`, queryRef);
 
-  console.log({spells})
-
   const spellcastingInfoMapFunc: MappingFunc<Spell> = (spell, spellIndex) => {
     // TODO
     const description: ReactNode[] = [];

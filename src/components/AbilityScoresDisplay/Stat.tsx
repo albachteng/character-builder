@@ -3,14 +3,38 @@ import { useFragment } from 'react-relay';
 import { ZeroToTwenty } from '../../types';
 import dice from '../../utilities/dice';
 import type { StatFragment_ability_score$key } from './__generated__/StatFragment_ability_score.graphql';
+import { Tooltip } from '@mantine/core';
+import { Hammer, Heart, Wind, Wand, Leaf, Flower } from 'tabler-icons-react';
 
 type Props = {
-  name: string;
   statRef: StatFragment_ability_score$key
   score: ZeroToTwenty;
 };
 
-function Stat({ name, score, statRef }: Props): JSX.Element {
+function getIcon(index: string) {
+  switch (index) {
+    case "str":
+      return <Hammer className="flex-item"/>
+      break
+    case "con":
+      return <Heart className="flex-item"/>
+      break
+    case "dex":
+      return <Wind className="flex-item"/>
+      break
+    case "int":
+      return <Wand className="flex-item"/>
+      break
+    case "wis":
+      return <Leaf className="flex-item"/>
+      break
+    case "cha":
+      return <Flower className="flex-item"/>
+      break
+  }
+}
+
+function Stat({ score, statRef }: Props): JSX.Element {
 
   const stat = useFragment(graphql`
     fragment StatFragment_ability_score on AbilityScore {
@@ -24,19 +48,21 @@ function Stat({ name, score, statRef }: Props): JSX.Element {
     }`, statRef);
 
   return (
-    <div>
-      <h4>
-        <strong>
-          {name}
-          :
-          {score >= 10 ? '+' : ''}
-        </strong>
+    <div className="flex-container-row">
+      <Tooltip closeDelay={100} transitionDuration={200} wrapLines width={400} label={stat.desc}>
+        <h4>
+          <strong>
+            {stat.index?.toUpperCase()}: {score >= 10 ? ' +' : ' '}
+          </strong>
         {dice.mod(score)}
-        ;
-      </h4>
+        <br></br>
+        </h4>
+      </Tooltip>
+      <div className="flex-container">
+        {getIcon(stat?.index)}
+      </div>
       <p>
-        Total:
-        {score}
+        Total: {score}
       </p>
     </div>
   );

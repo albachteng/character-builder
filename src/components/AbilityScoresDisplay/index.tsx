@@ -20,20 +20,15 @@ function AbilityScoresDisplay({characterStats, queryRef}: Props) {
       }
     }`, queryRef);
 
-  const scores: ReactNode[] = [];
-
-  let key: keyof AbilityScores;
-
-  for (key in characterStats) {
-    scores.push(
-      <Stat
-        name={key}
-        key={key}
-        statRef={abilityScores.find((stat) => stat.index === key)}
-        score={characterStats[key]}
-      />,
-    );
-  }
+  const scores = abilityScores.map((abilityScore) => {
+    const { index } = abilityScore;
+    console.log({index})
+    return <Stat
+        key={index}
+        statRef={abilityScore}
+        score={characterStats[index?.toUpperCase()]}
+      />
+  });
 
   return (
     <section style={{ display: 'flex', justifyContent: 'space-around' }}>

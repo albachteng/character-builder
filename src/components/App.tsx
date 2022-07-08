@@ -145,14 +145,17 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
   return (
     <main id="main">
 
-      <section className={"wide"}>
+      <section className="full-width">
         <h1>
           Play a fucking {characterRace} {characterClass}, coward!
         </h1>
       </section>
 
-      <Controls refetch={refetch} characterClass={characterClass} characterRace={characterRace} dispatch={dispatch}/>
-      {myPersonality}
+      <Controls
+        isRefetching={isRefetching}
+        refetch={refetch}
+        dispatch={dispatch}
+      />
 
       <Suspense fallback={<Fallback />}>
         <AbilityScoresDisplay characterStats={characterStats} />
@@ -191,6 +194,11 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
           backgroundRef={data?.background!}
           classRef={data?.class!}
         />}
+      </Suspense>
+
+      {myPersonality}
+
+      <Suspense>
         {isSpellcaster(characterClass) &&
           <SpellsDisplay
             characterClass={characterClass}
@@ -200,11 +208,11 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
             spellcastingRef={data?.class?.spellcasting!}
             spellslotsRef={data?.class?.class_levels?.[characterLevel]?.spellcasting!}
             classRef={data?.class!}
-        />
-        })
+        />}
       </Suspense>
 
-  </main>
+
+    </main>
   );
 }
 

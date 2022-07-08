@@ -23,7 +23,7 @@ section {
   border: 20px solid white;
 }
 
-.wide {
+.full-width {
   grid-column-start: span 12;
 }
 
@@ -35,13 +35,16 @@ section {
 }
 
 .grid-item {
-  grid-column-start: span 2;
+  grid-column-start: span 3;
+  grid-row-start: auto;
 }
 
 .button {
   background-color: #282c34;
   border: 2px solid white;
   color: white;
+  transition: color .5;
+  transition: background-color .5s;
 }
 
 .button:hover {

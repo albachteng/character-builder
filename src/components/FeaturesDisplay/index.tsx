@@ -20,7 +20,7 @@ function FeaturesDisplay({classRef, characterClass }: Props): JSX.Element {
       class_levels (limit: $level, sort: LEVEL_ASC){
         level
         ability_score_bonuses
-        features (sort: LEVEL_ASC){
+        features (sort: LEVEL_ASC) {
           ...FeatureFragment_feature
           index
           choice {

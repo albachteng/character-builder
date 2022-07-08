@@ -5,6 +5,8 @@ ultimately responsible for displaying character name, character class, race, lev
 import {
   AbilityScores, CharacterClass, Race, ZeroToTwenty, Background
 } from '../../types';
+import OnClickInput from './OnClickInput';
+
 
 type Props = {
   characterName?: string
@@ -26,23 +28,16 @@ function HeaderDisplay({
   experience = 0,
 }: Props) {
 
+  const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1);
+
   return (
     <section>
-      <pre>
-        {JSON.stringify(
-          {
-            characterName,
-            characterClass,
-            characterRace,
-            characterLevel,
-            alignment,
-            experience,
-            characterBackground,
-          },
-          null,
-          2,
-        )}
-      </pre>
+      <OnClickInput>{characterName}</OnClickInput>
+      <OnClickInput>{capitalize(characterClass)}</OnClickInput>
+      <OnClickInput>{capitalize(characterRace)}</OnClickInput>
+      <OnClickInput>{characterLevel}</OnClickInput>
+      <OnClickInput>{capitalize(alignment)}</OnClickInput>
+      <OnClickInput>{experience}</OnClickInput>
     </section>
   );
 }

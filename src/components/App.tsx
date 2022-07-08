@@ -66,6 +66,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       $level: Int,
       $background: FilterFindOneBackgroundInput,
       $spells:  FilterFindManySpellInput) {
+        ...AbilityScoresDisplayFragment_query
         class (filter: $class) {
           ...FeaturesDisplayFragment_class
           ...ClassEquipmentFragment_class
@@ -158,7 +159,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
       />
 
       <Suspense fallback={<Fallback />}>
-        <AbilityScoresDisplay characterStats={characterStats} />
+        <AbilityScoresDisplay characterStats={characterStats} queryRef={data!}/>
       </Suspense>
 
       <Suspense fallback={<Fallback />}>

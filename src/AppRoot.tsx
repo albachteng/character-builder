@@ -67,6 +67,7 @@ function AppRoot() {
         queryRef={queryRef}
         state={state}
         dispatch={dispatch}
+        startTransition={startTransition}
       />
     </Suspense>
   )

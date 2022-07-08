@@ -5,7 +5,6 @@ ultimately responsible for displaying character name, character class, race, lev
 import {
   AbilityScores, CharacterClass, Race, ZeroToTwenty, Background
 } from '../../types';
-import HitPoints from './HitPoints';
 
 type Props = {
   characterName?: string
@@ -14,12 +13,10 @@ type Props = {
   characterClass: CharacterClass
   characterBackground: Background
   characterRace: Race
-  characterStats: AbilityScores
   characterLevel: ZeroToTwenty
 };
 
 function HeaderDisplay({
-  characterStats,
   characterClass,
   characterBackground,
   characterRace,
@@ -46,7 +43,6 @@ function HeaderDisplay({
           2,
         )}
       </pre>
-      <HitPoints characterClass={characterClass} characterStats={characterStats} characterLevel={characterLevel}/>
     </section>
   );
 }

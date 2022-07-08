@@ -1,6 +1,8 @@
 import useHP, { Rolls } from '../../hooks/useHP';
 import { CharacterClass, AbilityScores, ZeroToTwenty } from '../../types';
 import dice from '../../utilities/dice';
+import { Tooltip } from '@mantine/core';
+import HPDetails from './HPDetails.tsx';
 
 const calculateHP = (
   characterStats: AbilityScores,
@@ -28,19 +30,18 @@ function HitPoints({characterLevel, characterClass, characterStats}: Props) {
   const { rolls, getHitDice } = useHP(characterLevel, characterClass);
 
   return (
-    <>
+    <section className="flex-container">
+
+      <Tooltip label={<HPDetails rolls={rolls} CON={dice.mod(characterStats['CON'])}/>}>
+        <h1>
+          HP: {calculateHP(characterStats, characterLevel, rolls)}
+        </h1>
+      </Tooltip>
+
       <h1>
-        HP:
-        {calculateHP(characterStats, characterLevel, rolls)}
+        Hit dice: {characterLevel} d{getHitDice(characterClass)}
       </h1>
-      <h1>
-        Hit dice:
-        {' '}
-        {characterLevel}
-        d
-        {getHitDice(characterClass)}
-      </h1>
-    </>
+    </section>
   );
 }
 

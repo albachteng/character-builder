@@ -1,21 +1,16 @@
 import type {PreloadedQuery} from 'react-relay';
-import { Suspense, useMemo, lazy, useContext } from "react";
+import { Suspense, useMemo, lazy } from "react";
 import Fallback from "./Fallback";
 import "../assets/css/App.css";
 import { AbilityScores, Background, CharacterClass, Race, ZeroToTwenty } from "../types";
-import type { AppCharacterQuery as AppCharacterQueryType, AppCharacterQuery$variables } from "./__generated__/AppCharacterQuery.graphql";
+import type { AppCharacterQuery as AppCharacterQueryType } from "./__generated__/AppCharacterQuery.graphql";
 import {
-  RelayEnvironmentProvider,
-  loadQuery,
   usePreloadedQuery,
 } from 'react-relay/hooks';
-import RelayEnvironment from '../RelayEnvironment';
 import graphql from 'babel-plugin-relay/macro'
-import { OperationType } from 'relay-runtime';
-import CharacterContext from './CharacterContext';
-import BackgroundFeaturesDisplay from './FeaturesDisplay/BackgroundFeaturesDisplay';
-import TraitsDisplay from './FeaturesDisplay/TraitsDisplay';
 
+const BackgroundFeaturesDisplay = lazy(() => import("./FeaturesDisplay/BackgroundFeaturesDisplay"));
+const TraitsDisplay = lazy(() => import("./FeaturesDisplay/TraitsDisplay"));
 const Controls = lazy(() => import("./Controls"));
 const Personality = lazy(() => import("./Personality"));
 const AbilityScoresDisplay = lazy(() => import("./AbilityScoresDisplay"));
@@ -25,13 +20,13 @@ const InventoryDisplay = lazy(() => import("./InventoryDisplay"));
 const ItemStore = lazy(() => import("./ItemStore"));
 const SkillsDisplay = lazy(() => import("./SkillsDisplay"));
 const SpellsDisplay = lazy(() => import("./SpellsDisplay"));
+const HitPoints = lazy(() => import("./HitPoints"));
 
 type Props = {
   isRefetching: boolean
   dispatch: React.Dispatch<React.SetStateAction<any>>
   refetch: () => void
   queryRef: PreloadedQuery<AppCharacterQueryType, Record<string, unknown>>
-  // loadQuery: (variables: AppCharacterQuery$variables, options?: any) => void
   state: {
     characterRace: Race,
     characterClass: CharacterClass,
@@ -39,9 +34,10 @@ type Props = {
     characterStats: AbilityScores,
     characterBackground: Background,
   }
+  startTransition: () => void
 }
 
-function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
+function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}: Props) {
 
   const { characterClass, characterRace, characterBackground, characterLevel, characterStats } = state;
   // Two fighter and rogue archetypes DO get spellcasting - Eldritch Knight and Arcane Trickster
@@ -139,10 +135,11 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
         ...SpellsDisplayFragment_query
       }`, queryRef);
 
-  const myPersonality = useMemo(
+  const MemoizedPersonality = useMemo(
     () => <Personality characterBackground={characterBackground} backgroundRef={data?.background!}/>,
     [characterBackground, characterClass]
   );
+
   return (
     <main id="main">
 
@@ -152,24 +149,30 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
         </h1>
       </section>
 
-      <Controls
-        isRefetching={isRefetching}
-        refetch={refetch}
-        dispatch={dispatch}
-      />
+      <Suspense>
+        <Controls
+          startTransition={startTransition}
+          isRefetching={isRefetching}
+          refetch={refetch}
+          dispatch={dispatch}
+        />
+      </Suspense>
 
       <Suspense fallback={<Fallback />}>
         <AbilityScoresDisplay characterStats={characterStats} queryRef={data!}/>
       </Suspense>
 
       <Suspense fallback={<Fallback />}>
-        {data && <HeaderDisplay
-          characterStats={characterStats}
+        <HitPoints characterClass={characterClass} characterStats={characterStats} characterLevel={characterLevel}/>
+      </Suspense>
+
+      <Suspense fallback={<Fallback />}>
+        <HeaderDisplay
           characterClass={characterClass}
           characterBackground={characterBackground}
           characterRace={characterRace}
           characterLevel={characterLevel}
-          characterName="nonsense" />}
+          characterName="Nonsense" />
       </Suspense>
 
       <Suspense fallback={<Fallback />}>
@@ -197,7 +200,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch}: Props) {
         />}
       </Suspense>
 
-      {myPersonality}
+      {MemoizedPersonality}
 
       <Suspense>
         {isSpellcaster(characterClass) &&

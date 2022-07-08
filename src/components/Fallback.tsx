@@ -1,8 +1,8 @@
 function Fallback() {
     return (
-        <div className={"wrapper"}>
+        <section className={"wrapper"}>
             <div className={"card animate"}/>
-        </div>
+        </section>
     )
 }
 

@@ -11,36 +11,28 @@ type Props = {
   dispatch: React.Dispatch<React.SetStateAction<any>>
 }
 
+const actions = [
+  {label: "GraphQL", href: "https://www.dnd5eapi.co/graphql" , onClick: () => {}},
+  {label: "This one is weak, bring me another", onClick: () => dispatch({type: "newCharacter"})},
+  {label: "Increase this one's power", onClick: () => dispatch({type: "levelUp"})},
+  {label: "These stats are bullshit, roll again", onClick: () => dispatch({type: "reroll"})},
+];
+
 function Controls({refetch, characterRace, characterClass, dispatch}: Props) {
     return (
       <section className="wide controls">
 
-        <a className="grid-item" target="_" href="https://www.dnd5eapi.co/graphql">GraphQL Playground</a>
-
-        <Button
-          className="grid-item"
+        {actions.map(({label, onClick, href}) => {
+        return <Button
+          loading={false}
+          component={href ? "a" : "button"}
+          href={href || null}
+          target="_"
+          disabled={false}
+          className="grid-item button"
           variant="default"
-          onClick={() =>  {
-            dispatch({ type: "newCharacter" })
-        }}>
-          This one is weak, bring me another!
-        </Button>
-
-        <Button
-          className="grid-item"
-          variant="default"
-          onClick={() => dispatch({ type: "levelUp" })}
-        >
-          Increase this one's power...
-        </Button>
-
-        <Button
-          className="grid-item"
-          variant="default"
-          onClick={() => dispatch({ type: "reroll" })}
-        >
-          These stats are bullshit, roll again!
-        </Button>
+          onClick={onClick}>{label}
+        </Button> })}
 
     </section>
     )

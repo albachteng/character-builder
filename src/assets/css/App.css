@@ -38,6 +38,16 @@ section {
   grid-column-start: span 2;
 }
 
+.button {
+  background-color: #282c34;
+  border: 2px solid white;
+  color: white;
+}
+
+.button:hover {
+  color: #282c34;
+}
+
 .card {
   border: 2px solid #fff;
   box-shadow:0px 0px 10px 0 #a9a9a9;

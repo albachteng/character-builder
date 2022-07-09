@@ -16,10 +16,16 @@ main {
 }
 
 section {
-  grid-column-start: span 6;
+  grid-column-start: span 12;
   padding: 20px;
   margin: 20px;
   border: 20px solid white;
+}
+
+@media only screen and (min-width: 900px) {
+  section {
+    grid-column-start: span 6;
+  }
 }
 
 .full-width {
@@ -34,9 +40,22 @@ section {
 }
 
 .grid-item {
-  grid-column-start: span 3;
+  grid-column-start: span 12;
+  width: 100%;
   align-items: center;
   justify-content: space-evenly;
+}
+
+@media only screen and (min-width: 600px) {
+  .grid-item {
+    grid-column-start: span 6;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .grid-item {
+    grid-column-start: span 3;
+  }
 }
 
 .flex-container {
@@ -57,6 +76,16 @@ section {
   color: white;
   transition: color .5;
   transition: background-color .5s;
+}
+
+@media screen only and (min-width: 900px){
+  .flex-container {
+    display: block;
+  }
+  .button {
+    display: block;
+    width: 100%;
+  }
 }
 
 .button:hover {

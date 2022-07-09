@@ -17,9 +17,9 @@ function Controls({isRefetching, refetch, dispatch, startTransition}: Props) {
 
 const actions = [
   {label: "GraphQL", href: "https://www.dnd5eapi.co/graphql" , icon: <Database />},
-  {label: "This one is weak, bring me another", onClick: () => startTransition(() => dispatch({type: "newCharacter"})), icon: <Swords />},
-  {label: "Increase this one's power", onClick: () => startTransition(() => dispatch({type: "levelUp"})), icon: <Bolt />},
-  {label: "These stats are bullshit, roll again", onClick: () => startTransition(() => dispatch({type: "reroll"})), icon: <Dice />},
+  {label: "It is weak, bring another", onClick: () => startTransition(() => dispatch({type: "newCharacter"})), icon: <Swords />},
+  {label: "Increase its power", onClick: () => startTransition(() => dispatch({type: "levelUp"})), icon: <Bolt />},
+  {label: "Bullshit! Roll again", onClick: () => startTransition(() => dispatch({type: "reroll"})), icon: <Dice />},
 ];
 
     return (

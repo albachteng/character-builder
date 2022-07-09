@@ -5,6 +5,7 @@ import dice from '../../utilities/dice';
 import type { StatFragment_ability_score$key } from './__generated__/StatFragment_ability_score.graphql';
 import { Tooltip } from '@mantine/core';
 import { Hammer, Heart, Wind, Wand, Leaf, Flower } from 'tabler-icons-react';
+import capitalize from '../../utilities/capitalize';
 
 type Props = {
   statRef: StatFragment_ability_score$key
@@ -56,9 +57,9 @@ function Stat({ score, statRef }: Props): JSX.Element {
         <strong>
           {stat.index?.toUpperCase()}:
         </strong>
-        <div>{score}</div>
+        <div className="score"><p>{score}</p></div>
         <div>
-        {' '}<span className="mod">{score >= 10 ? '+' : ''}{dice.mod(score)}</span>
+        {' '}<div className="number-circle"><p>{score >= 10 ? '+' : ''}{dice.mod(score)}</p></div>
         </div>
       </h4>
     </Tooltip>

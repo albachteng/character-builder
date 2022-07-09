@@ -3,13 +3,15 @@ import type { BackgroundFeaturesDisplayFragment_feature$key } from './__generate
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 import { Background } from '../../types';
+import capitalize from '../../utilities/capitalize';
 
 type Props = {
   backgroundRef: BackgroundFeaturesDisplayFragment_feature$key
   characterBackground: Background
+  children: React.ReactNode
 }
 
-function BackgroundFeaturesDisplay({backgroundRef, characterBackground}: Props): JSX.Element {
+function BackgroundFeaturesDisplay({backgroundRef, characterBackground, children}: Props): JSX.Element {
 
   const { feature: backgroundFeature } = useFragment(
     graphql`fragment BackgroundFeaturesDisplayFragment_background on Background {
@@ -18,7 +20,7 @@ function BackgroundFeaturesDisplay({backgroundRef, characterBackground}: Props):
       }
     }`, backgroundRef)
 
-  const backgroundTitle = characterBackground[0].toUpperCase() + characterBackground.slice(1)
+  const backgroundTitle = capitalize(characterBackground)
 
   return (
     <section>
@@ -26,6 +28,7 @@ function BackgroundFeaturesDisplay({backgroundRef, characterBackground}: Props):
       <BackgroundFeature
         backgroundFeatureRef={backgroundFeature}
       />
+      {children}
     </section>
   );
 }

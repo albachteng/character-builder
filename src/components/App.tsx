@@ -74,6 +74,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           }
         }
         race (filter: $race) {
+          ...RaceDetailsFragment_race
           ability_bonus_options {
             choose
             from {
@@ -88,10 +89,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
             }
             bonus
           }
-          age
-          alignment
           index
-          language_desc
           language_options {
             choose
             from {
@@ -106,7 +104,6 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           }
           name
           size
-          size_description
           speed
           ...SkillsDisplayFragment_race
           subraces {
@@ -187,7 +184,9 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
         <BackgroundFeaturesDisplay
           backgroundRef={data?.background!}
           characterBackground={characterBackground}
-        />
+        >
+          {MemoizedPersonality}
+        </BackgroundFeaturesDisplay>
       </Suspense>
 
       <Suspense fallback={<Fallback />}>
@@ -199,8 +198,6 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           classRef={data?.class!}
         />
       </Suspense>
-
-      {MemoizedPersonality}
 
       <Suspense>
         {isSpellcaster(characterClass) &&

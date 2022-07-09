@@ -85,7 +85,10 @@ section {
 @media only screen and (min-width: 600px) {
   .ability-scores-display {
     display: grid;
-    flex-direction: column;
+    /* flex-direction: column; */
+  }
+  .ability-scores-display > * {
+    padding: 0 80px;
   }
 }
 
@@ -107,11 +110,20 @@ section {
   }
 }
 
-.mod {
+.score {
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.number-circle {
+  font-size: 14px;
   border-radius: 50%;
-  border: 1px solid white;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  padding: 8px;
+  border: 2px solid white;
+  text-align: center;
 }
 
 /* BUTTONS */

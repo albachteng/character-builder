@@ -5,6 +5,7 @@ import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 import { useState, useEffect } from 'react';
 import chooseFrom from '../../utilities/chooseFrom';
+import RaceDetails from './RaceDetails';
 
 type Props = {
   raceRef: TraitsDisplayFragment_race$key
@@ -146,6 +147,7 @@ function TraitsDisplay({ raceRef, characterRace }: Props): JSX.Element {
           shouldRender={shouldRender()}
         />)
       })}
+      <RaceDetails raceRef={raceRef}/>
     </section>
   );
 }

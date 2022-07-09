@@ -1,6 +1,7 @@
 import { useDisclosure, useInputState, useClickOutside} from '@mantine/hooks';
 import { TextInput } from '@mantine/core';
 import { useEffect } from 'react';
+import capitalize from '../../utilities/capitalize';
 
 type Props = {
   initialValue: string
@@ -13,8 +14,6 @@ function OnClickInput({initialValue, label}: Props) {
   const [ opened, handlers ] = useDisclosure(false)
 
   const ref = useClickOutside(() => handlers.close());
-
-  const capitalize = (str: string) => String(str)[0].toUpperCase() + String(str).slice(1);
 
   useEffect(() => {
     setStringValue(initialValue)

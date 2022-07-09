@@ -78,24 +78,40 @@ section {
 /* ABILITY SCORES */
 
 .ability-scores-display {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  justify-items: center;
+  align-items: center;
+  padding: 0 15%;
+}
+
+@media only screen and (min-width: 400px) {
+  .ability-scores-display {
+    padding: 0 20%;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .ability-scores-display {
+    padding: 0 25%;
+  }
 }
 
 @media only screen and (min-width: 600px) {
   .ability-scores-display {
-    display: grid;
-    /* flex-direction: column; */
-  }
-  .ability-scores-display > * {
-    padding: 0 80px;
+    padding: 0 30%;
   }
 }
 
-.stat {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+@media only screen and (min-width: 900px) {
+  .ability-scores-display {
+    padding: 0 25%;
+  }
+}
+
+.ability-scores-display > * {
+  grid-column-start: span 3;
+  /* border: 1px solid white; */
   padding: .25rem;
   margin: .25rem;
 }
@@ -110,17 +126,12 @@ section {
   }
 }
 
-.score {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
 .number-circle {
-  font-size: 14px;
+  font-size: .8rem;
   border-radius: 50%;
-  width: 1.5rem;
-  height: 1.5rem;
-  line-height: 1.5rem;
+  width: 1rem;
+  height: 1rem;
+  line-height: 1rem;
   padding: 8px;
   border: 2px solid white;
   text-align: center;

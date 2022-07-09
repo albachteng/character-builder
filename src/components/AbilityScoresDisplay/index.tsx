@@ -31,7 +31,7 @@ function AbilityScoresDisplay({characterStats, queryRef}: Props) {
   });
 
   return (
-    <section style={{ display: 'flex', justifyContent: 'space-around' }}>
+    <section className="ability-scores-display">
       {scores}
     </section>
   );

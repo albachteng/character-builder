@@ -24,7 +24,7 @@ function OnClickInput({initialValue, label}: Props) {
     opened ?
       <TextInput
         ref={ref}
-        classNames="text-input"
+        className="text-input"
         // variant="unstyled"
         onBlur={() => handlers.close()}
         onKeyDown={(e: React.KeyboardEvent) => {

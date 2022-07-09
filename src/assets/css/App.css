@@ -1,3 +1,4 @@
+/* GLOBAL */
 * {
   margin: 0;
   padding: 0;
@@ -32,13 +33,6 @@ section {
   grid-column-start: span 12;
 }
 
-.controls {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  justify-items: center;
-  gap: 20px;
-}
-
 .grid-item {
   grid-column-start: span 12;
   width: 100%;
@@ -64,12 +58,50 @@ section {
   align-items: center;
 }
 
-.flex-container-row {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+/* CONTROLS */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  justify-items: center;
+  gap: 20px;
 }
 
+@media only screen and (max-width: 340px) {
+  .controls {
+    column-gap: 0;
+  }
+}
+
+/* ABILITY SCORES */
+
+/* .ability-scores-display { */
+/*   flex-direction: row; */
+/* } */
+
+@media only screen and (min-width: 600px) {
+  .ability-scores-display {
+    display: grid;
+    flex-direction: column;
+  }
+}
+
+.stat {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.stat > * {
+  gap: 1rem;
+}
+
+@media only screen and (max-width: 408px) {
+  .stat > * {
+    margin: 0 auto;
+  }
+}
+
+/* BUTTONS */
 .button {
   background-color: #282c34;
   border: 2px solid white;
@@ -79,19 +111,21 @@ section {
 }
 
 @media screen only and (min-width: 900px){
-  .flex-container {
-    display: block;
+  .controls {
+    flex-direction: row;
   }
+
   .button {
-    display: block;
     width: 100%;
   }
 }
+
 
 .button:hover {
   color: #282c34;
 }
 
+/* FALLBACK */
 .card {
   border: 2px solid #fff;
   box-shadow:0px 0px 10px 0 #a9a9a9;

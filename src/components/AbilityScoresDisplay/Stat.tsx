@@ -48,23 +48,20 @@ function Stat({ score, statRef }: Props): JSX.Element {
     }`, statRef);
 
   return (
-    <div className="flex-container-row">
-      <Tooltip closeDelay={100} transitionDuration={200} wrapLines width={400} label={stat.desc}>
-        <h4>
-          <strong>
-            {stat.index?.toUpperCase()}: {score >= 10 ? ' +' : ' '}
-          </strong>
-        {dice.mod(score)}
-        <br></br>
-        </h4>
-      </Tooltip>
-      <div className="flex-container">
-        {getIcon(stat?.index)}
-      </div>
-      <p>
-        Total: {score}
-      </p>
-    </div>
+    <Tooltip closeDelay={100} transitionDuration={200} wrapLines width={400} label={stat.desc}>
+      <h4 className="stat">
+        <div>
+          {getIcon(stat?.index)}
+        </div>
+        <strong>
+          {stat.index?.toUpperCase()}:
+        </strong>
+        <div>{score}</div>
+        <div>
+        {' '}({score >= 10 ? '+' : ''}{dice.mod(score)})
+        </div>
+      </h4>
+    </Tooltip>
   );
 }
 

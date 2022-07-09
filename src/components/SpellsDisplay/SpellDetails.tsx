@@ -149,7 +149,7 @@ const {
       )}
       {concentration && <p>Concentration</p>}
       {ritual && <p>Ritual</p>}
-      {damage && JSON.stringify(damage)}
+      {damage && JSON.stringify(damage, null, 3)}
       {dc && dc?.dc_success && (
         <p>
           DC:
@@ -165,7 +165,7 @@ const {
       {heal_at_slot_level && (
         <p>
           Healing:
-          {JSON.stringify(heal_at_slot_level)}
+          {JSON.stringify(heal_at_slot_level, null, 3)}
         </p>
       )}
       {higher_level && <h5>At Higher Levels: </h5>}
@@ -179,16 +179,6 @@ const {
         ) /* name, index, desc, typename */
       }
       {school && school?.desc && <span>{school?.desc}</span>}
-      {/* {subclasses && ( */}
-      {/*   <p> */}
-      {/*     Subclasses: */}
-      {/*     {' '} */}
-      {/*     {handleStringArray( */}
-      {/*       subclasses.map((subclass) => subclass?.name || ''), */}
-      {/*       'span', */}
-      {/*     )} */}
-      {/*   </p> */}
-      {/* )} */}
     </div>
   );
 }

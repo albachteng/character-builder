@@ -191,13 +191,13 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
       </Suspense>
 
       <Suspense fallback={<Fallback />}>
-        {data && <SkillsDisplay
+        <SkillsDisplay
           characterLevel={characterLevel}
           characterStats={characterStats}
           raceRef={data?.race!}
           backgroundRef={data?.background!}
           classRef={data?.class!}
-        />}
+        />
       </Suspense>
 
       {MemoizedPersonality}

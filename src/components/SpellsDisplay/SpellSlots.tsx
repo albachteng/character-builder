@@ -35,7 +35,7 @@ function SpellSlots({ characterClass, characterLevel, classRef}: Props) {
 
   return (
     <>
-      <pre>{JSON.stringify(spellcasting)}</pre>
+      <pre>{JSON.stringify(spellcasting, null, 3)}</pre>
     </>
   );
 }

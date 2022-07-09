@@ -70,7 +70,7 @@ function SpellsDisplay({
 
   if (spells) {
     return (
-      <section className='wide'>
+      <section className="full-width">
           <h2>Spells Display</h2>
           <h3>Spell Slots</h3>
           <SpellSlots

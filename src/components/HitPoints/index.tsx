@@ -3,6 +3,8 @@ import { CharacterClass, AbilityScores, ZeroToTwenty } from '../../types';
 import dice from '../../utilities/dice';
 import { Tooltip } from '@mantine/core';
 import HPDetails from './HPDetails.tsx';
+import { Modal } from '@mantine/core';
+import { InfoCircle } from 'tabler-icons-react';
 
 const calculateHP = (
   characterStats: AbilityScores,
@@ -31,7 +33,9 @@ function HitPoints({characterLevel, characterClass, characterStats}: Props) {
 
   return (
     <section className="flex-container">
-
+      <Modal withCloseButton={false}>
+        <InfoCircle className="info-circle"/>
+      </Modal>
       <Tooltip label={<HPDetails rolls={rolls} CON={dice.mod(characterStats['CON'])}/>}>
         <h1>
           HP: {calculateHP(characterStats, characterLevel, rolls)}

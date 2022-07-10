@@ -14,9 +14,14 @@ h1, h2, h3, h4, h5, h6 {
   font-size: calc(10px + 2vmin);
 }
 
-main {
+#main {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+}
+
+.nav, .header {
+  background-color: #282c34;
+  border: none;
 }
 
 section {
@@ -176,14 +181,14 @@ section {
 
 @keyframes fullView {
   100% {
-    width: 100%;
+    width: 80%;
   }
 }
 
 .animate {
    animation : shimmer 2s infinite linear;
    background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
-    background-size: 1000px 100%;
+    background-size: 100% 100%;
 }
 
 @keyframes shimmer {

@@ -49,9 +49,11 @@ function Stat({ score, statRef }: Props): JSX.Element {
 
   return (
         <>
-        <div className="stat">
-          {getIcon(stat?.index)}
-        </div>
+        <Tooltip closeDelay={100} transitionDuration={200} wrapLines width={400} label={stat.desc}>
+          <div className="stat">
+            {getIcon(stat?.index)}
+          </div>
+        </Tooltip>
         <div>
           <Tooltip closeDelay={100} transitionDuration={200} wrapLines width={400} label={stat.desc}>
             <strong className="stat">
@@ -59,10 +61,16 @@ function Stat({ score, statRef }: Props): JSX.Element {
             </strong>
           </Tooltip>
         </div>
+
+        <Tooltip closeDelay={100} transitionDuration={200} wrapLines width={400} label={stat.desc}>
           <div className="score"><p>{score}</p></div>
-        <div>
-        {' '}<div className="number-circle"><p>{score >= 10 ? '+' : ''}{dice.mod(score)}</p></div>
-        </div>
+        </Tooltip>
+
+        <Tooltip closeDelay={100} transitionDuration={200} wrapLines width={400} label={stat.desc}>
+          <div>
+          {' '}<div className="number-circle"><p>{score >= 10 ? '+' : ''}{dice.mod(score)}</p></div>
+          </div>
+        </Tooltip>
         </>
   );
 }

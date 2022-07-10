@@ -3,13 +3,10 @@ import { CharacterClass, AbilityScores, ZeroToTwenty } from '../../types';
 import dice from '../../utilities/dice';
 import { Tooltip } from '@mantine/core';
 import HPDetails from './HPDetails.tsx';
-import { Modal } from '@mantine/core';
-import { InfoCircle } from 'tabler-icons-react';
-import { useState } from 'react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 import type { HitPointsFragment_ruleSection$key } from './__generated__/HitPointsFragment_ruleSection.graphql';
-import MarkdownViewer from '../MarkdownViewer';
+import InfoModal from '../InfoModal';
 
 const calculateHP = (
   characterStats: AbilityScores,
@@ -43,15 +40,11 @@ function HitPoints({characterLevel, characterClass, characterStats, ruleSectionR
     }`, ruleSectionRef);
 
   const { rolls, getHitDice } = useHP(characterLevel, characterClass);
-  const [ opened, setOpened ] = useState(false)
-
 
   return (
     <section className="flex-container">
-      <Modal opened={opened} onClose={() => setOpened(false)} withCloseButton={false}>
-        <MarkdownViewer>{desc}</MarkdownViewer>
-      </Modal>
-      <InfoCircle className="info-circle" onClick={() => setOpened(true)}/>
+      <InfoModal label={"Resting"} markdown={desc}/>
+      {/* <InfoModal label={"Damage and Healing"} markdown={desc}/> */}
       <Tooltip label={<HPDetails rolls={rolls} CON={dice.mod(characterStats['CON'])}/>}>
         <h1>
           HP: {calculateHP(characterStats, characterLevel, rolls)}

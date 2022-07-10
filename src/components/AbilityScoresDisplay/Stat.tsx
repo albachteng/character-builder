@@ -68,7 +68,7 @@ function Stat({ score, statRef }: Props): JSX.Element {
 
         <Tooltip closeDelay={100} transitionDuration={200} wrapLines width={400} label={stat.desc}>
           <div>
-          {' '}<div className="number-circle"><p>{score >= 10 ? '+' : ''}{dice.mod(score)}</p></div>
+          {' '}<div className="number-circle"><span>{score >= 10 ? '+' : ''}{dice.mod(score)}</span></div>
           </div>
         </Tooltip>
         </>

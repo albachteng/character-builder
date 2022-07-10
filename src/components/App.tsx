@@ -133,6 +133,10 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
         ruleSection (filter: {index: "resting"}){
           ...HitPointsFragment_ruleSection
         }
+        ruleSections (filter: {OR: [{index: "ability-scores-and-modifiers"}, {index: "resting"}]}){
+          ...HitPointsFragment_ruleSection
+          # ...AbilityScoresDisplayFragment_ruleSection
+        }
       }`, queryRef);
 
   const MemoizedPersonality = useMemo(

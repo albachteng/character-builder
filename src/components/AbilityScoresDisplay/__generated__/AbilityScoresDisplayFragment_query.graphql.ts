@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<983a70afafaacb22d195fbdd4b5aeb3a>>
+ * @generated SignedSource<<1f59bc5ab30605617fb34eaa5131a8eb>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,6 +15,11 @@ export type AbilityScoresDisplayFragment_query$data = {
     readonly index: string | null;
     readonly " $fragmentSpreads": FragmentRefs<"StatFragment_ability_score">;
   }>;
+  readonly ruleSections: ReadonlyArray<{
+    readonly desc: string | null;
+    readonly index: string | null;
+    readonly name: string | null;
+  }>;
   readonly " $fragmentType": "AbilityScoresDisplayFragment_query";
 };
 export type AbilityScoresDisplayFragment_query$key = {
@@ -22,7 +27,15 @@ export type AbilityScoresDisplayFragment_query$key = {
   readonly " $fragmentSpreads": FragmentRefs<"AbilityScoresDisplayFragment_query">;
 };
 
-const node: ReaderFragment = {
+const node: ReaderFragment = (function(){
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "index",
+  "storageKey": null
+};
+return {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
@@ -36,13 +49,7 @@ const node: ReaderFragment = {
       "name": "abilityScores",
       "plural": true,
       "selections": [
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
-          "name": "index",
-          "storageKey": null
-        },
+        (v0/*: any*/),
         {
           "args": null,
           "kind": "FragmentSpread",
@@ -50,12 +57,54 @@ const node: ReaderFragment = {
         }
       ],
       "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "filter",
+          "value": {
+            "OR": [
+              {
+                "index": "ability-scores-and-modifiers"
+              },
+              {
+                "index": "resting"
+              }
+            ]
+          }
+        }
+      ],
+      "concreteType": "RuleSection",
+      "kind": "LinkedField",
+      "name": "ruleSections",
+      "plural": true,
+      "selections": [
+        (v0/*: any*/),
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "name",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "desc",
+          "storageKey": null
+        }
+      ],
+      "storageKey": "ruleSections(filter:{\"OR\":[{\"index\":\"ability-scores-and-modifiers\"},{\"index\":\"resting\"}]})"
     }
   ],
   "type": "Query",
   "abstractKey": null
 };
+})();
 
-(node as any).hash = "8327e88be05c45fdfd703a12b704cecc";
+(node as any).hash = "f3a1fff52c54ac5e32dd12ba2ed820fd";
 
 export default node;

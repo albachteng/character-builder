@@ -14,6 +14,9 @@ import SpellSlots from './SpellSlots';
 import type { SpellModFragment_spellcasting$key } from './__generated__/SpellModFragment_spellcasting.graphql';
 import type { SpellsDisplayFragment_query$key} from './__generated__/SpellHeaderFragment_query.graphql';
 import type { SpellSlotsFragment_class$key } from './__generated__/SpellSlotsFragment_.graphql';
+import type { SpellsDisplaySpellFragment_ruleSections$key } from './__generated__/SpellsDisplaySpellFragment_ruleSections.graphql';
+import type { SpellsDisplaySpellcastingFragment_ruleSections$key } from './__generated__/SpellsDisplaySpellcastingFragment_ruleSections.graphql';
+import InfoModal from '../InfoModal';
 
 const formatSpellTitle = (spell: Spell) => {
   let title = `${spell?.name} `;
@@ -30,6 +33,8 @@ type Props = {
   spellcastingRef: SpellModFragment_spellcasting$key
   spellslotsRef: SpellSlotsFragment_spellcasting$key
   classRef: SpellSlotsFragment_class$key
+  spellcastingRulesRef: SpellsDisplaySpellcastingFragment_ruleSections$key
+  spellRulesRef: SpellsDisplaySpellFragment_ruleSections$key
 }
 
 function SpellsDisplay({
@@ -39,7 +44,9 @@ function SpellsDisplay({
   queryRef,
   spellcastingRef,
   classRef,
-  spellslotsRef
+  spellslotsRef,
+  spellcastingRulesRef,
+  spellRulesRef
 }: Props) {
 
   const { spells } = useFragment(graphql`
@@ -54,6 +61,18 @@ function SpellsDisplay({
         }
       }
     }`, queryRef);
+
+  const { desc, name } = useFragment(graphql`
+    fragment SpellsDisplaySpellFragment_ruleSections on RuleSection {
+      desc
+      name
+    }`, spellRulesRef);
+
+  const { desc: spellcastingDesc, name: spellcastingName } = useFragment(graphql`
+    fragment SpellsDisplaySpellcastingFragment_ruleSections on RuleSection {
+      desc
+      name
+    }`, spellcastingRulesRef);
 
   const spellcastingInfoMapFunc: MappingFunc<Spell> = (spell, spellIndex) => {
     const description: ReactNode[] = [];
@@ -71,7 +90,8 @@ function SpellsDisplay({
   if (spells) {
     return (
       <section className="full-width">
-          <h2>Spells Display</h2>
+          <InfoModal label={name} markdown={desc}/>
+          <InfoModal label={spellcastingName} markdown={spellcastingDesc}/>
           <h3>Spell Slots</h3>
           <SpellSlots
             characterClass={characterClass}

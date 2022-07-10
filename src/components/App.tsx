@@ -149,6 +149,8 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           ...HitPointsRestingFragment_ruleSections
           ...HitPointsDamageFragment_ruleSections
           ...AbilityScoresDisplayFragment_ruleSections
+          ...SpellsDisplaySpellFragment_ruleSections
+          ...SpellsDisplaySpellcastingFragment_ruleSections
         }
       }`, queryRef);
 
@@ -239,6 +241,8 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
             spellcastingRef={data?.class?.spellcasting!}
             spellslotsRef={data?.class?.class_levels?.[characterLevel]?.spellcasting!}
             classRef={data?.class!}
+            spellRulesRef={data?.ruleSections?.find((section) => section.index === 'what-is-a-spell')}
+            spellcastingRulesRef={data?.ruleSections?.find((section) => section.index === 'casting-a-spell')}
         />}
       </Suspense>
 

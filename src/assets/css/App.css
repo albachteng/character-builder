@@ -166,6 +166,14 @@ section {
   color: #282c34;
 }
 
+/* HP */
+.info-circle:hover {
+  border-radius: 3px;
+  background-color: white;
+  color: #282c34;
+}
+
+
 /* FALLBACK */
 .card {
   border: 2px solid #fff;

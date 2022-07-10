@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<028e2528c3dae4385241cc1917741ec1>>
+ * @generated SignedSource<<846af38d8438c86120cfa1cdb3970136>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -76,7 +76,6 @@ export type TraitsDisplayFragment_race$data = {
     } | null;
     readonly " $fragmentSpreads": FragmentRefs<"TraitFragment_trait">;
   }>;
-  readonly " $fragmentSpreads": FragmentRefs<"RaceDetailsFragment_race">;
   readonly " $fragmentType": "TraitsDisplayFragment_race";
 };
 export type TraitsDisplayFragment_race$key = {
@@ -135,11 +134,6 @@ return {
   "metadata": null,
   "name": "TraitsDisplayFragment_race",
   "selections": [
-    {
-      "args": null,
-      "kind": "FragmentSpread",
-      "name": "RaceDetailsFragment_race"
-    },
     {
       "alias": null,
       "args": null,
@@ -372,6 +366,6 @@ return {
 };
 })();
 
-(node as any).hash = "4473c8a85c85a7359f1df72525058ea5";
+(node as any).hash = "a0d7467cb40022858ae2d9703a1c038d";
 
 export default node;

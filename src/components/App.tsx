@@ -130,6 +130,9 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           }
         }
         ...SpellsDisplayFragment_query
+        ruleSection (filter: {index: "resting"}){
+          ...HitPointsFragment_ruleSection
+        }
       }`, queryRef);
 
   const MemoizedPersonality = useMemo(
@@ -160,7 +163,12 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
       </Suspense>
 
       <Suspense fallback={<Fallback />}>
-        <HitPoints characterClass={characterClass} characterStats={characterStats} characterLevel={characterLevel}/>
+        <HitPoints
+          characterClass={characterClass}
+          characterStats={characterStats}
+          characterLevel={characterLevel}
+          ruleSectionRef={data?.ruleSection!}
+        />
       </Suspense>
 
       <Suspense fallback={<Fallback />}>

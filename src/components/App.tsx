@@ -151,6 +151,8 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           ...AbilityScoresDisplayFragment_ruleSections
           ...SpellsDisplaySpellFragment_ruleSections
           ...SpellsDisplaySpellcastingFragment_ruleSections
+          ...ProficiencyBonusFragment_ruleSections
+          ...SkillsDisplayFragment_ruleSections
         }
       }`, queryRef);
 
@@ -192,6 +194,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           characterLevel={characterLevel}
           restingRulesRef={data?.ruleSections?.find((section) => section.index === 'resting')!}
           damageRulesRef={data?.ruleSections?.find((section) => section.index === 'damage-and-healing')!}
+          proficiencyRulesRef={data?.ruleSections?.find((section) => section?.index === 'proficiency-bonus')!}
         />
       </Suspense>
 
@@ -228,6 +231,7 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           raceRef={data?.race!}
           backgroundRef={data?.background!}
           classRef={data?.class!}
+          skillsRuleRef={data?.ruleSections?.find((section) => section?.index === 'ability-checks')}
         />
       </Suspense>
 

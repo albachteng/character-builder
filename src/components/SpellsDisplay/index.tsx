@@ -74,19 +74,6 @@ function SpellsDisplay({
       name
     }`, spellcastingRulesRef);
 
-  const spellcastingInfoMapFunc: MappingFunc<Spell> = (spell, spellIndex) => {
-    const description: ReactNode[] = [];
-    spell?.desc?.forEach((paragraph: Maybe<string>, index: number) => {
-      description.push(<p key={paragraph}>{paragraph}</p>);
-    });
-    return (
-      <div key={useId()}>
-        <h4>{spell?.name}</h4>
-        {description}
-      </div>
-    );
-  };
-
   if (spells) {
     return (
       <section className="full-width">

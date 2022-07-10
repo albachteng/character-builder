@@ -11,6 +11,8 @@ import type { SkillsDisplayFragment_race$key } from './__generated__/SkillsDispl
 import type { SkillsDisplayFragment_background$key } from './__generated__/SkillsDisplayFragment_background.graphql';
 import type { SkillsDisplayFragment_class$key } from './__generated__/SkillsDisplayFragment_class.graphql';
 import type { SkillsDisplayQuery } from './__generated__/SkillsDisplayQuery.graphql';
+import type { SkillsDisplayFragment_ruleSections$key } from './__generated__/SkillsDisplayFragment_ruleSections.graphql';
+import InfoModal from '../InfoModal';
 
 type Props = {
   characterLevel: ZeroToTwenty
@@ -18,6 +20,7 @@ type Props = {
   classRef: SkillsDisplayFragment_class$key
   raceRef: SkillsDisplayFragment_race$key
   backgroundRef: SkillsDisplayFragment_background$key
+  skillsRuleRef: SkillsDisplayFragment_ruleSections$key
 }
 
 function SkillsDisplay({
@@ -25,7 +28,9 @@ function SkillsDisplay({
   characterLevel,
   classRef,
   raceRef,
-  backgroundRef }: Props) {
+  backgroundRef,
+  skillsRuleRef
+}: Props) {
 
   const proficiencyBonus = Math.floor((7 + Number(characterLevel)) / 4);
 
@@ -92,6 +97,11 @@ function SkillsDisplay({
       }
     }`);
 
+  const { name, desc } = useFragment(graphql`
+    fragment SkillsDisplayFragment_ruleSections on RuleSection {
+      name
+      desc
+    }`, skillsRuleRef)
 
   const { proficiencies } = useSkillProficiencies(
     backgroundProficiencies,
@@ -133,7 +143,6 @@ function SkillsDisplay({
   const mappedSkills = skills.map((skill, i, allSkills) => {
     const proficiencyIndices = proficiencies.map((prof) => prof?.index?.slice(6))
     const [bool, from] = isProficient(proficiencies, skill);
-    console.log(skill?.index)
     return (
       <SkillProficiency
         key={skill?.index}
@@ -146,6 +155,7 @@ function SkillsDisplay({
 
   return (
     <section>
+      <h1>Skills: <InfoModal label={name} markdown={desc}/></h1>
       {mappedSkills}
     </section>
   );

@@ -8,6 +8,9 @@ import { graphql } from 'babel-plugin-relay/macro';
 import type { HitPointsRestingFragment_ruleSections$key } from './__generated__/HitPointsRestingFragment_ruleSections.graphql';
 import type { HitPointsDamageFragment_ruleSections$key } from './__generated__/HitPointsDamageFragment_ruleSections.graphql';
 import InfoModal from '../InfoModal';
+import ProficiencyBonus from './ProficiencyBonus';
+import ArmorClass from './ArmorClass';
+import type { ProficiencyBonusFragment_ruleSections$key } from './__generated__/ProficiencyBonusFragment_ruleSections.graphql';
 
 const calculateHP = (
   characterStats: AbilityScores,
@@ -30,9 +33,10 @@ type Props = {
   characterStats: AbilityScores
   restingRulesRef: HitPointsFragment_ruleSections$key
   damageRulesRef: HitPointsFragment_ruleSections$key
+  proficiencyRulesRef: ProficiencyBonusFragment_ruleSections$key
 }
 
-function HitPoints({characterLevel, characterClass, characterStats, restingRulesRef, damageRulesRef}: Props) {
+function HitPoints({ characterLevel, characterClass, characterStats, restingRulesRef, damageRulesRef, proficiencyRulesRef }: Props) {
 
   const { desc, name } = useFragment(graphql`
     fragment HitPointsRestingFragment_ruleSections on RuleSection {
@@ -49,18 +53,27 @@ function HitPoints({characterLevel, characterClass, characterStats, restingRules
   const { rolls, getHitDice } = useHP(characterLevel, characterClass);
 
   return (
-    <section className="flex-container">
-      <Tooltip label={<HPDetails rolls={rolls} CON={dice.mod(characterStats['CON'])}/>}>
-        <h1>
-          HP: {calculateHP(characterStats, characterLevel, rolls)}
-        </h1>
-      </Tooltip>
+    <section className="hit-points flex-container">
+      <div>
+        <Tooltip label={
+          <HPDetails
+            rolls={rolls}
+            CON={dice.mod(characterStats['CON'])}
+            />
+        }>
+          <h1>
+            HP: {calculateHP(characterStats, characterLevel, rolls)}
+          </h1>
+        </Tooltip>{' '}
+        <InfoModal label={damageName} markdown={damageDesc}/>
+      </div>
 
       <h1>
-        Hit dice: {characterLevel}d{getHitDice(characterClass)}
+        Hit dice: {characterLevel}d{getHitDice(characterClass)}{' '}
+        <InfoModal label={name} markdown={desc}/>
       </h1>
-      <InfoModal label={name} markdown={desc}/>
-      <InfoModal label={damageName} markdown={damageDesc}/>
+      <ProficiencyBonus proficiencyRulesRef={proficiencyRulesRef} characterLevel={characterLevel}/>
+      <ArmorClass characterStats={characterStats}/>
     </section>
   );
 }

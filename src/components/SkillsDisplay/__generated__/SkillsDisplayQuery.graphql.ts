@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0e07b562e9c36afc51b1c882faf48822>>
+ * @generated SignedSource<<392678b0615bf44b1fdac5af54eb9b4b>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type SkillsDisplayQuery$variables = {};
 export type SkillsDisplayQuery$data = {
   readonly skills: ReadonlyArray<{
+    readonly index: string | null;
     readonly " $fragmentSpreads": FragmentRefs<"SkillProficiencyFragment_skill">;
   }>;
 };
@@ -26,21 +27,21 @@ var v0 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "name",
+  "name": "index",
   "storageKey": null
 },
 v1 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "__typename",
+  "name": "name",
   "storageKey": null
 },
 v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "index",
+  "name": "__typename",
   "storageKey": null
 };
 return {
@@ -58,6 +59,7 @@ return {
         "name": "skills",
         "plural": true,
         "selections": [
+          (v0/*: any*/),
           {
             "args": null,
             "kind": "FragmentSpread",
@@ -102,9 +104,9 @@ return {
             "name": "ability_score",
             "plural": false,
             "selections": [
+              (v1/*: any*/),
               (v0/*: any*/),
-              (v2/*: any*/),
-              (v1/*: any*/)
+              (v2/*: any*/)
             ],
             "storageKey": null
           }
@@ -114,16 +116,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "5816f430cfad078e13a589ca74eea1fe",
+    "cacheID": "6cb09e8f9630acea15f37d4ecca2a3e2",
     "id": null,
     "metadata": {},
     "name": "SkillsDisplayQuery",
     "operationKind": "query",
-    "text": "query SkillsDisplayQuery {\n  skills {\n    ...SkillProficiencyFragment_skill\n  }\n}\n\nfragment SkillProficiencyFragment_skill on Skill {\n  name\n  __typename\n  index\n  desc\n  ability_score {\n    name\n    index\n    __typename\n  }\n}\n"
+    "text": "query SkillsDisplayQuery {\n  skills {\n    index\n    ...SkillProficiencyFragment_skill\n  }\n}\n\nfragment SkillProficiencyFragment_skill on Skill {\n  name\n  __typename\n  index\n  desc\n  ability_score {\n    name\n    index\n    __typename\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "898facdabc66c0a14bd05218d22e07b4";
+(node as any).hash = "eb440e506f02fb13325356f3015608c6";
 
 export default node;

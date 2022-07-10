@@ -65,12 +65,12 @@ function Personality({ backgroundRef, characterBackground = 'acolyte'}: Props) {
     const RenderMapWithOption = withUseOption(RenderMap);
 
     return (
-        <>
+        <div>
           <RenderMapWithOption data={personality_traits} mappingFunc={personalityMap}/>
           <RenderMapWithOption data={ideals} mappingFunc={idealsMap}/>
           <RenderMapWithOption data={bonds} mappingFunc={personalityMap}/>
           <RenderMapWithOption data={flaws} mappingFunc={personalityMap}/>
-        </>
+        </div>
         )
 }
 

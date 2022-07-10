@@ -2,32 +2,57 @@ import type { Action, CharacterClass, Race } from '../types';
 import { useContext } from 'react';
 import CharacterContext from './CharacterContext';
 import React from "react";
+import { Button } from '@mantine/core'
+import { Database, Swords, Bolt, Dice } from 'tabler-icons-react';
 
 type Props = {
+  isRefetching: boolean
   refetch: () => void
-  characterRace: Race
-  characterClass: CharacterClass
   dispatch: React.Dispatch<React.SetStateAction<any>>
+  startTransition: () => void
 }
 
-function Controls({refetch, characterRace, characterClass, dispatch}: Props) {
+
+function Controls({isRefetching, refetch, dispatch, startTransition}: Props) {
+
+const actions = [
+  {label: "GraphQL", href: "https://www.dnd5eapi.co/graphql" , icon: <Database />},
+  {label: "It is weak, bring another", onClick: () => startTransition(() => dispatch({type: "newCharacter"})), icon: <Swords />},
+  {label: "Increase its power", onClick: () => startTransition(() => dispatch({type: "levelUp"})), icon: <Bolt />},
+  {label: "Bullshit! Roll again", onClick: () => startTransition(() => dispatch({type: "reroll"})), icon: <Dice />},
+];
+
     return (
-      <div id="App">
-        <a target="_" href="https://www.dnd5eapi.co/graphql">
-          GraphQL Playground
-        </a>
-        <button onClick={() =>  {
-          dispatch({ type: "newCharacter" })
-          // refetch()
-        }}> This one is weak, bring me another </button>
-        <button onClick={() =>  refetch() }>REFETCH</button>
-        <button onClick={() => dispatch({ type: "levelUp" })}>
-          Increase this one's power...
-        </button>
-        <button onClick={() => dispatch({ type: "reroll" })}>
-          These stats are bullshit, roll again!
-        </button>
-    </div>
+      <section className="full-width controls">
+
+        {actions.map(({label, onClick, href, icon}) => {
+        return href ?
+          <Button
+            key={label}
+            loading={isRefetching}
+            disabled={isRefetching}
+            variant="default"
+            className="grid-item button"
+            leftIcon={icon}
+            component={href ? "a" : "button"}
+            href={href}
+            target="_"
+          >
+          {label}
+          </Button> :
+          <Button
+            key={label}
+            loading={isRefetching}
+            disabled={isRefetching}
+            variant="default"
+            className="grid-item button"
+            leftIcon={icon}
+            onClick={onClick}
+          >
+            {label}
+          </Button>})}
+
+    </section>
     )
 };
 

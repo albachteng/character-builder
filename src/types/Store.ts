@@ -10,5 +10,4 @@ export type Store = {
   characterBackground: Background;
   characterStats: AbilityScores;
   characterLevel: ZeroToTwenty;
-  proficiencyBonus: number;
 };

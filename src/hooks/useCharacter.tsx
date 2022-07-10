@@ -69,7 +69,6 @@ export const initState: Store = {
   characterBackground: getRandom(backgroundIndexArray),
   characterStats: getRandomStats(),
   characterLevel: 1,
-  proficiencyBonus: 2
 };
 
 const reducer = (state: Store, action: Action<never>): Store => {
@@ -77,8 +76,7 @@ const reducer = (state: Store, action: Action<never>): Store => {
     case 'levelUp':
       if (state.characterLevel < 20) {
         const characterLevel = (state.characterLevel + 1) as ZeroToTwenty;
-        const proficiencyBonus = Math.floor((7 + characterLevel) / 4);
-        return { ...state, characterLevel, proficiencyBonus };
+        return { ...state, characterLevel };
       } else return state;
 
     case 'newCharacter':
@@ -88,7 +86,6 @@ const reducer = (state: Store, action: Action<never>): Store => {
         characterBackground: getRandom(backgroundIndexArray),
         characterStats: getRandomStats(),
         characterLevel: 1,
-        proficiencyBonus: 2
       };
 
     case 'reroll':

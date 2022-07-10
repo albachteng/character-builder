@@ -1,15 +1,194 @@
+/* GLOBAL */
+* {
+  margin: 0;
+  padding: 0;
+}
 
 body {
   background-color: #282c34;
-  /* min-height: 100vh; */
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; */
-  font-size: calc(10px + 2vmin);
   color: white;
+  margin: 0 auto;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-size: calc(10px + 2vmin);
+}
+
+p {
+  padding: .25rem .5rem;
+  margin: .5rem .75rem;
+}
+
+#main {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.nav, .header {
+  background-color: #282c34;
+  border: none;
+}
+
+section {
+  grid-column-start: span 12;
+  padding: 20px;
+  margin: 20px;
+  border: 20px solid white;
+}
+
+@media only screen and (min-width: 900px) {
+  section {
+    grid-column-start: span 6;
+  }
+}
+
+.full-width {
+  grid-column-start: span 12;
+}
+
+.grid-item {
+  grid-column-start: span 12;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+@media only screen and (min-width: 600px) {
+  .grid-item {
+    grid-column-start: span 6;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .grid-item {
+    grid-column-start: span 3;
+  }
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* CONTROLS */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  justify-items: center;
+  gap: 20px;
+}
+
+@media only screen and (max-width: 340px) {
+  .controls {
+    column-gap: 0;
+  }
+}
+
+/* ABILITY SCORES */
+
+.ability-scores-display {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  justify-items: center;
+  align-items: center;
+  padding: 0 15%;
+}
+
+@media only screen and (min-width: 400px) {
+  .ability-scores-display {
+    padding: 0 20%;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .ability-scores-display {
+    padding: 0 25%;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .ability-scores-display {
+    padding: 0 30%;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .ability-scores-display {
+    padding: 0 25%;
+  }
+}
+
+.ability-scores-display > * {
+  grid-column-start: span 3;
+  /* border: 1px solid white; */
+  padding: .25rem;
+  margin: .25rem;
+}
+
+.stat > * {
+  gap: 1rem;
+}
+
+@media only screen and (max-width: 408px) {
+  .stat > * {
+    margin: 0 auto;
+  }
+}
+
+.number-circle {
+  font-size: .8rem;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  line-height: 1rem;
+  padding: 8px;
+  border: 2px solid white;
+  text-align: center;
+}
+
+/* BUTTONS */
+.button {
+  background-color: #282c34;
+  border: 2px solid white;
+  color: white;
+  transition: color .5;
+  transition: background-color .5s;
+}
+
+@media screen only and (min-width: 900px){
+  .controls {
+    flex-direction: row;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+
+.button:hover {
+  color: #282c34;
+}
+
+/* HP */
+.info-circle:hover {
+  border-radius: 3px;
+  background-color: white;
+  color: #282c34;
+}
+
+table {
+  margin: 0 auto;
+  padding: .25rem;
+}
+
+td, th, tr {
+  padding: .25rem;
+  margin: 0 auto;
+}
+
+/* FALLBACK */
 .card {
   border: 2px solid #fff;
   box-shadow:0px 0px 10px 0 #a9a9a9;
@@ -24,15 +203,14 @@ body {
 
 @keyframes fullView {
   100% {
-    width: 100%;
+    width: 80%;
   }
 }
-
 
 .animate {
    animation : shimmer 2s infinite linear;
    background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
-    background-size: 1000px 100%;
+    background-size: 100% 100%;
 }
 
 @keyframes shimmer {
@@ -47,3 +225,4 @@ body {
 .hidden {
   display: none
 }
+

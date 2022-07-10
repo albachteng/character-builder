@@ -5,7 +5,8 @@ ultimately responsible for displaying character name, character class, race, lev
 import {
   AbilityScores, CharacterClass, Race, ZeroToTwenty, Background
 } from '../../types';
-import HitPoints from './HitPoints';
+import OnClickInput from './OnClickInput';
+
 
 type Props = {
   characterName?: string
@@ -14,40 +15,28 @@ type Props = {
   characterClass: CharacterClass
   characterBackground: Background
   characterRace: Race
-  characterStats: AbilityScores
   characterLevel: ZeroToTwenty
 };
 
 function HeaderDisplay({
-  characterStats,
   characterClass,
   characterBackground,
   characterRace,
   characterLevel,
-  characterName,
+  characterName = "Give this one a name",
   alignment = 'Neutral',
   experience = 0,
 }: Props) {
 
   return (
-    <>
-        <pre>
-          {JSON.stringify(
-            {
-              characterName,
-              characterClass,
-              characterRace,
-              characterLevel,
-              alignment,
-              experience,
-              characterBackground,
-            },
-            null,
-            2,
-          )}
-        </pre>
-        <HitPoints characterClass={characterClass} characterStats={characterStats} characterLevel={characterLevel}/>
-        </>
+    <section>
+      <OnClickInput label={"Name"} initialValue={characterName}/>
+      <OnClickInput label={"Class"} initialValue={characterClass}/>
+      <OnClickInput label={"Race"} initialValue={characterRace}/>
+      <OnClickInput label={"Level"} initialValue={characterLevel}/>
+      <OnClickInput label={"Alignment"} initialValue={alignment}/>
+      <OnClickInput label={"Experience"} initialValue={experience}/>
+    </section>
   );
 }
 

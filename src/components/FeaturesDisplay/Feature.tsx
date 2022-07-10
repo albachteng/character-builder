@@ -2,6 +2,7 @@ import { graphql } from "babel-plugin-relay/macro";
 import { useFragment } from "react-relay";
 import useOnClickDescription from "../../hooks/useOnClickDescription";
 import type { FeatureFragment_feature$key } from './__generated__/FeatureFragment_feature_feature.graphql';
+import { useClickOutside } from '@mantine/hooks';
 
 type Props = {
   featureRef: FeatureFragment_feature$key

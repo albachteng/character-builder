@@ -5,6 +5,7 @@ import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 import { useState, useEffect } from 'react';
 import chooseFrom from '../../utilities/chooseFrom';
+import RaceDetails from './RaceDetails';
 
 type Props = {
   raceRef: TraitsDisplayFragment_race$key
@@ -125,7 +126,7 @@ function TraitsDisplay({ raceRef, characterRace }: Props): JSX.Element {
   const raceTitle = characterRace[0].toUpperCase() + characterRace.slice(1)
 
   return (
-    <div style={{ height: '50%', overflow: 'scroll' }}>
+    <section>
       <h2>{`Racial Traits: ${raceTitle}`}</h2>
       {traits.map((trait, i, traits) => {
         const shouldRender = () => {
@@ -146,7 +147,8 @@ function TraitsDisplay({ raceRef, characterRace }: Props): JSX.Element {
           shouldRender={shouldRender()}
         />)
       })}
-    </div>
+      <RaceDetails raceRef={raceRef}/>
+    </section>
   );
 }
 

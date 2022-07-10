@@ -1,27 +1,51 @@
+import { graphql } from 'babel-plugin-relay/macro';
 import { ReactNode } from 'react';
+import { useFragment } from 'react-relay';
 import { AbilityScores } from '../../types';
+import InfoModal from '../InfoModal';
 import Stat from './Stat';
+import type {  AbilityScoresDisplayFragment_query$key } from './__generated__/AbilityScoresDisplayFragment_query.graphql';
+import type { AbilityScoresDisplayFragment_ruleSections$key } from './__generated__/AbilityScoresDisplayFragment_ruleSections.graphql';
 
 type Props = {
   characterStats: AbilityScores
+  queryRef: AbilityScoresDisplayFragment_query$key
+  abilityScoresRuleRef: AbilityScoresDisplayFragment_ruleSections$key
 }
 
-function AbilityScoresDisplay({characterStats}: Props) {
+function AbilityScoresDisplay({characterStats, queryRef, abilityScoresRuleRef}: Props) {
 
-  const scores: ReactNode[] = [];
+  const { abilityScores } = useFragment(graphql`
+    fragment AbilityScoresDisplayFragment_query on Query {
+      abilityScores {
+        index
+        ...StatFragment_ability_score
+      }
+    }`, queryRef);
 
-  let key: keyof AbilityScores;
+  const { desc, name } = useFragment(graphql`
+    fragment AbilityScoresDisplayFragment_ruleSections on RuleSection {
+      index
+      name
+      desc
+    }`, abilityScoresRuleRef);
 
-  for (key in characterStats) {
-    scores.push(
-      <Stat name={key} key={key} stats={characterStats[key]} />,
-    );
-  }
+  const scores = abilityScores.map((abilityScore) => {
+
+    const { index } = abilityScore;
+
+    return <Stat
+        key={index}
+        statRef={abilityScore}
+        score={characterStats[index?.toUpperCase()]}
+      />
+  });
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+    <section className="ability-scores-display">
       {scores}
-    </div>
+      <InfoModal label={name} markdown={desc}/>
+    </section>
   );
 }
 

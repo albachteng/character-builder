@@ -6,6 +6,8 @@ import type {} from 'react/next';
 import { Suspense, useCallback, useContext, useEffect, useTransition } from "react";
 import useCharacter from "./hooks/useCharacter";
 import { CharacterClass, ZeroToTwenty } from "./types";
+import { AppShell, Header, Navbar, Text } from '@mantine/core';
+import Fallback from "./components/Fallback";
 
 const AppCharacterQuery = require('./components/__generated__/AppCharacterQuery.graphql');
 
@@ -60,15 +62,33 @@ function AppRoot() {
   }
 
   return (
-    <Suspense fallback={"Loading in QueryRoot"}>
-      <App
+    <AppShell
+      className=".shell"
+      padding="md"
+      navbar={<Navbar
+        className="nav"
+        width={{ base: 100 }}
+        height={'100vh'}
+        p="xs"
+        hidden
+        hiddenBreakpoint={"md"}
+      >
+        <Navbar.Section>Home</Navbar.Section>
+        <Navbar.Section>Monsters</Navbar.Section>
+        <Navbar.Section>Characters</Navbar.Section>
+      </Navbar>}
+      header={<Header className="header" height={60} p="xs"><h1>Fightr</h1></Header>}>
+      <Suspense fallback={<Fallback/>}>
+        <App
         isRefetching={isRefetching}
         refetch={refetch}
         queryRef={queryRef}
         state={state}
         dispatch={dispatch}
+        startTransition={startTransition}
       />
     </Suspense>
+    </AppShell>
   )
 }
 

@@ -63,6 +63,7 @@ function ItemStore({characterBackground, backgroundRef, characterClass, classRef
   const items = [...selections, ...starting_equipment, ...backgroundEquipment];
 
   return (
+    <section>
       <ToggleList<Equipment>
         query={ Items}
         variables={{}}
@@ -71,6 +72,7 @@ function ItemStore({characterBackground, backgroundRef, characterClass, classRef
         Details={EquipmentDetails}
         initial={items}
       />
+    </section>
   );
 }
 

@@ -130,12 +130,25 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           }
         }
         ...SpellsDisplayFragment_query
-        ruleSection (filter: {index: "resting"}){
-          ...HitPointsFragment_ruleSection
-        }
-        ruleSections (filter: {OR: [{index: "ability-scores-and-modifiers"}, {index: "resting"}]}){
-          ...HitPointsFragment_ruleSection
-          # ...AbilityScoresDisplayFragment_ruleSection
+        ruleSections (filter: {OR: [
+          {index: "ability-scores-and-modifiers"},
+          {index: "resting"},
+          {index: "damage-and-healing"},
+          {index: "casting-a-spell"},
+          {index: "what-is-a-spell"},
+          {index: "using-each-ability"},
+          {index: "movement"},
+          {index: "saving-throws"},
+          {index: "ability-checks"},
+          {index: "proficiency-bonus"},
+          {index: "actions-in-combat"},
+          {index: "making-an-attack"}
+        ]}
+        ){
+          index
+          ...HitPointsRestingFragment_ruleSections
+          ...HitPointsDamageFragment_ruleSections
+          ...AbilityScoresDisplayFragment_ruleSections
         }
       }`, queryRef);
 
@@ -163,7 +176,11 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
       </Suspense>
 
       <Suspense fallback={<Fallback />}>
-        <AbilityScoresDisplay characterStats={characterStats} queryRef={data!}/>
+        <AbilityScoresDisplay
+          characterStats={characterStats}
+          abilityScoresRuleRef={data?.ruleSections?.find((section) => section.index ==='ability-scores-and-modifiers')!}
+          queryRef={data!}
+        />
       </Suspense>
 
       <Suspense fallback={<Fallback />}>
@@ -171,7 +188,8 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           characterClass={characterClass}
           characterStats={characterStats}
           characterLevel={characterLevel}
-          ruleSectionRef={data?.ruleSection!}
+          restingRulesRef={data?.ruleSections?.find((section) => section.index === 'resting')!}
+          damageRulesRef={data?.ruleSections?.find((section) => section.index === 'damage-and-healing')!}
         />
       </Suspense>
 

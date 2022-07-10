@@ -5,27 +5,30 @@ import { AbilityScores } from '../../types';
 import InfoModal from '../InfoModal';
 import Stat from './Stat';
 import type {  AbilityScoresDisplayFragment_query$key } from './__generated__/AbilityScoresDisplayFragment_query.graphql';
+import type { AbilityScoresDisplayFragment_ruleSections$key } from './__generated__/AbilityScoresDisplayFragment_ruleSections.graphql';
 
 type Props = {
   characterStats: AbilityScores
   queryRef: AbilityScoresDisplayFragment_query$key
+  abilityScoresRuleRef: AbilityScoresDisplayFragment_ruleSections$key
 }
 
-function AbilityScoresDisplay({characterStats, queryRef}: Props) {
+function AbilityScoresDisplay({characterStats, queryRef, abilityScoresRuleRef}: Props) {
 
-  const { abilityScores, ruleSections } = useFragment(graphql`
+  const { abilityScores } = useFragment(graphql`
     fragment AbilityScoresDisplayFragment_query on Query {
       abilityScores {
         index
         ...StatFragment_ability_score
       }
-      ruleSections (filter: {OR: [{index: "ability-scores-and-modifiers"}, {index: "resting"}]}){
-        index
-        name
-        desc
-      }
     }`, queryRef);
 
+  const { desc, name } = useFragment(graphql`
+    fragment AbilityScoresDisplayFragment_ruleSections on RuleSection {
+      index
+      name
+      desc
+    }`, abilityScoresRuleRef);
 
   const scores = abilityScores.map((abilityScore) => {
 
@@ -38,12 +41,10 @@ function AbilityScoresDisplay({characterStats, queryRef}: Props) {
       />
   });
 
-  const desc = ruleSections.find((section) => section?.index === 'ability-scores-and-modifiers')?.desc;
-
   return (
     <section className="ability-scores-display">
       {scores}
-      <InfoModal label={"Ability Scores and Modifiers"} markdown={desc}/>
+      <InfoModal label={name} markdown={desc}/>
     </section>
   );
 }

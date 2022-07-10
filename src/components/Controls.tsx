@@ -28,6 +28,7 @@ const actions = [
         {actions.map(({label, onClick, href, icon}) => {
         return href ?
           <Button
+            key={label}
             loading={isRefetching}
             disabled={isRefetching}
             variant="default"
@@ -40,6 +41,7 @@ const actions = [
           {label}
           </Button> :
           <Button
+            key={label}
             loading={isRefetching}
             disabled={isRefetching}
             variant="default"

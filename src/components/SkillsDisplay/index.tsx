@@ -87,6 +87,7 @@ function SkillsDisplay({
   const { skills } = useLazyLoadQuery<SkillsDisplayQuery>(
     graphql`query SkillsDisplayQuery {
       skills {
+        index
         ...SkillProficiencyFragment_skill
       }
     }`);
@@ -132,9 +133,10 @@ function SkillsDisplay({
   const mappedSkills = skills.map((skill, i, allSkills) => {
     const proficiencyIndices = proficiencies.map((prof) => prof?.index?.slice(6))
     const [bool, from] = isProficient(proficiencies, skill);
+    console.log(skill?.index)
     return (
       <SkillProficiency
-        key={allSkills?.[i]?.index}
+        key={skill?.index}
         skillRef={allSkills[i]}
         characterStats={characterStats}
         characterLevel={characterLevel}

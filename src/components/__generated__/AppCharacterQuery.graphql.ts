@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<f02a6847d183ad990c54f75c81aa7ae4>>
+ * @generated SignedSource<<45653769a87c85e63557fba866cf32d0>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -1131,11 +1131,9 @@ export type AppCharacterQuery$data = {
     } | null> | null;
     readonly " $fragmentSpreads": FragmentRefs<"RaceDetailsFragment_race" | "SkillsDisplayFragment_race" | "TraitsDisplayFragment_race">;
   } | null;
-  readonly ruleSection: {
-    readonly " $fragmentSpreads": FragmentRefs<"HitPointsFragment_ruleSection">;
-  } | null;
   readonly ruleSections: ReadonlyArray<{
-    readonly " $fragmentSpreads": FragmentRefs<"HitPointsFragment_ruleSection">;
+    readonly index: string | null;
+    readonly " $fragmentSpreads": FragmentRefs<"AbilityScoresDisplayFragment_ruleSections" | "HitPointsDamageFragment_ruleSections" | "HitPointsRestingFragment_ruleSections">;
   }>;
   readonly " $fragmentSpreads": FragmentRefs<"AbilityScoresDisplayFragment_query" | "SpellsDisplayFragment_query">;
 };
@@ -1357,24 +1355,7 @@ v21 = {
   ],
   "storageKey": null
 },
-v22 = {
-  "index": "resting"
-},
-v23 = [
-  {
-    "kind": "Literal",
-    "name": "filter",
-    "value": (v22/*: any*/)
-  }
-],
-v24 = [
-  {
-    "args": null,
-    "kind": "FragmentSpread",
-    "name": "HitPointsFragment_ruleSection"
-  }
-],
-v25 = [
+v22 = [
   {
     "kind": "Literal",
     "name": "filter",
@@ -1383,90 +1364,122 @@ v25 = [
         {
           "index": "ability-scores-and-modifiers"
         },
-        (v22/*: any*/)
+        {
+          "index": "resting"
+        },
+        {
+          "index": "damage-and-healing"
+        },
+        {
+          "index": "casting-a-spell"
+        },
+        {
+          "index": "what-is-a-spell"
+        },
+        {
+          "index": "using-each-ability"
+        },
+        {
+          "index": "movement"
+        },
+        {
+          "index": "saving-throws"
+        },
+        {
+          "index": "ability-checks"
+        },
+        {
+          "index": "proficiency-bonus"
+        },
+        {
+          "index": "actions-in-combat"
+        },
+        {
+          "index": "making-an-attack"
+        }
       ]
     }
   }
 ],
-v26 = {
+v23 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "desc",
   "storageKey": null
 },
-v27 = {
+v24 = {
   "kind": "Literal",
   "name": "sort",
   "value": "LEVEL_ASC"
 },
-v28 = {
+v25 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "level",
   "storageKey": null
 },
-v29 = {
+v26 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "__typename",
   "storageKey": null
 },
-v30 = {
+v27 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "url",
   "storageKey": null
 },
-v31 = [
-  (v29/*: any*/),
+v28 = [
+  (v26/*: any*/),
   (v11/*: any*/),
   (v12/*: any*/),
-  (v30/*: any*/)
+  (v27/*: any*/)
 ],
-v32 = [
+v29 = [
   (v12/*: any*/),
   (v11/*: any*/),
-  (v29/*: any*/)
+  (v26/*: any*/)
 ],
-v33 = [
+v30 = [
   (v11/*: any*/),
   (v12/*: any*/),
-  (v30/*: any*/)
+  (v27/*: any*/)
 ],
-v34 = {
+v31 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "quantity",
   "storageKey": null
 },
-v35 = [
+v32 = [
   (v12/*: any*/),
-  (v29/*: any*/),
+  (v26/*: any*/),
   (v11/*: any*/),
-  (v30/*: any*/)
+  (v27/*: any*/)
 ],
-v36 = {
+v33 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "damage_at_character_level",
   "storageKey": null
 },
-v37 = {
+v34 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "from",
   "storageKey": null
 },
-v38 = [
+v35 = [
   (v7/*: any*/),
-  (v37/*: any*/)
+  (v34/*: any*/)
 ];
 return {
   "fragment": {
@@ -1619,23 +1632,30 @@ return {
       },
       {
         "alias": null,
-        "args": (v23/*: any*/),
-        "concreteType": "RuleSection",
-        "kind": "LinkedField",
-        "name": "ruleSection",
-        "plural": false,
-        "selections": (v24/*: any*/),
-        "storageKey": "ruleSection(filter:{\"index\":\"resting\"})"
-      },
-      {
-        "alias": null,
-        "args": (v25/*: any*/),
+        "args": (v22/*: any*/),
         "concreteType": "RuleSection",
         "kind": "LinkedField",
         "name": "ruleSections",
         "plural": true,
-        "selections": (v24/*: any*/),
-        "storageKey": "ruleSections(filter:{\"OR\":[{\"index\":\"ability-scores-and-modifiers\"},{\"index\":\"resting\"}]})"
+        "selections": [
+          (v11/*: any*/),
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "HitPointsRestingFragment_ruleSections"
+          },
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "HitPointsDamageFragment_ruleSections"
+          },
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "AbilityScoresDisplayFragment_ruleSections"
+          }
+        ],
+        "storageKey": "ruleSections(filter:{\"OR\":[{\"index\":\"ability-scores-and-modifiers\"},{\"index\":\"resting\"},{\"index\":\"damage-and-healing\"},{\"index\":\"casting-a-spell\"},{\"index\":\"what-is-a-spell\"},{\"index\":\"using-each-ability\"},{\"index\":\"movement\"},{\"index\":\"saving-throws\"},{\"index\":\"ability-checks\"},{\"index\":\"proficiency-bonus\"},{\"index\":\"actions-in-combat\"},{\"index\":\"making-an-attack\"}]})"
       }
     ],
     "type": "Query",
@@ -1662,7 +1682,7 @@ return {
         "plural": true,
         "selections": [
           (v11/*: any*/),
-          (v26/*: any*/),
+          (v23/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -1688,20 +1708,6 @@ return {
       },
       {
         "alias": null,
-        "args": (v25/*: any*/),
-        "concreteType": "RuleSection",
-        "kind": "LinkedField",
-        "name": "ruleSections",
-        "plural": true,
-        "selections": [
-          (v11/*: any*/),
-          (v12/*: any*/),
-          (v26/*: any*/)
-        ],
-        "storageKey": "ruleSections(filter:{\"OR\":[{\"index\":\"ability-scores-and-modifiers\"},{\"index\":\"resting\"}]})"
-      },
-      {
-        "alias": null,
         "args": (v5/*: any*/),
         "concreteType": "Class",
         "kind": "LinkedField",
@@ -1716,14 +1722,14 @@ return {
                 "name": "limit",
                 "variableName": "level"
               },
-              (v27/*: any*/)
+              (v24/*: any*/)
             ],
             "concreteType": "Level",
             "kind": "LinkedField",
             "name": "class_levels",
             "plural": true,
             "selections": [
-              (v28/*: any*/),
+              (v25/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -1734,7 +1740,7 @@ return {
               {
                 "alias": null,
                 "args": [
-                  (v27/*: any*/)
+                  (v24/*: any*/)
                 ],
                 "concreteType": "Feature",
                 "kind": "LinkedField",
@@ -1743,9 +1749,9 @@ return {
                 "selections": [
                   (v12/*: any*/),
                   (v11/*: any*/),
-                  (v29/*: any*/),
-                  (v28/*: any*/),
                   (v26/*: any*/),
+                  (v25/*: any*/),
+                  (v23/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -1783,7 +1789,7 @@ return {
                             "kind": "LinkedField",
                             "name": "from",
                             "plural": true,
-                            "selections": (v31/*: any*/),
+                            "selections": (v28/*: any*/),
                             "storageKey": null
                           },
                           (v9/*: any*/)
@@ -1806,7 +1812,7 @@ return {
                             "kind": "LinkedField",
                             "name": "from",
                             "plural": true,
-                            "selections": (v32/*: any*/),
+                            "selections": (v29/*: any*/),
                             "storageKey": null
                           },
                           (v9/*: any*/)
@@ -1833,7 +1839,7 @@ return {
                       },
                       (v11/*: any*/),
                       (v12/*: any*/),
-                      (v30/*: any*/)
+                      (v27/*: any*/)
                     ],
                     "storageKey": null
                   },
@@ -1844,7 +1850,7 @@ return {
                     "kind": "LinkedField",
                     "name": "parent",
                     "plural": false,
-                    "selections": (v33/*: any*/),
+                    "selections": (v30/*: any*/),
                     "storageKey": null
                   },
                   {
@@ -1855,12 +1861,12 @@ return {
                     "name": "prerequisites",
                     "plural": true,
                     "selections": [
-                      (v28/*: any*/),
+                      (v25/*: any*/),
                       (v9/*: any*/)
                     ],
                     "storageKey": null
                   },
-                  (v30/*: any*/)
+                  (v27/*: any*/)
                 ],
                 "storageKey": "features(sort:\"LEVEL_ASC\")"
               },
@@ -1981,7 +1987,7 @@ return {
             "name": "starting_equipment",
             "plural": true,
             "selections": [
-              (v34/*: any*/),
+              (v31/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -1989,10 +1995,10 @@ return {
                 "kind": "LinkedField",
                 "name": "equipment",
                 "plural": false,
-                "selections": (v32/*: any*/),
+                "selections": (v29/*: any*/),
                 "storageKey": null
               },
-              (v29/*: any*/)
+              (v26/*: any*/)
             ],
             "storageKey": null
           },
@@ -2013,7 +2019,7 @@ return {
                 "name": "from",
                 "plural": true,
                 "selections": [
-                  (v34/*: any*/),
+                  (v31/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -2021,10 +2027,10 @@ return {
                     "kind": "LinkedField",
                     "name": "equipment",
                     "plural": false,
-                    "selections": (v32/*: any*/),
+                    "selections": (v29/*: any*/),
                     "storageKey": null
                   },
-                  (v29/*: any*/)
+                  (v26/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -2039,7 +2045,7 @@ return {
             "kind": "LinkedField",
             "name": "proficiencies",
             "plural": true,
-            "selections": (v35/*: any*/),
+            "selections": (v32/*: any*/),
             "storageKey": null
           },
           {
@@ -2051,7 +2057,7 @@ return {
             "plural": true,
             "selections": [
               (v7/*: any*/),
-              (v29/*: any*/),
+              (v26/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2059,7 +2065,7 @@ return {
                 "kind": "LinkedField",
                 "name": "from",
                 "plural": true,
-                "selections": (v35/*: any*/),
+                "selections": (v32/*: any*/),
                 "storageKey": null
               }
             ],
@@ -2080,10 +2086,10 @@ return {
                 "kind": "LinkedField",
                 "name": "spellcasting_ability",
                 "plural": false,
-                "selections": (v33/*: any*/),
+                "selections": (v30/*: any*/),
                 "storageKey": null
               },
-              (v28/*: any*/),
+              (v25/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2092,7 +2098,7 @@ return {
                 "name": "info",
                 "plural": true,
                 "selections": [
-                  (v26/*: any*/),
+                  (v23/*: any*/),
                   (v12/*: any*/)
                 ],
                 "storageKey": null
@@ -2147,7 +2153,7 @@ return {
           (v12/*: any*/),
           (v17/*: any*/),
           (v18/*: any*/),
-          (v29/*: any*/),
+          (v26/*: any*/),
           {
             "alias": "proficiencies",
             "args": null,
@@ -2155,7 +2161,7 @@ return {
             "kind": "LinkedField",
             "name": "starting_proficiencies",
             "plural": true,
-            "selections": (v35/*: any*/),
+            "selections": (v32/*: any*/),
             "storageKey": null
           },
           {
@@ -2167,7 +2173,7 @@ return {
             "plural": false,
             "selections": [
               (v7/*: any*/),
-              (v29/*: any*/),
+              (v26/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2175,7 +2181,7 @@ return {
                 "kind": "LinkedField",
                 "name": "from",
                 "plural": true,
-                "selections": (v35/*: any*/),
+                "selections": (v32/*: any*/),
                 "storageKey": null
               }
             ],
@@ -2192,8 +2198,8 @@ return {
             "selections": [
               (v12/*: any*/),
               (v11/*: any*/),
-              (v29/*: any*/),
               (v26/*: any*/),
+              (v23/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2224,7 +2230,7 @@ return {
                     "kind": "LinkedField",
                     "name": "from",
                     "plural": true,
-                    "selections": (v32/*: any*/),
+                    "selections": (v29/*: any*/),
                     "storageKey": null
                   },
                   (v9/*: any*/)
@@ -2265,7 +2271,7 @@ return {
                         "kind": "LinkedField",
                         "name": "from",
                         "plural": true,
-                        "selections": (v31/*: any*/),
+                        "selections": (v28/*: any*/),
                         "storageKey": null
                       },
                       (v9/*: any*/)
@@ -2288,7 +2294,7 @@ return {
                         "kind": "LinkedField",
                         "name": "from",
                         "plural": true,
-                        "selections": (v32/*: any*/),
+                        "selections": (v29/*: any*/),
                         "storageKey": null
                       },
                       (v9/*: any*/)
@@ -2314,7 +2320,7 @@ return {
                     "plural": false,
                     "selections": [
                       (v12/*: any*/),
-                      (v26/*: any*/),
+                      (v23/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -2370,7 +2376,7 @@ return {
                         "name": "damage",
                         "plural": true,
                         "selections": [
-                          (v36/*: any*/)
+                          (v33/*: any*/)
                         ],
                         "storageKey": null
                       }
@@ -2396,7 +2402,7 @@ return {
         "selections": [
           (v11/*: any*/),
           (v12/*: any*/),
-          (v29/*: any*/),
+          (v26/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -2407,8 +2413,8 @@ return {
             "selections": [
               (v12/*: any*/),
               (v11/*: any*/),
-              (v30/*: any*/),
-              (v29/*: any*/)
+              (v27/*: any*/),
+              (v26/*: any*/)
             ],
             "storageKey": null
           },
@@ -2420,8 +2426,8 @@ return {
             "name": "starting_equipment",
             "plural": true,
             "selections": [
-              (v29/*: any*/),
-              (v34/*: any*/),
+              (v26/*: any*/),
+              (v31/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2429,7 +2435,7 @@ return {
                 "kind": "LinkedField",
                 "name": "equipment",
                 "plural": false,
-                "selections": (v32/*: any*/),
+                "selections": (v29/*: any*/),
                 "storageKey": null
               }
             ],
@@ -2452,7 +2458,7 @@ return {
                 "name": "from",
                 "plural": true,
                 "selections": [
-                  (v34/*: any*/),
+                  (v31/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -2460,7 +2466,7 @@ return {
                     "kind": "LinkedField",
                     "name": "equipment",
                     "plural": false,
-                    "selections": (v32/*: any*/),
+                    "selections": (v29/*: any*/),
                     "storageKey": null
                   }
                 ],
@@ -2478,8 +2484,8 @@ return {
             "plural": false,
             "selections": [
               (v12/*: any*/),
-              (v29/*: any*/),
-              (v26/*: any*/)
+              (v26/*: any*/),
+              (v23/*: any*/)
             ],
             "storageKey": null
           },
@@ -2491,9 +2497,9 @@ return {
             "name": "personality_traits",
             "plural": false,
             "selections": [
-              (v29/*: any*/),
+              (v26/*: any*/),
               (v7/*: any*/),
-              (v37/*: any*/)
+              (v34/*: any*/)
             ],
             "storageKey": null
           },
@@ -2514,7 +2520,7 @@ return {
                 "name": "from",
                 "plural": true,
                 "selections": [
-                  (v26/*: any*/),
+                  (v23/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -2540,7 +2546,7 @@ return {
             "kind": "LinkedField",
             "name": "bonds",
             "plural": false,
-            "selections": (v38/*: any*/),
+            "selections": (v35/*: any*/),
             "storageKey": null
           },
           {
@@ -2550,7 +2556,7 @@ return {
             "kind": "LinkedField",
             "name": "flaws",
             "plural": false,
-            "selections": (v38/*: any*/),
+            "selections": (v35/*: any*/),
             "storageKey": null
           },
           (v21/*: any*/)
@@ -2573,7 +2579,7 @@ return {
         "selections": [
           (v11/*: any*/),
           (v12/*: any*/),
-          (v28/*: any*/),
+          (v25/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -2630,7 +2636,7 @@ return {
                 "name": "damage_at_slot_level",
                 "storageKey": null
               },
-              (v36/*: any*/),
+              (v33/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -2669,11 +2675,11 @@ return {
                 "selections": (v13/*: any*/),
                 "storageKey": null
               },
-              (v26/*: any*/)
+              (v23/*: any*/)
             ],
             "storageKey": null
           },
-          (v26/*: any*/),
+          (v23/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -2724,7 +2730,7 @@ return {
             "name": "school",
             "plural": false,
             "selections": [
-              (v26/*: any*/),
+              (v23/*: any*/),
               (v11/*: any*/),
               (v12/*: any*/)
             ],
@@ -2745,31 +2751,31 @@ return {
       },
       {
         "alias": null,
-        "args": (v23/*: any*/),
+        "args": (v22/*: any*/),
         "concreteType": "RuleSection",
         "kind": "LinkedField",
-        "name": "ruleSection",
-        "plural": false,
+        "name": "ruleSections",
+        "plural": true,
         "selections": [
           (v11/*: any*/),
-          (v26/*: any*/),
+          (v23/*: any*/),
           (v12/*: any*/)
         ],
-        "storageKey": "ruleSection(filter:{\"index\":\"resting\"})"
+        "storageKey": "ruleSections(filter:{\"OR\":[{\"index\":\"ability-scores-and-modifiers\"},{\"index\":\"resting\"},{\"index\":\"damage-and-healing\"},{\"index\":\"casting-a-spell\"},{\"index\":\"what-is-a-spell\"},{\"index\":\"using-each-ability\"},{\"index\":\"movement\"},{\"index\":\"saving-throws\"},{\"index\":\"ability-checks\"},{\"index\":\"proficiency-bonus\"},{\"index\":\"actions-in-combat\"},{\"index\":\"making-an-attack\"}]})"
       }
     ]
   },
   "params": {
-    "cacheID": "becfa9870b96bf94a1a4a0a79fd744e7",
+    "cacheID": "aa0802c2f34db3f0f14857acfed4bbee",
     "id": null,
     "metadata": {},
     "name": "AppCharacterQuery",
     "operationKind": "query",
-    "text": "query AppCharacterQuery(\n  $class: FilterFindOneClassInput\n  $race: FilterFindOneRaceInput\n  $level: Int\n  $background: FilterFindOneBackgroundInput\n  $spells: FilterFindManySpellInput\n) {\n  ...AbilityScoresDisplayFragment_query\n  class(filter: $class) {\n    ...FeaturesDisplayFragment_class\n    ...ClassEquipmentFragment_class\n    ...SkillsDisplayFragment_class\n    ...ItemStoreFragment_class\n    ...SpellSlotsFragment_class\n    spellcasting {\n      ...SpellModFragment_spellcasting\n    }\n  }\n  race(filter: $race) {\n    ...RaceDetailsFragment_race\n    ability_bonus_options {\n      choose\n      from {\n        bonus\n      }\n      type\n    }\n    ability_bonuses {\n      ability_score {\n        index\n        name\n      }\n      bonus\n    }\n    index\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    languages {\n      index\n      name\n    }\n    name\n    size\n    speed\n    ...SkillsDisplayFragment_race\n    subraces {\n      index\n      name\n    }\n    ...TraitsDisplayFragment_race\n  }\n  background(filter: $background) {\n    index\n    name\n    ...SkillsDisplayFragment_background\n    ...ItemStoreFragment_background\n    ...BackgroundEquipmentFragment_background\n    ...BackgroundFeaturesDisplayFragment_background\n    ...PersonalityFragment_background\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n  }\n  ...SpellsDisplayFragment_query\n  ruleSection(filter: {index: \"resting\"}) {\n    ...HitPointsFragment_ruleSection\n  }\n  ruleSections(filter: {OR: [{index: \"ability-scores-and-modifiers\"}, {index: \"resting\"}]}) {\n    ...HitPointsFragment_ruleSection\n  }\n}\n\nfragment AbilityScoresDisplayFragment_query on Query {\n  abilityScores {\n    index\n    ...StatFragment_ability_score\n  }\n  ruleSections(filter: {OR: [{index: \"ability-scores-and-modifiers\"}, {index: \"resting\"}]}) {\n    index\n    name\n    desc\n  }\n}\n\nfragment BackgroundEquipmentFragment_background on Background {\n  starting_equipment {\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n      equipment {\n        name\n        index\n        __typename\n      }\n    }\n  }\n}\n\nfragment BackgroundFeatureFragment_feature on BackgroundFeature {\n  name\n  __typename\n  desc\n}\n\nfragment BackgroundFeaturesDisplayFragment_background on Background {\n  feature {\n    ...BackgroundFeatureFragment_feature\n  }\n}\n\nfragment ClassEquipmentFragment_class on Class {\n  starting_equipment {\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n      equipment {\n        name\n        index\n        __typename\n      }\n    }\n  }\n}\n\nfragment FeatureFragment_feature on Feature {\n  name\n  index\n  __typename\n  level\n  desc\n}\n\nfragment FeaturesDisplayFragment_class on Class {\n  class_levels(limit: $level, sort: LEVEL_ASC) {\n    level\n    ability_score_bonuses\n    features(sort: LEVEL_ASC) {\n      ...FeatureFragment_feature\n      index\n      choice {\n        choose\n        type\n      }\n      feature_specific {\n        subfeature_options {\n          choose\n          from {\n            __typename\n            index\n            name\n            url\n          }\n          type\n        }\n        expertise_options {\n          choose\n          from {\n            name\n            index\n            __typename\n          }\n          type\n        }\n      }\n      class {\n        hit_die\n        index\n        name\n        url\n      }\n      parent {\n        index\n        name\n        url\n      }\n      prerequisites {\n        level\n        type\n      }\n      url\n    }\n    index\n    prof_bonus\n    subclass {\n      index\n      name\n    }\n  }\n}\n\nfragment HitPointsFragment_ruleSection on RuleSection {\n  index\n  desc\n  name\n}\n\nfragment ItemStoreFragment_background on Background {\n  starting_equipment {\n    __typename\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n}\n\nfragment ItemStoreFragment_class on Class {\n  starting_equipment {\n    __typename\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      __typename\n      quantity\n      equipment {\n        index\n        name\n        __typename\n      }\n    }\n  }\n}\n\nfragment PersonalityFragment_background on Background {\n  personality_traits {\n    __typename\n    choose\n    from\n  }\n  ideals {\n    choose\n    from {\n      desc\n      alignments {\n        name\n      }\n    }\n  }\n  bonds {\n    choose\n    from\n  }\n  flaws {\n    choose\n    from\n  }\n}\n\nfragment RaceDetailsFragment_race on Race {\n  language_desc\n  size_description\n  alignment\n  age\n}\n\nfragment SkillsDisplayFragment_background on Background {\n  __typename\n  starting_proficiencies {\n    name\n    index\n    url\n    __typename\n  }\n}\n\nfragment SkillsDisplayFragment_class on Class {\n  index\n  proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n\nfragment SkillsDisplayFragment_race on Race {\n  index\n  __typename\n  proficiencies: starting_proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices: starting_proficiency_options {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n\nfragment SpellDetailsFragment_spell on Spell {\n  area_of_effect {\n    size\n    type\n  }\n  attack_type\n  casting_time\n  components\n  concentration\n  damage {\n    damage_at_slot_level\n    damage_at_character_level\n    damage_type {\n      index\n      name\n    }\n  }\n  dc {\n    dc_success\n    dc_type {\n      index\n      name\n    }\n    desc\n  }\n  desc\n  duration\n  heal_at_slot_level\n  higher_level\n  index\n  material\n  range\n  ritual\n  school {\n    desc\n    index\n    name\n  }\n}\n\nfragment SpellHeaderFragment_spell on Spell {\n  name\n  level\n}\n\nfragment SpellModFragment_spellcasting on ClassSpellcasting {\n  spellcasting_ability {\n    index\n    name\n    url\n  }\n  level\n  info {\n    desc\n    name\n  }\n}\n\nfragment SpellSlotsFragment_class on Class {\n  class_levels(limit: $level, sort: LEVEL_ASC) {\n    spellcasting {\n      cantrips_known\n      spell_slots_level_1\n      spell_slots_level_2\n      spell_slots_level_3\n      spell_slots_level_4\n      spell_slots_level_5\n      spell_slots_level_6\n      spell_slots_level_7\n      spell_slots_level_8\n      spell_slots_level_9\n      spells_known\n    }\n  }\n}\n\nfragment SpellsDisplayFragment_query on Query {\n  spells(filter: $spells) {\n    index\n    ...SpellHeaderFragment_spell\n    ...SpellDetailsFragment_spell\n    subclasses {\n      index\n      name\n    }\n  }\n}\n\nfragment StatFragment_ability_score on AbilityScore {\n  desc\n  full_name\n  index\n  name\n  skills {\n    index\n  }\n}\n\nfragment TraitFragment_trait on Trait {\n  name\n  index\n  __typename\n  desc\n}\n\nfragment TraitsDisplayFragment_race on Race {\n  traits {\n    ...TraitFragment_trait\n    index\n    proficiencies {\n      index\n      name\n      type\n    }\n    proficiency_choices {\n      choose\n      from {\n        name\n        index\n        __typename\n      }\n      type\n    }\n    parent {\n      index\n      name\n    }\n    trait_specific {\n      subtrait_options {\n        choose\n        from {\n          __typename\n          index\n          name\n          url\n        }\n        type\n      }\n      spell_options {\n        choose\n        from {\n          name\n          index\n          __typename\n        }\n        type\n      }\n      damage_type {\n        index\n        name\n      }\n      breath_weapon {\n        name\n        desc\n        usage {\n          type\n          times\n        }\n        dc {\n          dc_type {\n            index\n            name\n          }\n          success_type\n        }\n        damage {\n          damage_at_character_level\n        }\n      }\n    }\n  }\n}\n"
+    "text": "query AppCharacterQuery(\n  $class: FilterFindOneClassInput\n  $race: FilterFindOneRaceInput\n  $level: Int\n  $background: FilterFindOneBackgroundInput\n  $spells: FilterFindManySpellInput\n) {\n  ...AbilityScoresDisplayFragment_query\n  class(filter: $class) {\n    ...FeaturesDisplayFragment_class\n    ...ClassEquipmentFragment_class\n    ...SkillsDisplayFragment_class\n    ...ItemStoreFragment_class\n    ...SpellSlotsFragment_class\n    spellcasting {\n      ...SpellModFragment_spellcasting\n    }\n  }\n  race(filter: $race) {\n    ...RaceDetailsFragment_race\n    ability_bonus_options {\n      choose\n      from {\n        bonus\n      }\n      type\n    }\n    ability_bonuses {\n      ability_score {\n        index\n        name\n      }\n      bonus\n    }\n    index\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n    languages {\n      index\n      name\n    }\n    name\n    size\n    speed\n    ...SkillsDisplayFragment_race\n    subraces {\n      index\n      name\n    }\n    ...TraitsDisplayFragment_race\n  }\n  background(filter: $background) {\n    index\n    name\n    ...SkillsDisplayFragment_background\n    ...ItemStoreFragment_background\n    ...BackgroundEquipmentFragment_background\n    ...BackgroundFeaturesDisplayFragment_background\n    ...PersonalityFragment_background\n    language_options {\n      choose\n      from {\n        index\n        name\n      }\n      type\n    }\n  }\n  ...SpellsDisplayFragment_query\n  ruleSections(filter: {OR: [{index: \"ability-scores-and-modifiers\"}, {index: \"resting\"}, {index: \"damage-and-healing\"}, {index: \"casting-a-spell\"}, {index: \"what-is-a-spell\"}, {index: \"using-each-ability\"}, {index: \"movement\"}, {index: \"saving-throws\"}, {index: \"ability-checks\"}, {index: \"proficiency-bonus\"}, {index: \"actions-in-combat\"}, {index: \"making-an-attack\"}]}) {\n    index\n    ...HitPointsRestingFragment_ruleSections\n    ...HitPointsDamageFragment_ruleSections\n    ...AbilityScoresDisplayFragment_ruleSections\n  }\n}\n\nfragment AbilityScoresDisplayFragment_query on Query {\n  abilityScores {\n    index\n    ...StatFragment_ability_score\n  }\n}\n\nfragment AbilityScoresDisplayFragment_ruleSections on RuleSection {\n  index\n  name\n  desc\n}\n\nfragment BackgroundEquipmentFragment_background on Background {\n  starting_equipment {\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n      equipment {\n        name\n        index\n        __typename\n      }\n    }\n  }\n}\n\nfragment BackgroundFeatureFragment_feature on BackgroundFeature {\n  name\n  __typename\n  desc\n}\n\nfragment BackgroundFeaturesDisplayFragment_background on Background {\n  feature {\n    ...BackgroundFeatureFragment_feature\n  }\n}\n\nfragment ClassEquipmentFragment_class on Class {\n  starting_equipment {\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      quantity\n      equipment {\n        name\n        index\n        __typename\n      }\n    }\n  }\n}\n\nfragment FeatureFragment_feature on Feature {\n  name\n  index\n  __typename\n  level\n  desc\n}\n\nfragment FeaturesDisplayFragment_class on Class {\n  class_levels(limit: $level, sort: LEVEL_ASC) {\n    level\n    ability_score_bonuses\n    features(sort: LEVEL_ASC) {\n      ...FeatureFragment_feature\n      index\n      choice {\n        choose\n        type\n      }\n      feature_specific {\n        subfeature_options {\n          choose\n          from {\n            __typename\n            index\n            name\n            url\n          }\n          type\n        }\n        expertise_options {\n          choose\n          from {\n            name\n            index\n            __typename\n          }\n          type\n        }\n      }\n      class {\n        hit_die\n        index\n        name\n        url\n      }\n      parent {\n        index\n        name\n        url\n      }\n      prerequisites {\n        level\n        type\n      }\n      url\n    }\n    index\n    prof_bonus\n    subclass {\n      index\n      name\n    }\n  }\n}\n\nfragment HitPointsDamageFragment_ruleSections on RuleSection {\n  desc\n  name\n}\n\nfragment HitPointsRestingFragment_ruleSections on RuleSection {\n  desc\n  name\n}\n\nfragment ItemStoreFragment_background on Background {\n  starting_equipment {\n    __typename\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n}\n\nfragment ItemStoreFragment_class on Class {\n  starting_equipment {\n    __typename\n    quantity\n    equipment {\n      name\n      index\n      __typename\n    }\n  }\n  starting_equipment_options {\n    choose\n    from {\n      __typename\n      quantity\n      equipment {\n        index\n        name\n        __typename\n      }\n    }\n  }\n}\n\nfragment PersonalityFragment_background on Background {\n  personality_traits {\n    __typename\n    choose\n    from\n  }\n  ideals {\n    choose\n    from {\n      desc\n      alignments {\n        name\n      }\n    }\n  }\n  bonds {\n    choose\n    from\n  }\n  flaws {\n    choose\n    from\n  }\n}\n\nfragment RaceDetailsFragment_race on Race {\n  language_desc\n  size_description\n  alignment\n  age\n}\n\nfragment SkillsDisplayFragment_background on Background {\n  __typename\n  starting_proficiencies {\n    name\n    index\n    url\n    __typename\n  }\n}\n\nfragment SkillsDisplayFragment_class on Class {\n  index\n  proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n\nfragment SkillsDisplayFragment_race on Race {\n  index\n  __typename\n  proficiencies: starting_proficiencies {\n    name\n    __typename\n    index\n    url\n  }\n  proficiency_choices: starting_proficiency_options {\n    choose\n    __typename\n    from {\n      name\n      __typename\n      index\n      url\n    }\n  }\n}\n\nfragment SpellDetailsFragment_spell on Spell {\n  area_of_effect {\n    size\n    type\n  }\n  attack_type\n  casting_time\n  components\n  concentration\n  damage {\n    damage_at_slot_level\n    damage_at_character_level\n    damage_type {\n      index\n      name\n    }\n  }\n  dc {\n    dc_success\n    dc_type {\n      index\n      name\n    }\n    desc\n  }\n  desc\n  duration\n  heal_at_slot_level\n  higher_level\n  index\n  material\n  range\n  ritual\n  school {\n    desc\n    index\n    name\n  }\n}\n\nfragment SpellHeaderFragment_spell on Spell {\n  name\n  level\n}\n\nfragment SpellModFragment_spellcasting on ClassSpellcasting {\n  spellcasting_ability {\n    index\n    name\n    url\n  }\n  level\n  info {\n    desc\n    name\n  }\n}\n\nfragment SpellSlotsFragment_class on Class {\n  class_levels(limit: $level, sort: LEVEL_ASC) {\n    spellcasting {\n      cantrips_known\n      spell_slots_level_1\n      spell_slots_level_2\n      spell_slots_level_3\n      spell_slots_level_4\n      spell_slots_level_5\n      spell_slots_level_6\n      spell_slots_level_7\n      spell_slots_level_8\n      spell_slots_level_9\n      spells_known\n    }\n  }\n}\n\nfragment SpellsDisplayFragment_query on Query {\n  spells(filter: $spells) {\n    index\n    ...SpellHeaderFragment_spell\n    ...SpellDetailsFragment_spell\n    subclasses {\n      index\n      name\n    }\n  }\n}\n\nfragment StatFragment_ability_score on AbilityScore {\n  desc\n  full_name\n  index\n  name\n  skills {\n    index\n  }\n}\n\nfragment TraitFragment_trait on Trait {\n  name\n  index\n  __typename\n  desc\n}\n\nfragment TraitsDisplayFragment_race on Race {\n  traits {\n    ...TraitFragment_trait\n    index\n    proficiencies {\n      index\n      name\n      type\n    }\n    proficiency_choices {\n      choose\n      from {\n        name\n        index\n        __typename\n      }\n      type\n    }\n    parent {\n      index\n      name\n    }\n    trait_specific {\n      subtrait_options {\n        choose\n        from {\n          __typename\n          index\n          name\n          url\n        }\n        type\n      }\n      spell_options {\n        choose\n        from {\n          name\n          index\n          __typename\n        }\n        type\n      }\n      damage_type {\n        index\n        name\n      }\n      breath_weapon {\n        name\n        desc\n        usage {\n          type\n          times\n        }\n        dc {\n          dc_type {\n            index\n            name\n          }\n          success_type\n        }\n        damage {\n          damage_at_character_level\n        }\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "3efbf1e3545c8584213cf2dc8d12ef8c";
+(node as any).hash = "9f0a252f88a890f1e4a1193d7c92bd43";
 
 export default node;

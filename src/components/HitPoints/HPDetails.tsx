@@ -14,7 +14,7 @@ function HPDetails({rolls, CON}: Props) {
     <div>
     {entries.map(([level, roll]) => {
       if (roll + CON < 1) return <p>{`Level ${level}: 1 (default, roll + CON were less than 1)`}</p>
-      return <p>{`Level ${level}: ${roll} + ${CON} (CON)`}</p>
+      return <p key={`HP-${level}`}>{`Level ${level}: ${roll} + ${CON} (CON)`}</p>
     })}
     </div>
   )

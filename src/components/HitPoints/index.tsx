@@ -5,7 +5,8 @@ import { Tooltip } from '@mantine/core';
 import HPDetails from './HPDetails.tsx';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
-import type { HitPointsFragment_ruleSection$key } from './__generated__/HitPointsFragment_ruleSection.graphql';
+import type { HitPointsRestingFragment_ruleSections$key } from './__generated__/HitPointsRestingFragment_ruleSections.graphql';
+import type { HitPointsDamageFragment_ruleSections$key } from './__generated__/HitPointsDamageFragment_ruleSections.graphql';
 import InfoModal from '../InfoModal';
 
 const calculateHP = (
@@ -27,24 +28,28 @@ type Props = {
   characterLevel: ZeroToTwenty
   characterClass: CharacterClass
   characterStats: AbilityScores
-  ruleSectionRef: HitPointsFragment_ruleSection$key
+  restingRulesRef: HitPointsFragment_ruleSections$key
+  damageRulesRef: HitPointsFragment_ruleSections$key
 }
 
-function HitPoints({characterLevel, characterClass, characterStats, ruleSectionRef}: Props) {
+function HitPoints({characterLevel, characterClass, characterStats, restingRulesRef, damageRulesRef}: Props) {
 
-  const { index, desc, name } = useFragment(graphql`
-    fragment HitPointsFragment_ruleSection on RuleSection {
-      index
+  const { desc, name } = useFragment(graphql`
+    fragment HitPointsRestingFragment_ruleSections on RuleSection {
       desc
       name
-    }`, ruleSectionRef);
+    }`, restingRulesRef);
+
+  const { desc: damageDesc, name: damageName } = useFragment(graphql`
+    fragment HitPointsDamageFragment_ruleSections on RuleSection {
+      desc
+      name
+    }`, damageRulesRef);
 
   const { rolls, getHitDice } = useHP(characterLevel, characterClass);
 
   return (
     <section className="flex-container">
-      <InfoModal label={"Resting"} markdown={desc}/>
-      {/* <InfoModal label={"Damage and Healing"} markdown={desc}/> */}
       <Tooltip label={<HPDetails rolls={rolls} CON={dice.mod(characterStats['CON'])}/>}>
         <h1>
           HP: {calculateHP(characterStats, characterLevel, rolls)}
@@ -54,6 +59,8 @@ function HitPoints({characterLevel, characterClass, characterStats, ruleSectionR
       <h1>
         Hit dice: {characterLevel}d{getHitDice(characterClass)}
       </h1>
+      <InfoModal label={name} markdown={desc}/>
+      <InfoModal label={damageName} markdown={damageDesc}/>
     </section>
   );
 }

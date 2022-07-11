@@ -9,6 +9,7 @@ import {
 } from 'react-relay/hooks';
 import graphql from 'babel-plugin-relay/macro'
 
+const SpellcastingDisplay = lazy(() => import ("./SpellcastingDisplay"));
 const BackgroundFeaturesDisplay = lazy(() => import("./FeaturesDisplay/BackgroundFeaturesDisplay"));
 const TraitsDisplay = lazy(() => import("./FeaturesDisplay/TraitsDisplay"));
 const Controls = lazy(() => import("./Controls"));
@@ -69,47 +70,14 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           ...SkillsDisplayFragment_class
           ...ItemStoreFragment_class
           ...SpellSlotsFragment_class
+          ...SpellcastingDisplayFragment_class
           spellcasting {
             ...SpellModFragment_spellcasting
           }
         }
         race (filter: $race) {
           ...RaceDetailsFragment_race
-          ability_bonus_options {
-            choose
-            from {
-              bonus
-            }
-            type
-          }
-          ability_bonuses {
-            ability_score {
-              index
-              name
-            }
-            bonus
-          }
-          index
-          language_options {
-            choose
-            from {
-              index
-              name
-            }
-            type
-          }
-          languages {
-            index
-            name
-          }
-          name
-          size
-          speed
           ...SkillsDisplayFragment_race
-          subraces {
-            index
-            name
-          }
           ...TraitsDisplayFragment_race
         }
         background(filter: $background) {
@@ -120,14 +88,6 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
           ...BackgroundEquipmentFragment_background
           ...BackgroundFeaturesDisplayFragment_background
           ...PersonalityFragment_background
-          language_options {
-            choose
-            from {
-              index
-              name
-            }
-            type
-          }
         }
         ...SpellsDisplayFragment_query
         ruleSections (filter: {OR: [
@@ -237,19 +197,22 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
 
       <Suspense>
         {isSpellcaster(characterClass) &&
-          <SpellsDisplay
+        <SpellcastingDisplay
             characterClass={characterClass}
             characterLevel={characterLevel}
             characterStats={characterStats}
-            queryRef={data!}
-            spellcastingRef={data?.class?.spellcasting!}
-            spellslotsRef={data?.class?.class_levels?.[characterLevel]?.spellcasting!}
             classRef={data?.class!}
+        />}
+      </Suspense>
+
+      <Suspense>
+        {isSpellcaster(characterClass) &&
+          <SpellsDisplay
+            queryRef={data!}
             spellRulesRef={data?.ruleSections?.find((section) => section.index === 'what-is-a-spell')}
             spellcastingRulesRef={data?.ruleSections?.find((section) => section.index === 'casting-a-spell')}
         />}
       </Suspense>
-
 
     </main>
   );

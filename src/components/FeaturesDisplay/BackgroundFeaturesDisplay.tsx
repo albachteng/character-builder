@@ -24,7 +24,7 @@ function BackgroundFeaturesDisplay({backgroundRef, characterBackground, children
 
   return (
     <section>
-      <h2>Background Feature: {backgroundTitle}</h2>
+      <h2>Background: {backgroundTitle}</h2>
       <BackgroundFeature
         backgroundFeatureRef={backgroundFeature}
       />

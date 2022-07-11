@@ -44,8 +44,7 @@ function Personality({ backgroundRef, characterBackground = 'acolyte'}: Props) {
         if (trait) {
         return (
             <p key={`${trait}${index}`}>
-            Trait:
-            {trait}
+            Trait: {trait}
             </p>
         );
         }
@@ -55,8 +54,7 @@ function Personality({ backgroundRef, characterBackground = 'acolyte'}: Props) {
         if (ideal) {
         return (
             <p key={`${ideal}${index}`}>
-            Ideal:
-            {ideal?.desc}
+            Ideal: {ideal?.desc}
             </p>
         );
         }

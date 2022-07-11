@@ -77,6 +77,10 @@ section {
   flex-direction: column;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 /* CONTROLS */
 .controls {
   display: grid;

@@ -5,10 +5,12 @@
     information on a click
 */
 
+import { useDisclosure } from "@mantine/hooks";
+
 type WithDescription = {
-  [key: string]: any
-  [key: number]: any
-  desc?: string[]
+  [key: string]: any;
+  [key: number]: any;
+  desc?: string[];
   name?: string
 };
 
@@ -16,23 +18,14 @@ const useOnClickDescription = <T extends WithDescription>(
   withDescription?: T,
   name?: string
 ) => {
-  const toggleDescription = () => {
-    const length = withDescription?.desc?.length || 0;
-    for (let i = 0; i < length; i += 1) {
-      const target = document.getElementById(
-        `${withDescription?.name || name}-desc${i}`
-      );
-      target &&
-        (target?.style?.display === 'block'
-          ? (target.style.display = 'none')
-          : (target.style.display = 'block'));
-    }
-  };
+
+  const [ open, handlers ] = useDisclosure(false)
+  const toggleDescription = () => handlers.toggle();
 
   const description = withDescription?.desc?.map((paragraph, i) => {
     return (
       <p
-        style={{ display: 'none' }}
+        className={open ? "" : "hidden"}
         id={`${withDescription?.name || name}-desc${i}`}
         key={`${withDescription?.name || name}-desc${i}`}
       >

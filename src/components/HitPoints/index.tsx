@@ -50,6 +50,12 @@ function HitPoints({ characterLevel, characterClass, characterStats, restingRule
       name
     }`, damageRulesRef);
 
+  const endIndex = damageDesc.indexOf('## Damage Rolls');
+  const firstChunk = damageDesc.slice(0, endIndex);
+  const secondChunkStartIndex = damageDesc.indexOf('## Healing');
+  const secondChunkEndIndex = damageDesc.indexOf('## Dropping to');
+  const secondChunk = damageDesc.slice(secondChunkStartIndex, secondChunkEndIndex - 1);
+
   const { rolls, getHitDice } = useHP(characterLevel, characterClass);
 
   return (
@@ -65,7 +71,7 @@ function HitPoints({ characterLevel, characterClass, characterStats, restingRule
             HP: {calculateHP(characterStats, characterLevel, rolls)}
           </h1>
         </Tooltip>{' '}
-        <InfoModal label={damageName} markdown={damageDesc}/>
+        <InfoModal label={damageName} markdown={firstChunk + secondChunk}/>
       </div>
 
       <h1>

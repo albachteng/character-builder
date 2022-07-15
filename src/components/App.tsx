@@ -168,6 +168,17 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
       </Suspense>
 
       <Suspense fallback={<Fallback />}>
+        <SkillsDisplay
+          characterLevel={characterLevel}
+          characterStats={characterStats}
+          raceRef={data?.race!}
+          backgroundRef={data?.background!}
+          classRef={data?.class!}
+          skillsRuleRef={data?.ruleSections?.find((section) => section?.index === 'ability-checks')}
+        />
+      </Suspense>
+
+      <Suspense fallback={<Fallback />}>
         <FeaturesDisplay
           classRef={data?.class!}
           characterClass={characterClass}
@@ -182,17 +193,6 @@ function App({queryRef, refetch, isRefetching, state, dispatch, startTransition}
         >
           {MemoizedPersonality}
         </BackgroundFeaturesDisplay>
-      </Suspense>
-
-      <Suspense fallback={<Fallback />}>
-        <SkillsDisplay
-          characterLevel={characterLevel}
-          characterStats={characterStats}
-          raceRef={data?.race!}
-          backgroundRef={data?.background!}
-          classRef={data?.class!}
-          skillsRuleRef={data?.ruleSections?.find((section) => section?.index === 'ability-checks')}
-        />
       </Suspense>
 
       <Suspense>

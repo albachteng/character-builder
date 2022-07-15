@@ -44,14 +44,14 @@ function HitPoints({ characterLevel, characterClass, characterStats, restingRule
       name
     }`, restingRulesRef);
 
-  const { desc: damageDesc, name: damageName } = useFragment(graphql`
+  const { desc: damageDesc } = useFragment(graphql`
     fragment HitPointsDamageFragment_ruleSections on RuleSection {
       desc
-      name
     }`, damageRulesRef);
 
   const endIndex = damageDesc.indexOf('## Damage Rolls');
-  const firstChunk = damageDesc.slice(0, endIndex);
+  const startIndex = damageDesc.indexOf('## Hit Points');
+  const firstChunk = damageDesc.slice(startIndex, endIndex);
   const secondChunkStartIndex = damageDesc.indexOf('## Healing');
   const secondChunkEndIndex = damageDesc.indexOf('## Dropping to');
   const secondChunk = damageDesc.slice(secondChunkStartIndex, secondChunkEndIndex - 1);
@@ -71,7 +71,7 @@ function HitPoints({ characterLevel, characterClass, characterStats, restingRule
             HP: {calculateHP(characterStats, characterLevel, rolls)}
           </h1>
         </Tooltip>{' '}
-        <InfoModal label={damageName} markdown={firstChunk + secondChunk}/>
+        <InfoModal label={'Hit Points'} markdown={firstChunk + secondChunk}/>
       </div>
 
       <h1>

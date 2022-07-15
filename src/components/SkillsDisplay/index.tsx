@@ -103,6 +103,10 @@ function SkillsDisplay({
       desc
     }`, skillsRuleRef)
 
+  const startIndex = desc.indexOf('## Skills');
+  const endIndex = desc.indexOf('The skills related');
+  const chunk = desc.slice(startIndex, endIndex - 1);
+
   const { proficiencies } = useSkillProficiencies(
     backgroundProficiencies,
     racialProficiencies,
@@ -155,7 +159,7 @@ function SkillsDisplay({
 
   return (
     <section>
-      <h1>Skills: <InfoModal label={name} markdown={desc}/></h1>
+      <h1>Skills: <InfoModal label={name} markdown={chunk}/></h1>
       {mappedSkills}
     </section>
   );

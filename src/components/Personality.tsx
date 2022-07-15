@@ -6,6 +6,7 @@ import { PersonalityByBackground } from "../queries";
 import type { PersonalityFragment_background$key } from './__generated__/PersonalityFragment_background.graphql';
 import { useFragment } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
+import { capitalize } from '../utilities/capitalize';
 
 interface Props {
   backgroundRef: PersonalityFragment_background$key

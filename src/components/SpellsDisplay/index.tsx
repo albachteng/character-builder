@@ -6,6 +6,7 @@ import type { SpellsDisplayFragment_query$key} from './__generated__/SpellHeader
 import type { SpellsDisplaySpellFragment_ruleSections$key } from './__generated__/SpellsDisplaySpellFragment_ruleSections.graphql';
 import type { SpellsDisplaySpellcastingFragment_ruleSections$key } from './__generated__/SpellsDisplaySpellcastingFragment_ruleSections.graphql';
 import InfoModal from '../InfoModal';
+import Spell from './Spell';
 
 type Props = {
   queryRef: SpellsDisplayFragment_query$key
@@ -52,10 +53,7 @@ function SpellsDisplay({
           <h3>Spellbook</h3>
           {spells?.map((_ , i, spells) => {
             return (
-              <div key={spells[i].__id}>
-                <SpellHeader spellRef={spells?.[i]!}/>
-                <SpellDetails spellRef={spells?.[i]!}/>
-              </div>
+              <Spell key={spells[i].__id} spellRef={spells[i]}/>
             )
           })}
       </section>

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8e64838c775a5571985329857b479ca0>>
+ * @generated SignedSource<<9bb8dd66baed3428815ff405d959e686>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,7 +12,6 @@ import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type HitPointsDamageFragment_ruleSections$data = {
   readonly desc: string | null;
-  readonly name: string | null;
   readonly " $fragmentType": "HitPointsDamageFragment_ruleSections";
 };
 export type HitPointsDamageFragment_ruleSections$key = {
@@ -32,19 +31,12 @@ const node: ReaderFragment = {
       "kind": "ScalarField",
       "name": "desc",
       "storageKey": null
-    },
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "name",
-      "storageKey": null
     }
   ],
   "type": "RuleSection",
   "abstractKey": null
 };
 
-(node as any).hash = "6caf91d668a82e9bdf67dd40c31c81a0";
+(node as any).hash = "28ae8b21b487985a71753f5fedea2ab2";
 
 export default node;

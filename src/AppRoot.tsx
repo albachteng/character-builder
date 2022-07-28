@@ -6,8 +6,9 @@ import type {} from 'react/next';
 import { Suspense, useCallback, useContext, useEffect, useTransition } from "react";
 import useCharacter from "./hooks/useCharacter";
 import { CharacterClass, ZeroToTwenty } from "./types";
-import { AppShell, Header, Navbar, Text } from '@mantine/core';
+import { AppShell, Header, Navbar, Tabs, Text } from '@mantine/core';
 import Fallback from "./components/Fallback";
+import { Home, Login, Skull, Sword } from 'tabler-icons-react';
 
 const AppCharacterQuery = require('./components/__generated__/AppCharacterQuery.graphql');
 
@@ -73,9 +74,13 @@ function AppRoot() {
         hidden
         hiddenBreakpoint={"md"}
       >
-        <Navbar.Section>Home</Navbar.Section>
-        <Navbar.Section>Monsters</Navbar.Section>
-        <Navbar.Section>Characters</Navbar.Section>
+        <Tabs styles={{
+          tabIcon: { color: "white" }
+        }} color="teal">
+          <Tabs.Tab icon={<Home/>}>Home</Tabs.Tab>
+          <Tabs.Tab icon={<Sword/>}>Monsters</Tabs.Tab>
+          <Tabs.Tab icon={<Login/>}>Characters</Tabs.Tab>
+        </Tabs>
       </Navbar>}
       header={<Header className="header" height={60} p="xs"><h1>Fightr</h1></Header>}>
       <Suspense fallback={<Fallback/>}>
